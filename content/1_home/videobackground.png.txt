@@ -1,0 +1,5 @@
+Uuid: mn9tpfgy89qudpe3
+
+----
+
+Template: image
