@@ -317,7 +317,18 @@ $renderCard = function (array $card): void {
   $heroVideo = soi_optional_url($page, 'heroVideo');
   ?>
   <section class="hero" id="hero">
-    <video class="hero__video" autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="<?= soi_url($page, 'heroPoster', 'images/school_of_ideas_motiv_Header.jpg') ?>">
+    <video
+      class="hero__video"
+      autoplay
+      muted
+      loop
+      playsinline
+      webkit-playsinline
+      preload="metadata"
+      poster="<?= soi_url($page, 'heroPoster', 'images/school_of_ideas_motiv_Header.jpg') ?>"
+      <?php if ($heroVideoMobile): ?>data-mobile-src="<?= esc($heroVideoMobile) ?>"<?php endif ?>
+      <?php if ($heroVideo): ?>data-desktop-src="<?= esc($heroVideo) ?>"<?php endif ?>
+    >
       <?php if ($heroVideoMobile): ?>
       <source src="<?= esc($heroVideoMobile) ?>" type="video/mp4" media="(max-width: 768px)">
       <?php endif ?>

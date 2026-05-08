@@ -98,6 +98,8 @@ inlineSvgHosts.forEach((host) => {
    ============================================================ */
 const heroVideo = document.querySelector('.hero__video');
 if (heroVideo) {
+  const heroVideoQuery = window.matchMedia('(max-width: 768px)');
+
   heroVideo.muted = true;
   heroVideo.defaultMuted = true;
   heroVideo.playsInline = true;
@@ -111,6 +113,37 @@ if (heroVideo) {
       promise.catch(() => {});
     }
   };
+
+  const normalizeVideoUrl = (url) => {
+    if (!url) return '';
+    try {
+      return new URL(url, window.location.href).href;
+    } catch {
+      return url;
+    }
+  };
+
+  const syncHeroSource = () => {
+    const mobileSrc = heroVideo.dataset.mobileSrc || '';
+    const desktopSrc = heroVideo.dataset.desktopSrc || '';
+    const nextSrc = heroVideoQuery.matches && mobileSrc ? mobileSrc : (desktopSrc || mobileSrc);
+    if (!nextSrc) return;
+
+    const normalizedNext = normalizeVideoUrl(nextSrc);
+    const current = normalizeVideoUrl(heroVideo.currentSrc || heroVideo.getAttribute('src'));
+    if (current === normalizedNext) return;
+
+    heroVideo.src = nextSrc;
+    heroVideo.load();
+    tryPlayHero();
+  };
+
+  syncHeroSource();
+  if (typeof heroVideoQuery.addEventListener === 'function') {
+    heroVideoQuery.addEventListener('change', syncHeroSource);
+  } else if (typeof heroVideoQuery.addListener === 'function') {
+    heroVideoQuery.addListener(syncHeroSource);
+  }
 
   if (heroVideo.readyState >= 2) {
     tryPlayHero();
