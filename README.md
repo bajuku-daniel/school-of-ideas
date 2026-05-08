@@ -70,8 +70,6 @@ The web root should point to:
 /home/www/p708685/school-of-ideas/public
 ```
 
-Apache needs the committed `public/.htaccess` file. Without it, Kirby media URLs such as `/media/pages/...` can run into internal redirect loops.
-
 If the host can only point to `/home/www/p708685/html`, deploy the project into `/home/www/p708685/school-of-ideas` and symlink `html` to `school-of-ideas/public`:
 
 ```bash
