@@ -1,0 +1,199 @@
+title: Agenturen
+icon: grid
+
+status:
+  draft: Entwurf
+  listed: Sichtbar
+
+tabs:
+  content:
+    label: Inhalt
+    icon: text
+    columns:
+      main:
+        width: 2/3
+        fields:
+          headline:
+            label: Headline alt
+            type: textarea
+            buttons: false
+            help: Fallback. Besser die geteilten Headline-Felder darunter nutzen.
+          headlineInk:
+            label: Headline schwarz
+            type: textarea
+            buttons: false
+            width: 1/2
+          headlineAccent:
+            label: Headline blau
+            type: textarea
+            buttons: false
+            width: 1/2
+          intro:
+            label: Introtext
+            type: textarea
+            buttons: false
+          spacingHeadline:
+            label: Abstände
+            type: headline
+          heroSpacingTopPx:
+            label: Hero Abstand oben
+            type: number
+            after: px
+            width: 1/3
+          heroSpacingBottomPx:
+            label: Hero Abstand unten
+            type: number
+            after: px
+            width: 1/3
+          introSpacingTopPx:
+            label: Headline zu Intro
+            type: number
+            after: px
+            width: 1/3
+          directorySpacingTopPx:
+            label: Filter/Grid Abstand oben
+            type: number
+            after: px
+            width: 1/2
+          directorySpacingBottomPx:
+            label: Filter/Grid Abstand unten
+            type: number
+            after: px
+            width: 1/2
+          filterInfo:
+            label: Filter
+            type: info
+            theme: blue
+            text: >
+              Die Filter entstehen automatisch aus den sichtbaren Agentur-Unterseiten. Neue Agenturen legst du rechts an.
+          sections:
+            label: Zusatzsektionen
+            type: structure
+            fields:
+              type:
+                label: Typ
+                type: select
+                default: text
+                options:
+                  text: Text
+                  cards: Karten
+                  faq: FAQ
+                  cta: CTA
+                  spacer: Abstand
+              heading:
+                label: Headline
+                type: text
+              text:
+                label: Text
+                type: textarea
+              cards:
+                label: Karten
+                type: structure
+                fields:
+                  icon:
+                    label: Icon
+                    type: select
+                    empty: Kein Icon
+                    options:
+                      airplane: Papierflieger
+                      bag: Tasche
+                      bottle: Flasche
+                      cloud: Wolke
+                      comet: Komet
+                      document: Dokument
+                      glasses-bold: Brille fett
+                      glasses: Brille
+                      leaf: Blatt
+                      lightbulb: Glühbirne
+                      lightning: Blitz
+                      pencil: Stift
+                      puzzle: Puzzle
+                      shooting-star: Sternschnuppe
+                      spark: Spark
+                      sparkles: Sparkles
+                      sparkles-line: Sparkles Linie
+                      star: Stern
+                      starlight: Sternlicht
+                      swirl: Wirbel
+                  heading:
+                    label: Titel
+                    type: text
+                  text:
+                    label: Text
+                    type: textarea
+              questions:
+                label: FAQ Fragen
+                type: structure
+                fields:
+                  question:
+                    label: Frage
+                    type: text
+                  answer:
+                    label: Antwort
+                    type: textarea
+                    buttons: false
+              buttonText:
+                label: Button Text
+                type: text
+                width: 1/2
+              buttonUrl:
+                label: Button Link
+                type: text
+                width: 1/2
+              contentGapPx:
+                label: CTA Headline zu Text
+                type: number
+                after: px
+                width: 1/2
+              buttonGapPx:
+                label: CTA Text zu Button
+                type: number
+                after: px
+                width: 1/2
+              buttonPaddingXPx:
+                label: Button innen links/rechts
+                type: number
+                after: px
+                width: 1/3
+              buttonPaddingTopPx:
+                label: Button innen oben
+                type: number
+                after: px
+                width: 1/3
+              buttonPaddingBottomPx:
+                label: Button innen unten
+                type: number
+                after: px
+                width: 1/3
+              spacingTopPx:
+                label: Abstand oben
+                type: number
+                after: px
+                width: 1/2
+              spacingBottomPx:
+                label: Abstand unten
+                type: number
+                after: px
+                width: 1/2
+      sidebar:
+        width: 1/3
+        sections:
+          agencies:
+            label: Agentur-Unterseiten
+            type: pages
+            template: agency
+            create: agency
+            status: all
+            layout: cards
+            image:
+              query: page.logo.toFile
+              cover: false
+
+  seo:
+    label: SEO
+    icon: search
+    fields:
+      metaDescription:
+        label: Meta Description
+        type: textarea
+        buttons: false

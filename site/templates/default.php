@@ -2,12 +2,23 @@
 
 function soi_page_text($text): string
 {
+    if (is_object($text) && method_exists($text, 'value')) {
+        $text = $text->value();
+    }
+
+    if (is_array($text)) {
+        $text = implode("\n\n", array_map(fn ($item) => is_array($item) ? implode("\n", $item) : (string)$item, $text));
+    }
+
     $parts = preg_split('/\R{2,}/', trim((string)$text)) ?: [];
     $html = '';
 
     foreach ($parts as $part) {
         if (trim($part) !== '') {
-            $html .= '<p>' . nl2br(htmlspecialchars(trim($part), ENT_QUOTES, 'UTF-8')) . '</p>';
+            $safe = htmlspecialchars(trim($part), ENT_QUOTES, 'UTF-8');
+            $safe = preg_replace('/\*\*(.+?)\*\*/s', '<strong>$1</strong>', $safe);
+            $safe = preg_replace('/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/s', '<em>$1</em>', $safe);
+            $html .= '<p>' . nl2br($safe) . '</p>';
         }
     }
 
@@ -22,6 +33,50 @@ $spacingMap = [
     'xlarge' => 'clamp(128px, 14vw, 220px)',
 ];
 
+function soi_builder_spacing($section, array $spacingMap): string
+{
+    $top = $spacingMap[$section->spacingTop()->or('normal')->value()] ?? $spacingMap['normal'];
+    $bottom = $spacingMap[$section->spacingBottom()->or('normal')->value()] ?? $spacingMap['normal'];
+
+    if ($section->spacingTopPx()->isNotEmpty()) {
+        $top = (int)$section->spacingTopPx()->value() . 'px';
+    }
+
+    if ($section->spacingBottomPx()->isNotEmpty()) {
+        $bottom = (int)$section->spacingBottomPx()->value() . 'px';
+    }
+
+    $styles = [
+        '--section-top: ' . $top,
+        '--section-bottom: ' . $bottom,
+    ];
+
+    $styleFields = [
+        'contentGapPx' => '--builder-content-gap',
+        'buttonGapPx' => '--builder-button-gap',
+        'buttonPaddingXPx' => '--button-pad-x',
+        'buttonPaddingTopPx' => '--button-pad-top',
+        'buttonPaddingBottomPx' => '--button-pad-bottom',
+    ];
+
+    foreach ($styleFields as $field => $variable) {
+        if ($section->{$field}()->isNotEmpty()) {
+            $styles[] = $variable . ': ' . (int)$section->{$field}()->value() . 'px';
+        }
+    }
+
+    return implode('; ', $styles);
+}
+
+function soi_page_spacing($page): string
+{
+    $heroTop = $page->heroSpacingTopPx()->isNotEmpty() ? (int)$page->heroSpacingTopPx()->value() . 'px' : 'clamp(150px, 15vw, 240px)';
+    $heroBottom = $page->heroSpacingBottomPx()->isNotEmpty() ? (int)$page->heroSpacingBottomPx()->value() . 'px' : 'clamp(72px, 10vw, 140px)';
+    $introTop = $page->introSpacingTopPx()->isNotEmpty() ? (int)$page->introSpacingTopPx()->value() . 'px' : 'clamp(28px, 4vw, 56px)';
+
+    return '--hero-top: ' . $heroTop . '; --hero-bottom: ' . $heroBottom . '; --intro-top: ' . $introTop;
+}
+
 ?><!doctype html>
 <html lang="de">
 <head>
@@ -33,13 +88,15 @@ $spacingMap = [
   <?php snippet('vite') ?>
 </head>
 <body>
+  <?php snippet('subpage-nav') ?>
   <main class="subpage">
-    <header class="subpage__hero">
+    <header class="subpage__hero" style="<?= esc(soi_page_spacing($page), 'attr') ?>">
       <div class="container">
-        <a class="subpage__brand" href="<?= url() ?>">
-          <img src="<?= url('logo/School_of_ideas_Logo_OW.png') ?>" alt="school of ideas">
-        </a>
-        <h1><?= esc($page->headline()->or($page->title())) ?></h1>
+        <p class="subpage__kicker"><?= esc($page->kicker()->or('School of Ideas')) ?></p>
+        <h1 class="subpage__title">
+          <span class="ink"><?= nl2br(esc($page->headlineInk()->or($page->headline()->or($page->title())))) ?></span>
+          <?php if ($page->headlineAccent()->isNotEmpty()): ?><span class="accent"><?= nl2br(esc($page->headlineAccent())) ?></span><?php endif ?>
+        </h1>
         <?php if ($page->intro()->isNotEmpty()): ?>
         <div class="subpage__intro"><?= soi_page_text($page->intro()->value()) ?></div>
         <?php endif ?>
@@ -49,13 +106,11 @@ $spacingMap = [
     <?php foreach ($page->sections()->toStructure() as $section): ?>
     <?php
       $type = $section->type()->or('text')->value();
-      $top = $spacingMap[$section->spacingTop()->or('normal')->value()] ?? $spacingMap['normal'];
-      $bottom = $spacingMap[$section->spacingBottom()->or('normal')->value()] ?? $spacingMap['normal'];
       $theme = $section->theme()->or('light')->value();
       $align = $section->align()->or('left')->value();
       $image = $section->image()->toFiles()->first();
     ?>
-    <section class="builder builder--<?= esc($type, 'attr') ?> builder--<?= esc($theme, 'attr') ?> builder--<?= esc($align, 'attr') ?>" style="--section-top: <?= esc($top, 'attr') ?>; --section-bottom: <?= esc($bottom, 'attr') ?>">
+    <section class="builder builder--<?= esc($type, 'attr') ?> builder--<?= esc($theme, 'attr') ?> builder--<?= esc($align, 'attr') ?>" style="<?= esc(soi_builder_spacing($section, $spacingMap), 'attr') ?>">
       <div class="container">
         <?php if ($type !== 'spacer'): ?>
           <?php if ($section->kicker()->isNotEmpty()): ?><p class="builder__kicker"><?= esc($section->kicker()) ?></p><?php endif ?>
@@ -71,14 +126,24 @@ $spacingMap = [
         <div class="builder__cards">
           <?php foreach ($section->cards()->toStructure() as $card): ?>
           <article class="builder__card">
+            <?php if ($card->icon()->isNotEmpty()): ?><span class="builder__card-icon" aria-hidden="true"><img src="<?= url('icons/' . $card->icon()->value() . '.svg') ?>" alt=""></span><?php endif ?>
             <?php if ($card->heading()->isNotEmpty()): ?><h3><?= esc($card->heading()) ?></h3><?php endif ?>
             <?= soi_page_text($card->text()->value()) ?>
           </article>
           <?php endforeach ?>
         </div>
+        <?php elseif ($type === 'faq'): ?>
+        <div class="faq-list">
+          <?php foreach ($section->questions()->toStructure() as $question): ?>
+          <details class="faq-item">
+            <summary><?= esc($question->question()) ?></summary>
+            <div><?= soi_page_text($question->answer()) ?></div>
+          </details>
+          <?php endforeach ?>
+        </div>
         <?php elseif ($type === 'cta'): ?>
         <div class="builder__text"><?= soi_page_text($section->text()->value()) ?></div>
-        <?php if ($section->buttonText()->isNotEmpty()): ?><a class="btn-mint" href="<?= esc($section->buttonUrl()->or('#')) ?>"><?= esc($section->buttonText()) ?></a><?php endif ?>
+        <?php if ($section->buttonText()->isNotEmpty()): ?><a class="btn-mint builder__button" href="<?= esc($section->buttonUrl()->or('#')) ?>"><?= esc($section->buttonText()) ?></a><?php endif ?>
         <?php elseif ($type !== 'spacer'): ?>
         <div class="builder__text"><?= soi_page_text($section->text()->value()) ?></div>
         <?php endif ?>
@@ -86,5 +151,6 @@ $spacingMap = [
     </section>
     <?php endforeach ?>
   </main>
+  <?php snippet('subpage-footer') ?>
 </body>
 </html>

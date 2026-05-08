@@ -93,6 +93,35 @@ inlineSvgHosts.forEach((host) => {
 });
 
 /* ============================================================
+   Agency directory filters
+   ============================================================ */
+document.querySelectorAll('[data-agency-directory]').forEach((directory) => {
+  const filters = Array.from(directory.querySelectorAll('[data-agency-filter]'));
+  const cards = Array.from(directory.querySelectorAll('.agency-card'));
+  const empty = directory.querySelector('[data-agency-empty]');
+
+  const applyFilters = () => {
+    const active = Object.fromEntries(
+      filters.map((filter) => [filter.dataset.agencyFilter, filter.value])
+    );
+
+    let visible = 0;
+    cards.forEach((card) => {
+      const show = Object.entries(active).every(([key, value]) => (
+        !value || card.dataset[key] === value
+      ));
+      card.hidden = !show;
+      if (show) visible += 1;
+    });
+
+    if (empty) empty.hidden = visible !== 0;
+  };
+
+  filters.forEach((filter) => filter.addEventListener('change', applyFilters));
+  applyFilters();
+});
+
+/* ============================================================
    Performance helper — rAF-throttle für Scroll-Handler.
 
    Scroll-Events feuern auf iOS / Firefox sehr häufig und können den

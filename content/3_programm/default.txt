@@ -1,0 +1,122 @@
+Title: Programm
+
+----
+
+Headline: Ein Jahr Praxis. Ein Jahr Entwicklung. Ein ziemlich guter Anfang.
+
+----
+
+Headlineink: 
+
+----
+
+Headlineaccent: 
+
+----
+
+Kicker: 
+
+----
+
+Intro: Vier Tage Agentur, ein Tag school of ideas. Du arbeitest an echten Projekten, bekommst Feedback von Menschen aus der Branche und entwickelst dein kreatives Profil weiter.
+
+----
+
+Herospacingtoppx: 
+
+----
+
+Herospacingbottompx: 
+
+----
+
+Introspacingtoppx: 
+
+----
+
+Sections:
+
+- 
+  title: Ablauf
+  type: cards
+  theme: light
+  align: left
+  kicker: Struktur
+  heading: So ist das Jahr aufgebaut
+  text: ""
+  image: [ ]
+  cards:
+    - 
+      icon: ""
+      heading: Agenturpraxis
+      text: >
+        Vier Tage pro Woche bist du Teil eines
+        Agenturteams und arbeitest an realen
+        Aufgaben.
+    - 
+      icon: ""
+      heading: School Friday
+      text: >
+        Freitags geht es um Idee, Haltung,
+        Tools, KI, Feedback und dein Portfolio.
+    - 
+      icon: ""
+      heading: Coaching
+      text: >
+        Du bekommst Orientierung, Sparring und
+        ehrliche Rückmeldungen zu deiner
+        Entwicklung.
+  questions: [ ]
+  buttontext: ""
+  buttonurl: ""
+  spacingtop: normal
+  spacingbottom: large
+  spacingtoppx: ""
+  spacingbottompx: ""
+- 
+  title: CTA
+  type: cta
+  theme: mint
+  align: left
+  kicker: ""
+  heading: Klingt nach deinem nächsten Schritt?
+  text: 'Dann schau dir an, wie die Bewerbung **funktioniert**.'
+  image: [ ]
+  cards: [ ]
+  questions: [ ]
+  buttontext: Bewerbung ansehen
+  buttonurl: /bewerbung
+  contentgappx: 72
+  buttongappx: 24
+  buttonpaddingxpx: 56
+  buttonpaddingtoppx: 22
+  buttonpaddingbottompx: 18
+  spacingtop: xlarge
+  spacingbottom: large
+  spacingtoppx: ""
+  spacingbottompx: ""
+- 
+  title: ""
+  type: imageText
+  theme: light
+  align: left
+  kicker: ""
+  heading: ""
+  text: ""
+  image: [ ]
+  cards: [ ]
+  questions: [ ]
+  buttontext: ""
+  buttonurl: ""
+  spacingtop: normal
+  spacingbottom: normal
+  spacingtoppx: ""
+  spacingbottompx: ""
+
+----
+
+Metadescription: Das einjährige Programm der school of ideas verbindet bezahlte Agenturpraxis mit kreativer Weiterentwicklung.
+
+----
+
+Uuid: qq12rbqyklbprugn

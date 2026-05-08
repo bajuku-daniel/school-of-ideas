@@ -1,0 +1,79 @@
+Title: About
+
+----
+
+Headline: Warum es die school of ideas gibt.
+
+----
+
+Headlineink: Warum es die
+
+----
+
+Headlineaccent: school of ideas gibt.
+
+----
+
+Kicker: About
+
+----
+
+Intro: Kreativarbeit verändert sich. Die school of ideas bringt junge Talente, Agenturen und neue Werkzeuge so zusammen, dass aus Neugier echte Praxis wird.
+
+----
+
+Herospacingtoppx: 150
+
+----
+
+Herospacingbottompx: 100
+
+----
+
+Introspacingtoppx: 40
+
+----
+
+Sections:
+
+- 
+  title: Haltung
+  type: text
+  theme: light
+  align: left
+  kicker: Idee
+  heading: Lernen muss näher an echter Arbeit sein.
+  text: Die school of ideas ist kein klassischer Kurs und kein theoretisches Programm. Sie ist ein Jahr, in dem du in Agenturen mitarbeitest, Rückmeldung bekommst und lernst, kreative Entscheidungen bewusster zu treffen.
+
+    Es geht um Haltung, Handwerk, Technologie und den Mut, Gedanken auszusprechen, bevor sie perfekt sind.
+  spacingTop: small
+  spacingBottom: large
+- 
+  title: Was uns wichtig ist
+  type: cards
+  theme: light
+  align: left
+  heading: Dafür stehen wir
+  cards:
+    - 
+      icon: spark
+      heading: Ideen vor Oberfläche
+      text: Gute Gestaltung beginnt mit einem Gedanken, der trägt.
+    - 
+      icon: glasses-bold
+      heading: Bewusster Umgang mit Tools
+      text: KI und neue Technologien sind Werkzeuge. Entscheidend ist, wie du sie nutzt.
+    - 
+      icon: document
+      heading: Praxis mit Feedback
+      text: Du arbeitest an echten Aufgaben und bekommst ehrliche Rückmeldung aus der Branche.
+  spacingTop: small
+  spacingBottom: large
+
+----
+
+Metadescription: About-Seite der school of ideas: Idee, Haltung und Arbeitsweise des Programms.
+
+----
+
+Uuid: akphvomlbwt5ouub

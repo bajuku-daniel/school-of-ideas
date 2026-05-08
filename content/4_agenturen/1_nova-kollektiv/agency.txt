@@ -1,0 +1,80 @@
+Title: Nova Kollektiv
+
+----
+
+Headline: Ideen für Marken, die sich bewegen wollen.
+
+----
+
+Headlineink: Ideen für Marken,
+
+----
+
+Headlineaccent: die sich bewegen wollen.
+
+----
+
+Intro: Nova Kollektiv arbeitet an Kampagnen, Social-Formaten und Markenmomenten für Kultur, Tech und Konsumgüter.
+
+----
+
+Herospacingtoppx: 150
+
+----
+
+Herospacingbottompx: 105
+
+----
+
+Introspacingtoppx: 40
+
+----
+
+Contentspacingtoppx: 115
+
+----
+
+Contentspacingbottompx: 140
+
+----
+
+Body:
+
+Hier lernst du, wie aus einem strategischen Gedanken eine kreative Kampagne wird. Das Team arbeitet schnell, kollaborativ und sehr nah an aktuellen kulturellen Bewegungen.
+
+Du bist in Konzept, Recherche, Präsentationen und Ausarbeitung eingebunden und bekommst Feedback von Strategie, Text und Art Direction.
+
+----
+
+Location: Hamburg
+
+----
+
+Discipline: Kampagne
+
+----
+
+Setup: Independent
+
+----
+
+Tags: Social, Kultur, Konzept
+
+----
+
+Website: https://example.com
+
+----
+
+Cards:
+
+- 
+  heading: Passt zu dir, wenn
+  text: du gern beobachtest, schnell Ideen skizzierst und Lust auf Markenkommunikation hast.
+- 
+  heading: Du arbeitest mit
+  text: Strategie, Text, Art Direction, Social Creative und Projektmanagement.
+
+----
+
+Uuid: jzuoi1ckekygngrr

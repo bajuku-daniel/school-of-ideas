@@ -8,6 +8,7 @@ site/sessions
 site/cache
 site/accounts
 content/_drafts
+content/**/_changes
 public/fontello
 .vscode
 .DS_Store

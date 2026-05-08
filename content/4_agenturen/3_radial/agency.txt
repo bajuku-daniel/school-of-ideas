@@ -1,0 +1,65 @@
+Title: Radial
+
+----
+
+Headline: Digitale Ideen mit Wirkung im Alltag.
+
+----
+
+Headlineink: Digitale Ideen
+
+----
+
+Headlineaccent: mit Wirkung im Alltag.
+
+----
+
+Intro: Radial entwickelt digitale Kampagnen, Plattformen und Experiences für Marken mit Haltung.
+
+----
+
+Herospacingtoppx: 150
+
+----
+
+Herospacingbottompx: 105
+
+----
+
+Introspacingtoppx: 40
+
+----
+
+Contentspacingtoppx: 115
+
+----
+
+Contentspacingbottompx: 140
+
+----
+
+Body: Hier lernst du, wie Konzept, UX, Design und Entwicklung zusammenspielen. Du arbeitest an Prototypen, Content-Systemen und digitalen Touchpoints.
+
+----
+
+Location: Köln
+
+----
+
+Discipline: Digital
+
+----
+
+Setup: Spezialagentur
+
+----
+
+Tags: UX, Prototyping, Experience
+
+----
+
+Website: https://example.com
+
+----
+
+Uuid: worjhyl2kl4ap0gi

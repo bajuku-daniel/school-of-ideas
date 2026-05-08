@@ -1,0 +1,66 @@
+Title: Agenturen
+
+----
+
+Headline: Agenturen, in denen du nicht zuschaust, sondern mitarbeitest.
+
+----
+
+Headlineink: Agenturen, in denen du nicht zuschaust,
+
+----
+
+Headlineaccent: sondern mitarbeitest.
+
+----
+
+Intro: Unsere Partneragenturen öffnen Teams, Projekte und Perspektiven. Filtere nach Standort, Schwerpunkt oder Setup und finde heraus, wo dein Jahr Gestalt annehmen kann.
+
+----
+
+Herospacingtoppx: 160
+
+----
+
+Herospacingbottompx: 105
+
+----
+
+Introspacingtoppx: 42
+
+----
+
+Directoryspacingtoppx: 48
+
+----
+
+Directoryspacingbottompx: 150
+
+----
+
+Sections:
+
+- 
+  type: cards
+  heading: Was eine gute Partneragentur mitbringt
+  cards:
+    - 
+      icon: document
+      heading: Echte Aufgaben
+      text: Keine künstlichen Übungen, sondern Einblicke in reale Kund:innen, Prozesse und Entscheidungen.
+    - 
+      icon: sparkles
+      heading: Gutes Sparring
+      text: Menschen, die dir Feedback geben und dich in deinem Denken ernst nehmen.
+    - 
+      icon: shooting-star
+      heading: Raum zum Wachsen
+      text: Teams, in denen Neugier wichtiger ist als fertige Antworten.
+
+----
+
+Metadescription: Übersicht der Partneragenturen der school of ideas mit Filtern nach Standort, Schwerpunkt und Setup.
+
+----
+
+Uuid: 8ynt6dggncpodxsj
