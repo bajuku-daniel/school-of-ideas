@@ -466,7 +466,7 @@ $renderCard = function (array $card): void {
       </div>
       <div class="footer__bottom">
         <div class="footer__legal"><?php foreach (soi_structure($page, 'legalLinks', [['label' => 'Impressum', 'url' => '#'], ['label' => 'Datenschutz', 'url' => '#'], ['label' => 'Cookies', 'url' => '#']]) as $item): ?><a href="<?= esc($item['url'] ?? '#') ?>"><?= esc($item['label'] ?? '') ?></a><?php endforeach ?></div>
-        <p class="footer__credit">Made with <span class="footer__heart" aria-hidden="true">♥</span><span class="visually-hidden">love</span> in Heimbach by <a class="footer__studio" href="https://weandthemachine.com" target="_blank" rel="noopener">we and the machine</a> <span class="footer__machine" aria-hidden="true"><span></span></span></p>
+        <p class="footer__credit">Made with <span class="footer__heart" aria-hidden="true">♥</span><span class="visually-hidden">love</span> in Heimbach by <a class="footer__studio" href="https://watm.bajuku-dev.de/" target="_blank" rel="noopener">we and the machine</a> <span class="footer__machine" aria-hidden="true"><span></span></span></p>
       </div>
     </div>
   </footer>
