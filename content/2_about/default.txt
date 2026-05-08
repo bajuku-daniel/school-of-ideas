@@ -43,7 +43,8 @@ Sections:
   align: left
   kicker: Idee
   heading: Lernen muss näher an echter Arbeit sein.
-  text: Die school of ideas ist kein klassischer Kurs und kein theoretisches Programm. Sie ist ein Jahr, in dem du in Agenturen mitarbeitest, Rückmeldung bekommst und lernst, kreative Entscheidungen bewusster zu treffen.
+  text: >
+    Die school of ideas ist kein klassischer Kurs und kein theoretisches Programm. Sie ist ein Jahr, in dem du in Agenturen mitarbeitest, Rückmeldung bekommst und lernst, kreative Entscheidungen bewusster zu treffen.
 
     Es geht um Haltung, Handwerk, Technologie und den Mut, Gedanken auszusprechen, bevor sie perfekt sind.
   spacingTop: small

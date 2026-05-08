@@ -38,7 +38,8 @@ Sections:
   theme: light
   align: left
   heading: Allgemeine Hinweise
-  text: Wir verarbeiten personenbezogene Daten nur, soweit dies für den Betrieb der Website, die Kommunikation und Bewerbungsprozesse erforderlich ist.
+  text: >
+    Wir verarbeiten personenbezogene Daten nur, soweit dies für den Betrieb der Website, die Kommunikation und Bewerbungsprozesse erforderlich ist.
 
     Weitere Details zu Verantwortlichen, Rechtsgrundlagen, Speicherdauer und Betroffenenrechten werden hier ergänzt.
   spacingTop: small

@@ -38,7 +38,8 @@ Sections:
   theme: light
   align: left
   heading: Angaben gemäß § 5 TMG
-  text: School of Ideas
+  text: >
+    School of Ideas
 
     Musterstraße 1
 
