@@ -1,142 +1,1976 @@
 // ----- Generic content blocks used across the page -----
 
+// =============================================================================
+// .intro — Hero-Anschluss, zwei-spaltig.
+//
+// DESIGNER-TUNING: alle pixel-relevanten Größen / Positionen sind als
+// CSS-Variablen oben in der Section definiert. Werte hier ändern,
+// nichts unten "im Layout" suchen.
+// =============================================================================
 .intro {
-  padding: clamp(70px, 10vw, 140px) 0;
+  // ===========================================================================
+  // DESIGNER-KNÖPFE — alle Abstände, Größen und Positionen leben hier.
+  //
+  // Breakpoint-System:
+  //   • DEFAULTS (unten)     gelten ab Wide-Desktop ≥ 1800 px
+  //   • DESKTOP-MID-Block    überschreibt 1200–1799 px
+  //                          (mittlere Desktop-Breiten — Spalten enger,
+  //                           Decorations brauchen Re-Tuning)
+  //   • TABLET-Block         überschreibt ≤ 1199 px
+  //   • MOBILE-Block         überschreibt ≤ 768 px (1-Spalte, Icons aus)
+  //
+  // → Du musst NIE alles neu schreiben — pro Breakpoint nur die Variablen
+  //   anfassen, die anders sein sollen. Alle anderen erben vom Default.
+  // ===========================================================================
+
+  // ---- Section-Abstand (oben / unten zur ganzen Section) ----
+  --intro-spacing-top:    var(--intro-spacing-top-desktop, #{clamp(70px, 10vw, 140px)});   // Luft über der Headline
+  --intro-spacing-bottom: var(--intro-spacing-bottom-desktop, #{clamp(60px, 9vw, 120px)}); // Luft unter Bild + CTAs
+
+  // ---- Bild-Position innerhalb der linken Spalte ----
+  // Vergrößern → Bild rutscht nach unten (mehr Platz zwischen Headline und Bild).
+  // Verkleinern → Bild rutscht nach oben (näher an die Headline).
+  --motiv-spacing-top:    var(--motiv-spacing-top-desktop, #{clamp(80px, 17vw, 285px)});
+  --intro-copy-gap:       var(--intro-copy-gap-desktop, #{clamp(24px, 3vw, 50px)});
+  --intro-cta-spacing-top: var(--intro-cta-spacing-top-desktop, #{clamp(4px, .8vw, 12px)});
+
+  // ---- Bild-Aspect-Ratio (Frame + blauer Schatten) ----
+  // Beispiele: `16 / 11` (default-landscape), `4 / 3`, `1 / 1` (quadratisch),
+  // `3 / 4` (portrait), `16 / 9` (breit). Pro Section frei wählbar.
+  --motiv-aspect: 16 / 11;
+
+  // ---- Schrift / Layout ----
+  // Floor 1.5rem (24 px) damit "Und der Anfang einer" bei 320 px noch in
+  // eine Zeile passt. Floor unten im Mobile-Slot ggf. nochmal absenken.
+  --lead-fs:        #{clamp(1.5rem, 2.8vw, 2.5rem)};
+  --lead-lh:        1.06;
+  --lead-gap:       0em;     // Abstand zwischen schwarzem und blauem Headline-Block
+
+  // ---- Decoration: Blitz ----
+  // Position ist RELATIV ZUR LINKEN SPALTE (oben-links der Spalte = 0/0).
+  // --lightning-top  = Abstand vom oberen Spaltenrand (≈ "spacing-top" des Blitzes)
+  // --lightning-left = Abstand vom linken Spaltenrand
+  // --lightning-display = `block` einblenden / `none` ausblenden
+  --lightning-display: block;
+  --lightning-size:    180px;
+  --lightning-top:     280px;
+  --lightning-left:    120px;
+  --lightning-rotate:  0deg;
+
+  // ---- Decoration: Papierflieger ----
+  // Position ist RELATIV ZUR RECHTEN SPALTE.
+  // bottom: -160px → 160 px UNTER der Spalte (hängt nach unten raus).
+  --airplane-display: block;
+  --airplane-size:    210px;
+  --airplane-top:     auto;
+  --airplane-bottom:  -360px;
+  --airplane-right:   auto;
+  --airplane-left:    30px;
+  --airplane-rotate:  0deg;
+
+  // =========================================================================
+  // BREAKPOINT — DESKTOP-MID (1200–1799 px)
+  // Mittlere Desktop-Breiten: Container ist enger, der Bild-Gap (motiv-
+  // spacing-top) schrumpft schneller als der Blitz, sodass der Blitz
+  // wieder ins Bild rutschen würde. Hier nachjustieren.
+  // =========================================================================
+  @media (min-width: 1200px) and (max-width: 1799px) {
+    --motiv-spacing-top: var(--motiv-spacing-top-desktop, 220px);
+
+    --lightning-size: 150px;
+    --lightning-top:  240px;
+    --lightning-left: 100px;
+  }
+
+  // =========================================================================
+  // BREAKPOINT — TABLET / kleinerer Desktop  (≤ 1199 px)
+  // Layout bleibt zweispaltig. Nur Werte ändern, die hier anders sein sollen.
+  // =========================================================================
+  @media (max-width: 1199px) {
+    --motiv-spacing-top: var(--motiv-spacing-top-tablet, 180px);
+
+    --lightning-size: 120px;
+    --lightning-top:  195px;
+    --lightning-left: 80px;
+
+    --airplane-size:   0px;
+    --airplane-bottom: -180px;
+    --airplane-left:   40px;
+  }
+
+  // =========================================================================
+  // BREAKPOINT — MOBILE  (≤ 768 px)
+  // Layout wird einspaltig. Icons werden per default AUSGEBLENDET.
+  // (Wenn der Designer sie auch mobil sehen will: --lightning-display:block
+  //  / --airplane-display:block setzen — sie laufen dann automatisch im
+  //  Spalten-Fluss mit, nicht absolut.)
+  // =========================================================================
+  @media (max-width: 768px) {
+    --intro-spacing-top:    var(--intro-spacing-top-mobile, 60px);
+    --intro-spacing-bottom: var(--intro-spacing-bottom-mobile, 60px);
+    --motiv-spacing-top:    var(--motiv-spacing-top-mobile, 48px);
+    --intro-copy-gap:       var(--intro-copy-gap-mobile, 32px);
+    --intro-cta-spacing-top: var(--intro-cta-spacing-top-mobile, 8px);
+
+    --lightning-display: none;
+    --airplane-display:  none;
+
+    // Subhead nicht mehr an die blaue Headline-Zeile koppeln —
+    // einspaltig hat "blaue Zeile rechts" kein Pendant.
+    .intro__sub { margin-top: 0; }
+  }
+
+  position: relative;
+  padding: var(--intro-spacing-top) 0 var(--intro-spacing-bottom);
+
+  // Two-column layout — each column is its own vertical stack so the
+  // headline / image (left) and subhead / body / CTAs (right) align by
+  // visual rhythm rather than by row.
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    column-gap: clamp(40px, 6vw, 110px);
+    align-items: start;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      row-gap: clamp(32px, 6vw, 60px);
+    }
+  }
+
+  &__col {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__col--left {
+    // Vertikaler Abstand zwischen Headline und Bild — gesteuert über
+    // --motiv-spacing-top (siehe Designer-Knöpfe oben).
+    gap: var(--motiv-spacing-top);
+  }
+
+  &__col--right {
+    gap: var(--intro-copy-gap);
+  }
 
   &__lead {
     font-family: $font-display;
     font-weight: 700;
-    font-size: clamp(2rem, 3.6vw, 3.4rem);
-    line-height: 1.05;
+    font-size: var(--lead-fs);
+    line-height: var(--lead-lh);
     letter-spacing: -.02em;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 1.1em;
+    gap: var(--lead-gap);
+
+    .ink    { color: $color-ink; }
+    .accent { color: $color-accent; }
+  }
+
+  // Subhead — Neue Haas (body font) at bold weight, NOT Nohemi.
+  // Aligns with the BLUE accent line of the headline (i.e. starts after
+  // 2 black lines + the lead-gap), per the reference design.
+  &__sub {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(1rem, 1.75vw, 1.4rem);
+    line-height: 1.4;
+    letter-spacing: -.005em;
+    color: $color-ink;
+    margin: 0;
+    max-width: 31ch;
+    margin-top: calc(2 * var(--lead-fs) * var(--lead-lh) + var(--lead-gap));
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25em;
+    max-width: 39ch;
+
+    p {
+      margin: 0;
+      font-family: $font-body;
+      font-weight: 400;
+      font-size: clamp(.9rem, .95vw, .95rem);
+      line-height: 1.5;
+      color: $color-ink;
+    }
+  }
+
+  &__ctas {
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 2.4vw, 36px);
+    margin-top: var(--intro-cta-spacing-top);
+  }
+}
+
+// ----- Decorative SVG icons -------------------------------------------------
+// Container = absolute Position + statische Rotation (designer-tunable).
+// Inneres <img> = wabern / wobble-Animation.
+//
+// DESIGNER: zum Verschieben / Skalieren NUR die Variablen oben in `.intro`
+// anfassen (`--lightning-top`, `--lightning-left`, `--lightning-size`,
+// `--lightning-rotate`, analog für `--airplane-…`).
+.float-icon {
+  position: absolute;
+  pointer-events: none;
+  color: $color-accent;
+  will-change: transform;
+  z-index: 5;     // sits above the motiv image + shadow
+
+  img, svg, .site-icon {
+    width: 100%;
+    height: auto;
+    display: flex;
+    animation: floatWobble 6.5s ease-in-out infinite;
+  }
+
+  .site-icon {
+    aspect-ratio: 1;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    --site-icon-scale: .92;
+
+    .site-icon__img,
+    .site-icon__svg { display: block; }
+  }
+
+  &--lightning { font-size: var(--lightning-size); }
+  &--airplane { font-size: var(--airplane-size); }
+
+  &--lightning {
+    display: var(--lightning-display);
+    width: var(--lightning-size);
+    top:   var(--lightning-top);
+    left:  var(--lightning-left);
+    transform: rotate(var(--lightning-rotate));
+  }
+
+  &--airplane {
+    display: var(--airplane-display);
+    width: var(--airplane-size);
+    top:    var(--airplane-top);
+    bottom: var(--airplane-bottom);
+    right:  var(--airplane-right);
+    left:   var(--airplane-left);
+    transform: rotate(var(--airplane-rotate));
+
+    img, svg, .site-icon { animation-duration: 7.5s; animation-delay: -3.4s; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    img, svg, .site-icon { animation: none; }
+  }
+
+  // Ab Mobile zurück in den Spalten-Fluss (falls Designer Icons mobil
+  // doch wieder einblendet via --lightning-display: block).
+  @media (max-width: 768px) {
+    position: static;
+    width: clamp(56px, 12vw, 90px);
+    transform: rotate(var(--lightning-rotate));
+
+    &--lightning { margin-left: 8vw; }
+    &--airplane  {
+      align-self: flex-end;
+      margin-right: 6vw;
+      margin-top: 2vw;
+      transform: rotate(var(--airplane-rotate));
+    }
+  }
+}
+
+@keyframes floatWobble {
+  0%,
+  100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  25%  { transform: translate3d(2px, -4px, 0) rotate(2deg); }
+  50%  { transform: translate3d(-1px, -2px, 0) rotate(-1.5deg); }
+  75%  { transform: translate3d(-3px, 3px, 0) rotate(1deg); }
+}
+
+// ----- Mint CTA + ghost underline link (intro section) ---------------------
+.btn-mint {
+  display: inline-flex;
+  align-items: center;
+  font-family: $font-body;
+  font-weight: 700;
+  font-size: clamp(.85rem, .9vw, .9rem);
+  color: $color-ink;
+  background: $color-mint;
+  border-radius: $radius-md;          // Standard-Radius (10px), nicht Pill
+  padding: .65rem 1.15rem;
+  transition: background $duration-base $easing-out, transform $duration-base $easing-out;
+
+  &:hover { background: $color-mint-deep; transform: translateY(-1px); }
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  font-family: $font-body;
+  font-weight: 700;
+  font-size: clamp(.85rem, .9vw, .9rem);
+  color: $color-accent;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1.5px;
+
+  &:hover { color: $color-accent-soft; }
+}
+
+// =============================================================================
+// .manifest — KI-/Kreativitäts-Statement, blau, mit Inline-Icons.
+//
+// DESIGNER-KNÖPFE oben in `.manifest`. Breakpoint-Slots wie bei `.intro`.
+// =============================================================================
+.manifest {
+  // ===========================================================================
+  // DESIGNER-KNÖPFE
+  //   • DEFAULTS gelten ab Desktop ≥ 1200 px
+  //   • TABLET-Block überschreibt nur was sich ≤ 1199 px ändert
+  //   • MOBILE-Block überschreibt nur was sich ≤ 991 px ändert
+  // ===========================================================================
+
+  // ---- Section-Abstand ----
+  --manifest-spacing-top:    var(--manifest-spacing-top-desktop, #{clamp(80px, 11vw, 160px)});
+  --manifest-spacing-bottom: var(--manifest-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)});
+
+  // ---- Typo ----
+  // EIN durchgehender Clamp von 320 px bis 1920+ px — kein Sprung am
+  // Breakpoint. Bei 320 ≈ 17 px, 1200 ≈ 27 px, 1400 ≈ 30 px, 1920+ = 33.6 px.
+  --manifest-fs:        clamp(2.15rem, 4.6vw, 4.35rem);
+  --manifest-lh:        1.22;
+  --manifest-fw:        700;
+  --manifest-color:     #{$color-accent};
+  --manifest-max-width: 1260px;          // Lesebreite
+
+  // ---- Abstand zwischen den beiden Absätzen ----
+  --manifest-paragraph-gap: var(--manifest-paragraph-gap-desktop, 1.65em);
+
+  // ---- Inline-Icons ----
+  // Größe / Versatz / Gap sind alle in `em` → skalieren AUTOMATISCH mit
+  // der Schrift mit. Designer setzt sie hier einmal, die Proportion zum
+  // Text bleibt auf jedem Breakpoint identisch.
+  --manifest-icon-size:    var(--manifest-icon-size-desktop, 1.32em);
+  --manifest-icon-gap:     var(--manifest-icon-gap-desktop, .2em); // horizontaler Abstand um jedes Icon
+  --manifest-icon-align:   -.02em;       // vertikale Lage des 0-height Slots
+  --manifest-icon-lift:    var(--manifest-icon-lift-desktop, calc(var(--manifest-icon-size) * .62)); // Icon nach oben ziehen, ohne Zeilenhöhe zu ändern
+
+  // Strichstärke der Icon-SVGs in viewBox-Units (327×327).
+  // Skaliert NICHT automatisch mit der Schrift — daher unten im Mobile-Slot
+  // nochmal nachgezogen, damit der Stroke bei kleinen Icons sichtbar bleibt.
+  --manifest-icon-stroke:  var(--manifest-icon-stroke-desktop, 24);
+  --manifest-icon-color:   var(--manifest-color);
+
+  // =========================================================================
+  // BREAKPOINT — TABLET (≤ 1199 px)
+  // Layout bleibt gleich. Schrift skaliert kontinuierlich über den Default-
+  // Clamp — hier sind nur Werte zu setzen, die WIRKLICH anders sein müssen.
+  // =========================================================================
+  @media (max-width: 1199px) {
+    --manifest-spacing-top:    var(--manifest-spacing-top-tablet, var(--manifest-spacing-top-desktop, #{clamp(80px, 11vw, 160px)}));
+    --manifest-spacing-bottom: var(--manifest-spacing-bottom-tablet, var(--manifest-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)}));
+    --manifest-paragraph-gap:  var(--manifest-paragraph-gap-tablet, var(--manifest-paragraph-gap-desktop, 1.65em));
+    --manifest-icon-size:      var(--manifest-icon-size-tablet, var(--manifest-icon-size-desktop, 1.32em));
+    --manifest-icon-gap:       var(--manifest-icon-gap-tablet, var(--manifest-icon-gap-desktop, .2em));
+    --manifest-icon-lift:      var(--manifest-icon-lift-tablet, var(--manifest-icon-lift-desktop, calc(var(--manifest-icon-size) * .62)));
+    --manifest-icon-stroke:    var(--manifest-icon-stroke-tablet, var(--manifest-icon-stroke-desktop, 24));
+  }
+
+  // =========================================================================
+  // BREAKPOINT — MOBILE (≤ 991 px)
+  // Section-Padding enger, Stroke etwas dicker damit kleine Icons trotzdem
+  // ihre Form behalten. Schrift / Icon-Größen / Gaps skalieren weiter
+  // via em + clamp aus den Defaults oben.
+  // =========================================================================
+  @media (max-width: 991px) {
+    --manifest-spacing-top:    var(--manifest-spacing-top-mobile, 60px);
+    --manifest-spacing-bottom: var(--manifest-spacing-bottom-mobile, 60px);
+    --manifest-icon-stroke:    var(--manifest-icon-stroke-mobile, 26);
+    --manifest-fs:             clamp(2.05rem, 8.5vw, 3.2rem);
+    --manifest-max-width:      86vw;
+    --manifest-paragraph-gap:  var(--manifest-paragraph-gap-mobile, var(--manifest-paragraph-gap-tablet, 1.35em));
+    --manifest-icon-size:      var(--manifest-icon-size-mobile, var(--manifest-icon-size-tablet, 1.22em));
+    --manifest-icon-gap:       var(--manifest-icon-gap-mobile, var(--manifest-icon-gap-tablet, .16em));
+    --manifest-icon-lift:      var(--manifest-icon-lift-mobile, var(--manifest-icon-lift-tablet, calc(var(--manifest-icon-size) * .62)));
+  }
+
+  padding: var(--manifest-spacing-top) 0 var(--manifest-spacing-bottom);
+
+  // Zentrale Lesebreite — `.container` liefert die Außen-Padding,
+  // `.manifest__inner` die Lesebreite (in Zeichen).
+  &__inner {
+    max-width: var(--manifest-max-width);
+    margin: 0 auto;
+  }
+
+  &__text {
+    color: var(--manifest-color);
+    //font-family: $font-display;
+    font-weight: var(--manifest-fw);
+    font-size: var(--manifest-fs);
+    line-height: var(--manifest-lh);
+    letter-spacing: -.01em;
+    margin: 0;
+    text-align: left;
+
+    // Abstand zwischen den Absätzen
+    & + & { margin-top: var(--manifest-paragraph-gap); }
+  }
+
+  // Inline-Icon im Text — sitzt mitten im Lesefluss zwischen Wörtern.
+  // <img> wird beim Boot von main.js durch das echte <svg> ersetzt.
+  // Die Original-SVG-Styles bleiben erhalten (damit Icons mit
+  // gemischten Fills/Strokes — z. B. `glasses` mit gefüllten Augen —
+  // nicht ihre Füllung verlieren).  main.js rewritet im SVG-Style:
+  //   • `#0a3aea` → `currentColor`           (bekommt --manifest-icon-color)
+  //   • `stroke-width: 9px` → `var(--icon-stroke, 9px)`  (Designer-tunable)
+  &__icon {
+    display: inline-block;
+    width:  var(--manifest-icon-size);
+    height: 0;
+    line-height: 0;
+    margin: 0 var(--manifest-icon-gap);
+    vertical-align: var(--manifest-icon-align);
+    position: relative;
+    color: var(--manifest-icon-color);   // currentColor-Quelle für die SVGs
+    --icon-stroke: var(--manifest-icon-stroke); // wird von SVG-Styles gelesen
+    flex-shrink: 0;
+    overflow: visible;
+
+    img,
+    svg,
+    .site-icon {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: var(--manifest-icon-size);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;                 // damit fettere Strokes nicht beschnitten werden
+      transform: translateY(calc(-1 * var(--manifest-icon-lift)));
+      transform-origin: 50% 50%;
+    }
+
+    .site-icon {
+      font-size: 1em;
+      --site-icon-scale: 1;
+      --site-icon-y: 0;
+    }
+
+    .site-icon__img,
+    .site-icon__svg {
+      transform: none;
+    }
+  }
+}
+
+// =============================================================================
+// .expect — "Was dich bei uns erwartet"
+// 2-spaltiger Header (Headline links, Bold-Subhead + Body rechts) plus
+// zentrales Bild mit blauem Drop-Shadow (Scroll-Rotation) und drei
+// dekorative Float-Icons.  Pattern parallel zu `.intro` — alle Designer-
+// Knöpfe leben oben.
+// =============================================================================
+.expect {
+  // ===========================================================================
+  // DESIGNER-KNÖPFE
+  //   • DEFAULTS gelten ab Desktop ≥ 1200 px
+  //   • TABLET-Block ≤ 1199 px
+  //   • MOBILE-Block ≤ 768 px (Layout wird einspaltig, Icons aus)
+  // ===========================================================================
+
+  // ---- Section-Abstand ----
+  --expect-spacing-top:    var(--expect-spacing-top-desktop, #{clamp(80px, 11vw, 160px)});
+  --expect-spacing-bottom: var(--expect-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)});
+
+  // ---- Abstand zwischen Header (Text-Block) und dem Bild ----
+  --expect-motiv-spacing-top: var(--expect-motiv-spacing-top-desktop, #{clamp(60px, 8vw, 140px)});
+  --expect-copy-gap: var(--expect-copy-gap-desktop, #{clamp(28px, 4vw, 56px)});
+
+  // ---- Bild-Größe / -Position innerhalb der Section ----
+  // Breite des Bildes relativ zur Container-Breite. Margin schiebt es horizontal.
+  --expect-motiv-width:      55%;
+  --expect-motiv-margin-left: auto;
+  --expect-motiv-margin-right: auto;
+
+  // ---- Bild-Aspect-Ratio (Frame + blauer Schatten) ----
+  // motiv_03.jpg ist nahezu quadratisch (1:1). Default für diese Section
+  // entsprechend. Andere Werte: `16 / 11`, `4 / 3`, `3 / 2`, `16 / 9`, `3 / 4`.
+  --motiv-aspect: 1 / 1;
+
+  // ---- Headline ----
+  --expect-lead-fs:  #{clamp(1.5rem, 2.8vw, 2.7rem)};
+  --expect-lead-lh:  1.06;
+  --expect-lead-gap: 0em;
+
+  // ---- Subhead (rechte Spalte oben, fett) ----
+  --expect-sub-fs: clamp(1.05rem, 1.4vw, 1.4rem);
+  --expect-sub-lh: 1.4;
+
+  // ---- Body (rechte Spalte unten) ----
+  --expect-body-fs:        clamp(.9rem, .95vw, .95rem);
+  --expect-body-lh:        1.5;
+  --expect-body-gap:       1.25em;
+  --expect-body-max-width: 42ch;
+
+  // ---- Decoration: Airplane (rechte Spalte, zwischen Subhead und Body) ----
+    --ex-airplane-display: block;
+    --ex-airplane-size: 230px;
+    --ex-airplane-top: 244px;
+    --ex-airplane-right: auto;
+    --ex-airplane-left: 40%;
+    --ex-airplane-bottom: auto;
+    --ex-airplane-rotate: 0deg;
+
+  // ---- Decoration: Shooting Star (links unten, neben Bild) ----
+  --ex-star-display: block;
+  --ex-star-size:    230px;
+  --ex-star-top:     auto;
+  --ex-star-right:   auto;
+  --ex-star-left:    3%;
+  --ex-star-bottom:  60px;
+  --ex-star-rotate:  -10deg;
+
+  // ---- Decoration: Bottle / Knall (rechts unten, neben Bild) ----
+  --ex-bottle-display: block;
+  --ex-bottle-size:    230px;
+  --ex-bottle-top:     auto;
+  --ex-bottle-right:   15%;
+  --ex-bottle-left:    auto;
+  --ex-bottle-bottom:  -40px;
+  --ex-bottle-rotate:  10deg;
+
+  // ---- Stroke-Stärke der Inline-Icons (viewBox-Units) ----
+  --ex-icon-stroke: 14;
+
+  // =========================================================================
+  // BREAKPOINT — TABLET (≤ 1199 px)
+  // =========================================================================
+  @media (max-width: 1199px) {
+    --expect-spacing-top:    var(--expect-spacing-top-tablet, var(--expect-spacing-top-desktop, #{clamp(80px, 11vw, 160px)}));
+    --expect-spacing-bottom: var(--expect-spacing-bottom-tablet, var(--expect-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)}));
+    --expect-motiv-spacing-top: var(--expect-motiv-spacing-top-tablet, var(--expect-motiv-spacing-top-desktop, #{clamp(60px, 8vw, 140px)}));
+    --expect-copy-gap: var(--expect-copy-gap-tablet, var(--expect-copy-gap-desktop, #{clamp(28px, 4vw, 56px)}));
+
+    --expect-motiv-width: 70%;
+
+    --ex-airplane-size: 110px;
+    --ex-airplane-top:  340px;
+    --ex-airplane-left: 40%;
+
+    --ex-star-size: 110px;
+    --ex-star-bottom: 40px;
+
+    --ex-bottle-size: 110px;
+    --ex-bottle-bottom: -20px;
+  }
+
+  // =========================================================================
+  // BREAKPOINT — MOBILE (≤ 768 px)
+  // Layout wird einspaltig, Icons standardmäßig aus.
+  // =========================================================================
+  @media (max-width: 768px) {
+    --expect-spacing-top:       var(--expect-spacing-top-mobile, 60px);
+    --expect-spacing-bottom:    var(--expect-spacing-bottom-mobile, 60px);
+    --expect-motiv-spacing-top: var(--expect-motiv-spacing-top-mobile, 40px);
+    --expect-copy-gap:          var(--expect-copy-gap-mobile, 32px);
+    --expect-motiv-width:       100%;
+
+    --ex-airplane-display: none;
+    --ex-star-display:     none;
+    --ex-bottle-display:   none;
+  }
+
+  position: relative;
+  padding: var(--expect-spacing-top) 0 var(--expect-spacing-bottom);
+
+  // ---- Header: 2-spaltig — Headline links, Subhead + Body rechts ----
+  &__head {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    column-gap: clamp(40px, 6vw, 110px);
+    align-items: start;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      row-gap: clamp(28px, 5vw, 50px);
+    }
+  }
+
+  &__lead {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: var(--expect-lead-fs);
+    line-height: var(--expect-lead-lh);
+    letter-spacing: -.02em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--expect-lead-gap);
+
+    .ink    { color: $color-ink; }
+    .accent { color: $color-accent; }
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--expect-copy-gap);
+  }
+
+  &__sub {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: var(--expect-sub-fs);
+    line-height: var(--expect-sub-lh);
+    letter-spacing: -.005em;
+    color: $color-ink;
+    margin: 0;
+    max-width: 32ch;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--expect-body-gap);
+    max-width: var(--expect-body-max-width);
+
+    p {
+      margin: 0;
+      font-family: $font-body;
+      font-weight: 400;
+      font-size: var(--expect-body-fs);
+      line-height: var(--expect-body-lh);
+      color: $color-ink;
+    }
+  }
+
+  // ---- Motiv (zentrales Bild mit Drop-Shadow) ----
+  // .motiv--shadow Mechanik (Scroll-Rotation + blauer Schatten) kommt aus
+  // _motiv.scss. Hier nur Größe und horizontale Position überschreiben.
+  &__motiv {
+    width: var(--expect-motiv-width);
+    margin-left: var(--expect-motiv-margin-left);
+    margin-right: var(--expect-motiv-margin-right);
+    margin-top: var(--expect-motiv-spacing-top);
+  }
+}
+
+// ----- Decorative Float-Icons der .expect-Section ------------------------
+// Selber Mechanismus wie .float-icon (absolute, inline-SVG via main.js).
+// Variablen kommen aus .expect oben.
+.float-icon--ex-airplane,
+.float-icon--ex-star,
+.float-icon--ex-bottle {
+  position: absolute;
+  pointer-events: none;
+  color: $color-accent;
+  z-index: 5;
+  --icon-stroke: var(--ex-icon-stroke);
+}
+
+.float-icon--ex-airplane {
+  display: var(--ex-airplane-display);
+  width: var(--ex-airplane-size);
+  top:    var(--ex-airplane-top);
+  bottom: var(--ex-airplane-bottom);
+  left:   var(--ex-airplane-left);
+  right:  var(--ex-airplane-right);
+  transform: rotate(var(--ex-airplane-rotate));
+}
+
+.float-icon--ex-star {
+  display: var(--ex-star-display);
+  width: var(--ex-star-size);
+  top:    var(--ex-star-top);
+  bottom: var(--ex-star-bottom);
+  left:   var(--ex-star-left);
+  right:  var(--ex-star-right);
+  transform: rotate(var(--ex-star-rotate));
+}
+
+.float-icon--ex-bottle {
+  display: var(--ex-bottle-display);
+  width: var(--ex-bottle-size);
+  top:    var(--ex-bottle-top);
+  bottom: var(--ex-bottle-bottom);
+  left:   var(--ex-bottle-left);
+  right:  var(--ex-bottle-right);
+  transform: rotate(var(--ex-bottle-rotate));
+}
+
+.float-icon--ex-airplane { font-size: var(--ex-airplane-size); }
+.float-icon--ex-star { font-size: var(--ex-star-size); }
+.float-icon--ex-bottle { font-size: var(--ex-bottle-size); }
+
+// =============================================================================
+// .year — "So sieht dein Jahr bei uns aus"
+// Headline links oben, dann zwei vertikal gestaffelte Textblock-Spuren
+// (links / rechts), darunter zentrales Bild mit Drop-Shadow + drei
+// Float-Icons. Pattern parallel zu `.intro` / `.expect`.
+// =============================================================================
+.year {
+  // ===========================================================================
+  // DESIGNER-KNÖPFE
+  // ===========================================================================
+
+  // ---- Section-Abstand ----
+  --year-spacing-top:    var(--year-spacing-top-desktop, #{clamp(80px, 11vw, 160px)});
+  --year-spacing-bottom: var(--year-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)});
+
+  // ---- Headline ----
+  --year-lead-fs:  #{clamp(1.5rem, 2.8vw, 2.7rem)};
+  --year-lead-lh:  1.06;
+  --year-lead-gap: 0em;
+
+  // ---- Textblock-Typo ----
+  --year-block-lead-fs: clamp(1.05rem, 1.4vw, 1.4rem);   // Bold-Untertitel
+  --year-block-lead-lh: 1.4;
+  --year-block-body-fs: clamp(.9rem, .95vw, .95rem);     // Fließtext
+  --year-block-body-lh: 1.55;
+
+  // ---- Vertikale Abstände (zwischen Headline → Text-Grid → Bild) ----
+  --year-copy-spacing-top:  var(--year-copy-spacing-top-desktop, #{clamp(80px, 10vw, 160px)}); // Lücke Headline → erster Block
+  --year-motiv-spacing-top: var(--year-motiv-spacing-top-desktop, #{clamp(80px, 10vw, 160px)}); // Lücke letzter Block → Bild
+  --year-block-row-gap:     var(--year-block-row-gap-desktop, #{clamp(40px, 5vw, 90px)});       // Vertikaler Abstand zwischen Reihen
+  --year-block-col-gap:     var(--year-block-col-gap-desktop, #{clamp(20px, 2vw, 40px)});
+
+  // ---- Bild-Größe / Aspect ----
+  --year-motiv-width:  64%;
+  --motiv-aspect:      16 / 11;
+
+  // ---- Decoration: Spark (Stern, links neben dem Bild) ----
+  --yr-spark-display: block;
+  --yr-spark-size:    230px;
+  --yr-spark-top:     auto;
+  --yr-spark-bottom:  500px;        // Abstand vom Section-Ende
+  --yr-spark-left:    8%;
+  --yr-spark-right:   auto;
+  --yr-spark-rotate:  -8deg;
+
+  // ---- Decoration: Sparkles (Funken, rechts neben dem Bild) ----
+  --yr-sparkles-display: block;
+  --yr-sparkles-size:    230px;
+  --yr-sparkles-top:     auto;
+  --yr-sparkles-bottom:  340px;
+  --yr-sparkles-left:    auto;
+  --yr-sparkles-right:   6%;
+  --yr-sparkles-rotate:  6deg;
+
+  // ---- Decoration: Document (kleiner Beleg, unter dem Bild) ----
+  --yr-document-display: block;
+  --yr-document-size:    230px;
+  --yr-document-top:     auto;
+  --yr-document-bottom:  -230px;
+  --yr-document-left:    50%;
+  --yr-document-right:   auto;
+  --yr-document-rotate:  -10deg;
+
+  --yr-icon-stroke: 14;
+
+  // =========================================================================
+  // BREAKPOINT — TABLET (≤ 1199 px)
+  // =========================================================================
+  @media (max-width: 1199px) {
+    --year-spacing-top:       var(--year-spacing-top-tablet, var(--year-spacing-top-desktop, #{clamp(80px, 11vw, 160px)}));
+    --year-spacing-bottom:    var(--year-spacing-bottom-tablet, var(--year-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)}));
+    --year-copy-spacing-top:  var(--year-copy-spacing-top-tablet, var(--year-copy-spacing-top-desktop, #{clamp(80px, 10vw, 160px)}));
+    --year-motiv-spacing-top: var(--year-motiv-spacing-top-tablet, var(--year-motiv-spacing-top-desktop, #{clamp(80px, 10vw, 160px)}));
+    --year-block-row-gap:     var(--year-block-row-gap-tablet, var(--year-block-row-gap-desktop, #{clamp(40px, 5vw, 90px)}));
+    --year-block-col-gap:     var(--year-block-col-gap-tablet, var(--year-block-col-gap-desktop, #{clamp(20px, 2vw, 40px)}));
+
+    --year-motiv-width: 80%;
+
+    --yr-spark-size:    120px;
+    --yr-spark-bottom:  430px;
+
+    --yr-sparkles-size:   120px;
+    --yr-sparkles-bottom: 290px;
+
+    --yr-document-size:   110px;
+    --yr-document-bottom: -30px;
+  }
+
+  // =========================================================================
+  // BREAKPOINT — MOBILE (≤ 768 px)
+  // Layout linearisiert sich: Textblöcke alle in eine Spalte, Icons aus.
+  // =========================================================================
+  @media (max-width: 768px) {
+    --year-spacing-top:       var(--year-spacing-top-mobile, 60px);
+    --year-spacing-bottom:    var(--year-spacing-bottom-mobile, 60px);
+    --year-copy-spacing-top:  var(--year-copy-spacing-top-mobile, 48px);
+    --year-motiv-spacing-top: var(--year-motiv-spacing-top-mobile, 48px);
+    --year-block-row-gap:     var(--year-block-row-gap-mobile, 48px);
+    --year-block-col-gap:     var(--year-block-col-gap-mobile, 24px);
+    --year-motiv-width:       100%;
+
+    --yr-spark-display:    none;
+    --yr-sparkles-display: none;
+    --yr-document-display: none;
+  }
+
+  position: relative;
+  padding: var(--year-spacing-top) 0 var(--year-spacing-bottom);
+
+  // ---- Headline ----
+  &__lead {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: var(--year-lead-fs);
+    line-height: var(--year-lead-lh);
+    letter-spacing: -.02em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--year-lead-gap);
+
+    .ink    { color: $color-ink; }
+    .accent { color: $color-accent; }
+  }
+
+  // ---- Staggered Text-Grid: 12 Spalten ----
+  &__copy {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--year-block-col-gap);
+    row-gap: var(--year-block-row-gap);
+    margin-top: var(--year-copy-spacing-top);
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      row-gap: clamp(28px, 5vw, 48px);
+    }
+  }
+
+  // Reihen + Spalten-Slots — designer-tunable über grid-column / grid-row
+  &__block {
+    color: $color-ink;
+
+    p { margin: 0 0 .8em; &:last-child { margin: 0; } }
+
+    // Bold-Untertitel ("Ein Jahr. Zwei Agenturstationen." etc.)
+    .year__block-lead {
+      font-family: $font-body;
+      font-weight: 700;
+      font-size: var(--year-block-lead-fs);
+      line-height: var(--year-block-lead-lh);
+      letter-spacing: -.005em;
+      max-width: 22ch;
+    }
+    // Fließtext-Absätze
+    p:not(.year__block-lead) {
+      font-family: $font-body;
+      font-weight: 400;
+      font-size: var(--year-block-body-fs);
+      line-height: var(--year-block-body-lh);
+      max-width: 36ch;
+    }
+
+    // Layout-Slots (Desktop ≥ 769 px)
+    @media (min-width: 769px) {
+      &--lead-1 { grid-column: 4 / span 5; grid-row: 1; }
+      &--body-1 { grid-column: 4 / span 5; grid-row: 2; }
+      &--lead-2 { grid-column: 8 / span 5; grid-row: 3; }
+      &--body-2 { grid-column: 8 / span 5; grid-row: 4; }
+    }
+  }
+
+  // ---- Motiv (zentrales Bild) ----
+  &__motiv {
+    width: var(--year-motiv-width);
+    margin: var(--year-motiv-spacing-top) auto 0;
+    align-self: center;
+  }
+}
+
+// ----- Decorative Float-Icons der .year-Section ----------------------------
+.float-icon--yr-spark,
+.float-icon--yr-sparkles,
+.float-icon--yr-document {
+  position: absolute;
+  pointer-events: none;
+  color: $color-accent;
+  z-index: 5;
+  --icon-stroke: var(--yr-icon-stroke);
+}
+
+.float-icon--yr-spark {
+  display: var(--yr-spark-display);
+  width: var(--yr-spark-size);
+  top:    var(--yr-spark-top);
+  bottom: var(--yr-spark-bottom);
+  left:   var(--yr-spark-left);
+  right:  var(--yr-spark-right);
+  transform: rotate(var(--yr-spark-rotate));
+}
+
+.float-icon--yr-sparkles {
+  display: var(--yr-sparkles-display);
+  width: var(--yr-sparkles-size);
+  top:    var(--yr-sparkles-top);
+  bottom: var(--yr-sparkles-bottom);
+  left:   var(--yr-sparkles-left);
+  right:  var(--yr-sparkles-right);
+  transform: rotate(var(--yr-sparkles-rotate));
+}
+
+.float-icon--yr-document {
+  display: var(--yr-document-display);
+  width: var(--yr-document-size);
+  top:    var(--yr-document-top);
+  bottom: var(--yr-document-bottom);
+  left:   var(--yr-document-left);
+  right:  var(--yr-document-right);
+  transform: rotate(var(--yr-document-rotate));
+}
+
+.float-icon--yr-spark { font-size: var(--yr-spark-size); }
+.float-icon--yr-sparkles { font-size: var(--yr-sparkles-size); }
+.float-icon--yr-document { font-size: var(--yr-document-size); }
+
+// =============================================================================
+// .values — "Was heute wirklich zählt"
+// Reine Text-Section: Headline oben links, darunter 3-spaltiger Body-Grid.
+// Spalte 1: Bold-Lead, Spalte 2 + 3: Fließtext.
+// =============================================================================
+.values {
+  // ===========================================================================
+  // DESIGNER-KNÖPFE
+  // ===========================================================================
+
+  // ---- Section-Abstand ----
+  --values-spacing-top:    var(--values-spacing-top-desktop, #{clamp(80px, 11vw, 160px)});
+  --values-spacing-bottom: var(--values-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)});
+
+  // ---- Vertikal-Rhythmus zwischen Headline und 3-Spalten-Grid ----
+  --values-grid-spacing-top: var(--values-grid-spacing-top-desktop, #{clamp(120px, 16vw, 280px)});
+
+  // ---- Headline ----
+  --values-lead-fs:  #{clamp(1.5rem, 2.8vw, 2.7rem)};
+  --values-lead-lh:  1.06;
+  --values-lead-gap: 0em;
+
+  // ---- Spalten-Typo ----
+  --values-col-lead-fs: clamp(1.05rem, 1.4vw, 1.4rem);   // Bold-Untertitel (Spalte 1)
+  --values-col-lead-lh: 1.4;
+  --values-col-body-fs: clamp(.9rem, .95vw, .95rem);     // Fließtext (Spalte 2/3)
+  --values-col-body-lh: 1.55;
+  --values-col-paragraph-gap: var(--values-col-paragraph-gap-desktop, 1.4em); // Abstand zwischen Absätzen
+  --values-col-max-width: 30ch;                          // max-Breite pro Spalte
+
+  // ---- Spalten-Grid ----
+  --values-grid-cols:    repeat(3, minmax(0, 1fr));
+  --values-grid-col-gap: var(--values-grid-col-gap-desktop, #{clamp(40px, 5vw, 100px)});
+
+  // =========================================================================
+  // BREAKPOINT — TABLET (≤ 1199 px)
+  // 3-Spalten bleiben, aber etwas enger
+  // =========================================================================
+  @media (max-width: 1199px) {
+    --values-spacing-top:      var(--values-spacing-top-tablet, var(--values-spacing-top-desktop, #{clamp(80px, 11vw, 160px)}));
+    --values-spacing-bottom:   var(--values-spacing-bottom-tablet, var(--values-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)}));
+    --values-grid-spacing-top: var(--values-grid-spacing-top-tablet, 160px);
+    --values-grid-col-gap:     var(--values-grid-col-gap-tablet, 40px);
+    --values-col-paragraph-gap: var(--values-col-paragraph-gap-tablet, var(--values-col-paragraph-gap-desktop, 1.4em));
+  }
+
+  // =========================================================================
+  // BREAKPOINT — MOBILE (≤ 768 px)
+  // Layout wird einspaltig, alle Texte stapeln sich
+  // =========================================================================
+  @media (max-width: 768px) {
+    --values-spacing-top:      var(--values-spacing-top-mobile, 60px);
+    --values-spacing-bottom:   var(--values-spacing-bottom-mobile, 60px);
+    --values-grid-spacing-top: var(--values-grid-spacing-top-mobile, 48px);
+    --values-grid-cols:        1fr;
+    --values-grid-col-gap:     var(--values-grid-col-gap-mobile, 32px);
+    --values-col-paragraph-gap: var(--values-col-paragraph-gap-mobile, var(--values-col-paragraph-gap-tablet, 1.4em));
+  }
+
+  position: relative;
+  padding: var(--values-spacing-top) 0 var(--values-spacing-bottom);
+
+  // ---- Headline ----
+  &__lead {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: var(--values-lead-fs);
+    line-height: var(--values-lead-lh);
+    letter-spacing: -.02em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--values-lead-gap);
+
+    .ink    { color: $color-ink; }
+    .accent { color: $color-accent; }
+  }
+
+  // ---- 3-Spalten-Text-Grid ----
+  &__grid {
+    display: grid;
+    grid-template-columns: var(--values-grid-cols);
+    column-gap: var(--values-grid-col-gap);
+    row-gap: var(--values-grid-col-gap);
+    margin-top: var(--values-grid-spacing-top);
+    align-items: start;
+  }
+
+  // ---- Einzelne Spalte ----
+  &__col {
+    color: $color-ink;
+    max-width: var(--values-col-max-width);
+
+    p { margin: 0 0 var(--values-col-paragraph-gap); &:last-child { margin: 0; } }
+
+    // Bold-Lead-Statement (nur Spalte 1)
+    .values__col-lead {
+      font-family: $font-body;
+      font-weight: 700;
+      font-size: var(--values-col-lead-fs);
+      line-height: var(--values-col-lead-lh);
+      letter-spacing: -.005em;
+      max-width: 22ch;
+    }
+
+    // Body-Paragraphen (Spalte 2 + 3)
+    p:not(.values__col-lead) {
+      font-family: $font-body;
+      font-weight: 400;
+      font-size: var(--values-col-body-fs);
+      line-height: var(--values-col-body-lh);
+    }
+  }
+}
+
+// =============================================================================
+// .card-grid + .card — wiederverwendbare 4-Spalten-Card-Struktur
+//
+// Jede Card kann via Inline-Style an eine Grid-Position gepinnt werden:
+//   <article class="card" style="--card-col: 3; --card-row: 2"> … </article>
+// Leere Cells einfach auslassen. Designer kann pro Card frei positionieren.
+//
+// Auf Mobile (≤ 991 px) kollabiert das Grid auf weniger Spalten und die
+// `--card-col` / `--card-row` Werte werden ignoriert (auto-flow).
+// =============================================================================
+.card-grid {
+  --grid-cols:    4;
+  --grid-col-gap: var(--grid-col-gap-desktop, #{clamp(20px, 2vw, 40px)});
+  --grid-row-gap: var(--grid-row-gap-desktop, #{clamp(40px, 5vw, 90px)});
+
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  column-gap: var(--grid-col-gap);
+  row-gap: var(--grid-row-gap);
+  align-items: start;
+
+  @media (max-width: 991px) {
+    --grid-cols: 2;
+    --grid-col-gap: var(--grid-col-gap-tablet, var(--grid-col-gap-desktop, #{clamp(20px, 2vw, 40px)}));
+    --grid-row-gap: var(--grid-row-gap-tablet, var(--grid-row-gap-desktop, #{clamp(40px, 5vw, 90px)}));
+  }
+
+  @media (max-width: 600px) {
+    --grid-cols: 1;
+    --grid-col-gap: var(--grid-col-gap-mobile, 24px);
+    --grid-row-gap: var(--grid-row-gap-mobile, 36px);
+  }
+}
+
+.card {
+  // Designer-Positionierung über Inline-Style. Default: auto-flow.
+  grid-column: var(--card-col, auto);
+  grid-row:    var(--card-row, auto);
+
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(8px, 1vw, 14px);
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: $color-ink;
+  max-width: 24ch;
+
+  &__arrow {
+    flex-shrink: 0;
+    width: clamp(20px, 1.6vw, 26px);
+    height: clamp(20px, 1.6vw, 26px);
+    color: $color-accent;
+    margin-top: .15em;
+  }
+
+  &__text {
+    margin: 0;
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(.95rem, 1.05vw, 1.05rem);
+    line-height: 1.35;
+    color: $color-ink;
+  }
+
+  // Auf Mobile fließen die Cards der Reihe nach — Inline-Position ignorieren.
+  @media (max-width: 991px) {
+    grid-column: auto;
+    grid-row:    auto;
+  }
+}
+
+// =============================================================================
+// .audience — "Für wen das Sinn macht"
+// =============================================================================
+.audience {
+  // ---- Section-Abstand ----
+  --audience-spacing-top:    var(--audience-spacing-top-desktop, #{clamp(80px, 11vw, 160px)});
+  --audience-spacing-bottom: var(--audience-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)});
+
+  // ---- Header → Grid Lücke ----
+  --audience-grid-spacing-top: var(--audience-grid-spacing-top-desktop, #{clamp(80px, 10vw, 180px)});
+
+  // ---- Headline + Lead ----
+  --audience-lead-fs:  #{clamp(1.5rem, 2.8vw, 2.7rem)};
+  --audience-lead-lh:  1.06;
+  --audience-lead-gap: 0em;
+  --audience-sub-fs:   clamp(1.05rem, 1.3vw, 1.3rem);
+  --audience-sub-lh:   1.4;
+  --audience-sub-spacing-top: var(--audience-sub-spacing-top-desktop, #{clamp(120px, 16vw, 280px)});
+
+  // ---- Decoration: Shooting-Star (oben Mitte) ----
+  --au-shooting-display: block;
+  --au-shooting-size:    230px;
+  --au-shooting-top:     0px;
+  --au-shooting-right:   auto;
+  --au-shooting-left:    50%;
+  --au-shooting-bottom:  auto;
+  --au-shooting-rotate:  -10deg;
+
+  // ---- Decoration: Comet (oben rechts) ----
+  --au-comet-display: block;
+  --au-comet-size:    230px;
+  --au-comet-top:     -100px;
+  --au-comet-right:   10%;
+  --au-comet-left:    auto;
+  --au-comet-bottom:  auto;
+  --au-comet-rotate:  -8deg;
+
+  // ---- Decoration: Airplane (rechts mittig) ----
+  --au-airplane-display: block;
+  --au-airplane-size:    230px;
+  --au-airplane-top:     32%;
+  --au-airplane-right:   18%;
+  --au-airplane-left:    auto;
+  --au-airplane-bottom:  auto;
+  --au-airplane-rotate:  20deg;
+
+  // ---- Decoration: Spark (unten links) ----
+  --au-spark-display: block;
+  --au-spark-size:    230px;
+  --au-spark-top:     auto;
+  --au-spark-right:   auto;
+  --au-spark-left:    10%;
+  --au-spark-bottom:  -10px;
+  --au-spark-rotate:  10deg;
+
+  --au-icon-stroke: 14;
+
+  @media (max-width: 1199px) {
+    --audience-spacing-top:      var(--audience-spacing-top-tablet, var(--audience-spacing-top-desktop, #{clamp(80px, 11vw, 160px)}));
+    --audience-spacing-bottom:   var(--audience-spacing-bottom-tablet, var(--audience-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)}));
+    --audience-grid-spacing-top: var(--audience-grid-spacing-top-tablet, var(--audience-grid-spacing-top-desktop, #{clamp(80px, 10vw, 180px)}));
+    --audience-sub-spacing-top:  var(--audience-sub-spacing-top-tablet, var(--audience-sub-spacing-top-desktop, #{clamp(120px, 16vw, 280px)}));
+
+    --au-shooting-size: 110px;
+    --au-comet-size:    110px;
+    --au-airplane-size: 110px;
+    --au-spark-size:    120px;
+  }
+
+  @media (max-width: 768px) {
+    --audience-spacing-top:      var(--audience-spacing-top-mobile, 60px);
+    --audience-spacing-bottom:   var(--audience-spacing-bottom-mobile, 60px);
+    --audience-grid-spacing-top: var(--audience-grid-spacing-top-mobile, 48px);
+    --audience-sub-spacing-top:  var(--audience-sub-spacing-top-mobile, 48px);
+
+    --au-shooting-display: none;
+    --au-comet-display:    none;
+    --au-airplane-display: none;
+    --au-spark-display:    none;
+  }
+
+  position: relative;
+  padding: var(--audience-spacing-top) 0 var(--audience-spacing-bottom);
+
+  &__head {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__lead {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: var(--audience-lead-fs);
+    line-height: var(--audience-lead-lh);
+    letter-spacing: -.02em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--audience-lead-gap);
 
     .ink    { color: $color-ink; }
     .accent { color: $color-accent; }
   }
 
   &__sub {
-    font-family: $font-body;       // Neue Haas — body weight, not headline
+    margin: var(--audience-sub-spacing-top) 0 0;
+    font-family: $font-body;
     font-weight: 700;
-    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
-    line-height: 1.4;
+    font-size: var(--audience-sub-fs);
+    line-height: var(--audience-sub-lh);
+    letter-spacing: -.005em;
     color: $color-ink;
-    margin: 0;
+    max-width: 26ch;
   }
+
+  .card-grid { margin-top: var(--audience-grid-spacing-top); }
 }
 
-.manifest {
-  padding: clamp(60px, 9vw, 120px) 0;
+// =============================================================================
+// .outcome — "Was du am Ende mitnimmst"
+// =============================================================================
+.outcome {
+  --outcome-spacing-top:    var(--outcome-spacing-top-desktop, #{clamp(80px, 11vw, 160px)});
+  --outcome-spacing-bottom: var(--outcome-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)});
+  --outcome-grid-spacing-top: var(--outcome-grid-spacing-top-desktop, #{clamp(80px, 10vw, 180px)});
 
-  &__text {
-    color: $color-accent;
-    font-family: $font-display;
-    font-weight: 600;
-    font-size: clamp(1.4rem, 2.4vw, 2.1rem);
-    line-height: 1.25;
-    letter-spacing: -.01em;
-    max-width: 30ch;
-    margin: 0 auto;
-    text-align: left;
+  --outcome-lead-fs:  #{clamp(1.5rem, 2.8vw, 2.7rem)};
+  --outcome-lead-lh:  1.06;
+  --outcome-lead-gap: 0em;
+
+  // ---- Decoration: Sparkles (oben Mitte) ----
+  --ou-sparkles-display: block;
+  --ou-sparkles-size:    230px;
+  --ou-sparkles-top:     30px;
+  --ou-sparkles-right:   auto;
+  --ou-sparkles-left:    50%;
+  --ou-sparkles-bottom:  auto;
+  --ou-sparkles-rotate:  -8deg;
+
+  // ---- Decoration: Document (unten links) ----
+  --ou-document-display: block;
+  --ou-document-size:    230px;
+  --ou-document-top:     auto;
+  --ou-document-right:   auto;
+  --ou-document-left:    3%;
+  --ou-document-bottom:  20px;
+  --ou-document-rotate:  -12deg;
+
+  --ou-icon-stroke: 14;
+
+  @media (max-width: 1199px) {
+    --outcome-spacing-top:      var(--outcome-spacing-top-tablet, var(--outcome-spacing-top-desktop, #{clamp(80px, 11vw, 160px)}));
+    --outcome-spacing-bottom:   var(--outcome-spacing-bottom-tablet, var(--outcome-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)}));
+    --outcome-grid-spacing-top: var(--outcome-grid-spacing-top-tablet, var(--outcome-grid-spacing-top-desktop, #{clamp(80px, 10vw, 180px)}));
+
+    --ou-sparkles-size: 110px;
+    --ou-document-size: 110px;
   }
-}
 
-.expect {
-  padding-bottom: clamp(60px, 9vw, 120px);
+  @media (max-width: 768px) {
+    --outcome-spacing-top:      var(--outcome-spacing-top-mobile, 60px);
+    --outcome-spacing-bottom:   var(--outcome-spacing-bottom-mobile, 60px);
+    --outcome-grid-spacing-top: var(--outcome-grid-spacing-top-mobile, 48px);
 
-  &__title { max-width: 12ch; }
-
-  &__col-text p { color: $color-ink-soft; }
-}
-
-.year {
-  padding: clamp(60px, 9vw, 120px) 0;
-
-  &__title { max-width: 12ch; }
-
-  ul {
-    padding: 0;
-    list-style: none;
-    margin: 0;
-    color: $color-ink-soft;
-
-    li { padding: 14px 0; border-bottom: 1px solid $color-border; }
+    --ou-sparkles-display: none;
+    --ou-document-display: none;
   }
-}
 
-.values {
-  padding: clamp(60px, 9vw, 120px) 0;
+  position: relative;
+  padding: var(--outcome-spacing-top) 0 var(--outcome-spacing-bottom);
+
+  &__head { display: flex; flex-direction: column; }
 
   &__lead {
     font-family: $font-display;
-    font-weight: 500;
-    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
-    color: $color-ink-soft;
-    max-width: 32ch;
+    font-weight: 700;
+    font-size: var(--outcome-lead-fs);
+    line-height: var(--outcome-lead-lh);
+    letter-spacing: -.02em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--outcome-lead-gap);
+
+    .ink    { color: $color-ink; }
+    .accent { color: $color-accent; }
   }
+
+  .card-grid { margin-top: var(--outcome-grid-spacing-top); }
 }
 
-.audience,
-.outcome {
-  padding: clamp(60px, 9vw, 120px) 0;
-
-  .card {
-    background: transparent;
-    border: 0;
-    padding: 24px 0;
-
-    &__icon {
-      width: 36px;
-      height: 36px;
-      margin-bottom: 14px;
-
-      img, svg { width: 100%; height: 100%; object-fit: contain; }
-    }
-
-    &__text {
-      font-size: .98rem;
-      color: $color-ink-soft;
-      max-width: 22ch;
-    }
-  }
+// ----- Decorative Float-Icons der .audience-Section ------------------------
+.float-icon--au-shooting,
+.float-icon--au-comet,
+.float-icon--au-airplane,
+.float-icon--au-spark {
+  position: absolute;
+  pointer-events: none;
+  color: $color-accent;
+  z-index: 5;
+  --icon-stroke: var(--au-icon-stroke);
 }
 
+.float-icon--au-shooting {
+  display: var(--au-shooting-display); width: var(--au-shooting-size);
+  top: var(--au-shooting-top); bottom: var(--au-shooting-bottom);
+  left: var(--au-shooting-left); right: var(--au-shooting-right);
+  transform: rotate(var(--au-shooting-rotate));
+}
+.float-icon--au-comet {
+  display: var(--au-comet-display); width: var(--au-comet-size);
+  top: var(--au-comet-top); bottom: var(--au-comet-bottom);
+  left: var(--au-comet-left); right: var(--au-comet-right);
+  transform: rotate(var(--au-comet-rotate));
+}
+.float-icon--au-airplane {
+  display: var(--au-airplane-display); width: var(--au-airplane-size);
+  top: var(--au-airplane-top); bottom: var(--au-airplane-bottom);
+  left: var(--au-airplane-left); right: var(--au-airplane-right);
+  transform: rotate(var(--au-airplane-rotate));
+}
+.float-icon--au-spark {
+  display: var(--au-spark-display); width: var(--au-spark-size);
+  top: var(--au-spark-top); bottom: var(--au-spark-bottom);
+  left: var(--au-spark-left); right: var(--au-spark-right);
+  transform: rotate(var(--au-spark-rotate));
+}
+
+.float-icon--au-shooting { font-size: var(--au-shooting-size); }
+.float-icon--au-comet { font-size: var(--au-comet-size); }
+.float-icon--au-airplane { font-size: var(--au-airplane-size); }
+.float-icon--au-spark { font-size: var(--au-spark-size); }
+
+// ----- Decorative Float-Icons der .outcome-Section -------------------------
+.float-icon--ou-sparkles,
+.float-icon--ou-document {
+  position: absolute;
+  pointer-events: none;
+  color: $color-accent;
+  z-index: 5;
+  --icon-stroke: var(--ou-icon-stroke);
+}
+
+.float-icon--ou-sparkles {
+  display: var(--ou-sparkles-display); width: var(--ou-sparkles-size);
+  top: var(--ou-sparkles-top); bottom: var(--ou-sparkles-bottom);
+  left: var(--ou-sparkles-left); right: var(--ou-sparkles-right);
+  transform: rotate(var(--ou-sparkles-rotate));
+}
+.float-icon--ou-document {
+  display: var(--ou-document-display); width: var(--ou-document-size);
+  top: var(--ou-document-top); bottom: var(--ou-document-bottom);
+  left: var(--ou-document-left); right: var(--ou-document-right);
+  transform: rotate(var(--ou-document-rotate));
+}
+
+.float-icon--ou-sparkles { font-size: var(--ou-sparkles-size); }
+.float-icon--ou-document { font-size: var(--ou-document-size); }
+
+// =============================================================================
+// .cta-final — Closing-Section
+// Bild oben (motiv 04, mit Drop-Shadow + Scroll-Rotation), Closing-Headline
+// drunter, dann 3-Spalten-CTA-Grid mit Bold-Title + Action (Button / Link / Text).
+// Vier dekorative Float-Icons verteilen sich um das Bild.
+// =============================================================================
 .cta-final {
-  padding: clamp(80px, 10vw, 140px) 0;
-  text-align: left;
+  // ===========================================================================
+  // DESIGNER-KNÖPFE
+  // ===========================================================================
 
+  // ---- Section-Abstand ----
+  --cta-final-spacing-top:    var(--cta-final-spacing-top-desktop, #{clamp(80px, 11vw, 160px)});
+  --cta-final-spacing-bottom: var(--cta-final-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)});
+
+  // ---- Bild ----
+  --cta-final-motiv-width: 50%;
+  --motiv-aspect:          4 / 5;       // leicht hochformatig
+
+  // ---- Vertikaler Rhythmus ----
+  --cta-final-title-spacing-top: var(--cta-final-title-spacing-top-desktop, #{clamp(60px, 8vw, 140px)}); // Bild → Headline
+  --cta-final-cards-spacing-top: var(--cta-final-cards-spacing-top-desktop, #{clamp(60px, 8vw, 140px)}); // Headline → Cards
+
+  // ---- Headline ----
+  --cta-final-title-fs:  #{clamp(1.5rem, 2.8vw, 2.7rem)};
+  --cta-final-title-lh:  1.06;
+  --cta-final-title-gap: 0em;
+
+  // ---- Cards ----
+  --cta-final-card-title-fs:  clamp(1rem, 1.1vw, 1.15rem);
+  --cta-final-card-text-fs:   clamp(.9rem, .95vw, .95rem);
+  --cta-final-card-text-lh:   1.5;
+  --cta-final-cards-gap:      var(--cta-final-cards-gap-desktop, #{clamp(40px, 4vw, 80px)});
+  --cta-final-card-row-gap:   var(--cta-final-card-row-gap-desktop, #{clamp(20px, 2vw, 32px)});
+
+  // ---- Decoration: Document (oben links) ----
+  --ct-document-display: block;
+  --ct-document-size:    230px;
+  --ct-document-top:     30px;
+  --ct-document-right:   auto;
+  --ct-document-left:    8%;
+  --ct-document-bottom:  auto;
+  --ct-document-rotate:  -10deg;
+
+  // ---- Decoration: Shooting Star (oben rechts) ----
+  --ct-shooting-display: block;
+  --ct-shooting-size:    230px;
+  --ct-shooting-top:     0px;
+  --ct-shooting-right:   20%;
+  --ct-shooting-left:    auto;
+  --ct-shooting-bottom:  auto;
+  --ct-shooting-rotate:  -8deg;
+
+  // ---- Decoration: Bottle (rechts mitte) ----
+  --ct-bottle-display: block;
+  --ct-bottle-size:    230px;
+  --ct-bottle-top:     420px;
+  --ct-bottle-right:   8%;
+  --ct-bottle-left:    auto;
+  --ct-bottle-bottom:  auto;
+  --ct-bottle-rotate:  10deg;
+
+  // ---- Decoration: Glasses (rechts unten am Bild) ----
+  --ct-glasses-display: block;
+  --ct-glasses-size:    230px;
+  --ct-glasses-top:     auto;
+  --ct-glasses-right:   20%;
+  --ct-glasses-left:    auto;
+  --ct-glasses-bottom:  20%;
+  --ct-glasses-rotate:  4deg;
+
+  --ct-icon-stroke: 14;
+
+  @media (max-width: 1199px) {
+    --cta-final-spacing-top:       var(--cta-final-spacing-top-tablet, var(--cta-final-spacing-top-desktop, #{clamp(80px, 11vw, 160px)}));
+    --cta-final-spacing-bottom:    var(--cta-final-spacing-bottom-tablet, var(--cta-final-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)}));
+    --cta-final-title-spacing-top: var(--cta-final-title-spacing-top-tablet, var(--cta-final-title-spacing-top-desktop, #{clamp(60px, 8vw, 140px)}));
+    --cta-final-cards-spacing-top: var(--cta-final-cards-spacing-top-tablet, var(--cta-final-cards-spacing-top-desktop, #{clamp(60px, 8vw, 140px)}));
+    --cta-final-cards-gap:         var(--cta-final-cards-gap-tablet, var(--cta-final-cards-gap-desktop, #{clamp(40px, 4vw, 80px)}));
+    --cta-final-card-row-gap:      var(--cta-final-card-row-gap-tablet, var(--cta-final-card-row-gap-desktop, #{clamp(20px, 2vw, 32px)}));
+
+    --cta-final-motiv-width: 60%;
+    --ct-document-size: 110px;
+    --ct-shooting-size: 110px;
+    --ct-bottle-size:   110px;
+    --ct-glasses-size:  110px;
+  }
+
+  @media (max-width: 768px) {
+    --cta-final-spacing-top:       var(--cta-final-spacing-top-mobile, 60px);
+    --cta-final-spacing-bottom:    var(--cta-final-spacing-bottom-mobile, 60px);
+    --cta-final-motiv-width:       100%;
+    --cta-final-title-spacing-top: var(--cta-final-title-spacing-top-mobile, 115px);
+    --cta-final-cards-spacing-top: var(--cta-final-cards-spacing-top-mobile, 48px);
+    --cta-final-cards-gap:         var(--cta-final-cards-gap-mobile, 32px);
+    --cta-final-card-row-gap:      var(--cta-final-card-row-gap-mobile, 28px);
+
+    --ct-document-display: none;
+    --ct-shooting-display: none;
+    --ct-bottle-display:   none;
+    --ct-glasses-display:  none;
+  }
+
+  position: relative;
+  padding: var(--cta-final-spacing-top) 0 var(--cta-final-spacing-bottom);
+
+  // ---- Bild ----
+  &__motiv {
+    width: var(--cta-final-motiv-width);
+    margin: 0 auto;
+  }
+
+  // ---- Closing-Headline ----
   &__title {
     font-family: $font-display;
     font-weight: 700;
-    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-    line-height: 1.1;
-    margin-bottom: 1em;
+    font-size: var(--cta-final-title-fs);
+    line-height: var(--cta-final-title-lh);
+    letter-spacing: -.02em;
+    margin: var(--cta-final-title-spacing-top) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--cta-final-title-gap);
+    max-width: 22ch;
+
+    .ink    { color: $color-ink; }
+    .accent { color: $color-accent; }
   }
 
-  .cards {
+  // ---- 3-Spalten-CTA-Grid ----
+  &__cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
-    margin-top: 40px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: var(--cta-final-cards-gap);
+    row-gap: var(--cta-final-cards-gap);
+    margin-top: var(--cta-final-cards-spacing-top);
+    align-items: start;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
   }
 
-  .cta-card {
-    border-top: 1px solid $color-border;
-    padding-top: 18px;
+  // ---- Einzelne CTA-Card ----
+  // Layout: 2-spaltiges Mini-Grid — Pfeil links, Title + Action rechts.
+  &__card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: clamp(10px, 1.2vw, 18px);
+    row-gap: var(--cta-final-card-row-gap);
+    align-items: start;
+    color: $color-ink;
+    max-width: 28ch;
 
-    h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-    p  { font-size: .92rem; color: $color-ink-soft; }
+    // Pfeil sitzt in Spalte 1 auf Höhe des Titles
+    .card__arrow {
+      flex-shrink: 0;
+      width: clamp(20px, 1.6vw, 26px);
+      height: clamp(20px, 1.6vw, 26px);
+      color: $color-accent;
+      grid-column: 1;
+      grid-row: 1;
+      margin-top: .15em;
+    }
+
+    // Title in Spalte 2, Reihe 1
+    .cta-final__card-title { grid-column: 2; grid-row: 1; }
+
+    // Action (Button / Link / Text) in Spalte 2, Reihe 2
+    // `justify-self: start` schrumpft Button + Link auf Inhalts-Breite,
+    // damit sie nicht über die ganze Zellen-Breite stretched werden.
+    > .btn-mint,
+    > .btn-ghost,
+    .cta-final__card-text {
+      grid-column: 2;
+      grid-row: 2;
+      justify-self: start;
+    }
+  }
+
+  &__card-title {
+    margin: 0;
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: var(--cta-final-card-title-fs);
+    line-height: 1.35;
+    letter-spacing: -.005em;
+    color: $color-ink;
+  }
+
+  &__card-text {
+    margin: 0;
+    font-family: $font-body;
+    font-weight: 400;
+    font-size: var(--cta-final-card-text-fs);
+    line-height: var(--cta-final-card-text-lh);
+    color: $color-ink;
   }
 }
 
-.foot-deco {
-  // little floating icons used as visual accents around the layout
+// ----- Decorative Float-Icons der .cta-final-Section -----------------------
+.float-icon--ct-document,
+.float-icon--ct-shooting,
+.float-icon--ct-bottle,
+.float-icon--ct-glasses {
   position: absolute;
-  width: 28px;
-  height: 28px;
-  opacity: .9;
   pointer-events: none;
+  color: $color-accent;
+  z-index: 5;
+  --icon-stroke: var(--ct-icon-stroke);
+}
+
+.float-icon--ct-document {
+  display: var(--ct-document-display); width: var(--ct-document-size);
+  top: var(--ct-document-top); bottom: var(--ct-document-bottom);
+  left: var(--ct-document-left); right: var(--ct-document-right);
+  transform: rotate(var(--ct-document-rotate));
+}
+.float-icon--ct-shooting {
+  display: var(--ct-shooting-display); width: var(--ct-shooting-size);
+  top: var(--ct-shooting-top); bottom: var(--ct-shooting-bottom);
+  left: var(--ct-shooting-left); right: var(--ct-shooting-right);
+  transform: rotate(var(--ct-shooting-rotate));
+}
+.float-icon--ct-bottle {
+  display: var(--ct-bottle-display); width: var(--ct-bottle-size);
+  top: var(--ct-bottle-top); bottom: var(--ct-bottle-bottom);
+  left: var(--ct-bottle-left); right: var(--ct-bottle-right);
+  transform: rotate(var(--ct-bottle-rotate));
+}
+.float-icon--ct-glasses {
+  display: var(--ct-glasses-display); width: var(--ct-glasses-size);
+  top: var(--ct-glasses-top); bottom: var(--ct-glasses-bottom);
+  left: var(--ct-glasses-left); right: var(--ct-glasses-right);
+  transform: rotate(var(--ct-glasses-rotate));
+}
+
+.float-icon--ct-document { font-size: var(--ct-document-size); }
+.float-icon--ct-shooting { font-size: var(--ct-shooting-size); }
+.float-icon--ct-bottle { font-size: var(--ct-bottle-size); }
+.float-icon--ct-glasses { font-size: var(--ct-glasses-size); }
+
+// =============================================================================
+// .footer — Closing-Footer mit Mint-Divider, Claim, Logo + Nav, Legal-Links
+// =============================================================================
+.footer {
+  // ===========================================================================
+  // DESIGNER-KNÖPFE
+  // ===========================================================================
+
+  --footer-spacing-top:    #{clamp(60px, 8vw, 120px)};
+  --footer-spacing-bottom: #{clamp(40px, 5vw, 80px)};
+
+  // Vertikalrhythmus innerhalb des Footers
+  --footer-claim-spacing-bottom: #{clamp(60px, 8vw, 120px)};   // Claim → Logo+Nav
+  --footer-row-spacing-bottom:   #{clamp(40px, 5vw, 80px)};    // Logo+Nav → Legal
+
+  // Closing-Claim
+  --footer-claim-fs:  #{clamp(1.5rem, 2.8vw, 2.7rem)};
+  --footer-claim-lh:  1.06;
+  --footer-claim-gap: 0em;
+
+  // Logo
+  --footer-brand-height: clamp(28px, 3vw, 44px);
+
+  // Nav
+  --footer-nav-fs:  clamp(.95rem, 1.05vw, 1.05rem);
+  --footer-nav-gap: clamp(20px, 2.5vw, 40px);
+
+  // Legal-Row
+  --footer-legal-fs:  clamp(.85rem, .9vw, .95rem);
+  --footer-legal-gap: clamp(16px, 2vw, 28px);
+
+  // Mint-Stripe (Brand-Echo zum Hero)
+  --footer-mint-height: clamp(10px, 1vw, 14px);
+
+  @media (max-width: 768px) {
+    --footer-spacing-top:           60px;
+    --footer-spacing-bottom:        40px;
+    --footer-claim-spacing-bottom:  48px;
+    --footer-row-spacing-bottom:    32px;
+  }
+
+  position: relative;
+  background: $color-bg;
+
+  // Mint-Divider ganz oben — verbindet Footer optisch mit Hero
+  &__mint {
+    width: 100%;
+    height: var(--footer-mint-height);
+    background: $color-mint;
+  }
+
+  > .container {
+    padding-top:    var(--footer-spacing-top);
+    padding-bottom: var(--footer-spacing-bottom);
+  }
+
+  // ---- Closing-Claim ----
+  &__claim {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: var(--footer-claim-fs);
+    line-height: var(--footer-claim-lh);
+    letter-spacing: -.02em;
+    margin: 0 0 var(--footer-claim-spacing-bottom);
+    display: flex;
+    flex-direction: column;
+    gap: var(--footer-claim-gap);
+    max-width: 22ch;
+
+    .ink    { color: $color-ink; }
+    .accent { color: $color-accent; }
+  }
+
+  // ---- Logo + Nav-Row ----
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(20px, 3vw, 48px);
+    margin-bottom: var(--footer-row-spacing-bottom);
+    padding-bottom: var(--footer-row-spacing-bottom);
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  // Wordmark-Stack mit Cloud-Slot — gleiches Pattern wie .nav__brand-stack.
+  // Die Nav-Cloud fliegt in diesen Slot rein (siehe main.js Cloud-Journey).
+  &__brand-stack {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+  }
+
+  &__brand-text {
+    height: var(--footer-brand-height);
+    width: auto;
+    display: block;
+  }
+
+  // Cloud-Slot — leerer Platz im Wortmarken-Gap, Ziel der Cloud-Reise.
+  // Position spiegelt die Nav (60.1% horizontal, 55% vertikal), Größe
+  // skaliert mit der Wortmarke wie im Header.
+  &__cloud-slot {
+    position: absolute;
+    left: 60.1%;
+    top: 55%;
+    transform: translate(-50%, calc(-50% - 1px));
+    width:  calc(var(--footer-brand-height) * 1.4);
+    height: calc(var(--footer-brand-height) * 1.4);
+    pointer-events: none;
+  }
+
+  &__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--footer-nav-gap);
+
+    a {
+      font-family: $font-display;
+      font-weight: 500;
+      font-size: var(--footer-nav-fs);
+      color: $color-ink;
+      text-decoration: none;
+      transition: color $duration-base $easing-out;
+
+      &:hover { color: $color-accent; }
+    }
+
+    @media (max-width: 768px) {
+      // Nav-Links wickeln auf Mobile, kleinerer Gap
+      gap: clamp(14px, 4vw, 24px);
+    }
+  }
+
+  // ---- Bottom-Row: Legal-Links + Studio-Credit ----
+  &__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(16px, 2vw, 24px);
+  }
+
+  &__legal {
+    display: flex;
+    gap: var(--footer-legal-gap);
+
+    a {
+      font-family: $font-body;
+      font-size: var(--footer-legal-fs);
+      color: $color-muted;
+      text-decoration: none;
+      transition: color $duration-base $easing-out;
+
+      &:hover { color: $color-ink; }
+    }
+  }
+
+  &__credit {
+    margin: 0;
+    font-family: $font-body;
+    font-size: var(--footer-legal-fs);
+    color: $color-muted;
+    display: inline-flex;
+    align-items: center;
+    gap: .35em;
+  }
+
+  // Herz im Studio-Credit — pulst minimal, dezent.
+  &__heart {
+    color: $color-accent;
+    display: inline-block;
+    transform-origin: center;
+    animation: heartBeat 2.4s ease-in-out infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
+  }
+}
+
+@keyframes heartBeat {
+  0%, 60%, 100% { transform: scale(1); }
+  10% { transform: scale(1.18); }
+  20% { transform: scale(.95); }
+  30% { transform: scale(1.10); }
+  40% { transform: scale(1); }
+}
+
+// Visually-hidden helper für den Screenreader-Text im Credit
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// =============================================================================
+// Generic Kirby subpage builder
+// =============================================================================
+.subpage {
+  background: $color-bg;
+  min-height: 100vh;
+}
+
+.subpage__hero {
+  padding: clamp(96px, 12vw, 180px) 0 clamp(72px, 10vw, 140px);
+
+  h1 {
+    max-width: 14ch;
+    margin: clamp(56px, 8vw, 120px) 0 0;
+    font-size: clamp(2.2rem, 6vw, 6rem);
+    line-height: .98;
+    letter-spacing: -.02em;
+  }
+}
+
+.subpage__brand {
+  display: inline-flex;
+  width: clamp(180px, 20vw, 320px);
+
+  img { width: 100%; height: auto; }
+}
+
+.subpage__intro {
+  max-width: 42ch;
+  margin-top: clamp(28px, 4vw, 56px);
+
+  p {
+    margin: 0;
+    font-size: clamp(1rem, 1.3vw, 1.35rem);
+    line-height: 1.45;
+  }
+
+  p + p { margin-top: 1em; }
+}
+
+.builder {
+  padding: var(--section-top) 0 var(--section-bottom);
+
+  &--mint { background: $color-mint; }
+
+  &--blue {
+    background: $color-accent;
+    color: #fff;
+
+    h2, h3, .builder__kicker, p { color: inherit; }
+    .btn-mint { background: #fff; color: $color-accent; }
+  }
+
+  &--center {
+    text-align: center;
+
+    .builder__text,
+    .builder__split,
+    .builder__cards {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  h2 {
+    max-width: 16ch;
+    margin: 0;
+    font-size: clamp(1.7rem, 3.6vw, 3.8rem);
+    line-height: 1.04;
+    letter-spacing: -.02em;
+  }
+}
+
+.builder__kicker {
+  margin: 0 0 clamp(14px, 2vw, 24px);
+  font-family: $font-display;
+  font-weight: 700;
+  color: $color-accent;
+}
+
+.builder__text {
+  max-width: 52ch;
+  margin-top: clamp(28px, 4vw, 64px);
+
+  p {
+    margin: 0;
+    font-size: clamp(.95rem, 1vw, 1.05rem);
+    line-height: 1.55;
+  }
+
+  p + p { margin-top: 1em; }
+}
+
+.builder__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 96px);
+  align-items: center;
+  margin-top: clamp(36px, 5vw, 80px);
+
+  img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  p {
+    margin: 0;
+    font-size: clamp(.95rem, 1vw, 1.05rem);
+    line-height: 1.55;
+  }
+
+  p + p { margin-top: 1em; }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.builder__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 48px);
+  margin-top: clamp(36px, 5vw, 80px);
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.builder__card {
+  h3 {
+    margin: 0 0 .7em;
+    font-family: $font-body;
+    font-size: clamp(1rem, 1.1vw, 1.2rem);
+    line-height: 1.35;
+    letter-spacing: 0;
+  }
+
+  p {
+    margin: 0;
+    font-size: clamp(.9rem, .95vw, 1rem);
+    line-height: 1.5;
+  }
 }

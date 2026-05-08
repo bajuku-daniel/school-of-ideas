@@ -15,25 +15,23 @@
 
       <div class="nav__left">
         <a class="nav__brand" href="#" aria-label="school of ideas">
-          <!-- Wordmark, split into "school of" + cloud + "ideas".
-               Both halves render the same Schriftlogo SVG (injected at
-               runtime), each with overflow:hidden + a translateX so
-               only the relevant glyph run is visible. -->
-          <span class="nav__wm nav__wm--left"  data-logo aria-hidden="true"></span>
+          <!-- Wordmark PNG (already has the gap for the cloud) + cloud
+               SVG positioned absolutely in that gap.  Way more reliable
+               than embedding the wordmark as inline SVG with web-fonts. -->
+          <span class="nav__brand-stack">
+            <img class="nav__brand-text"
+                 src="/logo/School_of_ideas_Logo_OW.png"
+                 alt="school of ideas" />
 
-          <span class="nav__cloud" aria-hidden="true">
-            <svg viewBox="0 0 225.35 217.44" xmlns="http://www.w3.org/2000/svg">
-              <path fill="#fff" stroke="currentColor" stroke-width="9" stroke-miterlimit="10"
-                d="M177.39,121.2c5.74-14.12-10.35-24.14-24.65-18.18-.53.22-4.97,2.77-5.84,3.26-1.04-9.07-5.37-21.64-21.36-22.53-3.38-.19-6.59.75-9.47,2.1-4.09-9.18-15.39-18.14-32.89-15.58-14.35,2.1-24.28,14.38-17.36,26.26.32.54.8,1.2,1.28,1.79-.62.26-2.44,1.03-2.55,1.07-9.6,3.61-17.77,13.53-17.77,21.77,0,10.5,9.62,12.84,16.59,14.91,19.29,5.73,55.9,4.01,77.5.65,9.23-1.44,32.81-6.36,36.53-15.51Z"/>
-              <path fill="none" stroke="currentColor" stroke-width="9" stroke-miterlimit="10"
-                d="M112.18,110.62c-5.25-4.46-20.69-9.99-31.94,3.94"/>
-            </svg>
+            <span class="nav__cloud" aria-hidden="true">
+              <svg viewBox="0 0 225.35 217.44" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#fff" stroke="currentColor" stroke-width="9" stroke-miterlimit="10"
+                  d="M177.39,121.2c5.74-14.12-10.35-24.14-24.65-18.18-.53.22-4.97,2.77-5.84,3.26-1.04-9.07-5.37-21.64-21.36-22.53-3.38-.19-6.59.75-9.47,2.1-4.09-9.18-15.39-18.14-32.89-15.58-14.35,2.1-24.28,14.38-17.36,26.26.32.54.8,1.2,1.28,1.79-.62.26-2.44,1.03-2.55,1.07-9.6,3.61-17.77,13.53-17.77,21.77,0,10.5,9.62,12.84,16.59,14.91,19.29,5.73,55.9,4.01,77.5.65,9.23-1.44,32.81-6.36,36.53-15.51Z"/>
+                <path fill="none" stroke="currentColor" stroke-width="9" stroke-miterlimit="10"
+                  d="M112.18,110.62c-5.25-4.46-20.69-9.99-31.94,3.94"/>
+              </svg>
+            </span>
           </span>
-
-          <span class="nav__wm nav__wm--right" data-logo aria-hidden="true"></span>
-
-          <!-- Screen-reader fallback: full readable text is still here -->
-          <span class="visually-hidden">school of ideas</span>
         </a>
       </div>
 
@@ -48,10 +46,33 @@
           </ul>
         </nav>
         <a href="#contact" class="nav__cta">Bewerbung</a>
+
+        <!-- Mobile burger — visible only at narrow viewports -->
+        <button class="nav__burger" id="navBurger"
+                aria-label="Menü öffnen" aria-expanded="false"
+                aria-controls="mobileMenu" type="button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
 
     </div>
   </header>
+
+  <!-- ===================== Mobile menu (full-screen blue overlay) ===================== -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-menu__nav" aria-label="Mobile navigation">
+      <ul class="mobile-menu__list">
+        <li><a href="#about"   class="mobile-menu__link"><span>About</span></a></li>
+        <li><a href="#year"    class="mobile-menu__link"><span>Programm</span></a></li>
+        <li><a href="#values"  class="mobile-menu__link"><span>Agenturen</span></a></li>
+        <li><a href="#contact" class="mobile-menu__link"><span>Kontakt</span></a></li>
+        <li><a href="#faq"     class="mobile-menu__link"><span>FAQ</span></a></li>
+        <li><a href="#contact" class="mobile-menu__link mobile-menu__link--cta"><span>Bewerbung</span></a></li>
+      </ul>
+    </nav>
+  </div>
 
   <!-- ===================== Hero (video) ===================== -->
   <section class="hero" id="hero">
@@ -62,7 +83,7 @@
     </video>
     <div class="hero__overlay"></div>
 
-    <div class="container hero__content">
+    <div class="hero__content">
       <h1 class="hero__title">
         <span class="line">Kreativität&nbsp;hat</span>
         <span class="line">
@@ -80,40 +101,252 @@
   <!-- ===================== Intro Block ===================== -->
   <section class="intro" id="about">
     <div class="container">
-      <div class="row gx-5 align-items-end">
-        <div class="col-lg-7">
+      <div class="intro__grid">
+
+        <!-- Left column: headline → lightning → image -->
+        <div class="intro__col intro__col--left">
           <h2 class="intro__lead">
             <span class="ink">Dein Einstieg in die<br/>Kreativbranche.</span>
             <span class="accent">Und der Anfang einer<br/>richtig guten Karriere.</span>
           </h2>
+
+          <span class="float-icon float-icon--lightning" data-wobble="1" aria-hidden="true">
+            <img src="/icons/lightning.svg" alt="" />
+          </span>
+
+          <!--
+            data-rotate: final rotation in deg (negative = counter-clockwise)
+            data-shadow-x / data-shadow-y: final blue-shadow offset in px
+            data-shadow-rotate: rotation of the blue shadow itself in deg
+          -->
+          <figure class="motiv motiv--shadow"
+                  data-motiv-shadow
+                  data-rotate="-8"
+                  data-shadow-x="44"
+                  data-shadow-y="40"
+                  data-shadow-rotate="6">
+            <span class="motiv__shadow" aria-hidden="true"></span>
+            <div class="motiv__frame">
+              <img class="motiv__img"
+                   src="/images/school_of_ideas_motiv_01.jpg"
+                   alt="Kreatives Motiv 01" />
+            </div>
+          </figure>
         </div>
-        <div class="col-lg-5 intro__body">
+
+        <!-- Right column: subhead → body → CTAs → airplane -->
+        <div class="intro__col intro__col--right">
           <p class="intro__sub">
-            Die school of ideas verbindet echte kreative Arbeit in Agenturen
-            mit gezielter Weiterentwicklung.
+            Die school of ideas verbindet echte
+            kreative Arbeit in Agenturen mit
+            gezielter Weiterentwicklung.
           </p>
+
+          <div class="intro__body">
+            <p class="text-medium">Du beschäftigst dich mit realen Projekten und lernst
+               Ideen zu entwickeln, zu schärfen und umzusetzen.</p>
+            <p>Du verdienst von Anfang an Geld und entwickelst
+               dein kreatives Profil weiter.</p>
+          </div>
+
+          <div class="intro__ctas">
+            <a class="btn-mint" href="#contact">Jetzt bewerben</a>
+            <a class="btn-ghost" href="#contact">Selbsttest starten</a>
+          </div>
+
+          <span class="float-icon float-icon--airplane" data-wobble="2" aria-hidden="true">
+            <img src="/icons/airplane.svg" alt="" />
+          </span>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ===================== Manifest ===================== -->
+  <!-- ===================== Manifest =====================
+       Block aus 2 Absätzen mit inline Icons zwischen Wörtern.
+       Icon-Mapping ist über `<span class="manifest__icon">` gesteuert —
+       Designer kann Reihenfolge / Icon einfach austauschen, ohne den
+       Lesefluss zu zerstören. -->
   <section class="manifest">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8 offset-lg-2">
-          <p class="manifest__text">
-            Kreativität verändert sich. Durch KI schneller als je zuvor. Doch
-            nicht die Werkzeuge entscheiden über kreative Qualität, sondern
-            wie du sie zu nutzen weißt.
+      <div class="manifest__inner">
+
+        <p class="manifest__text">
+          Kreativität verändert sich. Durch KI
+          schneller <!--
+          --> <span class="manifest__icon"><img src="/icons/airplane.svg" alt="" /></span> 
+          als je zuvor. Doch nicht die Werkzeuge entscheiden über kreative<!--
+          --> <span class="manifest__icon"><img src="/icons/shooting-star.svg" alt="" /></span>
+          Qualität, sondern wie du sie zu nutzen weißt.<!--
+          --> <span class="manifest__icon"><img src="/icons/bottle.svg" alt="" /></span>
+        </p>
+
+        <p class="manifest__text">
+          Wir lehren nicht nur<!--
+          --> <span class="manifest__icon"><img src="/icons/glasses-bold.svg" alt="" /></span>
+          Kreativität, sondern wir lehren den bewussten Umgang<!--
+          --> <span class="manifest__icon"><img src="/icons/lightbulb.svg" alt="" /></span>
+          mit Technologie.<!--
+          --> <span class="manifest__icon"><img src="/icons/spark.svg" alt="" /></span>
+          KI<!--
+          --> <span class="manifest__icon"><img src="/icons/star.svg" alt="" /></span>
+          ist bei uns kein Zusatzmodul, sondern ein selbstverständliches Tool beim Denken und Arbeiten.<!--
+          --> <span class="manifest__icon"><img src="/icons/sparkles.svg" alt="" /></span>
+        </p>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Was dich erwartet (.expect) =====================
+       2-spaltige Section: Headline links, Bold-Subhead + Body rechts. Bild
+       (Mick Jagger, motiv 03) zentral darunter mit blauem Schatten + Scroll-
+       Rotation (gleicher Mechanismus wie .intro motiv).  Drei dekorative
+       Float-Icons sind absolut über die Section verteilt. -->
+  <section class="expect" id="program">
+    <div class="container">
+
+      <header class="expect__head">
+        <h2 class="expect__lead">
+          <span class="ink">Was dich bei uns</span>
+          <span class="accent">erwartet:</span>
+        </h2>
+
+        <div class="expect__copy">
+          <p class="expect__sub">
+            Wir sind kein Studium. Und
+            keine klassische Ausbildung.
           </p>
-          <p class="manifest__text mt-4">
-            Wir lehren nicht nur Kreativität, sondern wir lehren den
-            bewussten Umgang mit Technologie. KI ist bei uns kein Zusatzmodul,
-            sondern ein selbstverständliches Tool beim Denken und Arbeiten.
+
+          <div class="expect__body">
+            <p class="text-medium">
+              Die school of ideas ist ein einjähriges Programm für Talente,
+              die in kreativen Berufen arbeiten wollen.
+            </p>
+            <p>
+              Wir verbinden bezahlte Praxis in Agenturen mit gezielter
+              Weiterentwicklung und persönlichem Coaching. Konsequent
+              ausgerichtet auf die Kreativarbeit von heute und deine
+              Karriere von morgen.
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Bild mit blauem Drop-Shadow (Scroll-Effekt: gerade beim Laden,
+           rotiert + Schatten beim Scrollen). data-* Knöpfe pro Motiv. -->
+      <figure class="motiv motiv--shadow expect__motiv"
+              data-motiv-shadow
+              data-rotate="20"
+              data-shadow-x="56"
+              data-shadow-y="48"
+              data-shadow-rotate="-9">
+        <span class="motiv__shadow" aria-hidden="true"></span>
+        <div class="motiv__frame">
+          <img class="motiv__img"
+               src="/images/school_of_ideas_motiv_03.jpg"
+               alt="Kreatives Motiv 03 — Mick Jagger" />
+        </div>
+      </figure>
+
+      <!-- Decorative SVG icons — absolute zur .expect-Section.
+           Designer kann oben in den --ex-… Variablen verschieben/skalieren. -->
+      <span class="float-icon float-icon--ex-airplane" data-inline-svg aria-hidden="true">
+        <img src="/icons/airplane.svg" alt="" />
+      </span>
+      <span class="float-icon float-icon--ex-star" data-inline-svg aria-hidden="true">
+        <img src="/icons/shooting-star.svg" alt="" />
+      </span>
+      <span class="float-icon float-icon--ex-bottle" data-inline-svg aria-hidden="true">
+        <img src="/icons/lightbulb.svg" alt="" />
+      </span>
+
+    </div>
+  </section>
+
+  <!-- ===================== So sieht dein Jahr (.year) =====================
+       Staggered Layout: Headline oben links, dann zwei Textblock-Spuren
+       (links / rechts) vertikal versetzt, darunter zentrales Bild
+       (motiv 02) mit blauem Drop-Shadow. Drei dekorative Float-Icons.
+       Designer-Knöpfe oben in `.year` (siehe _content.scss). -->
+  <section class="year" id="year">
+    <div class="container">
+
+      <h2 class="year__lead">
+        <span class="ink">So sieht dein Jahr</span>
+        <span class="accent">bei uns aus:</span>
+      </h2>
+
+      <!-- Staggered Text-Grid: 12 Spalten, jeder Block belegt eigene Cells.
+           Pro Block: Position + Span sind über Daten-Grid-Klassen gesteuert. -->
+      <div class="year__copy">
+
+        <div class="year__block year__block--lead-1">
+          <p class="year__block-lead">
+            Ein Jahr. Zwei<br/>Agenturstationen.
           </p>
         </div>
+
+        <div class="year__block year__block--body-1">
+          <p class="text-medium">
+            Vier Tage pro Woche arbeitest du in einer Agentur.
+            Der Freitag gehört deiner kreativen
+            Weiterentwicklung in der school of ideas.
+          </p>
+          <p>
+            Du arbeitest an echten Projekten.<br/>
+            Und wirst dafür bezahlt.
+          </p>
+        </div>
+
+        <div class="year__block year__block--lead-2">
+          <p class="year__block-lead">
+            Ø 1.875 € brutto im Monat.<br/>
+            0 € Studiengebühren.
+          </p>
+        </div>
+
+        <div class="year__block year__block--body-2">
+          <p class="text-medium">
+            Wir sorgen dafür, dass du und deine Agenturen
+            zusammenpassen. Fachlich und menschlich.
+          </p>
+          <p>
+            Du bekommst gezieltes Knowhow und persönliches
+            Coaching. Und den Raum, dich gezielt weiterzuentwickeln.
+          </p>
+        </div>
+
       </div>
+
+      <!-- Bild zentral, mit Scroll-Rotation + blauem Schatten (motiv--shadow) -->
+      <figure class="motiv motiv--shadow year__motiv"
+              data-motiv-shadow
+              data-rotate="-5"
+              data-shadow-x="-50"
+              data-shadow-y="40"
+              data-shadow-rotate="7">
+        <span class="motiv__shadow" aria-hidden="true"></span>
+        <div class="motiv__frame">
+          <img class="motiv__img"
+               src="/images/school_of_ideas_motiv_02.jpg"
+               alt="Kreatives Motiv 02" />
+        </div>
+      </figure>
+
+      <!-- Decorative SVG icons — absolute zur .year-Section.
+           Designer-Knöpfe in den --yr-… Variablen oben. -->
+      <span class="float-icon float-icon--yr-spark" data-inline-svg aria-hidden="true">
+        <img src="/icons/spark.svg" alt="" />
+      </span>
+      <span class="float-icon float-icon--yr-sparkles" data-inline-svg aria-hidden="true">
+        <img src="/icons/sparkles.svg" alt="" />
+      </span>
+      <span class="float-icon float-icon--yr-document" data-inline-svg aria-hidden="true">
+        <img src="/icons/bottle.svg" alt="" />
+      </span>
+
     </div>
   </section>
 
@@ -128,242 +361,333 @@
         d="M112.18,110.62c-5.25-4.46-20.69-9.99-31.94,3.94"/>
     </svg>
 
-    <!-- Section heading -->
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <h2 class="expect__title">
-            Was dich bei uns erwartet:
-          </h2>
-        </div>
-        <div class="col-lg-6">
-          <p class="intro__lead">Wir ersetzen Studium. Und<br/>lehren klassische Ausbildung.</p>
-          <p>
-            Du arbeitest fokussiert an realen Projekten der renommierten Agenturen
-            der Stadt und lernst klassische Ausbildung neu zu denken.
-          </p>
-          <p>
-            Wir lehren das, was die Branche heute braucht: Kreativität, Haltung,
-            Verantwortung und ein gutes Gespür für Technologie.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Motiv 1 — static, no scroll effect -->
-    <figure class="motiv motiv--static" data-motiv="1">
-      <div class="motiv__frame">
-        <img class="motiv__img" src="/images/school_of_ideas_motiv_01.jpg" alt="Kreatives Motiv 01" />
-      </div>
-    </figure>
-
-    <!-- Year section between images -->
-    <div class="year container" id="year">
-      <div class="row gx-5">
-        <div class="col-lg-6">
-          <h2 class="year__title">So sieht dein Jahr<br/>bei uns aus:</h2>
-        </div>
-        <div class="col-lg-6">
-          <ul>
-            <li>Ein Jahr. Zwei Agentursemester.</li>
-            <li>Vier Ausbildungsjahre, in denen du wächst.</li>
-            <li>15 + 1 ECTS-Punkte für die Spezialisierung.</li>
-            <li>96 Wochen voll mit echten Aufgaben.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Motiv 2 — scroll parallax -->
-    <figure class="motiv motiv--parallax" data-motiv="2">
-      <div class="motiv__frame">
-        <img class="motiv__img" src="/images/school_of_ideas_motiv_02.jpg" alt="Kreatives Motiv 02" />
-      </div>
-    </figure>
-
-    <!-- Values section -->
-    <div class="values container" id="values">
-      <div class="row gx-5">
-        <div class="col-lg-6">
-          <h2>Was heute wirklich zählt</h2>
-        </div>
-        <div class="col-lg-6">
-          <p class="values__lead">
-            Die Kreativbranche wird gerade auf den Kopf gestellt.
-          </p>
-          <p>
-            KI macht Vorhandenes leichter zu reproduzieren. Dadurch wird
-            der Unterschied wichtiger, der nur Menschen ausmacht: echte
-            Ideen, Haltung, Strategie.
-          </p>
-          <p>
-            Genau das machen wir mit dir. Du arbeitest an konkreten Aufgaben,
-            mit echten Briefings — nicht mit Lehrplänen, sondern mit Realität.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Motiv 3 — middle reveal -->
-    <figure class="motiv motiv--middle" data-motiv="3">
-      <div class="motiv__backdrop"></div>
-      <div class="motiv__frame">
-        <img class="motiv__img" src="/images/school_of_ideas_motiv_03.jpg" alt="Kreatives Motiv 03" />
-      </div>
-    </figure>
-
   </section>
 
-  <!-- ===================== Audience grid ===================== -->
-  <section class="audience">
+  <!-- ===================== Was heute wirklich zählt (.values) =====================
+       Reine Text-Section: Headline oben links, darunter 3-spaltiger Grid mit
+       Bold-Lead in Spalte 1 und Body-Paragraphen in Spalten 2+3. Kein Bild,
+       keine Icons — Designer-Knöpfe oben in `.values` (siehe _content.scss). -->
+  <section class="values" id="values">
     <div class="container">
-      <div class="row mb-5">
-        <div class="col-lg-7">
-          <h2>Für wen das Sinn<br/>macht</h2>
-          <p class="values__lead">
-            Für dich, wenn du mit deiner Kreativität etwas bewegen
-            und Welt verändern willst.
-          </p>
-        </div>
-      </div>
 
-      <div class="row g-4">
-        <div class="col-6 col-md-3">
-          <div class="card">
-            <div class="card__icon"><img src="/icons/icon-03.svg" alt="" /></div>
-            <p class="card__text">Wenn du das kreative Handwerk inhaltlich und durchsetzen möchtest.</p>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="card">
-            <div class="card__icon"><img src="/icons/icon-04.svg" alt="" /></div>
-            <p class="card__text">Du neugierig auf Medien, Kultur und Zeitgeist bist.</p>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="card">
-            <div class="card__icon"><img src="/icons/icon-05.svg" alt="" /></div>
-            <p class="card__text">Wenn du lernen willst, wie deine Wirkung versagt.</p>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="card">
-            <div class="card__icon"><img src="/icons/icon-06.svg" alt="" /></div>
-            <p class="card__text">Wenn du Lust hast, dein Tools mit KI zu erweitern.</p>
-          </div>
-        </div>
-
-        <div class="col-6 col-md-3">
-          <div class="card">
-            <div class="card__icon"><img src="/icons/icon-07.svg" alt="" /></div>
-            <p class="card__text">Du reale Probleme mit Kreativität lösen willst.</p>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="card">
-            <div class="card__icon"><img src="/icons/icon-08.svg" alt="" /></div>
-            <p class="card__text">Wenn du lernen möchtest, wie Kreativität heute kollaboriert.</p>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="card">
-            <div class="card__icon"><img src="/icons/icon-09.svg" alt="" /></div>
-            <p class="card__text">Wenn du offen bist für neue Tools und KI als Werkzeug.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== Outcome ===================== -->
-  <section class="outcome" id="outcome">
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-lg-7">
-          <h2>Was du am Ende<br/>mitnimmst</h2>
-        </div>
-      </div>
-
-      <div class="row g-4">
-        <div class="col-6 col-md-3">
-          <div class="card">
-            <div class="card__icon"><img src="/icons/icon-10.svg" alt="" /></div>
-            <p class="card__text">Ein Portfolio, das zeigt, was du kannst. Konkrete Erfahrung in echten Teams und auf echten Briefings.</p>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="card">
-            <div class="card__icon"><img src="/icons/icon-11.svg" alt="" /></div>
-            <p class="card__text">Ein Verständnis dafür, wie Marken auswirkt. Wie sie entstehen, wachsen und auftauchen werden. Und wie ihren ihre Idee bringst.</p>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="card">
-            <div class="card__icon"><img src="/icons/icon-12.svg" alt="" /></div>
-            <p class="card__text">Wichtige Kontakte in den Kreativbranche. Ins Netzwerk aus erfahrenen Mitwirkenden, das du dabei aufbaust.</p>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="card">
-            <div class="card__icon"><img src="/icons/icon-13.svg" alt="" /></div>
-            <p class="card__text">Kreative Fähigkeiten, die du im Umgang mit KI und neuen Technologien Leistung kennenlernst.</p>
-          </div>
-        </div>
-        <div class="col-6 col-md-3">
-          <div class="card">
-            <div class="card__icon"><img src="/icons/icon-14.svg" alt="" /></div>
-            <p class="card__text">Ein Spielen, mit dem du dich konkret bewerben kannst.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== Final image ===================== -->
-  <section class="container">
-    <figure class="motiv motiv--static">
-      <div class="motiv__frame">
-        <img class="motiv__img" src="/images/school_of_ideas_motiv_04.jpg" alt="Kreatives Motiv 04" />
-      </div>
-    </figure>
-  </section>
-
-  <!-- ===================== Final CTA ===================== -->
-  <section class="cta-final" id="contact">
-    <div class="container">
-      <h2 class="cta-final__title">
-        Kreativität hat immer Zukunft.<br/>
-        Wir bilden die Talente aus, die sie gestalten.
+      <h2 class="values__lead">
+        <span class="ink">Was heute wirklich</span>
+        <span class="accent">zählt</span>
       </h2>
 
-      <div class="cards">
-        <div class="cta-card">
-          <h4>Ich bin mir sicher</h4>
-          <p>Bewirb dich direkt — die Bewerbung läuft online.</p>
-          <a href="#" class="btn btn-primary mt-3">Jetzt bewerben</a>
+      <div class="values__grid">
+
+        <!-- Col 1: Bold-Lead-Statement -->
+        <div class="values__col">
+          <p class="values__col-lead">
+            Die Kreativbranche wird gerade auf den Kopf gestellt.
+          </p>
         </div>
-        <div class="cta-card">
-          <h4>Ich teste mich erstmal</h4>
-          <p>Selbsttest zeigt dir, ob das passt.</p>
-          <a href="#" class="btn btn-outline mt-3">Selbsttest starten</a>
+
+        <!-- Col 2: Body Paragraph -->
+        <div class="values__col">
+          <p class="text-medium">
+            KI mit seinen grenzenlosen Tools erzeugt ganz neue Möglichkeiten
+            und Prozesse. Das verändert die Denk- und Arbeitsweise, wie Ideen
+            entwickelt und umgesetzt werden.
+          </p>
         </div>
-        <div class="cta-card">
-          <h4>Ich erwäge das für mich</h4>
-          <p>Dann sich an einen, den du kennst und vertrauenst.</p>
+
+        <!-- Col 3: Body Paragraphs (3 Absätze) -->
+        <div class="values__col">
+          <p>
+            Genau hier setzt die school of ideas an. Du arbeitest an Ideen
+            und Konzepten, die mit eben diesen neuen Möglichkeiten entstehen.
+          </p>
+          <p>
+            Du lernst, wie dich die Tools in der Ideenfindung unterstützen.
+            Wie sich kreative Prozesse verändern.
+          </p>
+          <p>
+            Und wie du KI gezielt einsetzt, um schneller zu außergewöhnlichen
+            Ergebnissen zu kommen.
+          </p>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ===================== Footer ===================== -->
-  <footer class="container py-5">
-    <div class="row align-items-center">
-      <div class="col-md-6">
-        <a href="#" class="nav__brand"><img src="/logo/School_of_ideas_Logo.svg" alt="School of Ideas" style="height:32px" /></a>
+  <!-- ===================== Für wen das Sinn macht (.audience) =====================
+       4er-Card-Grid mit gestaffelter Belegung. Jede Card kann via
+       inline `style="--card-col: <n>; --card-row: <n>"` an eine
+       freie Position gesetzt werden — leere Cells einfach auslassen.
+       Selber Mechanismus wie bei .outcome — eine wiederverwendbare
+       `.card-grid` + `.card` Struktur. -->
+  <section class="audience" id="audience">
+    <div class="container">
+
+      <header class="audience__head">
+        <h2 class="audience__lead">
+          <span class="ink">Für wen das Sinn</span>
+          <span class="accent">macht</span>
+        </h2>
+        <p class="audience__sub">
+          Für dich, wenn du mit deiner
+          Kreativität was bewegen und
+          Geld verdienen willst.
+        </p>
+      </header>
+
+      <div class="card-grid">
+        <article class="card" style="--card-col: 2; --card-row: 1">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="card__text">Wenn du ein kreatives Fundament mitbringst und darauf aufbauen möchtest.</p>
+        </article>
+
+        <article class="card" style="--card-col: 3; --card-row: 1">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="card__text">Du neugierig bist auf Medien, Kultur und Zeitgeist.</p>
+        </article>
+
+        <article class="card" style="--card-col: 4; --card-row: 1">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="card__text">Wenn du lernen willst, wie Ideen entstehen, die Wirkung erzeugen.</p>
+        </article>
+
+        <article class="card" style="--card-col: 2; --card-row: 2">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="card__text">Du reale Probleme mit Kreativität lösen willst.</p>
+        </article>
+
+        <article class="card" style="--card-col: 3; --card-row: 2">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="card__text">Wenn du lernen möchtest, wie Kreativarbeit heute funktioniert. Und morgen relevant bleibt.</p>
+        </article>
+
+        <article class="card" style="--card-col: 4; --card-row: 2">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="card__text">Wenn du offen bist für neue Tools und KI als Werkzeug.</p>
+        </article>
       </div>
-      <div class="col-md-6 text-md-end small text-muted">
-        © School of Ideas — Impressum · Datenschutz
+
+      <!-- Decorative SVG icons — designer-tunable in den --au-… Variablen -->
+      <span class="float-icon float-icon--au-shooting" data-inline-svg aria-hidden="true">
+        <img src="/icons/shooting-star.svg" alt="" />
+      </span>
+      <span class="float-icon float-icon--au-comet" data-inline-svg aria-hidden="true">
+        <img src="/icons/star.svg" alt="" />
+      </span>
+      <span class="float-icon float-icon--au-airplane" data-inline-svg aria-hidden="true">
+        <img src="/icons/airplane.svg" alt="" />
+      </span>
+      <span class="float-icon float-icon--au-spark" data-inline-svg aria-hidden="true">
+        <img src="/icons/spark.svg" alt="" />
+      </span>
+    </div>
+  </section>
+
+  <!-- ===================== Was du am Ende mitnimmst (.outcome) =====================
+       Selbe Card-Grid-Mechanik wie .audience. Cards gestaffelt versetzt
+       im 4er-Grid platziert. -->
+  <section class="outcome" id="outcome">
+    <div class="container">
+
+      <header class="outcome__head">
+        <h2 class="outcome__lead">
+          <span class="ink">Was du am Ende</span>
+          <span class="accent">mitnimmst</span>
+        </h2>
+      </header>
+
+      <div class="card-grid">
+        <article class="card" style="--card-col: 1; --card-row: 1">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="card__text">Ein Portfolio, das zeigt, was du kannst. Fundierte Erfahrung in echten Teams und auf echten Kunden.</p>
+        </article>
+
+        <article class="card" style="--card-col: 2; --card-row: 2">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="card__text">Ein Verständnis dafür, was Marken ausmacht. Wie sie entstehen, wachsen und erfolgreich werden. Und wie Ideen dazu beitragen.</p>
+        </article>
+
+        <article class="card" style="--card-col: 3; --card-row: 1">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="card__text">Wichtige Kontakte in der Kreativbranche. Ein Netzwerk aus kreativen Mitstreitern, das bleibt.</p>
+        </article>
+
+        <article class="card" style="--card-col: 3; --card-row: 2">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="card__text">Ein System, mit dem du dich selbst reflektierst. Und gezielt weiterentwickelst.</p>
+        </article>
+
+        <article class="card" style="--card-col: 4; --card-row: 1">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="card__text">Kreative Fähigkeiten, die du direkt einsetzen kannst. Knowhow im Umgang mit KI und neuen Technologien.</p>
+        </article>
+
+        <article class="card" style="--card-col: 4; --card-row: 2">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="card__text">Ein klares Gefühl dafür, wohin du willst.</p>
+        </article>
       </div>
+
+      <!-- Decorative SVG icons -->
+      <span class="float-icon float-icon--ou-sparkles" data-inline-svg aria-hidden="true">
+        <img src="/icons/sparkles.svg" alt="" />
+      </span>
+    </div>
+  </section>
+
+  <!-- ===================== Final CTA (.cta-final) =====================
+       Letztes Bild + Closing-Headline + 3 CTA-Karten (sicher / testen /
+       nichts für mich). Bild bekommt motiv--shadow Scroll-Effekt; vier
+       Float-Icons (document / shooting / bottle / glasses) verteilen
+       sich um das Bild. -->
+  <section class="cta-final" id="contact">
+    <div class="container">
+
+      <!-- Bild mit Drop-Shadow + Scroll-Rotation -->
+      <figure class="motiv motiv--shadow cta-final__motiv"
+              data-motiv-shadow
+              data-rotate="-5"
+              data-shadow-x="-60"
+              data-shadow-y="50"
+              data-shadow-rotate="6">
+        <span class="motiv__shadow" aria-hidden="true"></span>
+        <div class="motiv__frame">
+          <img class="motiv__img"
+               src="/images/school_of_ideas_motiv_04.jpg"
+               alt="Kreatives Motiv 04" />
+        </div>
+      </figure>
+
+      <!-- Decorative Float-Icons (designer-tunable über --ct-… Variablen) -->
+      <span class="float-icon float-icon--ct-document" data-inline-svg aria-hidden="true">
+        <img src="/icons/bottle.svg" alt="" />
+      </span>
+      <span class="float-icon float-icon--ct-shooting" data-inline-svg aria-hidden="true">
+        <img src="/icons/shooting-star.svg" alt="" />
+      </span>
+      <span class="float-icon float-icon--ct-bottle" data-inline-svg aria-hidden="true">
+        <img src="/icons/lightbulb.svg" alt="" />
+      </span>
+      <span class="float-icon float-icon--ct-glasses" data-inline-svg aria-hidden="true">
+        <img src="/icons/glasses-bold.svg" alt="" />
+      </span>
+
+      <!-- Closing-Headline -->
+      <h2 class="cta-final__title">
+        <span class="ink">Kreativität hat immer Zukunft</span>
+        <span class="accent">Wir bilden die Talente aus, die sie gestalten.</span>
+      </h2>
+
+      <!-- Drei CTA-Karten — wiederverwendete .card-grid Mechanik -->
+      <div class="cta-final__cards">
+        <article class="cta-final__card">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3 class="cta-final__card-title">Ich bin mir sicher</h3>
+          <a class="btn-mint" href="#">Jetzt bewerben</a>
+        </article>
+
+        <article class="cta-final__card">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3 class="cta-final__card-title">Ich will erst herausfinden,<br/>ob das passt</h3>
+          <a class="btn-ghost" href="#">Selbsttest starten</a>
+        </article>
+
+        <article class="cta-final__card">
+          <svg class="card__arrow" viewBox="0 0 32 32" aria-hidden="true">
+            <path d="M9 9 L23 23 M23 23 L23 14 M23 23 L14 23" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3 class="cta-final__card-title">Ist nichts für mich</h3>
+          <p class="cta-final__card-text">
+            Dann such dir etwas,
+            das dich wirklich
+            weiterbringt.
+          </p>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================== Footer =====================
+       Mint-Divider oben (Brand-Echo zum Hero), darunter Logo + Nav +
+       Legal-Links. Closing-Claim als typografisches Statement. -->
+  <footer class="footer">
+    <div class="footer__mint" aria-hidden="true"></div>
+
+    <div class="container">
+
+      <!-- Closing-Claim — typografisches Statement -->
+      <p class="footer__claim">
+        <span class="ink">Bereit, deine Kreativität</span>
+        <span class="accent">in Zukunft zu verwandeln?</span>
+      </p>
+
+      <!-- Logo + Primary-Nav -->
+      <!-- Logo nutzt das gleiche "Wordmark + Cloud-Slot"-Pattern wie der
+           Nav-Header. Die Nav-Cloud fliegt beim Runterscrollen genau hier
+           rein (siehe Cloud-Journey in main.js). -->
+      <div class="footer__row">
+        <a class="footer__brand" href="#" aria-label="school of ideas">
+          <span class="footer__brand-stack">
+            <img class="footer__brand-text"
+                 src="/logo/School_of_ideas_Logo_OW.png"
+                 alt="school of ideas" />
+            <!-- Ziel-Slot für die Nav-Cloud beim Scroll-Ende -->
+            <span class="footer__cloud-slot" data-cloud-target aria-hidden="true"></span>
+          </span>
+        </a>
+
+        <nav class="footer__nav" aria-label="Footer-Navigation">
+          <a href="#about">About</a>
+          <a href="#program">Programm</a>
+          <a href="#values">Agenturen</a>
+          <a href="#contact">Kontakt</a>
+          <a href="#audience">FAQ</a>
+        </nav>
+      </div>
+
+      <!-- Bottom-Row: Legal-Links + Studio-Credit -->
+      <div class="footer__bottom">
+        <div class="footer__legal">
+          <a href="#">Impressum</a>
+          <a href="#">Datenschutz</a>
+          <a href="#">Cookies</a>
+        </div>
+
+        <p class="footer__credit">
+          Made with <span class="footer__heart" aria-hidden="true">♥</span>
+          <span class="visually-hidden">love</span>
+          in Heimbach
+        </p>
+      </div>
+
     </div>
   </footer>
 

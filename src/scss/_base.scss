@@ -1,8 +1,32 @@
 :root {
+  // ----- Brand palette
+  --color-bg:        #{$color-bg};
+  --color-ink:       #{$color-ink};
+  --color-ink-soft:  #{$color-ink-soft};
+  --color-muted:     #{$color-muted};
+  --color-accent:    #{$color-accent};
+  --color-mint:      #{$color-mint};
+  --color-mint-deep: #{$color-mint-deep};
+
+  // ----- Layout
+  --nav-height:      #{$nav-height};
+
+  // ----- Hero positioning (override these to nudge the title)
+  --hero-text-left:    #{$hero-text-left};
+  --hero-text-right:   #{$hero-text-right};
+  --hero-text-bottom:  #{$hero-text-bottom};
+  --hero-mint-height:  #{$hero-mint-height};
+
+  // ----- Glassmorphism (Apple-style)
   --globalnav-backdrop-filter: #{$globalnav-backdrop-filter};
   --globalnav-background:      #{$globalnav-background};
-  --color-accent:              #{$color-accent};
-  --color-ink:                 #{$color-ink};
+
+  // ----- Motion
+  --duration-fast: #{$duration-fast};
+  --duration-base: #{$duration-base};
+  --duration-slow: #{$duration-slow};
+  --easing-out:    #{$easing-out};
+  --easing-spring: #{$easing-spring};
 }
 
 * { box-sizing: border-box; }
@@ -14,7 +38,7 @@ html, body {
   color: $color-ink;
   font-family: $font-body;
   font-weight: 400;
-  font-size: 17px;
+  font-size: 24px;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -59,6 +83,17 @@ p { margin: 0 0 1em; }
   margin-bottom: .8em;
 }
 
+// Utility — minimaler Akzent: gleiche Schrift, nur Medium-Weight (500)
+// statt Regular (400). Auf einzelne Paragraphen draufklatschen, wenn ein
+// Lead-/Intro-Absatz vom umliegenden Body abgesetzt werden soll.
+//   <p class="text-medium">…</p>
+//
+// `!important` ist hier bewusst: Section-Rules (.expect__body p { … })
+// haben gleiche Specificity wie `.text-medium` und kommen später im
+// Cascade — würden sonst gewinnen. Utility-Klassen sind genau für diesen
+// Override-Use-Case gedacht.
+.text-medium { font-weight: 500 !important; }
+
 .btn {
   font-family: $font-display;
   font-weight: 500;
@@ -85,14 +120,65 @@ p { margin: 0 0 1em; }
   &:hover { background: $color-ink; color: #fff; }
 }
 
-// scroll fade-in
+// =============================================================================
+// Scroll-Reveal-System (Apple-style — subtil, gestaffelt)
+//
+// Zwei Layer:
+//   • `.reveal` + `.is-visible`           — SECTION-LEVEL Fade-in
+//   • `[data-reveal]` + `.is-revealed`    — ELEMENT-LEVEL mit Auto-Stagger
+//
+// Stagger-Delay kommt aus `--reveal-delay` (in main.js berechnet pro
+// Geschwister-Index innerhalb des gleichen Eltern-Containers).
+// =============================================================================
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1);
+  transform: translateY(28px);
+  transition:
+    opacity   .9s cubic-bezier(.22, .61, .36, 1),
+    transform .9s cubic-bezier(.22, .61, .36, 1);
+  will-change: opacity, transform;
 
   &.is-visible {
     opacity: 1;
     transform: none;
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity   .75s cubic-bezier(.22, .61, .36, 1),
+    transform .75s cubic-bezier(.22, .61, .36, 1);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+
+  &.is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+// Subtilere Variante — nur Fade, kein Slide (für Icons / dekorative Elemente)
+[data-reveal="soft"] {
+  transform: none;
+  &.is-revealed { opacity: 1; }
+}
+
+// Scale-Variante — sanftes Reinzoomen (für Bilder)
+[data-reveal="scale"] {
+  transform: scale(.965);
+  &.is-revealed { transform: scale(1); }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_01_Icons" data-name="01_Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 327.46 327.46">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #0a3aea;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #0a3aea;
+        stroke-width: 9px;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <path class="cls-2" d="M243.06,112.5c-4.15,13.89-14.34,25.41-29.27,25.41-16.32,0-29.56-13.22-29.56-29.54,0-12.58,6.93-24.97,19.99-27.52,2.87-.56,5.77-.24,8.65-.71,15.47-2.5,23.95-16.85,29.62-30.03.19-.44.37-.87.56-1.31.84-1.99,2.14-4.49,2.14-6.71.29,1.21,7.2,39.16-2.14,70.41Z"/>
+  <circle class="cls-1" cx="152.49" cy="127.81" r="11.82"/>
+  <path class="cls-2" d="M106.05,154.21h42.47c3.74,0,6.78,3.04,6.78,6.78v105.55h-56.02v-105.55c0-3.74,3.04-6.78,6.78-6.78Z" transform="translate(107 455.42) rotate(-144.09)"/>
+  <path class="cls-2" d="M139.69,141.82h56.02v15.15c0,5.71-4.63,10.34-10.34,10.34h-45.68v-25.49h0Z" transform="translate(212.88 378.11) rotate(-144.09)"/>
+</svg>

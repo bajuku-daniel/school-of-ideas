@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_01_Icons" data-name="01_Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 327.46 327.46">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-1, .cls-2 {
+        stroke: #0a3aea;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 9px;
+      }
+
+      .cls-3 {
+        fill: #0a3aea;
+      }
+
+      .cls-2 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <circle class="cls-2" cx="142.35" cy="183.44" r="67.32"/>
+  <g>
+    <path class="cls-2" d="M188.5,108.75l15.7-25.18s8.6-10.45,20.59-2.98c11.99,7.48,8.03,19.16,8.03,19.16,0,0-10.14,26.97,3.19,33.63l11.39,7.1"/>
+    <line class="cls-1" x1="256.58" y1="117.08" x2="265.92" y2="102.09"/>
+    <line class="cls-1" x1="273.37" y1="135.02" x2="290.51" y2="130.76"/>
+    <line class="cls-1" x1="268.3" y1="154.75" x2="283.29" y2="164.1"/>
+    <line class="cls-1" x1="246.68" y1="165.42" x2="251.56" y2="182.39"/>
+  </g>
+  <g>
+    <polygon class="cls-3" points="166.63 95.11 154.04 114.75 166.6 120.64 185.35 130.06 196.13 142.75 210.38 122.39 166.63 95.11"/>
+    <polygon class="cls-2" points="166.63 95.11 154.04 114.75 166.6 120.64 185.35 130.06 196.13 142.75 210.38 122.39 166.63 95.11"/>
+  </g>
+</svg>

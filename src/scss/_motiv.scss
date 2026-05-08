@@ -20,7 +20,7 @@
     position: relative;
     width: min(70%, 760px);
     aspect-ratio: 3 / 2;
-    border-radius: $radius;
+    border-radius: $radius-lg;
     overflow: hidden;
     background: #ddd;
     will-change: transform;
@@ -46,6 +46,57 @@
     transition: transform .05s linear;
   }
 
+  // -- Variant: scroll-driven rotate + blue shadow drop-out
+  //    Loads flat. As the figure scrolls into view, the frame rotates
+  //    and a coloured shadow slides out from behind it. Target values
+  //    are set per-figure via data-rotate / data-shadow-x / data-shadow-y
+  //    / data-shadow-rotate so each motiv can have its own personality.
+  //
+  //    DESIGNER: Aspect-Ratio per section über `--motiv-aspect` setzen
+  //    (z. B. `4 / 3`, `1 / 1`, `16 / 9`). Default ist `16 / 11`.
+  &--shadow {
+    --motiv-rot: 0deg;
+    --motiv-shadow-x: 0px;
+    --motiv-shadow-y: 0px;
+    --motiv-shadow-rot: 0deg;
+
+    width: min(86%, 620px);
+    align-self: flex-start;
+    position: relative;
+
+    .motiv__frame {
+      width: 100%;
+      // Aspect-Ratio kommt vom Eltern-Section (.intro / .expect / …) via
+      // `--motiv-aspect`. Fallback `16 / 11`, falls die Section keinen Wert setzt.
+      aspect-ratio: var(--motiv-aspect, 16 / 11);
+      background: #111;
+      box-shadow: 0 24px 50px -28px rgba(0,0,0,.35);
+      transform: rotate(var(--motiv-rot)) translateZ(0);
+      // Keine CSS-transition: das Update passiert in main.js bereits
+      // pro Frame (rAF-throttled).  Eine zusätzliche Transition würde
+      // mit dem JS-Update kämpfen → Jank auf iOS / Firefox.
+      will-change: transform;
+      backface-visibility: hidden;     // kompositiert auf eigenem Layer
+      z-index: 2;
+    }
+
+    .motiv__shadow {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      aspect-ratio: var(--motiv-aspect, 16 / 11);
+      background: $color-accent;
+      border-radius: $radius-lg;
+      transform:
+        translate3d(var(--motiv-shadow-x), var(--motiv-shadow-y), 0)
+        rotate(var(--motiv-shadow-rot));
+      will-change: transform;
+      backface-visibility: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+  }
+
   // -- Variant 3: middle reveal — frame stays, but a coloured backdrop
   //    rotates / scales as the image enters the viewport
   &--middle {
@@ -56,7 +107,7 @@
       width: 70%;
       aspect-ratio: 3 / 2;
       background: $color-accent;
-      border-radius: $radius;
+      border-radius: $radius-lg;
       transform: rotate(var(--rot, 0deg)) scale(var(--scl, .8));
       transition: transform .1s linear;
       z-index: 0;

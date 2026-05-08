@@ -4,7 +4,7 @@
   // ----- Anschnitt fixiert auf 16/9 Videoformat -----
   aspect-ratio: 16 / 9;
   max-height: 88vh;
-  min-height: 520px;
+  min-height: 380px;            // shorter on mobile so the title doesn't get crowded
   overflow: hidden;
   color: #fff;
 }
@@ -27,13 +27,20 @@
   z-index: 1;
 }
 
+// ----- Hero text positioning ---------------------------------------------
+// All four sides + bottom offset are exposed as variables, so the title
+// block can be re-anchored without touching the rest of the file.
+// Edit these in `_variables.scss` (the values below are the fallbacks).
 .hero__content {
-  position: relative;
+  position: absolute;
+  left:   var(--hero-text-left,   4vw);
+  right:  var(--hero-text-right,  4vw);
+  bottom: var(--hero-text-bottom, 7vw);
   z-index: 2;
-  height: 100%;
   display: flex;
-  align-items: center;
-  padding-bottom: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
 }
 
 .hero__title {
@@ -41,25 +48,28 @@
   font-weight: 800;             // Nohemi ExtraBold
   color: #fff;
   margin: 0;
-  font-size: clamp(2.8rem, 8.4vw, 8rem);
-  line-height: .96;
+  // Floor 1.55rem (~25px) damit "immer ★ Zukunft" bei 320 px noch passt.
+  font-size: clamp(1.55rem, 8vw, 8rem);
+  line-height: .72;
   letter-spacing: -.03em;
   display: flex;
   flex-direction: column;
-  gap: .04em;
+  gap: .1em;
 
   .line {
     display: inline-flex;
     align-items: center;
-    gap: clamp(20px, 2.8vw, 48px);
+    // gap: clamp(8px, 2.4vw, 48px);
+    flex-wrap: nowrap;
   }
 
   .star-inline {
     display: inline-flex;
-    width: clamp(140px, 14vw, 240px);
+    // mobile floor klein genug, dass "immer ★ Zukunft" bei 320 px in eine Zeile passt
+    width: clamp(48px, 15vw, 290px);
     flex-shrink: 0;
     align-items: center;
-    transform: translateY(-.04em);
+    transform: translateY(-.02em);
 
     svg {
       width: 100%;
@@ -86,6 +96,6 @@
 // Slim mint divider sitting flush under the hero
 .hero__mint {
   width: 100%;
-  height: clamp(16px, 1.6vw, 28px);
+  height: clamp(10px, 1.6vw, 10px);
   background: $color-mint;
 }

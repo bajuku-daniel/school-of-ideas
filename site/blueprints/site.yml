@@ -1,0 +1,20 @@
+title: School of Ideas
+
+tabs:
+  pages:
+    label: Seiten
+    icon: page
+    sections:
+      pages:
+        type: pages
+        templates:
+          - home
+          - default
+  settings:
+    label: Einstellungen
+    icon: settings
+    fields:
+      siteDescription:
+        label: Meta Description
+        type: textarea
+        buttons: false

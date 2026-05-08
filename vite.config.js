@@ -2,14 +2,31 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   root: 'src',
-  publicDir: '../public',
-  base: './',
-  server: {
-    port: 5173,
-    open: true
+  publicDir: false,
+  base: '/assets/',
+  css: {
+    preprocessorOptions: {
+      scss: {
+        quietDeps: true,
+        silenceDeprecations: ['import', 'global-builtin', 'color-functions', 'if-function']
+      }
+    }
   },
   build: {
-    outDir: '../dist',
-    emptyOutDir: true
+    outDir: '../public/assets',
+    emptyOutDir: true,
+    rollupOptions: {
+      input: 'src/js/main.js',
+      output: {
+        entryFileNames: 'main.js',
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name?.match(/\.(woff2?|ttf)$/)) {
+            return 'fonts/[name][extname]';
+          }
+
+          return 'main[extname]';
+        }
+      }
+    }
   }
 });

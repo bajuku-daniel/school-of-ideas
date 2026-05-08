@@ -33,25 +33,15 @@
 .nav__left  { display: flex; align-items: center; }
 .nav__right { display: flex; align-items: center; gap: clamp(20px, 3vw, 36px); }
 
-// ----- Logo: "school of" + cloud + "ideas" composed inline -----
-// Values pre-computed for $wm-height = 44px (SVG aspect 839.45 / 217.44 ≈ 3.86):
-//   natural width   = 169.8 px
-//   1 SVG unit      = 0.202 px on screen
-//
-// Visible glyph runs in the source SVG:
-//   "school of"  ≈ x 100 .. 430  (width 330 svg-units → 66.7 px)
-//   "ideas"      ≈ x 445 .. 700  (width 255 svg-units → 51.5 px)
-
+// ----- Logo: PNG wordmark with cloud SVG overlaid in its gap -----
 .nav__brand {
   display: inline-flex;
   align-items: center;
-  gap: 4px;                  // tighter than before, lets cloud kiss the glyphs
   color: $color-ink;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
 
-  // suppress every form of browser focus ring — the brand blue ring was
-  // exactly the "blaue outline" the user kept seeing
+  // suppress every form of browser focus ring
   &,
   &:focus,
   &:focus-visible,
@@ -60,77 +50,60 @@
     outline: none;
     box-shadow: none;
   }
-
-  // hard guard: every glyph in the wordmark renders brand black
-  svg, svg * { color: $color-ink !important; }
-
-  // We strip the inline <style> blocks from the injected SVGs (they were
-  // bleeding into other inline SVGs via shared `.cls-1/2/…` class names);
-  // re-apply only the bits we need on the wordmark.
-  svg text {
-    fill: #141618 !important;
-    stroke: none !important;
-    font-family: 'Nohemi', sans-serif;
-    font-size: 65px;
-    font-weight: 700;
-  }
-
-  svg .cls-2 { letter-spacing: .03em; }
-  svg .cls-3 { letter-spacing: .02em; }
-  svg .cls-4 { letter-spacing: .02em; }
-  svg .cls-5 { letter-spacing: .02em; }
 }
 
-.nav__wm {
+// Pre-measured layout of the PNG (823 × 105 source px):
+//   gap-x:   392 .. 598  → centre at 60.1 % of the wordmark width
+//   gap-w:   206         → 25 % of wordmark width
+//
+// Logo height scales with viewport via a CSS var so the cloud follows it.
+$cloud-x-percent: 60.1%;
+
+.nav__brand-stack {
+  --wm-height: clamp(34px, 2.6vw, 56px);
+  position: relative;
   display: inline-block;
-  height: 44px;
-  overflow: hidden;
+  height: var(--wm-height);
   line-height: 0;
+}
+
+.nav__brand-text {
+  height: var(--wm-height);
+  width: auto;
+  display: block;
   transition: opacity .2s linear;
   will-change: opacity;
-
-  svg {
-    height: 44px;
-    width: 170px;
-    max-width: none;
-    display: block;
-  }
-
-  &--left  {
-    width: 67px;
-    svg { transform: translateX(-20.2px); }
-  }
-
-  &--right {
-    width: 52px;
-    svg { transform: translateX(-90px); }
-  }
 }
 
-// ----- Cloud sitting in the wordmark gap -----
+// Cloud overlaid on the PNG's built-in gap. Centred at the gap's measured
+// horizontal position, scaled up via JS through `--cloud-scale`.
+//
+// Außerdem: --cloud-shift-x / --cloud-shift-y schieben die Cloud beim
+// Scroll Richtung Page-Ende in den Footer-Slot rein (data-cloud-target).
+// Diese Werte werden ebenfalls in main.js gesetzt.
 .nav__cloud {
-  display: inline-flex;
-  width: 50px;
-  height: 50px;
+  position: absolute;
+  left: $cloud-x-percent;
+  top: 55%;
+  // Reihenfolge: Centring → Journey-Shift → Scale.
+  // Translate VOR Scale, damit die Verschiebung in absoluten Pixeln bleibt
+  // und nicht von --cloud-scale mit-skaliert wird.
+  transform:
+    translate(-50%, calc(-50% - 1px))
+    translate(var(--cloud-shift-x, 0px), var(--cloud-shift-y, 0px))
+    scale(var(--cloud-scale, 1));
+  width:  calc(var(--wm-height) * 1.4);
+  height: calc(var(--wm-height) * 1.4);
   color: $color-ink;
-  flex-shrink: 0;
   transform-origin: center;
   will-change: transform;
+  z-index: 100;          // muss über dem Footer liegen, wenn die Cloud reinfliegt
 
   svg {
     width: 100%;
     height: 100%;
     display: block;
   }
-}
-
-// Visually-hidden helper for screen readers
-.visually-hidden {
-  position: absolute !important;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden; clip: rect(0,0,0,0);
-  white-space: nowrap; border: 0;
 }
 
 // ----- Menu list -----
@@ -142,7 +115,7 @@
   padding: 0;
   font-family: $font-body;        // Neue Haas Unica Pro
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 17px;
 }
 
 .nav__link {
@@ -162,7 +135,7 @@
 .nav__cta {
   font-family: $font-body;        // Neue Haas Unica Pro
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 17px;
   color: $color-ink;
   background: $color-mint;
   border: 0;
@@ -178,7 +151,136 @@
   }
 }
 
+// ----- Mobile burger button -----
+.nav__burger {
+  display: none;          // shown only at mobile widths (see media query)
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 10px 8px;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  -webkit-tap-highlight-color: transparent;
+
+  span {
+    position: absolute;
+    left: 50%;
+    width: 22px;
+    height: 2.5px;
+    background: $color-ink;
+    border-radius: 2px;
+    transform-origin: center;
+    transition: top .25s ease, transform .35s cubic-bezier(.65,.05,.25,1.4),
+                opacity .15s ease, background-color .25s ease;
+  }
+
+  span:nth-child(1) { top: 13px; transform: translateX(-50%); }
+  span:nth-child(2) { top: 19px; transform: translateX(-50%); }
+  span:nth-child(3) { top: 25px; transform: translateX(-50%); }
+
+  &.is-open {
+    span:nth-child(1) { top: 19px; transform: translateX(-50%) rotate(45deg);  background: #fff; }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { top: 19px; transform: translateX(-50%) rotate(-45deg); background: #fff; }
+  }
+}
+
 @media (max-width: 900px) {
-  .nav__list { display: none; }
+  .nav__list,
+  .nav__cta { display: none; }
+
+  .nav__burger { display: block; }
+}
+
+// ----- Full-screen mobile menu (blue background, items "build" in) -----
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 95;            // under the nav (100) so the burger stays on top
+  background: $color-accent;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-12px);
+  transition: opacity .35s ease, transform .35s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+}
+
+.mobile-menu__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.4vh, 18px);
+}
+
+.mobile-menu__link {
+  display: inline-block;
+  font-family: $font-display;
+  font-weight: 700;
+  font-size: clamp(2rem, 8vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 14px;
+
+  span {
+    // The span allows us to animate position independently from the
+    // anchor's hit area and apply staggered entrance.
+    display: inline-block;
+    transform: translateY(28px);
+    opacity: 0;
+    transition: transform .55s cubic-bezier(.2,.8,.2,1),
+                opacity .35s ease;
+  }
+
+  // each item builds in on a slight delay
+  $i: 1;
+  @while $i < 8 {
+    .mobile-menu.is-open li:nth-child(#{$i}) & span {
+      transition-delay: #{0.05s + $i * 0.06s};
+    }
+    $i: $i + 1;
+  }
+
+  &:hover span,
+  &:focus-visible span { transform: translateY(-2px); }
+
+  &--cta {
+    margin-top: clamp(20px, 3vh, 40px);
+    background: #fff;
+    color: $color-accent;
+    border-radius: 999px;
+    padding: 14px 32px;
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
+  }
+}
+
+.mobile-menu.is-open .mobile-menu__link span {
+  transform: none;
+  opacity: 1;
+}
+
+// Lock body scroll while menu is open
+body.menu-open { overflow: hidden; }
+
+// Brand inverts to white over the blue overlay — readability over fancy.
+body.menu-open .nav {
+  // PNG wordmark: invert turns the dark glyphs white on transparent
+  .nav__brand-text { filter: invert(1) brightness(2); }
+  // Cloud's stroke uses currentColor → pull it to white
+  .nav__cloud      { color: #fff; }
 }
 

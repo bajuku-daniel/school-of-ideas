@@ -1,46 +1,134 @@
-// ----- Brand colors -----
-$color-bg:        #fafafc;
-$color-ink:       #141618;
-$color-ink-soft:  #2b2f33;
-$color-accent:    #0a3aea;   // strong blue from icons / screenshots
-$color-mint:      #b8f4cc;   // soft mint used for CTA + dividers
-$color-mint-deep: #8be0a8;
-$color-muted:     #6b7178;
-$color-border:    rgba(20, 22, 24, .12);
+// ============================================================================
+// School of Ideas — Design Tokens
+//
+// Single source of truth for colors, spacing, typography, layout values
+// and motion. Most are also exposed as CSS custom properties on :root
+// (see `_base.scss`) so they can be tweaked at runtime, used inside
+// inline `style="..."`, or read from JavaScript.
+//
+// Naming convention:
+//   $color-…    Brand & UI palette
+//   $space-…   / $spacing-… Common spacing values
+//   $radius-…   Border-radius scale
+//   $font-…     Type families
+//   $size-…     Static dimensional values (nav height, breakpoints, …)
+//   $duration-… Animation timings
+// ============================================================================
 
-// ----- Typography -----
+
+// -----------------------------------------------------------------------------
+// 1) Brand colours
+// -----------------------------------------------------------------------------
+$color-bg:         #fafafc;     // page background
+$color-ink:        #141618;     // primary text / dark UI
+$color-ink-soft:   #2b2f33;     // secondary text
+$color-muted:      #6b7178;     // captions, helper copy
+$color-border:     rgba(20, 22, 24, .12);
+
+$color-accent:     #0a3aea;     // brand blue (icons, links, manifest)
+$color-accent-soft:#1e4dff;
+
+$color-mint:       #b8f4cc;     // CTA & dividers
+$color-mint-deep:  #8be0a8;     // CTA hover
+
+$color-white:      #ffffff;
+
+
+// -----------------------------------------------------------------------------
+// 2) Typography
+// -----------------------------------------------------------------------------
 $font-display: 'Nohemi', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 $font-body:    'Neue Haas Unica', system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
-// ----- Layout -----
-$nav-height: 92px;
-$radius:     14px;
+$font-weight-regular:  400;
+$font-weight-medium:   500;
+$font-weight-semibold: 600;
+$font-weight-bold:     700;
+$font-weight-extra:    800;
+$font-weight-black:    900;
 
-// ----- Glassmorphism (Apple-style nav) -----
+
+// -----------------------------------------------------------------------------
+// 3) Spacing scale (used directly OR via the CSS vars below)
+// -----------------------------------------------------------------------------
+$space-2xs: 4px;
+$space-xs:  8px;
+$space-sm:  14px;
+$space-md:  24px;
+$space-lg:  40px;
+$space-xl:  64px;
+$space-2xl: 96px;
+$space-3xl: 140px;
+
+
+// -----------------------------------------------------------------------------
+// 4) Layout
+// -----------------------------------------------------------------------------
+$nav-height:        92px;
+$nav-padding-x:     clamp(20px, 4vw, 40px);
+$radius-sm:         6px;
+$radius-md:         10px;
+$radius-lg:         14px;
+$radius-pill:       999px;
+
+
+// -----------------------------------------------------------------------------
+// 5) Hero (positioning of the title + mint stripe)
+//    These are the knobs the user reaches for first when nudging the hero.
+// -----------------------------------------------------------------------------
+$hero-aspect:        math.div(16, 9);
+$hero-max-height:    88vh;
+$hero-min-height:    380px;
+
+$hero-text-left:     7vw;       // distance from the left edge
+$hero-text-right:    4vw;       // distance from the right edge
+$hero-text-bottom:   7vw;       // distance from the (mint stripe) bottom
+
+$hero-mint-height:   clamp(11px, 1.6vw, 11px);
+
+
+// -----------------------------------------------------------------------------
+// 6) Motion
+// -----------------------------------------------------------------------------
+$duration-fast:  .18s;
+$duration-base:  .25s;
+$duration-slow:  .55s;
+
+$easing-base:    ease;
+$easing-out:     cubic-bezier(.2, .7, .2, 1);
+$easing-spring:  cubic-bezier(.65, .05, .25, 1.4);
+
+
+// -----------------------------------------------------------------------------
+// 7) Glassmorphism (Apple-style nav)
+// -----------------------------------------------------------------------------
 $globalnav-backdrop-filter: saturate(180%) blur(20px);
 $globalnav-background:      rgba(250, 250, 252, .8);
 
-// ----- Bootstrap overrides (must be set before Bootstrap import) -----
-$body-bg:           $color-bg;
-$body-color:        $color-ink;
-$primary:           $color-accent;
-$font-family-sans-serif: $font-body;
-$headings-font-family:   $font-display;
-$headings-font-weight:   700;
+
+// -----------------------------------------------------------------------------
+// 8) Bootstrap overrides — must be set before importing Bootstrap
+// -----------------------------------------------------------------------------
+$body-bg:                 $color-bg;
+$body-color:              $color-ink;
+$primary:                 $color-accent;
+$font-family-sans-serif:  $font-body;
+$headings-font-family:    $font-display;
+$headings-font-weight:    $font-weight-bold;
 
 $grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
+  xs:    0,
+  sm:  576px,
+  md:  768px,
+  lg:  992px,
   xl: 1200px,
-  xxl: 1400px
+  xxl:1400px
 );
 
 $container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 960px,
+  sm:  540px,
+  md:  720px,
+  lg:  960px,
   xl: 1140px,
-  xxl: 1320px
+  xxl:1320px
 );
