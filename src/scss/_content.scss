@@ -226,7 +226,9 @@
     width: 100%;
     height: auto;
     display: flex;
-    animation: floatWobble 6.5s ease-in-out infinite;
+    transform-origin: 50% 50%;
+    animation: var(--icon-motion-name, floatWobble) var(--icon-motion-duration, 6.5s) ease-in-out infinite;
+    animation-delay: var(--icon-motion-delay, 0s);
   }
 
   .site-icon {
@@ -260,7 +262,9 @@
     left:   var(--airplane-left);
     transform: rotate(var(--airplane-rotate));
 
-    img, svg, .site-icon { animation-duration: 7.5s; animation-delay: -3.4s; }
+    --icon-motion-name: floatGlide;
+    --icon-motion-duration: 8.6s;
+    --icon-motion-delay: -3.4s;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -290,6 +294,26 @@
   25%  { transform: translate3d(2px, -4px, 0) rotate(2deg); }
   50%  { transform: translate3d(-1px, -2px, 0) rotate(-1.5deg); }
   75%  { transform: translate3d(-3px, 3px, 0) rotate(1deg); }
+}
+
+@keyframes floatGlide {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  28% { transform: translate3d(8px, -10px, 0) rotate(4deg); }
+  58% { transform: translate3d(2px, -3px, 0) rotate(-2deg); }
+  82% { transform: translate3d(-5px, 5px, 0) rotate(1deg); }
+}
+
+@keyframes floatTwinkle {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); opacity: 1; }
+  30% { transform: translate3d(2px, -5px, 0) rotate(5deg) scale(1.05); opacity: .86; }
+  56% { transform: translate3d(-2px, 2px, 0) rotate(-3deg) scale(.96); opacity: 1; }
+  78% { transform: translate3d(3px, -1px, 0) rotate(2deg) scale(1.03); opacity: .92; }
+}
+
+@keyframes floatPulse {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+  38% { transform: translate3d(1px, -4px, 0) scale(1.08); opacity: .9; }
+  68% { transform: translate3d(-2px, 2px, 0) scale(.98); opacity: 1; }
 }
 
 // ----- Mint CTA + ghost underline link (intro section) ---------------------
@@ -459,6 +483,8 @@
       overflow: visible;                 // damit fettere Strokes nicht beschnitten werden
       transform: translateY(calc(-1 * var(--manifest-icon-lift)));
       transform-origin: 50% 50%;
+      animation: manifestIconBreathe 7.2s ease-in-out infinite;
+      animation-delay: var(--manifest-icon-motion-delay, 0s);
     }
 
     .site-icon {
@@ -470,6 +496,31 @@
     .site-icon__img,
     .site-icon__svg {
       transform: none;
+    }
+
+    &:nth-of-type(2n) { --manifest-icon-motion-delay: -2.3s; }
+    &:nth-of-type(3n) { --manifest-icon-motion-delay: -4.1s; }
+  }
+}
+
+@keyframes manifestIconBreathe {
+  0%, 100% {
+    transform: translateY(calc(-1 * var(--manifest-icon-lift))) rotate(0deg) scale(1);
+  }
+  34% {
+    transform: translateY(calc(-1 * var(--manifest-icon-lift) - 4px)) rotate(2.2deg) scale(1.035);
+  }
+  68% {
+    transform: translateY(calc(-1 * var(--manifest-icon-lift) + 2px)) rotate(-1.6deg) scale(.99);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manifest__icon {
+    img,
+    svg,
+    .site-icon {
+      animation: none;
     }
   }
 }
@@ -687,6 +738,9 @@
   left:   var(--ex-airplane-left);
   right:  var(--ex-airplane-right);
   transform: rotate(var(--ex-airplane-rotate));
+  --icon-motion-name: floatGlide;
+  --icon-motion-duration: 8.8s;
+  --icon-motion-delay: -1.2s;
 }
 
 .float-icon--ex-star {
@@ -697,6 +751,9 @@
   left:   var(--ex-star-left);
   right:  var(--ex-star-right);
   transform: rotate(var(--ex-star-rotate));
+  --icon-motion-name: floatTwinkle;
+  --icon-motion-duration: 7.4s;
+  --icon-motion-delay: -4.8s;
 }
 
 .float-icon--ex-bottle {
@@ -707,6 +764,8 @@
   left:   var(--ex-bottle-left);
   right:  var(--ex-bottle-right);
   transform: rotate(var(--ex-bottle-rotate));
+  --icon-motion-duration: 7.9s;
+  --icon-motion-delay: -2.7s;
 }
 
 .float-icon--ex-airplane { font-size: var(--ex-airplane-size); }
@@ -912,6 +971,9 @@
   left:   var(--yr-spark-left);
   right:  var(--yr-spark-right);
   transform: rotate(var(--yr-spark-rotate));
+  --icon-motion-name: floatPulse;
+  --icon-motion-duration: 6.8s;
+  --icon-motion-delay: -1.7s;
 }
 
 .float-icon--yr-sparkles {
@@ -922,6 +984,9 @@
   left:   var(--yr-sparkles-left);
   right:  var(--yr-sparkles-right);
   transform: rotate(var(--yr-sparkles-rotate));
+  --icon-motion-name: floatTwinkle;
+  --icon-motion-duration: 7.2s;
+  --icon-motion-delay: -3.1s;
 }
 
 .float-icon--yr-document {
@@ -932,6 +997,8 @@
   left:   var(--yr-document-left);
   right:  var(--yr-document-right);
   transform: rotate(var(--yr-document-rotate));
+  --icon-motion-duration: 8.2s;
+  --icon-motion-delay: -5s;
 }
 
 .float-icon--yr-spark { font-size: var(--yr-spark-size); }
@@ -1333,24 +1400,36 @@
   top: var(--au-shooting-top); bottom: var(--au-shooting-bottom);
   left: var(--au-shooting-left); right: var(--au-shooting-right);
   transform: rotate(var(--au-shooting-rotate));
+  --icon-motion-name: floatTwinkle;
+  --icon-motion-duration: 7.8s;
+  --icon-motion-delay: -2.4s;
 }
 .float-icon--au-comet {
   display: var(--au-comet-display); width: var(--au-comet-size);
   top: var(--au-comet-top); bottom: var(--au-comet-bottom);
   left: var(--au-comet-left); right: var(--au-comet-right);
   transform: rotate(var(--au-comet-rotate));
+  --icon-motion-name: floatGlide;
+  --icon-motion-duration: 9.4s;
+  --icon-motion-delay: -6.2s;
 }
 .float-icon--au-airplane {
   display: var(--au-airplane-display); width: var(--au-airplane-size);
   top: var(--au-airplane-top); bottom: var(--au-airplane-bottom);
   left: var(--au-airplane-left); right: var(--au-airplane-right);
   transform: rotate(var(--au-airplane-rotate));
+  --icon-motion-name: floatGlide;
+  --icon-motion-duration: 8.9s;
+  --icon-motion-delay: -3.6s;
 }
 .float-icon--au-spark {
   display: var(--au-spark-display); width: var(--au-spark-size);
   top: var(--au-spark-top); bottom: var(--au-spark-bottom);
   left: var(--au-spark-left); right: var(--au-spark-right);
   transform: rotate(var(--au-spark-rotate));
+  --icon-motion-name: floatPulse;
+  --icon-motion-duration: 6.6s;
+  --icon-motion-delay: -1.1s;
 }
 
 .float-icon--au-shooting { font-size: var(--au-shooting-size); }
@@ -1373,12 +1452,17 @@
   top: var(--ou-sparkles-top); bottom: var(--ou-sparkles-bottom);
   left: var(--ou-sparkles-left); right: var(--ou-sparkles-right);
   transform: rotate(var(--ou-sparkles-rotate));
+  --icon-motion-name: floatTwinkle;
+  --icon-motion-duration: 7.6s;
+  --icon-motion-delay: -2.2s;
 }
 .float-icon--ou-document {
   display: var(--ou-document-display); width: var(--ou-document-size);
   top: var(--ou-document-top); bottom: var(--ou-document-bottom);
   left: var(--ou-document-left); right: var(--ou-document-right);
   transform: rotate(var(--ou-document-rotate));
+  --icon-motion-duration: 8.4s;
+  --icon-motion-delay: -4.4s;
 }
 
 .float-icon--ou-sparkles { font-size: var(--ou-sparkles-size); }
@@ -1601,24 +1685,34 @@
   top: var(--ct-document-top); bottom: var(--ct-document-bottom);
   left: var(--ct-document-left); right: var(--ct-document-right);
   transform: rotate(var(--ct-document-rotate));
+  --icon-motion-duration: 8.5s;
+  --icon-motion-delay: -1.9s;
 }
 .float-icon--ct-shooting {
   display: var(--ct-shooting-display); width: var(--ct-shooting-size);
   top: var(--ct-shooting-top); bottom: var(--ct-shooting-bottom);
   left: var(--ct-shooting-left); right: var(--ct-shooting-right);
   transform: rotate(var(--ct-shooting-rotate));
+  --icon-motion-name: floatTwinkle;
+  --icon-motion-duration: 7.1s;
+  --icon-motion-delay: -3.8s;
 }
 .float-icon--ct-bottle {
   display: var(--ct-bottle-display); width: var(--ct-bottle-size);
   top: var(--ct-bottle-top); bottom: var(--ct-bottle-bottom);
   left: var(--ct-bottle-left); right: var(--ct-bottle-right);
   transform: rotate(var(--ct-bottle-rotate));
+  --icon-motion-duration: 8s;
+  --icon-motion-delay: -5.1s;
 }
 .float-icon--ct-glasses {
   display: var(--ct-glasses-display); width: var(--ct-glasses-size);
   top: var(--ct-glasses-top); bottom: var(--ct-glasses-bottom);
   left: var(--ct-glasses-left); right: var(--ct-glasses-right);
   transform: rotate(var(--ct-glasses-rotate));
+  --icon-motion-name: floatPulse;
+  --icon-motion-duration: 7.5s;
+  --icon-motion-delay: -2.9s;
 }
 
 .float-icon--ct-document { font-size: var(--ct-document-size); }
