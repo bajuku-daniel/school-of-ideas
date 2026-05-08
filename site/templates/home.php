@@ -46,6 +46,25 @@ function soi_url($page, string $field, string $fallback): string
     return url(ltrim($fallback, '/'));
 }
 
+function soi_optional_url($page, string $field): ?string
+{
+    $value = $page->{$field}();
+
+    if ($value->isNotEmpty() && ($file = $value->toFiles()->first())) {
+        return $file->url();
+    }
+
+    if ($value->isNotEmpty() && ($file = $value->toFile())) {
+        return $file->url();
+    }
+
+    if ($value->isNotEmpty()) {
+        return url(ltrim($value->value(), '/'));
+    }
+
+    return null;
+}
+
 function soi_icon_library($page): array
 {
     $library = [];
@@ -293,10 +312,18 @@ $renderCard = function (array $card): void {
     </nav>
   </div>
 
+  <?php
+  $heroVideoMobile = soi_optional_url($page, 'heroVideoMobile');
+  $heroVideo = soi_optional_url($page, 'heroVideo');
+  ?>
   <section class="hero" id="hero">
     <video class="hero__video" autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="<?= soi_url($page, 'heroPoster', 'images/school_of_ideas_motiv_Header.jpg') ?>">
-      <source src="<?= soi_url($page, 'heroVideoMobile', 'video/hero.mp4') ?>" type="video/mp4" media="(max-width: 768px)">
-      <source src="<?= soi_url($page, 'heroVideo', 'video/hero.mp4') ?>" type="video/mp4">
+      <?php if ($heroVideoMobile): ?>
+      <source src="<?= esc($heroVideoMobile) ?>" type="video/mp4" media="(max-width: 768px)">
+      <?php endif ?>
+      <?php if ($heroVideo): ?>
+      <source src="<?= esc($heroVideo) ?>" type="video/mp4">
+      <?php endif ?>
     </video>
     <div class="hero__overlay"></div>
     <div class="hero__content">

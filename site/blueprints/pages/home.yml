@@ -86,7 +86,7 @@ tabs:
             type: files
             max: 1
             uploads: video
-            help: Für Smartphones. Leer lassen = kleine Default-Datei aus public/video/hero.mp4.
+            help: Für Smartphones optimierte MP4-Datei.
           introImage:
             label: Intro Bild
             type: files
