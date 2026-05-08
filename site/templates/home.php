@@ -8,7 +8,10 @@ function soi_text($page, string $field, string $fallback = ''): string
 
 function soi_html($text): string
 {
-    return nl2br(htmlspecialchars((string)$text, ENT_QUOTES, 'UTF-8'));
+    $safe = htmlspecialchars((string)$text, ENT_QUOTES, 'UTF-8');
+    $safe = preg_replace('/\*\*(.+?)\*\*/s', '<strong>$1</strong>', $safe);
+    $safe = preg_replace('/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/s', '<em>$1</em>', $safe);
+    return nl2br($safe);
 }
 
 function soi_paragraphs($text, string $leadClass = ''): string
@@ -150,11 +153,11 @@ function soi_spacing($page, array $map): string
 }
 
 $navItems = soi_structure($page, 'navItems', [
-    ['label' => 'About', 'url' => '#about'],
-    ['label' => 'Programm', 'url' => '#year'],
-    ['label' => 'Agenturen', 'url' => '#values'],
-    ['label' => 'Kontakt', 'url' => '#contact'],
-    ['label' => 'FAQ', 'url' => '#faq'],
+    ['label' => 'About', 'url' => url('about')],
+    ['label' => 'Programm', 'url' => url('programm')],
+    ['label' => 'Agenturen', 'url' => url('agenturen')],
+    ['label' => 'Kontakt', 'url' => url() . '#contact'],
+    ['label' => 'FAQ', 'url' => url('faq')],
 ]);
 
 $soiIconMode = trim(soi_text($page, 'iconMode', 'upload'));
@@ -463,7 +466,7 @@ $renderCard = function (array $card): void {
       </div>
       <div class="footer__bottom">
         <div class="footer__legal"><?php foreach (soi_structure($page, 'legalLinks', [['label' => 'Impressum', 'url' => '#'], ['label' => 'Datenschutz', 'url' => '#'], ['label' => 'Cookies', 'url' => '#']]) as $item): ?><a href="<?= esc($item['url'] ?? '#') ?>"><?= esc($item['label'] ?? '') ?></a><?php endforeach ?></div>
-        <p class="footer__credit">Made with <span class="footer__heart" aria-hidden="true">♥</span><span class="visually-hidden">love</span> in Heimbach</p>
+        <p class="footer__credit">Made with <span class="footer__heart" aria-hidden="true">♥</span><span class="visually-hidden">love</span> in Heimbach by <a class="footer__studio" href="https://weandthemachine.com" target="_blank" rel="noopener">we and the machine</a> <span class="footer__machine" aria-hidden="true"><span></span></span></p>
       </div>
     </div>
   </footer>

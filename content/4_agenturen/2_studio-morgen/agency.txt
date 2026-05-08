@@ -1,0 +1,65 @@
+Title: Studio Morgen
+
+----
+
+Headline: Designsysteme, Identitäten und digitale Produkte.
+
+----
+
+Headlineink: Designsysteme, Identitäten
+
+----
+
+Headlineaccent: und digitale Produkte.
+
+----
+
+Intro: Studio Morgen verbindet Brand Design mit digitalen Interfaces und klaren Systemen.
+
+----
+
+Herospacingtoppx: 150
+
+----
+
+Herospacingbottompx: 105
+
+----
+
+Introspacingtoppx: 40
+
+----
+
+Contentspacingtoppx: 115
+
+----
+
+Contentspacingbottompx: 140
+
+----
+
+Body: Du bekommst Einblick in Naming, visuelle Identität, Layoutsysteme und Prototyping. Das Studio arbeitet ruhig, präzise und mit einem hohen Anspruch an Details.
+
+----
+
+Location: Berlin
+
+----
+
+Discipline: Design
+
+----
+
+Setup: Studio
+
+----
+
+Tags: Branding, UI, Systeme
+
+----
+
+Website: https://example.com
+
+----
+
+Uuid: dqwqhzeyaszh9fhr

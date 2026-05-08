@@ -1,0 +1,79 @@
+Title: Bewerbung
+
+----
+
+Headline: Zeig uns, wie du denkst. Nicht, wie perfekt du schon bist.
+
+----
+
+Headlineink: Zeig uns, wie du denkst.
+
+----
+
+Headlineaccent: Nicht, wie perfekt du schon bist.
+
+----
+
+Intro: Für die Bewerbung zählt Neugier, Haltung und ein Gefühl für Ideen. Ein fertiges Profi-Portfolio brauchst du nicht.
+
+----
+
+Herospacingtoppx: 160
+
+----
+
+Herospacingbottompx: 110
+
+----
+
+Introspacingtoppx: 44
+
+----
+
+Sections:
+
+- 
+  title: Schritte
+  type: cards
+  theme: light
+  align: left
+  heading: So läuft die Bewerbung
+  cards:
+    - 
+      icon: document
+      heading: 1. Kurzes Profil
+      text: Erzähl uns, wer du bist und was dich an Kreativarbeit interessiert.
+    - 
+      icon: pencil
+      heading: 2. Kleine Aufgabe
+      text: Du bekommst eine Aufgabe, in der wir sehen, wie du denkst.
+    - 
+      icon: spark
+      heading: 3. Gespräch
+      text: Wir sprechen über deine Ideen, deine Fragen und mögliche Agenturmatches.
+  spacingTop: normal
+  spacingBottom: large
+- 
+  title: CTA
+  type: cta
+  theme: blue
+  align: left
+  heading: Bereit?
+  text: Dann starte mit deinem Profil. Die Feinheiten sortieren wir gemeinsam.
+  buttonText: Bewerbung starten
+  buttonUrl: mailto:hello@school-of-ideas.de
+  contentGapPx: 48
+  buttonGapPx: 28
+  buttonPaddingXPx: 42
+  buttonPaddingTopPx: 18
+  buttonPaddingBottomPx: 16
+  spacingTop: large
+  spacingBottom: large
+
+----
+
+Metadescription: Bewerbung für die school of ideas: Ablauf, Anforderungen und nächster Schritt.
+
+----
+
+Uuid: rhh2plcmka9nylt2

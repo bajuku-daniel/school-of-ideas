@@ -10,6 +10,8 @@ tabs:
         templates:
           - home
           - default
+          - agenturen
+          - agency
   settings:
     label: Einstellungen
     icon: settings

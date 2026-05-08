@@ -550,15 +550,15 @@ Introctagapmobile: 8
 
 ----
 
-Manifesttop: 150
+Manifesttop: 200
 
 ----
 
-Manifesttoptablet: 120
+Manifesttoptablet: 150
 
 ----
 
-Manifesttopmobile: 60
+Manifesttopmobile: 50
 
 ----
 
@@ -594,7 +594,7 @@ Manifesticonsizetablet: 84
 
 ----
 
-Manifesticonsizemobile: 56
+Manifesticonsizemobile: 84
 
 ----
 
@@ -602,11 +602,11 @@ Manifesticongap: 0
 
 ----
 
-Manifesticongaptablet: 12
+Manifesticongaptablet: 0
 
 ----
 
-Manifesticongapmobile: 8
+Manifesticongapmobile: 0
 
 ----
 
@@ -618,7 +618,7 @@ Manifesticonlifttablet: 52
 
 ----
 
-Manifesticonliftmobile: 35
+Manifesticonliftmobile: 61
 
 ----
 
@@ -626,11 +626,11 @@ Manifesticonstroke: 15
 
 ----
 
-Manifesticonstroketablet: 25
+Manifesticonstroketablet: 15
 
 ----
 
-Manifesticonstrokemobile: 23
+Manifesticonstrokemobile: 15
 
 ----
 
@@ -998,19 +998,19 @@ Navitems:
 
 - 
   label: About
-  url: '#about'
+  url: /about
 - 
   label: Programm
-  url: '#year'
+  url: /programm
 - 
   label: Agenturen
-  url: '#values'
+  url: /agenturen
 - 
   label: Kontakt
-  url: '#contact'
+  url: /
 - 
   label: FAQ
-  url: '#faq'
+  url: /faq
 
 ----
 
@@ -1018,7 +1018,7 @@ Ctalabel: Bewerbung
 
 ----
 
-Ctaurl: #contact
+Ctaurl: /bewerbung
 
 ----
 
@@ -1034,19 +1034,19 @@ Footerlinks:
 
 - 
   label: About
-  url: '#about'
+  url: /about
 - 
   label: Programm
-  url: '#program'
+  url: /programm
 - 
   label: Agenturen
-  url: '#values'
+  url: /agenturen
 - 
   label: Kontakt
-  url: '#contact'
+  url: /
 - 
   label: FAQ
-  url: '#audience'
+  url: /faq
 
 ----
 
@@ -1054,13 +1054,10 @@ Legallinks:
 
 - 
   label: Impressum
-  url: '#'
+  url: /impressum
 - 
   label: Datenschutz
-  url: '#'
-- 
-  label: Cookies
-  url: '#'
+  url: /datenschutz
 
 ----
 
