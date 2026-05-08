@@ -51,11 +51,11 @@ function soi_optional_url($page, string $field): ?string
     $value = $page->{$field}();
 
     if ($value->isNotEmpty() && ($file = $value->toFiles()->first())) {
-        return $file->url();
+        return $file->url() . '?v=' . $file->modified();
     }
 
     if ($value->isNotEmpty() && ($file = $value->toFile())) {
-        return $file->url();
+        return $file->url() . '?v=' . $file->modified();
     }
 
     if ($value->isNotEmpty()) {
