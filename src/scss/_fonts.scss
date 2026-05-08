@@ -1,0 +1,88 @@
+// ----- Nohemi (Display / Headlines) -----
+@font-face {
+  font-family: 'Nohemi';
+  src: url('/fonts/Nohemi-Light.woff2') format('woff2'),
+       url('/fonts/Nohemi-Light.woff')  format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('/fonts/Nohemi-Regular.woff2') format('woff2'),
+       url('/fonts/Nohemi-Regular.woff')  format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('/fonts/Nohemi-Medium.woff2') format('woff2'),
+       url('/fonts/Nohemi-Medium.woff')  format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('/fonts/Nohemi-SemiBold.woff2') format('woff2'),
+       url('/fonts/Nohemi-SemiBold.woff')  format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('/fonts/Nohemi-Bold.woff2') format('woff2'),
+       url('/fonts/Nohemi-Bold.woff')  format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('/fonts/Nohemi-ExtraBold.woff2') format('woff2'),
+       url('/fonts/Nohemi-ExtraBold.woff')  format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('/fonts/Nohemi-Black.woff2') format('woff2'),
+       url('/fonts/Nohemi-Black.woff')  format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+// ----- Neue Haas Unica Pro (Body) -----
+@font-face {
+  font-family: 'Neue Haas Unica';
+  src: url('/fonts/NeueHaasUnicaPro-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Haas Unica';
+  src: url('/fonts/NeueHaasUnicaPro-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Haas Unica';
+  src: url('/fonts/NeueHaasUnicaPro-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

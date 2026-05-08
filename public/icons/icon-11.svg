@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_01_Icons" data-name="01_Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 327.46 327.46">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #0a3aea;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #0a3aea;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 9px;
+      }
+    </style>
+  </defs>
+  <rect class="cls-2" x="120.14" y="109.97" width="21.37" height="178.17" transform="translate(216.98 -23.02) rotate(54.52)"/>
+  <rect class="cls-1" x="178.8" y="140.19" width="21.37" height="34.12" transform="translate(207.55 -88.32) rotate(54.52)"/>
+  <g>
+    <line class="cls-2" x1="255.19" y1="156.23" x2="249.43" y2="179.64"/>
+    <line class="cls-2" x1="264.76" y1="171" x2="239.86" y2="164.87"/>
+  </g>
+  <g>
+    <line class="cls-2" x1="154.34" y1="110.4" x2="157.53" y2="134.31"/>
+    <line class="cls-2" x1="168.64" y1="120.66" x2="143.23" y2="124.05"/>
+  </g>
+  <path class="cls-2" d="M263.68,89.48s-37.82-1.22-37.25,49.11c0,0-5.45-44.84-38.39-41.18,0,0,33.22,3.16,32.9-48.08,0,0,6.75,45.67,42.74,40.15Z"/>
+</svg>

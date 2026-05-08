@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_01_Icons" data-name="01_Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 327.46 327.46">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #0a3aea;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #0a3aea;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 9px;
+      }
+    </style>
+  </defs>
+  <polygon class="cls-2" points="219.49 94.17 247.57 148.43 212.38 137.23 150.48 117.55 122.41 63.28 219.49 94.17"/>
+  <polygon class="cls-2" points="247.57 148.43 216.7 245.5 119.61 214.64 150.48 117.55 212.38 137.23 247.57 148.43"/>
+  <g>
+    <circle class="cls-1" cx="167.48" cy="150.4" r="10.06"/>
+    <circle class="cls-1" cx="183.58" cy="181.53" r="10.06"/>
+    <circle class="cls-1" cx="199.69" cy="212.65" r="10.06"/>
+  </g>
+  <polygon class="cls-2" points="122.41 63.28 150.48 117.55 119.61 214.64 91.53 160.38 122.41 63.28"/>
+  <ellipse class="cls-1" cx="184.17" cy="104.29" rx="6.42" ry="10.06" transform="translate(28.98 248.2) rotate(-72.36)"/>
+  <ellipse class="cls-1" cx="110.12" cy="149.1" rx="9.11" ry="5.81" transform="translate(-60.78 220.87) rotate(-76.33)"/>
+  <ellipse class="cls-1" cx="119.78" cy="164.97" rx="9.11" ry="5.81" transform="translate(-68.82 242.37) rotate(-76.33)"/>
+  <ellipse class="cls-1" cx="120.51" cy="115.14" rx="9.11" ry="5.81" transform="translate(-19.85 205.03) rotate(-76.33)"/>
+  <ellipse class="cls-1" cx="130.17" cy="131.01" rx="9.11" ry="5.81" transform="translate(-27.89 226.54) rotate(-76.33)"/>
+</svg>

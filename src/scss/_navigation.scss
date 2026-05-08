@@ -1,0 +1,184 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: $nav-height;
+  display: flex;
+  align-items: center;
+  color: $color-ink;
+  background: transparent;
+  transition: background .35s ease, backdrop-filter .35s ease, box-shadow .35s ease;
+
+  // Glass state — added once the user scrolls past the hero video
+  &.is-glass {
+    background: var(--globalnav-background);
+    -webkit-backdrop-filter: var(--globalnav-backdrop-filter);
+            backdrop-filter: var(--globalnav-backdrop-filter);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .04);
+  }
+}
+
+.nav__inner {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clamp(20px, 4vw, 40px);
+  gap: 24px;
+}
+
+.nav__left  { display: flex; align-items: center; }
+.nav__right { display: flex; align-items: center; gap: clamp(20px, 3vw, 36px); }
+
+// ----- Logo: "school of" + cloud + "ideas" composed inline -----
+// Values pre-computed for $wm-height = 44px (SVG aspect 839.45 / 217.44 ≈ 3.86):
+//   natural width   = 169.8 px
+//   1 SVG unit      = 0.202 px on screen
+//
+// Visible glyph runs in the source SVG:
+//   "school of"  ≈ x 100 .. 430  (width 330 svg-units → 66.7 px)
+//   "ideas"      ≈ x 445 .. 700  (width 255 svg-units → 51.5 px)
+
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;                  // tighter than before, lets cloud kiss the glyphs
+  color: $color-ink;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+
+  // suppress every form of browser focus ring — the brand blue ring was
+  // exactly the "blaue outline" the user kept seeing
+  &,
+  &:focus,
+  &:focus-visible,
+  &:focus-within,
+  &:active {
+    outline: none;
+    box-shadow: none;
+  }
+
+  // hard guard: every glyph in the wordmark renders brand black
+  svg, svg * { color: $color-ink !important; }
+
+  // We strip the inline <style> blocks from the injected SVGs (they were
+  // bleeding into other inline SVGs via shared `.cls-1/2/…` class names);
+  // re-apply only the bits we need on the wordmark.
+  svg text {
+    fill: #141618 !important;
+    stroke: none !important;
+    font-family: 'Nohemi', sans-serif;
+    font-size: 65px;
+    font-weight: 700;
+  }
+
+  svg .cls-2 { letter-spacing: .03em; }
+  svg .cls-3 { letter-spacing: .02em; }
+  svg .cls-4 { letter-spacing: .02em; }
+  svg .cls-5 { letter-spacing: .02em; }
+}
+
+.nav__wm {
+  display: inline-block;
+  height: 44px;
+  overflow: hidden;
+  line-height: 0;
+  transition: opacity .2s linear;
+  will-change: opacity;
+
+  svg {
+    height: 44px;
+    width: 170px;
+    max-width: none;
+    display: block;
+  }
+
+  &--left  {
+    width: 67px;
+    svg { transform: translateX(-20.2px); }
+  }
+
+  &--right {
+    width: 52px;
+    svg { transform: translateX(-90px); }
+  }
+}
+
+// ----- Cloud sitting in the wordmark gap -----
+.nav__cloud {
+  display: inline-flex;
+  width: 50px;
+  height: 50px;
+  color: $color-ink;
+  flex-shrink: 0;
+  transform-origin: center;
+  will-change: transform;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+// Visually-hidden helper for screen readers
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+
+// ----- Menu list -----
+.nav__list {
+  display: flex;
+  gap: clamp(18px, 2.6vw, 34px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: $font-body;        // Neue Haas Unica Pro
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.nav__link {
+  position: relative;
+  color: $color-ink;
+  padding: 4px 0;
+  transition: transform .18s ease, color .18s ease;
+  display: inline-block;
+
+  &:hover {
+    color: $color-ink;
+    transform: translateY(-2px);
+  }
+}
+
+// ----- Mint CTA button -----
+.nav__cta {
+  font-family: $font-body;        // Neue Haas Unica Pro
+  font-weight: 700;
+  font-size: 1rem;
+  color: $color-ink;
+  background: $color-mint;
+  border: 0;
+  padding: .65rem 1.2rem;
+  border-radius: 10px;
+  line-height: 1;
+  transition: background .18s ease, transform .18s ease;
+
+  &:hover {
+    background: $color-mint-deep;
+    color: $color-ink;
+    transform: translateY(-1px);
+  }
+}
+
+@media (max-width: 900px) {
+  .nav__list { display: none; }
+}
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 839.45 217.44">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #141618;
+        font-family: Nohemi-Bold, Nohemi;
+        font-size: 65px;
+        font-weight: 700;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        stroke: #141618;
+        stroke-miterlimit: 10;
+        stroke-width: 7px;
+      }
+
+      .cls-3 {
+        letter-spacing: .03em;
+      }
+
+      .cls-4 {
+        letter-spacing: .02em;
+      }
+
+      .cls-5 {
+        letter-spacing: .02em;
+      }
+
+      .cls-6 {
+        letter-spacing: .02em;
+      }
+    </style>
+  </defs>
+  <g>
+    <path class="cls-2" d="M565.12,121.2c5.74-14.12-10.35-24.14-24.65-18.18-.53.22-4.97,2.77-5.84,3.26-1.04-9.07-5.37-21.64-21.36-22.53-3.38-.19-6.59.75-9.47,2.1-4.09-9.18-15.39-18.14-32.89-15.58-14.35,2.1-24.28,14.38-17.36,26.26.32.54.8,1.2,1.28,1.79-.62.26-2.44,1.03-2.55,1.07-9.6,3.61-17.77,13.53-17.77,21.77,0,10.5,9.62,12.84,16.59,14.91,19.29,5.73,55.9,4.01,77.5.65,9.23-1.44,32.81-6.36,36.53-15.51Z"/>
+    <path class="cls-2" d="M499.91,110.62c-5.25-4.46-20.69-9.99-31.94,3.94"/>
+  </g>
+  <text class="cls-1" transform="translate(121.65 130.33)"><tspan class="cls-5" x="0" y="0">s</tspan><tspan class="cls-3" x="38.48" y="0">chool </tspan><tspan class="cls-6" x="233.54" y="0">o</tspan><tspan class="cls-3" x="273.84" y="0" xml:space="preserve">f         id</tspan><tspan class="cls-4" x="514.13" y="0">e</tspan><tspan class="cls-3" x="553.71" y="0">as</tspan></text>
+</svg>

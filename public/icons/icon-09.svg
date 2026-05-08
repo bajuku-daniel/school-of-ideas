@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_01_Icons" data-name="01_Icons" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 327.46 327.46">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #0a3aea;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 9px;
+      }
+    </style>
+  </defs>
+  <polygon class="cls-1" points="165.53 76.68 177.46 112.47 151.83 138.1 185.44 134.37 199.99 173 208.83 134.56 245.5 130.58 216.76 113.8 228.71 81.1 194.25 101.42 165.53 76.68"/>
+  <g>
+    <line class="cls-1" x1="115.02" y1="173.88" x2="138.4" y2="151.1"/>
+    <line class="cls-1" x1="113.04" y1="211.43" x2="172.3" y2="153.69"/>
+    <line class="cls-1" x1="157" y1="203.46" x2="180.37" y2="180.69"/>
+    <line class="cls-1" x1="120.42" y1="239.32" x2="143.8" y2="216.55"/>
+    <line class="cls-1" x1="93.6" y1="194.9" x2="102.38" y2="186.34"/>
+  </g>
+</svg>

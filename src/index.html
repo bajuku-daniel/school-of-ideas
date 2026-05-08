@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School of Ideas — Kreativität hat immer Zukunft</title>
+  <meta name="description" content="Dein Einstieg in die Kreativbranche. Und der Anfang einer richtig guten Karriere." />
+  <link rel="icon" type="image/svg+xml" href="/logo/School_of_ideas_Bildlogo.svg" />
+</head>
+<body>
+
+  <!-- ===================== Navigation ===================== -->
+  <header class="nav" id="siteNav" data-glass="false">
+    <div class="nav__inner">
+
+      <div class="nav__left">
+        <a class="nav__brand" href="#" aria-label="school of ideas">
+          <!-- Wordmark, split into "school of" + cloud + "ideas".
+               Both halves render the same Schriftlogo SVG (injected at
+               runtime), each with overflow:hidden + a translateX so
+               only the relevant glyph run is visible. -->
+          <span class="nav__wm nav__wm--left"  data-logo aria-hidden="true"></span>
+
+          <span class="nav__cloud" aria-hidden="true">
+            <svg viewBox="0 0 225.35 217.44" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#fff" stroke="currentColor" stroke-width="9" stroke-miterlimit="10"
+                d="M177.39,121.2c5.74-14.12-10.35-24.14-24.65-18.18-.53.22-4.97,2.77-5.84,3.26-1.04-9.07-5.37-21.64-21.36-22.53-3.38-.19-6.59.75-9.47,2.1-4.09-9.18-15.39-18.14-32.89-15.58-14.35,2.1-24.28,14.38-17.36,26.26.32.54.8,1.2,1.28,1.79-.62.26-2.44,1.03-2.55,1.07-9.6,3.61-17.77,13.53-17.77,21.77,0,10.5,9.62,12.84,16.59,14.91,19.29,5.73,55.9,4.01,77.5.65,9.23-1.44,32.81-6.36,36.53-15.51Z"/>
+              <path fill="none" stroke="currentColor" stroke-width="9" stroke-miterlimit="10"
+                d="M112.18,110.62c-5.25-4.46-20.69-9.99-31.94,3.94"/>
+            </svg>
+          </span>
+
+          <span class="nav__wm nav__wm--right" data-logo aria-hidden="true"></span>
+
+          <!-- Screen-reader fallback: full readable text is still here -->
+          <span class="visually-hidden">school of ideas</span>
+        </a>
+      </div>
+
+      <div class="nav__right">
+        <nav aria-label="Primär">
+          <ul class="nav__list">
+            <li><a class="nav__link" href="#about">About</a></li>
+            <li><a class="nav__link" href="#year">Programm</a></li>
+            <li><a class="nav__link" href="#values">Agenturen</a></li>
+            <li><a class="nav__link" href="#contact">Kontakt</a></li>
+            <li><a class="nav__link" href="#faq">FAQ</a></li>
+          </ul>
+        </nav>
+        <a href="#contact" class="nav__cta">Bewerbung</a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ===================== Hero (video) ===================== -->
+  <section class="hero" id="hero">
+    <video class="hero__video"
+           autoplay muted loop playsinline preload="auto"
+           poster="/images/school_of_ideas_motiv_Header.jpg">
+      <source src="/video/hero.mp4" type="video/mp4" />
+    </video>
+    <div class="hero__overlay"></div>
+
+    <div class="container hero__content">
+      <h1 class="hero__title">
+        <span class="line">Kreativität&nbsp;hat</span>
+        <span class="line">
+          immer
+          <!-- Sternschnuppe (icon-03), inlined so the star can be filled white -->
+          <span class="star-inline" data-star aria-hidden="true"></span>
+          Zukunft
+        </span>
+      </h1>
+    </div>
+  </section>
+
+  <div class="hero__mint" aria-hidden="true"></div>
+
+  <!-- ===================== Intro Block ===================== -->
+  <section class="intro" id="about">
+    <div class="container">
+      <div class="row gx-5 align-items-end">
+        <div class="col-lg-7">
+          <h2 class="intro__lead">
+            <span class="ink">Dein Einstieg in die<br/>Kreativbranche.</span>
+            <span class="accent">Und der Anfang einer<br/>richtig guten Karriere.</span>
+          </h2>
+        </div>
+        <div class="col-lg-5 intro__body">
+          <p class="intro__sub">
+            Die school of ideas verbindet echte kreative Arbeit in Agenturen
+            mit gezielter Weiterentwicklung.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Manifest ===================== -->
+  <section class="manifest">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+          <p class="manifest__text">
+            Kreativität verändert sich. Durch KI schneller als je zuvor. Doch
+            nicht die Werkzeuge entscheiden über kreative Qualität, sondern
+            wie du sie zu nutzen weißt.
+          </p>
+          <p class="manifest__text mt-4">
+            Wir lehren nicht nur Kreativität, sondern wir lehren den
+            bewussten Umgang mit Technologie. KI ist bei uns kein Zusatzmodul,
+            sondern ein selbstverständliches Tool beim Denken und Arbeiten.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Image stack with cloud trail ===================== -->
+  <section class="motiv-stack" id="motiv-stack">
+
+    <!-- Cloud SVG that travels with scroll (desktop only) -->
+    <svg class="cloud-trail" id="cloudTrail" viewBox="0 0 225.35 217.44" aria-hidden="true">
+      <path fill="#fff" stroke="#141618" stroke-width="7" stroke-miterlimit="10"
+        d="M177.39,121.2c5.74-14.12-10.35-24.14-24.65-18.18-.53.22-4.97,2.77-5.84,3.26-1.04-9.07-5.37-21.64-21.36-22.53-3.38-.19-6.59.75-9.47,2.1-4.09-9.18-15.39-18.14-32.89-15.58-14.35,2.1-24.28,14.38-17.36,26.26.32.54.8,1.2,1.28,1.79-.62.26-2.44,1.03-2.55,1.07-9.6,3.61-17.77,13.53-17.77,21.77,0,10.5,9.62,12.84,16.59,14.91,19.29,5.73,55.9,4.01,77.5.65,9.23-1.44,32.81-6.36,36.53-15.51Z"/>
+      <path fill="#fff" stroke="#141618" stroke-width="7" stroke-miterlimit="10"
+        d="M112.18,110.62c-5.25-4.46-20.69-9.99-31.94,3.94"/>
+    </svg>
+
+    <!-- Section heading -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h2 class="expect__title">
+            Was dich bei uns erwartet:
+          </h2>
+        </div>
+        <div class="col-lg-6">
+          <p class="intro__lead">Wir ersetzen Studium. Und<br/>lehren klassische Ausbildung.</p>
+          <p>
+            Du arbeitest fokussiert an realen Projekten der renommierten Agenturen
+            der Stadt und lernst klassische Ausbildung neu zu denken.
+          </p>
+          <p>
+            Wir lehren das, was die Branche heute braucht: Kreativität, Haltung,
+            Verantwortung und ein gutes Gespür für Technologie.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Motiv 1 — static, no scroll effect -->
+    <figure class="motiv motiv--static" data-motiv="1">
+      <div class="motiv__frame">
+        <img class="motiv__img" src="/images/school_of_ideas_motiv_01.jpg" alt="Kreatives Motiv 01" />
+      </div>
+    </figure>
+
+    <!-- Year section between images -->
+    <div class="year container" id="year">
+      <div class="row gx-5">
+        <div class="col-lg-6">
+          <h2 class="year__title">So sieht dein Jahr<br/>bei uns aus:</h2>
+        </div>
+        <div class="col-lg-6">
+          <ul>
+            <li>Ein Jahr. Zwei Agentursemester.</li>
+            <li>Vier Ausbildungsjahre, in denen du wächst.</li>
+            <li>15 + 1 ECTS-Punkte für die Spezialisierung.</li>
+            <li>96 Wochen voll mit echten Aufgaben.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Motiv 2 — scroll parallax -->
+    <figure class="motiv motiv--parallax" data-motiv="2">
+      <div class="motiv__frame">
+        <img class="motiv__img" src="/images/school_of_ideas_motiv_02.jpg" alt="Kreatives Motiv 02" />
+      </div>
+    </figure>
+
+    <!-- Values section -->
+    <div class="values container" id="values">
+      <div class="row gx-5">
+        <div class="col-lg-6">
+          <h2>Was heute wirklich zählt</h2>
+        </div>
+        <div class="col-lg-6">
+          <p class="values__lead">
+            Die Kreativbranche wird gerade auf den Kopf gestellt.
+          </p>
+          <p>
+            KI macht Vorhandenes leichter zu reproduzieren. Dadurch wird
+            der Unterschied wichtiger, der nur Menschen ausmacht: echte
+            Ideen, Haltung, Strategie.
+          </p>
+          <p>
+            Genau das machen wir mit dir. Du arbeitest an konkreten Aufgaben,
+            mit echten Briefings — nicht mit Lehrplänen, sondern mit Realität.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Motiv 3 — middle reveal -->
+    <figure class="motiv motiv--middle" data-motiv="3">
+      <div class="motiv__backdrop"></div>
+      <div class="motiv__frame">
+        <img class="motiv__img" src="/images/school_of_ideas_motiv_03.jpg" alt="Kreatives Motiv 03" />
+      </div>
+    </figure>
+
+  </section>
+
+  <!-- ===================== Audience grid ===================== -->
+  <section class="audience">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-lg-7">
+          <h2>Für wen das Sinn<br/>macht</h2>
+          <p class="values__lead">
+            Für dich, wenn du mit deiner Kreativität etwas bewegen
+            und Welt verändern willst.
+          </p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <div class="card__icon"><img src="/icons/icon-03.svg" alt="" /></div>
+            <p class="card__text">Wenn du das kreative Handwerk inhaltlich und durchsetzen möchtest.</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <div class="card__icon"><img src="/icons/icon-04.svg" alt="" /></div>
+            <p class="card__text">Du neugierig auf Medien, Kultur und Zeitgeist bist.</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <div class="card__icon"><img src="/icons/icon-05.svg" alt="" /></div>
+            <p class="card__text">Wenn du lernen willst, wie deine Wirkung versagt.</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <div class="card__icon"><img src="/icons/icon-06.svg" alt="" /></div>
+            <p class="card__text">Wenn du Lust hast, dein Tools mit KI zu erweitern.</p>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <div class="card__icon"><img src="/icons/icon-07.svg" alt="" /></div>
+            <p class="card__text">Du reale Probleme mit Kreativität lösen willst.</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <div class="card__icon"><img src="/icons/icon-08.svg" alt="" /></div>
+            <p class="card__text">Wenn du lernen möchtest, wie Kreativität heute kollaboriert.</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <div class="card__icon"><img src="/icons/icon-09.svg" alt="" /></div>
+            <p class="card__text">Wenn du offen bist für neue Tools und KI als Werkzeug.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Outcome ===================== -->
+  <section class="outcome" id="outcome">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-lg-7">
+          <h2>Was du am Ende<br/>mitnimmst</h2>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <div class="card__icon"><img src="/icons/icon-10.svg" alt="" /></div>
+            <p class="card__text">Ein Portfolio, das zeigt, was du kannst. Konkrete Erfahrung in echten Teams und auf echten Briefings.</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <div class="card__icon"><img src="/icons/icon-11.svg" alt="" /></div>
+            <p class="card__text">Ein Verständnis dafür, wie Marken auswirkt. Wie sie entstehen, wachsen und auftauchen werden. Und wie ihren ihre Idee bringst.</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <div class="card__icon"><img src="/icons/icon-12.svg" alt="" /></div>
+            <p class="card__text">Wichtige Kontakte in den Kreativbranche. Ins Netzwerk aus erfahrenen Mitwirkenden, das du dabei aufbaust.</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <div class="card__icon"><img src="/icons/icon-13.svg" alt="" /></div>
+            <p class="card__text">Kreative Fähigkeiten, die du im Umgang mit KI und neuen Technologien Leistung kennenlernst.</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="card">
+            <div class="card__icon"><img src="/icons/icon-14.svg" alt="" /></div>
+            <p class="card__text">Ein Spielen, mit dem du dich konkret bewerben kannst.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Final image ===================== -->
+  <section class="container">
+    <figure class="motiv motiv--static">
+      <div class="motiv__frame">
+        <img class="motiv__img" src="/images/school_of_ideas_motiv_04.jpg" alt="Kreatives Motiv 04" />
+      </div>
+    </figure>
+  </section>
+
+  <!-- ===================== Final CTA ===================== -->
+  <section class="cta-final" id="contact">
+    <div class="container">
+      <h2 class="cta-final__title">
+        Kreativität hat immer Zukunft.<br/>
+        Wir bilden die Talente aus, die sie gestalten.
+      </h2>
+
+      <div class="cards">
+        <div class="cta-card">
+          <h4>Ich bin mir sicher</h4>
+          <p>Bewirb dich direkt — die Bewerbung läuft online.</p>
+          <a href="#" class="btn btn-primary mt-3">Jetzt bewerben</a>
+        </div>
+        <div class="cta-card">
+          <h4>Ich teste mich erstmal</h4>
+          <p>Selbsttest zeigt dir, ob das passt.</p>
+          <a href="#" class="btn btn-outline mt-3">Selbsttest starten</a>
+        </div>
+        <div class="cta-card">
+          <h4>Ich erwäge das für mich</h4>
+          <p>Dann sich an einen, den du kennst und vertrauenst.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Footer ===================== -->
+  <footer class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <a href="#" class="nav__brand"><img src="/logo/School_of_ideas_Logo.svg" alt="School of Ideas" style="height:32px" /></a>
+      </div>
+      <div class="col-md-6 text-md-end small text-muted">
+        © School of Ideas — Impressum · Datenschutz
+      </div>
+    </div>
+  </footer>
+
+  <!-- App entry -->
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

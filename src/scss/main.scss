@@ -1,0 +1,26 @@
+// ----- 1) variables (must come before bootstrap) -----
+@use 'sass:math';
+@import 'variables';
+
+// ----- 2) Bootstrap (grid + utilities only — keep the bundle small) -----
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+
+@import 'bootstrap/scss/root';
+@import 'bootstrap/scss/reboot';
+@import 'bootstrap/scss/containers';
+@import 'bootstrap/scss/grid';
+@import 'bootstrap/scss/buttons';
+@import 'bootstrap/scss/utilities/api';
+
+// ----- 3) Project styles -----
+@import 'fonts';
+@import 'base';
+@import 'navigation';
+@import 'hero';
+@import 'motiv';
+@import 'content';

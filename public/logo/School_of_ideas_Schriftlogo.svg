@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 839.45 217.44">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #141618;
+        font-family: Nohemi-Bold, Nohemi;
+        font-size: 65px;
+        font-weight: 700;
+      }
+
+      .cls-2 {
+        letter-spacing: .03em;
+      }
+
+      .cls-3 {
+        letter-spacing: .02em;
+      }
+
+      .cls-4 {
+        letter-spacing: .02em;
+      }
+
+      .cls-5 {
+        letter-spacing: .02em;
+      }
+    </style>
+  </defs>
+  <text class="cls-1" transform="translate(121.65 130.33)"><tspan class="cls-4" x="0" y="0">s</tspan><tspan class="cls-2" x="38.48" y="0">chool </tspan><tspan class="cls-5" x="233.54" y="0">o</tspan><tspan class="cls-2" x="273.84" y="0">f id</tspan><tspan class="cls-3" x="377.89" y="0">e</tspan><tspan class="cls-2" x="417.48" y="0">as</tspan></text>
+</svg>

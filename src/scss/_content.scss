@@ -1,0 +1,142 @@
+// ----- Generic content blocks used across the page -----
+
+.intro {
+  padding: clamp(70px, 10vw, 140px) 0;
+
+  &__lead {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: clamp(2rem, 3.6vw, 3.4rem);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1em;
+
+    .ink    { color: $color-ink; }
+    .accent { color: $color-accent; }
+  }
+
+  &__sub {
+    font-family: $font-body;       // Neue Haas — body weight, not headline
+    font-weight: 700;
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+    line-height: 1.4;
+    color: $color-ink;
+    margin: 0;
+  }
+}
+
+.manifest {
+  padding: clamp(60px, 9vw, 120px) 0;
+
+  &__text {
+    color: $color-accent;
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: clamp(1.4rem, 2.4vw, 2.1rem);
+    line-height: 1.25;
+    letter-spacing: -.01em;
+    max-width: 30ch;
+    margin: 0 auto;
+    text-align: left;
+  }
+}
+
+.expect {
+  padding-bottom: clamp(60px, 9vw, 120px);
+
+  &__title { max-width: 12ch; }
+
+  &__col-text p { color: $color-ink-soft; }
+}
+
+.year {
+  padding: clamp(60px, 9vw, 120px) 0;
+
+  &__title { max-width: 12ch; }
+
+  ul {
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    color: $color-ink-soft;
+
+    li { padding: 14px 0; border-bottom: 1px solid $color-border; }
+  }
+}
+
+.values {
+  padding: clamp(60px, 9vw, 120px) 0;
+
+  &__lead {
+    font-family: $font-display;
+    font-weight: 500;
+    font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+    color: $color-ink-soft;
+    max-width: 32ch;
+  }
+}
+
+.audience,
+.outcome {
+  padding: clamp(60px, 9vw, 120px) 0;
+
+  .card {
+    background: transparent;
+    border: 0;
+    padding: 24px 0;
+
+    &__icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 14px;
+
+      img, svg { width: 100%; height: 100%; object-fit: contain; }
+    }
+
+    &__text {
+      font-size: .98rem;
+      color: $color-ink-soft;
+      max-width: 22ch;
+    }
+  }
+}
+
+.cta-final {
+  padding: clamp(80px, 10vw, 140px) 0;
+  text-align: left;
+
+  &__title {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    line-height: 1.1;
+    margin-bottom: 1em;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .cta-card {
+    border-top: 1px solid $color-border;
+    padding-top: 18px;
+
+    h4 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    p  { font-size: .92rem; color: $color-ink-soft; }
+  }
+}
+
+.foot-deco {
+  // little floating icons used as visual accents around the layout
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  opacity: .9;
+  pointer-events: none;
+}
