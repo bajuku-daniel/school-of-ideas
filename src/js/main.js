@@ -93,6 +93,33 @@ inlineSvgHosts.forEach((host) => {
 });
 
 /* ============================================================
+   Hero video: iOS needs a very explicit muted inline play setup.
+   The template also serves a smaller mobile source before the CMS video.
+   ============================================================ */
+const heroVideo = document.querySelector('.hero__video');
+if (heroVideo) {
+  heroVideo.muted = true;
+  heroVideo.defaultMuted = true;
+  heroVideo.playsInline = true;
+  heroVideo.setAttribute('muted', '');
+  heroVideo.setAttribute('playsinline', '');
+  heroVideo.setAttribute('webkit-playsinline', '');
+
+  const tryPlayHero = () => {
+    const promise = heroVideo.play();
+    if (promise && typeof promise.catch === 'function') {
+      promise.catch(() => {});
+    }
+  };
+
+  if (heroVideo.readyState >= 2) {
+    tryPlayHero();
+  } else {
+    heroVideo.addEventListener('loadedmetadata', tryPlayHero, { once: true });
+  }
+}
+
+/* ============================================================
    Agency directory filters
    ============================================================ */
 document.querySelectorAll('[data-agency-directory]').forEach((directory) => {

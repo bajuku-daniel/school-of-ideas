@@ -34,6 +34,9 @@
 html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   background: $color-bg;
   color: $color-ink;
   font-family: $font-body;
@@ -45,7 +48,9 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-body { overflow-x: clip; }   // `clip` keeps `position: sticky` working
+@supports (overflow: clip) {
+  body { overflow-x: clip; }   // `clip` keeps `position: sticky` working where supported
+}
 
 a {
   color: inherit;

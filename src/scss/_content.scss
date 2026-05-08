@@ -2021,6 +2021,25 @@
   min-height: 100vh;
 }
 
+@media (max-width: 768px) {
+  .hero,
+  .hero__mint,
+  .intro,
+  .manifest,
+  .expect,
+  .year,
+  .values,
+  .audience,
+  .outcome,
+  .cta-final,
+  .motiv-stack,
+  .footer,
+  .subpage {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
 .subpage__hero {
   padding: var(--hero-top, clamp(150px, 15vw, 240px)) 0 var(--hero-bottom, clamp(72px, 10vw, 140px));
 

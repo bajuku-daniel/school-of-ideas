@@ -294,7 +294,8 @@ $renderCard = function (array $card): void {
   </div>
 
   <section class="hero" id="hero">
-    <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="<?= soi_url($page, 'heroPoster', 'images/school_of_ideas_motiv_Header.jpg') ?>">
+    <video class="hero__video" autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="<?= soi_url($page, 'heroPoster', 'images/school_of_ideas_motiv_Header.jpg') ?>">
+      <source src="<?= url('video/hero.mp4') ?>" type="video/mp4" media="(max-width: 768px)">
       <source src="<?= soi_url($page, 'heroVideo', 'video/hero.mp4') ?>" type="video/mp4">
     </video>
     <div class="hero__overlay"></div>
