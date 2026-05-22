@@ -2,7 +2,11 @@ Title: Datenschutz
 
 ----
 
-Headline: Datenschutz
+Builder: [{"content":{"layout":"1col","headlineink":"Allgemeine Hinweise","headlineaccent":"","sub":"","body":"Wir verarbeiten personenbezogene Daten nur, soweit dies für den Betrieb der Website, die Kommunikation und Bewerbungsprozesse erforderlich ist.\nWeitere Details zu Verantwortlichen, Rechtsgrundlagen, Speicherdauer und Betroffenenrechten werden hier ergänzt.","columns":[],"image":[],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"bb82b5ed-76a6-4d73-8123-f94b140be4b7","isHidden":false,"type":"editorial-split-intro"}]
+
+----
+
+Kicker: 
 
 ----
 
@@ -15,6 +19,14 @@ Headlineaccent: transparent und knapp
 ----
 
 Intro: Platzhalter für die Datenschutzhinweise. Die endgültigen Texte sollten rechtlich geprüft und ergänzt werden.
+
+----
+
+Metadescription: Datenschutzhinweise der school of ideas.
+
+----
+
+Headline: Datenschutz
 
 ----
 
@@ -44,10 +56,6 @@ Sections:
     Weitere Details zu Verantwortlichen, Rechtsgrundlagen, Speicherdauer und Betroffenenrechten werden hier ergänzt.
   spacingTop: small
   spacingBottom: large
-
-----
-
-Metadescription: Datenschutzhinweise der school of ideas.
 
 ----
 

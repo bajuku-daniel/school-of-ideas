@@ -2,7 +2,11 @@ Title: About
 
 ----
 
-Headline: Warum es die school of ideas gibt.
+Builder: [{"content":{"layout":"1col","headlineink":"Lernen muss näher an echter Arbeit sein.","headlineaccent":"","sub":"","body":"Die school of ideas ist kein klassischer Kurs und kein theoretisches Programm. Sie ist ein Jahr, in dem du in Agenturen mitarbeitest, Rückmeldung bekommst und lernst, kreative Entscheidungen bewusster zu treffen.\nEs geht um Haltung, Handwerk, Technologie und den Mut, Gedanken auszusprechen, bevor sie perfekt sind.","columns":[],"image":[],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"672be1b8-85d8-4ef6-a91a-c8792168fa33","isHidden":false,"type":"editorial-split-intro"},{"content":{"headlineink":"Dafür stehen wir","headlineaccent":"","sub":"","bulletkey":"","bulletupload":[],"items":[{"text":"Ideen vor Oberfläche\nGute Gestaltung beginnt mit einem Gedanken, der trägt.","col":1,"row":1},{"text":"Bewusster Umgang mit Tools\nKI und neue Technologien sind Werkzeuge. Entscheidend ist, wie du sie nutzt.","col":2,"row":1},{"text":"Praxis mit Feedback\nDu arbeitest an echten Aufgaben und bekommst ehrliche Rückmeldung aus der Branche.","col":3,"row":1}],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":""},"id":"505ca624-41ec-4a20-b4dc-51c05ec35864","isHidden":false,"type":"editorial-bullet-list"}]
+
+----
+
+Kicker: About
 
 ----
 
@@ -14,11 +18,15 @@ Headlineaccent: school of ideas gibt.
 
 ----
 
-Kicker: About
+Intro: Kreativarbeit verändert sich. Die school of ideas bringt junge Talente, Agenturen und neue Werkzeuge so zusammen, dass aus Neugier echte Praxis wird.
 
 ----
 
-Intro: Kreativarbeit verändert sich. Die school of ideas bringt junge Talente, Agenturen und neue Werkzeuge so zusammen, dass aus Neugier echte Praxis wird.
+Metadescription: About-Seite der school of ideas: Idee, Haltung und Arbeitsweise des Programms.
+
+----
+
+Headline: Warum es die school of ideas gibt.
 
 ----
 
@@ -70,10 +78,6 @@ Sections:
       text: Du arbeitest an echten Aufgaben und bekommst ehrliche Rückmeldung aus der Branche.
   spacingTop: small
   spacingBottom: large
-
-----
-
-Metadescription: About-Seite der school of ideas: Idee, Haltung und Arbeitsweise des Programms.
 
 ----
 

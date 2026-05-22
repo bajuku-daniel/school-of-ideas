@@ -170,18 +170,33 @@
   }
 
   // Subhead — Neue Haas (body font) at bold weight, NOT Nohemi.
-  // Aligns with the BLUE accent line of the headline (i.e. starts after
-  // 2 black lines + the lead-gap), per the reference design.
+  // BOTTOM-aligned with the BLUE accent line of the headline:
+  // letzte Zeile des Subs sitzt auf gleicher Baseline wie "richtig guten Karriere."
+  //
+  // DESIGNER-TUNING (falls Text wächst/schrumpft):
+  //   --sub-fs        = font-size des Subs
+  //   --sub-lh        = line-height des Subs
+  //   --sub-lines     = wie viele Zeilen der Sub hat (Default 3)
+  //   --lead-lines    = wie viele Zeilen die Headline gesamt hat (Default 4 = 2 ink + 2 accent)
+  --sub-fs:     #{clamp(1rem, 1.75vw, 1.4rem)};
+  --sub-lh:     1.4;
+  --sub-lines:  3;
+  --lead-lines: 4;
+
   &__sub {
     font-family: $font-body;
     font-weight: 700;
-    font-size: clamp(1rem, 1.75vw, 1.4rem);
-    line-height: 1.4;
+    font-size: var(--sub-fs);
+    line-height: var(--sub-lh);
     letter-spacing: -.005em;
-    color: $color-ink;
+    color: $color-accent;
     margin: 0;
     max-width: 31ch;
-    margin-top: calc(2 * var(--lead-fs) * var(--lead-lh) + var(--lead-gap));
+    // Bottom-align: lead_height − sub_height
+    margin-top: calc(
+      (var(--lead-lines) * var(--lead-fs) * var(--lead-lh) + var(--lead-gap))
+      - (var(--sub-lines) * var(--sub-fs) * var(--sub-lh))
+    );
   }
 
   &__body {
@@ -286,6 +301,89 @@
       transform: rotate(var(--airplane-rotate));
     }
   }
+}
+
+// =============================================================================
+// .section-icon — pro Block ein dekoratives Icon, gesteuert über CSS-Vars
+// die das soi_section_icon() PHP-Helper inline ausspielt:
+//   --section-icon-x-<bp>      (px, Position links)
+//   --section-icon-y-<bp>      (px, Position oben)
+//   --section-icon-size-<bp>   (px, Breite)
+//   --section-icon-rotate-<bp> (deg)
+//   --icon-motion-name         (floatWobble | floatGlide | none)
+//   --icon-motion-duration     (Sekunden)
+//   --icon-motion-delay        (Sekunden)
+//
+// Pro BP wird der passende <img> angezeigt — die anderen werden ausgeblendet.
+// Damit kann Björn pro Größe ein eigenes PNG mit angepasster Linienstärke
+// hochladen.
+// =============================================================================
+.section-icon {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+  display: block;
+  will-change: transform;
+
+  // Default-Position: oben-rechts mit etwas Abstand,
+  // falls Designer keine Werte setzt.
+  top:  var(--section-icon-y-mobile,  20px);
+  left: var(--section-icon-x-mobile,  auto);
+  width: var(--section-icon-size-mobile, 80px);
+  transform: rotate(var(--section-icon-rotate-mobile, 0deg));
+  transform-origin: 50% 50%;
+
+  @media (min-width: 769px) {
+    top:  var(--section-icon-y-tablet,  var(--section-icon-y-mobile, 30px));
+    left: var(--section-icon-x-tablet,  var(--section-icon-x-mobile, auto));
+    width: var(--section-icon-size-tablet, var(--section-icon-size-mobile, 100px));
+    transform: rotate(var(--section-icon-rotate-tablet, var(--section-icon-rotate-mobile, 0deg)));
+  }
+  @media (min-width: 1200px) {
+    top:  var(--section-icon-y-desktop,  var(--section-icon-y-tablet, 40px));
+    left: var(--section-icon-x-desktop,  var(--section-icon-x-tablet, auto));
+    width: var(--section-icon-size-desktop, var(--section-icon-size-tablet, 120px));
+    transform: rotate(var(--section-icon-rotate-desktop, var(--section-icon-rotate-tablet, 0deg)));
+  }
+
+  &__img {
+    display: none;     // Default: kein BP-Bild zeigen
+    width: 100%;
+    height: auto;
+    transform-origin: 50% 50%;
+    animation: var(--icon-motion-name, floatWobble)
+               var(--icon-motion-duration, 6.5s)
+               ease-in-out infinite;
+    animation-delay: var(--icon-motion-delay, 0s);
+
+    @media (prefers-reduced-motion: reduce) { animation: none; }
+  }
+
+  // Pro BP nur das passende Bild zeigen
+  &__img--mobile  { display: block; }
+  &__img--tablet  { display: none; }
+  &__img--desktop { display: none; }
+
+  @media (min-width: 769px) {
+    .section-icon__img--mobile  { display: none; }
+    .section-icon__img--tablet  { display: block; }
+    .section-icon__img--desktop { display: none; }
+    // (Geschwister-Selektor wäre eleganter, aber Spezifität reicht so.)
+  }
+  @media (min-width: 1200px) {
+    .section-icon__img--mobile  { display: none; }
+    .section-icon__img--tablet  { display: none; }
+    .section-icon__img--desktop { display: block; }
+  }
+
+  // Wenn Motion explizit "none": Animation aus
+  &[data-motion="none"] .section-icon__img { animation: none; }
+}
+
+// Damit absolute Section-Icons funktionieren: jede Block-Section ist position:relative.
+.hero, .intro, .manifest, .expect, .year, .values, .audience, .outcome,
+.cta-final, .qa, .image-block, .editorial {
+  position: relative;
 }
 
 @keyframes floatWobble {
@@ -685,7 +783,7 @@
     font-size: var(--expect-sub-fs);
     line-height: var(--expect-sub-lh);
     letter-spacing: -.005em;
-    color: $color-ink;
+    color: $color-accent;
     margin: 0;
     max-width: 32ch;
   }
@@ -924,6 +1022,7 @@
       font-size: var(--year-block-lead-fs);
       line-height: var(--year-block-lead-lh);
       letter-spacing: -.005em;
+      color: $color-accent;
       max-width: 22ch;
     }
     // Fließtext-Absätze
@@ -1107,6 +1206,7 @@
       font-size: var(--values-col-lead-fs);
       line-height: var(--values-col-lead-lh);
       letter-spacing: -.005em;
+      color: $color-accent;
       max-width: 22ch;
     }
 
@@ -1161,7 +1261,7 @@
 
   display: flex;
   align-items: flex-start;
-  gap: clamp(8px, 1vw, 14px);
+  gap: clamp(16px, 2vw, 28px);
   background: transparent;
   border: 0;
   padding: 0;
@@ -1303,7 +1403,7 @@
     font-size: var(--audience-sub-fs);
     line-height: var(--audience-sub-lh);
     letter-spacing: -.005em;
-    color: $color-ink;
+    color: $color-accent;
     max-width: 26ch;
   }
 
@@ -1497,7 +1597,7 @@
   --cta-final-title-gap: 0em;
 
   // ---- Cards ----
-  --cta-final-card-title-fs:  clamp(1rem, 1.1vw, 1.15rem);
+  --cta-final-card-title-fs:  clamp(.95rem, 1.05vw, 1.05rem);  // = .card__text (audience-Karten)
   --cta-final-card-text-fs:   clamp(.9rem, .95vw, .95rem);
   --cta-final-card-text-lh:   1.5;
   --cta-final-cards-gap:      var(--cta-final-cards-gap-desktop, #{clamp(40px, 4vw, 80px)});
@@ -1612,25 +1712,22 @@
   }
 
   // ---- Einzelne CTA-Card ----
-  // Layout: 2-spaltiges Mini-Grid — Pfeil links, Title + Action rechts.
+  // Layout: 2-spaltiges Mini-Grid — Punkt links, Title + Action rechts.
   &__card {
     display: grid;
     grid-template-columns: auto 1fr;
-    column-gap: clamp(10px, 1.2vw, 18px);
+    column-gap: clamp(16px, 2vw, 28px);  // = .card gap (audience-Karten)
     row-gap: var(--cta-final-card-row-gap);
     align-items: start;
     color: $color-ink;
     max-width: 28ch;
 
-    // Pfeil sitzt in Spalte 1 auf Höhe des Titles
+    // Punkt sitzt in Spalte 1 auf Höhe des Titles.
+    // Größe + Vertikalversatz kommen aus .site-icon.card__arrow in _icons.scss
+    // (Cap-Height-basiert) — hier NUR Grid-Placement.
     .card__arrow {
-      flex-shrink: 0;
-      width: clamp(20px, 1.6vw, 26px);
-      height: clamp(20px, 1.6vw, 26px);
-      color: $color-accent;
       grid-column: 1;
       grid-row: 1;
-      margin-top: .15em;
     }
 
     // Title in Spalte 2, Reihe 1
@@ -2343,20 +2440,8 @@
   }
 }
 
-.agency-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: clamp(24px, 3vw, 54px);
-  row-gap: clamp(42px, 6vw, 96px);
-
-  @media (max-width: 1050px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  @media (max-width: 650px) {
-    grid-template-columns: 1fr;
-  }
-}
+// (Legacy .agency-grid { display: grid } entfernt — kollidierte mit dem neuen
+//  Block-Selector. Definition für den neuen Block-Wrapper steht weiter unten.)
 
 .agency-card {
   display: grid;
@@ -2540,4 +2625,440 @@
 .agency-detail__cards {
   grid-column: 1 / -1;
   margin-top: clamp(50px, 7vw, 110px);
+}
+
+// =============================================================================
+// NEUE BLOCKS — Agency-Grid, Image-Grid, Work-Showcase, Icon-Divider
+// =============================================================================
+
+// ----- .agency-grid (Übersicht mit Filter + Tiles) ---------------------------
+.agency-grid {
+  padding: var(--section-top-mobile, clamp(60px, 9vw, 120px)) 0
+           var(--section-bottom-mobile, clamp(60px, 9vw, 120px));
+  @media (min-width: 769px) {
+    padding: var(--section-top-tablet, clamp(60px, 9vw, 120px)) 0
+             var(--section-bottom-tablet, clamp(60px, 9vw, 120px));
+  }
+  @media (min-width: 1200px) {
+    padding: var(--section-top-desktop, clamp(60px, 9vw, 120px)) 0
+             var(--section-bottom-desktop, clamp(60px, 9vw, 120px));
+  }
+
+  &__filters {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 48px);
+    margin-bottom: clamp(48px, 7vw, 96px);
+
+    @media (max-width: 760px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__filter-label {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(.9rem, 1vw, 1rem);
+    color: $color-accent;
+    margin-bottom: 12px;
+  }
+
+  &__filter-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    button {
+      appearance: none;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      font: inherit;
+      color: $color-ink;
+      text-align: left;
+      cursor: pointer;
+      font-size: clamp(.85rem, .95vw, .95rem);
+      transition: color $duration-base $easing-out;
+
+      &:hover { color: $color-accent; }
+      &.is-active { color: $color-accent; font-weight: 700; }
+    }
+  }
+
+  &__tiles {
+    display: grid;
+    grid-template-columns: repeat(var(--agency-grid-cols, 4), minmax(0, 1fr));
+    // KEIN auto-flow — Positionen kommen explizit aus --card-col / --card-row
+    gap: clamp(20px, 3vw, 48px) clamp(20px, 3vw, 48px);
+    align-items: start;
+
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__tile {
+    // Pattern-Position kommt aus dem Snippet via CSS-Vars
+    grid-column: var(--card-col, auto);
+    grid-row:    var(--card-row, auto);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-decoration: none;
+    color: inherit;
+
+    // Initial-Load: kaskadierender Aufbau. --stagger kommt aus dem Snippet
+    // (Index basierend auf row+col), Delay = stagger × 60ms = leichte Welle.
+    // Animation läuft NICHT sofort beim Page-Load — IntersectionObserver
+    // setzt .is-revealed auf den Tiles-Container sobald er scrolled in view ist.
+    opacity: 0;
+    transform: translateY(16px);
+
+    // Filter-Transitions: opacity + transform smooth.
+    transition:
+      opacity .35s cubic-bezier(.22, .9, .25, 1),
+      transform .45s cubic-bezier(.22, .9, .25, 1);
+
+    &:hover { transform: translateY(-4px); }
+
+    &.is-hidden {
+      display: none;     // raus aus Layout — kein Platzhalter, kein Overlap
+    }
+
+    @media (max-width: 991px) {
+      // Tablet/Mobile: Pattern aufgeben, normale Reihenfolge
+      grid-column: auto;
+      grid-row:    auto;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  // ---- Image-Tile: nur Bild, keine Beschriftung ----
+  &__tile--image {
+    .agency-grid__tile-image {
+      width: 100%;
+      margin: 0;
+      aspect-ratio: 3 / 4;
+    }
+  }
+
+  // ---- Text-Tile: nur Label, kein Bild ----
+  &__tile--text {
+    gap: 6px;
+    align-self: start;
+    padding-top: 4px;
+  }
+
+  &__tile-name {
+    display: block;
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(.95rem, 1.1vw, 1.1rem);
+    color: $color-ink;
+  }
+
+  &__tile-arrow {
+    display: block;
+    color: $color-accent;
+    font-size: clamp(1rem, 1.25vw, 1.25rem);
+    line-height: 1;
+    margin: 4px 0 8px;
+  }
+
+  &__tile-intro {
+    display: block;
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(.95rem, 1.05vw, 1.05rem);
+    color: $color-ink;
+    line-height: 1.35;
+    max-width: 22ch;
+  }
+
+  // ---- Initial-Load: Stagger-Welle erst wenn Container in Viewport ----
+  &__tiles.is-revealed &__tile {
+    animation: agencyTileEnter .55s cubic-bezier(.22, .9, .25, 1) both;
+    animation-delay: calc(var(--stagger, 0) * 60ms);
+  }
+
+  // ---- Filter aktiv: Pattern aufgeben, JS-Positionen via --filter-col/row ----
+  &__tiles.is-filtered &__tile:not(.is-hidden) {
+    grid-column: var(--filter-col, auto);
+    grid-row: var(--filter-row, auto);
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  &__placeholder {
+    background: $color-accent;
+    border-radius: $radius-lg;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+  }
+}
+
+// (View Transitions API für Filter wurde abgeschaltet — Cross-Fade
+//  führte zu Tile-Overlap. Stattdessen einfache CSS opacity-Transitions.)
+
+// @keyframes auf Root-Level — global verfügbar.
+// Enter: kaskadierender Aufbau beim ersten Render.
+@keyframes agencyTileEnter {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+// (agencyTileExit Keyframe entfernt — hidden Tiles sind jetzt display:none,
+//  kein Fade-Out nötig. Filter-Toggle ist instant statt mit Übergangsanimation.)
+
+// ----- .image-grid -----------------------------------------------------------
+.image-grid {
+  padding: var(--section-top-mobile, clamp(60px, 9vw, 120px)) 0
+           var(--section-bottom-mobile, clamp(60px, 9vw, 120px));
+  @media (min-width: 769px) {
+    padding: var(--section-top-tablet, clamp(60px, 9vw, 120px)) 0
+             var(--section-bottom-tablet, clamp(60px, 9vw, 120px));
+  }
+  @media (min-width: 1200px) {
+    padding: var(--section-top-desktop, clamp(60px, 9vw, 120px)) 0
+             var(--section-bottom-desktop, clamp(60px, 9vw, 120px));
+  }
+
+  &__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--image-grid-cols, 4), minmax(0, 1fr));
+    gap: clamp(24px, 3vw, 50px);
+    align-items: start;
+
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__item {
+    grid-column: var(--card-col, auto) / span var(--card-span, 1);
+    grid-row:    var(--card-row, auto);
+    width: 100%;
+    margin: 0;
+
+    @media (max-width: 991px) {
+      grid-column: auto / span 1;
+      grid-row:    auto;
+    }
+  }
+
+  &__caption {
+    font-size: clamp(.8rem, .9vw, .9rem);
+    color: $color-muted;
+    margin-top: 8px;
+  }
+}
+
+// ----- .work-showcase --------------------------------------------------------
+.work-showcase {
+  padding: var(--section-top-mobile, clamp(70px, 10vw, 140px)) 0
+           var(--section-bottom-mobile, clamp(70px, 10vw, 140px));
+  @media (min-width: 769px) {
+    padding: var(--section-top-tablet, clamp(70px, 10vw, 140px)) 0
+             var(--section-bottom-tablet, clamp(70px, 10vw, 140px));
+  }
+  @media (min-width: 1200px) {
+    padding: var(--section-top-desktop, clamp(70px, 10vw, 140px)) 0
+             var(--section-bottom-desktop, clamp(70px, 10vw, 140px));
+  }
+
+  &__media {
+    margin: 0 0 clamp(40px, 5vw, 72px);
+  }
+
+  &__media--video {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin-inline: auto;
+    aspect-ratio: 16 / 9;
+    background: $color-mint;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    transform: rotate(-1.5deg);
+
+    video, img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__video-label {
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    background: $color-accent;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: .8rem;
+    font-weight: 700;
+    z-index: 2;
+  }
+
+  &__media--2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 4vw, 60px);
+    @media (max-width: 760px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__media--3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 3vw, 44px);
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__tile {
+    margin: 0;
+    width: 100%;
+  }
+
+  &__placeholder {
+    aspect-ratio: 4 / 3;
+    background: $color-accent;
+    border-radius: $radius-lg;
+  }
+
+  &__copy {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(32px, 5vw, 80px);
+    margin-top: clamp(32px, 4vw, 56px);
+
+    @media (max-width: 760px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__title {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(1.1rem, 1.3vw, 1.35rem);
+    color: $color-ink;
+    margin: 0;
+  }
+
+  &__text {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 3vw, 44px);
+
+    @media (max-width: 760px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__col p {
+    font-family: $font-body;
+    font-size: clamp(.9rem, 1vw, 1rem);
+    line-height: 1.55;
+    margin: 0 0 1em;
+    &:last-child { margin: 0; }
+  }
+}
+
+// ----- .icon-divider ---------------------------------------------------------
+.icon-divider {
+  padding: var(--section-top-mobile, clamp(48px, 8vw, 100px)) 0
+           var(--section-bottom-mobile, clamp(48px, 8vw, 100px));
+  @media (min-width: 769px) {
+    padding: var(--section-top-tablet, clamp(48px, 8vw, 100px)) 0
+             var(--section-bottom-tablet, clamp(48px, 8vw, 100px));
+  }
+  @media (min-width: 1200px) {
+    padding: var(--section-top-desktop, clamp(48px, 8vw, 100px)) 0
+             var(--section-bottom-desktop, clamp(48px, 8vw, 100px));
+  }
+
+  > .container {
+    display: flex;
+  }
+
+  &[data-align="left"]   > .container { justify-content: flex-start; }
+  &[data-align="center"] > .container { justify-content: center; }
+  &[data-align="right"]  > .container { justify-content: flex-end; }
+
+  &__icon {
+    display: block;
+    width: var(--icon-divider-size-mobile, 64px);
+    @media (min-width: 769px)  { width: var(--icon-divider-size-tablet, 90px); }
+    @media (min-width: 1200px) { width: var(--icon-divider-size-desktop, 120px); }
+
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transform-origin: 50% 50%;
+      animation: var(--icon-motion-name, floatWobble) 6.5s ease-in-out infinite;
+    }
+    &[data-motion="none"] img { animation: none; }
+
+    @media (prefers-reduced-motion: reduce) { img { animation: none; } }
+  }
+}
+
+// ----- Agency-Detail Hero (für neues Template) -------------------------------
+.agency-detail__title {
+  font-family: $font-display;
+  font-weight: 700;
+  font-size: clamp(2.4rem, 6.5vw, 6rem);
+  line-height: 1.02;
+  letter-spacing: -.02em;
+  margin: 0 0 clamp(24px, 4vw, 48px);
+
+  .ink    { color: $color-ink; }
+  .accent { color: $color-accent; display: block; }
+}
+
+.agency-detail__intro {
+  max-width: 52ch;
+  font-family: $font-body;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  line-height: 1.5;
+  margin: 0 0 clamp(40px, 6vw, 72px);
+
+  a { color: $color-accent; text-decoration: underline; }
+}
+
+.agency-detail__bottom-nav {
+  padding: clamp(60px, 9vw, 120px) 0;
+
+  > .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
 }

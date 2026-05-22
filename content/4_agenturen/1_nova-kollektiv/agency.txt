@@ -14,7 +14,85 @@ Headlineaccent: die sich bewegen wollen.
 
 ----
 
-Intro: Nova Kollektiv arbeitet an Kampagnen, Social-Formaten und Markenmomenten für Kultur, Tech und Konsumgüter.
+Body:
+
+Hier lernst du, wie aus einem strategischen Gedanken eine kreative Kampagne wird. Das Team arbeitet schnell, kollaborativ und sehr nah an aktuellen kulturellen Bewegungen.
+
+Du bist in Konzept, Recherche, Präsentationen und Ausarbeitung eingebunden und bekommst Feedback von Strategie, Text und Art Direction.
+
+----
+
+Cards:
+
+- 
+  icon: ""
+  heading: Passt zu dir, wenn
+  text: >
+    du gern beobachtest, schnell Ideen
+    skizzierst und Lust auf
+    Markenkommunikation hast.
+- 
+  icon: ""
+  heading: Du arbeitest mit
+  text: >
+    Strategie, Text, Art Direction, Social
+    Creative und Projektmanagement.
+
+----
+
+Website: https://example.com
+
+----
+
+Contactemail: 
+
+----
+
+Logo: 
+
+----
+
+Location: Hamburg
+
+----
+
+Arbeitsweise: hybrid
+
+----
+
+Groesse: 10-50
+
+----
+
+Schwerpunkte: Kampagnen, Strategie
+
+----
+
+Discipline: Kampagne
+
+----
+
+Setup: Independent
+
+----
+
+Gridcol: 1
+
+----
+
+Gridrow: 1
+
+----
+
+Gridspan: 1
+
+----
+
+Builder: [{"content":{"layout":"1col","headlineink":"Agentur","headlineaccent":"Beschreibung","sub":"Nova Kollektiv ist eine unabhängige Kreativ-Agentur aus Hamburg.","body":"Unsere Projekte verbinden Strategie und Idee mit handwerklich starker Umsetzung. Unsere Kunden kommen aus Lifestyle, Tech und Sport.\n\nWir machen Kampagnen für die nächste Generation Marken — mutig, klar, mit Haltung.","columns":[],"image":[],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"e0f2e07a-a127-48d2-88a2-e0ef5822886a","isHidden":false,"type":"editorial-split-intro"},{"content":{"layout":"1col","headlineink":"Unsere","headlineaccent":"Kunden","sub":"","body":"AOK, Edeka, Frosta, Jägermeister, bonprix","columns":[],"image":[],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"8c36c7a5-8ed7-4708-b17b-05213d8162e6","isHidden":false,"type":"editorial-split-intro"},{"content":{"layout":"1col","headlineink":"Unsere","headlineaccent":"Arbeiten","sub":"","body":"","columns":[],"image":[],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"a6c9d416-9bed-4598-b73f-ad70aa9135ea","isHidden":false,"type":"editorial-split-intro"},{"content":{"mediamode":"video","video":[],"videoposter":[],"videolabel":"Video","images2":[],"images3":[],"casetitle":"Oreo Square Cookie","casetextleft":"AOK 2024: Ein neues Kampagnen-Konzept mit hohem Aufmerksamkeitswert. Plattformübergreifend, in 8 Sprachen, integriert auf TikTok, Instagram, Snapchat und im AOK-CRM.","casetextright":"In nur 5 Wochen Konzept bis Launch. Reichweite 12M+. CTR 5x über Branchen-Durchschnitt. Kreative Führung Nova Kollektiv.","sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"8e2f406e-9198-4075-8127-7c03cf85e8b2","isHidden":false,"type":"work-showcase"},{"content":{"mediamode":"image3","video":[],"videoposter":[],"videolabel":"","images2":[],"images3":[],"casetitle":"Oreo Square Cookie","casetextleft":"AOK 2024: Ein neues Kampagnen-Konzept mit hohem Aufmerksamkeitswert. Plattformübergreifend, in 8 Sprachen.","casetextright":"Reichweite 12M+. CTR 5x über Branchen-Durchschnitt. Kreative Führung Nova Kollektiv.","sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"cbe7051c-800d-49d7-aec1-91842374e94f","isHidden":false,"type":"work-showcase"},{"content":{"mediamode":"image3","video":[],"videoposter":[],"videolabel":"","images2":[],"images3":[],"casetitle":"Oreo Square Cookie","casetextleft":"Edeka Frühjahr 2024 — Saisonale Kommunikation für regionalen Handel.","casetextright":"Crossmedialer Auftritt: Plakat, Print, Online, POS. 6-stelliger Mediabudget.","sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"08ec04f4-076b-4ead-92ea-740c1e09fc28","isHidden":false,"type":"work-showcase"},{"content":{"mediamode":"image3","video":[],"videoposter":[],"videolabel":"","images2":[],"images3":[],"casetitle":"Oreo Square Cookie","casetextleft":"Jägermeister Loop — kontinuierliche Always-On Kampagne.","casetextright":"Markenführung über 18 Monate, Co-Kreation mit Influencer-Network.","sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"244ae5c4-61c4-400b-a823-c9606d97dfd9","isHidden":false,"type":"work-showcase"},{"content":{"iconkey":"sparkles","iconupload":[],"sizemobile":70,"sizetablet":90,"sizedesktop":110,"iconmotion":"wobble","align":"center","sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":""},"id":"10de2e13-3595-43f9-9000-76cd4648f2d7","isHidden":false,"type":"icon-divider"},{"content":{"layout":"3col","headlineink":"Unsere","headlineaccent":"Arbeitskultur","sub":"","body":"","columns":[{"lead":"Wie wir arbeiten","body":"Konzept-getrieben statt Tool-getrieben.\nKurze Wege, klare Entscheidungen.\nTeamarbeit über Hierarchien.\nProdukt-Quality über Quantity."},{"lead":"Was du lernst","body":"Wie aus Briefings große Kampagnen werden. Wie Kunden- und Kreativbedürfnisse zusammenkommen. Konkrete Projektverantwortung von Tag 1."},{"lead":"Was es nicht gibt","body":"Powerpoint-Schlachten."}],"image":[],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"6faa9e2f-9a49-4d37-8fba-2426e4499a9c","isHidden":false,"type":"editorial-split-intro"},{"content":{"headlineink":"Du möchtest mehr über","headlineaccent":"Nova Kollektiv erfahren?","image":[],"cards":[{"title":"Weitere Projekte + Arbeiten","buttontext":"Zur Agentur-Website","buttonurl":"https://www.nova-kollektiv.de","buttonstyle":"mint","text":""},{"title":"Direkt bewerben","buttontext":"agenturkontakt@soi.de","buttonurl":"mailto:agenturkontakt@soi.de","buttonstyle":"ghost","text":""}],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"glasses-bold","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":100,"icondesktopy":60,"icondesktopsize":110,"icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"c7e82ca9-9603-4f02-bafc-50341db57dc1","isHidden":false,"type":"conversion-section"}]
+
+----
+
+Metadescription: 
 
 ----
 
@@ -38,42 +116,7 @@ Contentspacingbottompx: 140
 
 ----
 
-Body:
-
-Hier lernst du, wie aus einem strategischen Gedanken eine kreative Kampagne wird. Das Team arbeitet schnell, kollaborativ und sehr nah an aktuellen kulturellen Bewegungen.
-
-Du bist in Konzept, Recherche, Präsentationen und Ausarbeitung eingebunden und bekommst Feedback von Strategie, Text und Art Direction.
-
-----
-
-Location: Hamburg
-
-----
-
-Discipline: Kampagne
-
-----
-
-Setup: Independent
-
-----
-
 Tags: Social, Kultur, Konzept
-
-----
-
-Website: https://example.com
-
-----
-
-Cards:
-
-- 
-  heading: Passt zu dir, wenn
-  text: du gern beobachtest, schnell Ideen skizzierst und Lust auf Markenkommunikation hast.
-- 
-  heading: Du arbeitest mit
-  text: Strategie, Text, Art Direction, Social Creative und Projektmanagement.
 
 ----
 

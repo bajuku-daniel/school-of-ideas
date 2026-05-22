@@ -1,0 +1,74 @@
+name: Conversion (CTA-Cards)
+icon: target
+preview: fields
+
+tabs:
+  content:
+    label: Inhalt
+    icon: text
+    fields:
+      sectionInfo:
+        label: Conversion-Section
+        type: info
+        theme: blue
+        text: >
+          Abschlusssektion mit Headline, optionalem Bild und mehreren CTA-Karten
+          (mit oder ohne Button).
+      headlineInk:
+        label: Headline (schwarz)
+        type: text
+        width: 1/2
+      headlineAccent:
+        label: Headline (blau)
+        type: text
+        width: 1/2
+      image:
+        label: Bild (optional)
+        type: files
+        max: 1
+        uploads: image
+        layout: cards
+      cards:
+        label: CTA-Karten
+        type: structure
+        columns:
+          title:
+            width: 1/3
+          buttonText:
+            width: 1/4
+          buttonStyle:
+            width: 1/4
+        fields:
+          title:
+            label: Karten-Titel
+            type: textarea
+            buttons: false
+          buttonText:
+            label: Button-Text
+            type: text
+            width: 1/2
+          buttonUrl:
+            label: Button-Link
+            type: text
+            width: 1/2
+          buttonStyle:
+            label: Button-Stil
+            type: toggles
+            default: mint
+            options:
+              mint: Mint
+              ghost: Outline
+              none: Kein Button (Fließtext)
+          text:
+            label: Fließtext (wenn kein Button)
+            type: textarea
+            buttons: false
+            when:
+              buttonStyle: none
+
+  layout:
+    extends: sections/block-layout-tab
+  icon:
+    extends: sections/block-icon-tab
+  shadow:
+    extends: sections/block-shadow-tab

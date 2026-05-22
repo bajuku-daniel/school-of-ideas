@@ -14,7 +14,67 @@ Headlineaccent: und Geschichten für Screens.
 
 ----
 
-Intro: Gruppe Halo entwickelt Film, Social Assets und Content-Serien für Marken und Institutionen.
+Body: Du lernst, wie Ideen für Film und Social entstehen, wie man Treatments schreibt und wie Produktion, Schnitt und Design zusammenkommen.
+
+----
+
+Cards: 
+
+----
+
+Website: https://example.com
+
+----
+
+Contactemail: 
+
+----
+
+Logo: 
+
+----
+
+Location: München
+
+----
+
+Arbeitsweise: hybrid
+
+----
+
+Groesse: 100-200
+
+----
+
+Schwerpunkte: Produktion, Content
+
+----
+
+Discipline: Film
+
+----
+
+Setup: Netzwerkagentur
+
+----
+
+Gridcol: 3
+
+----
+
+Gridrow: 2
+
+----
+
+Gridspan: 2
+
+----
+
+Builder: 
+
+----
+
+Metadescription: 
 
 ----
 
@@ -38,27 +98,7 @@ Contentspacingbottompx: 140
 
 ----
 
-Body: Du lernst, wie Ideen für Film und Social entstehen, wie man Treatments schreibt und wie Produktion, Schnitt und Design zusammenkommen.
-
-----
-
-Location: München
-
-----
-
-Discipline: Film
-
-----
-
-Setup: Netzwerkagentur
-
-----
-
 Tags: Film, Social, Storytelling
-
-----
-
-Website: https://example.com
 
 ----
 

@@ -2,7 +2,11 @@ Title: Bewerbung
 
 ----
 
-Headline: Zeig uns, wie du denkst. Nicht, wie perfekt du schon bist.
+Builder: [{"content":{"headlineink":"So läuft die Bewerbung","headlineaccent":"","sub":"","bulletkey":"","bulletupload":[],"items":[{"text":"1. Kurzes Profil\nErzähl uns, wer du bist und was dich an Kreativarbeit interessiert.","col":1,"row":1},{"text":"2. Kleine Aufgabe\nDu bekommst eine Aufgabe, in der wir sehen, wie du denkst.","col":2,"row":1},{"text":"3. Gespräch\nWir sprechen über deine Ideen, deine Fragen und mögliche Agenturmatches.","col":3,"row":1}],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":""},"id":"f563440a-2ff0-4913-a8c0-328389da536a","isHidden":false,"type":"editorial-bullet-list"},{"content":{"headlineink":"Bereit?","headlineaccent":"","image":[],"cards":[{"title":"Bereit?","buttontext":"Bewerbung starten","buttonurl":"mailto:hello@school-of-ideas.de","buttonstyle":"mint","text":""}],"sectiontheme":"blue","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"edff17ce-b584-46b4-90dc-5f2203aa3f59","isHidden":false,"type":"conversion-section"}]
+
+----
+
+Kicker: 
 
 ----
 
@@ -15,6 +19,14 @@ Headlineaccent: Nicht, wie perfekt du schon bist.
 ----
 
 Intro: Für die Bewerbung zählt Neugier, Haltung und ein Gefühl für Ideen. Ein fertiges Profi-Portfolio brauchst du nicht.
+
+----
+
+Metadescription: Bewerbung für die school of ideas: Ablauf, Anforderungen und nächster Schritt.
+
+----
+
+Headline: Zeig uns, wie du denkst. Nicht, wie perfekt du schon bist.
 
 ----
 
@@ -69,10 +81,6 @@ Sections:
   buttonPaddingBottomPx: 16
   spacingTop: large
   spacingBottom: large
-
-----
-
-Metadescription: Bewerbung für die school of ideas: Ablauf, Anforderungen und nächster Schritt.
 
 ----
 

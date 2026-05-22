@@ -1,0 +1,69 @@
+name: Agentur-Grid mit Filter
+icon: grid
+preview: fields
+
+tabs:
+  content:
+    label: Inhalt
+    icon: filter
+    fields:
+      sectionInfo:
+        label: Auto-Grid
+        type: info
+        theme: positive
+        text: >
+          Dieser Block ist NUR für die Agenturen-Übersicht gedacht. Er liest
+          automatisch alle Agentur-Unterseiten und stellt sie ins 4-Spalten-Raster.
+          Position (Spalte / Zeile / Breite) wird pro Agentur in der jeweiligen
+          Agentur-Unterseite eingestellt. Filter werden automatisch aus den
+          Metadaten der Agenturen gebildet.
+      filterHead:
+        label: Filter (Spaltenköpfe)
+        type: headline
+      filterLabelLocation:
+        label: Label "Standort"
+        type: text
+        default: Standort
+        width: 1/4
+      filterLabelWorkmode:
+        label: Label "Arbeitsweise"
+        type: text
+        default: Arbeitsweise
+        width: 1/4
+      filterLabelDisciplines:
+        label: Label "Schwerpunkte"
+        type: text
+        default: Schwerpunkte
+        width: 1/4
+      filterLabelSize:
+        label: Label "Agenturgröße"
+        type: text
+        default: Agenturgröße
+        width: 1/4
+      gridHead:
+        label: Grid-Einstellungen
+        type: headline
+      gridCols:
+        label: Spalten
+        type: number
+        default: 4
+        min: 2
+        max: 6
+        width: 1/3
+      patternInfo:
+        label: Pattern (drunter / rechts gemischt)
+        type: info
+        text: >
+          Pro Agentur werden jetzt ZWEI Grid-Cells gerendert: ein Bild-Tile +
+          ein Text-Tile. Die Text-Position (drunter ODER rechts vom Bild)
+          steht pro Pattern-Position fest und liegt im Code
+          (`site/snippets/blocks/agency-grid.php`, Variable `$patternPositions`).
+          So entsteht der gemischte Designer-Rhythmus.
+      tileLabel:
+        label: "Tile-Label-Template"
+        type: text
+        default: "Erfahre mehr über die {schwerpunkte} Agentur aus {ort}"
+        help: "Platzhalter: {name} {ort} {schwerpunkte} {groesse} {arbeitsweise}"
+
+  layout:
+    extends: sections/block-layout-tab

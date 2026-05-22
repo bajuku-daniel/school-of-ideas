@@ -14,7 +14,67 @@ Headlineaccent: mit Wirkung im Alltag.
 
 ----
 
-Intro: Radial entwickelt digitale Kampagnen, Plattformen und Experiences für Marken mit Haltung.
+Body: Hier lernst du, wie Konzept, UX, Design und Entwicklung zusammenspielen. Du arbeitest an Prototypen, Content-Systemen und digitalen Touchpoints.
+
+----
+
+Cards: 
+
+----
+
+Website: https://example.com
+
+----
+
+Contactemail: 
+
+----
+
+Logo: 
+
+----
+
+Location: Köln
+
+----
+
+Arbeitsweise: remote
+
+----
+
+Groesse: 5-10
+
+----
+
+Schwerpunkte: Web/Digital, Content
+
+----
+
+Discipline: Digital
+
+----
+
+Setup: Spezialagentur
+
+----
+
+Gridcol: 4
+
+----
+
+Gridrow: 1
+
+----
+
+Gridspan: 1
+
+----
+
+Builder: 
+
+----
+
+Metadescription: 
 
 ----
 
@@ -38,27 +98,7 @@ Contentspacingbottompx: 140
 
 ----
 
-Body: Hier lernst du, wie Konzept, UX, Design und Entwicklung zusammenspielen. Du arbeitest an Prototypen, Content-Systemen und digitalen Touchpoints.
-
-----
-
-Location: Köln
-
-----
-
-Discipline: Digital
-
-----
-
-Setup: Spezialagentur
-
-----
-
 Tags: UX, Prototyping, Experience
-
-----
-
-Website: https://example.com
 
 ----
 

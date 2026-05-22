@@ -2,7 +2,11 @@ Title: Impressum
 
 ----
 
-Headline: Impressum
+Builder: [{"content":{"layout":"1col","headlineink":"Angaben gemäß § 5 TMG","headlineaccent":"","sub":"","body":"","columns":[],"image":[],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"78e4eefb-fe0f-4bec-b6bc-a984d56a0ff3","isHidden":false,"type":"editorial-split-intro"}]
+
+----
+
+Kicker: 
 
 ----
 
@@ -15,6 +19,14 @@ Headlineaccent: Rechtliches
 ----
 
 Intro: Platzhalter für die rechtlichen Angaben. Hier können Anbieterkennzeichnung, Adresse, Kontakt und Vertretungsberechtigte gepflegt werden.
+
+----
+
+Metadescription: Impressum der school of ideas.
+
+----
+
+Headline: Impressum
 
 ----
 
@@ -47,10 +59,6 @@ Sections:
     E-Mail: hello@school-of-ideas.de
   spacingTop: small
   spacingBottom: large
-
-----
-
-Metadescription: Impressum der school of ideas.
 
 ----
 

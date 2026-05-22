@@ -1,0 +1,93 @@
+name: Work-Showcase (Case)
+icon: video
+preview: fields
+
+tabs:
+  content:
+    label: Inhalt
+    icon: text
+    fields:
+      sectionInfo:
+        label: Case-Sektion
+        type: info
+        theme: blue
+        text: >
+          Wiederkehrendes Schema für Cases auf Agentur-Detailseiten. Oben Media
+          (Video / 2 / 3 Bilder), darunter Case-Titel + 2-spaltiger Text.
+      mediaMode:
+        label: Media-Modus
+        type: toggles
+        default: image2
+        options:
+          video:  Video
+          image2: 2 Bilder
+          image3: 3 Bilder
+      video:
+        label: Video
+        type: files
+        max: 1
+        uploads:
+          template: image
+        layout: cards
+        when:
+          mediaMode: video
+      videoPoster:
+        label: Video Poster (Fallback)
+        type: files
+        max: 1
+        uploads: image
+        layout: cards
+        when:
+          mediaMode: video
+      videoLabel:
+        label: Video-Label (z. B. "Video")
+        type: text
+        default: Video
+        when:
+          mediaMode: video
+      imagesHead:
+        label: Bilder
+        type: headline
+        when:
+          mediaMode: image2
+      images2:
+        label: Zwei Bilder
+        type: files
+        max: 2
+        min: 2
+        uploads: image
+        layout: cards
+        when:
+          mediaMode: image2
+      images3:
+        label: Drei Bilder
+        type: files
+        max: 3
+        min: 3
+        uploads: image
+        layout: cards
+        when:
+          mediaMode: image3
+      caseHead:
+        label: Case-Beschreibung
+        type: headline
+      caseTitle:
+        label: Case-Titel
+        type: text
+        placeholder: z. B. "Oreo Square Cookie"
+      caseTextLeft:
+        label: Text (linke Spalte)
+        type: textarea
+        width: 1/2
+        help: Absätze mit Leerzeile trennen.
+      caseTextRight:
+        label: Text (rechte Spalte)
+        type: textarea
+        width: 1/2
+
+  layout:
+    extends: sections/block-layout-tab
+  icon:
+    extends: sections/block-icon-tab
+  shadow:
+    extends: sections/block-shadow-tab

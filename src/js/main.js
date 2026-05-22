@@ -555,3 +555,120 @@ if ('IntersectionObserver' in window) {
     elementObserver.observe(el);
   });
 }
+
+/* ============================================================
+   Agency-Grid Filter — multi-select Toggle pro Spalte (Standort,
+   Arbeitsweise, Schwerpunkte, Größe). Tiles werden ein-/ausgeblendet.
+   ============================================================ */
+document.querySelectorAll('[data-agency-grid]').forEach((grid) => {
+  // Initial-Load: Stagger-Animation startet erst wenn das Grid in den
+  // Viewport scrollt. Scroll-Listener-Fallback (IntersectionObserver
+  // verhält sich in manchen Setups quirky bei sehr großen Elementen).
+  let revealed = false;
+  const reveal = () => {
+    if (revealed) return;
+    revealed = true;
+    grid.classList.add('is-revealed');
+    window.removeEventListener('scroll', checkInView);
+  };
+  const checkInView = () => {
+    const r = grid.getBoundingClientRect();
+    // Trigger sobald oberer Rand 80% des Viewports erreicht
+    if (r.top < window.innerHeight * 0.8 && r.bottom > 0) reveal();
+  };
+  window.addEventListener('scroll', checkInView, { passive: true });
+  // Beim Load: prüfen ob's eh schon in view ist
+  checkInView();
+
+  const filterRoot = grid.parentElement.querySelector('[data-filters]');
+  if (!filterRoot) return;
+
+  const active = {
+    location: new Set(),
+    arbeitsweise: new Set(),
+    schwerpunkte: new Set(),
+    groesse: new Set(),
+  };
+
+  const anyFilterActive = () =>
+    Object.values(active).some((s) => s.size > 0);
+
+  // Sammelt Tiles in Reihenfolge der Agentur-Pairs (img dann text).
+  // Setzt explizite Grid-Positionen so dass jedes Pair in einer Reihe bleibt,
+  // 2 Pairs pro Reihe (4-col grid).
+  const reflowVisibleTiles = () => {
+    const allTiles = Array.from(grid.querySelectorAll('.agency-grid__tile'));
+    let visiblePairIdx = 0;
+    // Iteriere in Pairs: img-Tile (gerade idx) + zugehöriges text-Tile (ungerade idx)
+    for (let i = 0; i < allTiles.length; i += 2) {
+      const imgTile = allTiles[i];
+      const textTile = allTiles[i + 1];
+      const imgVisible = imgTile && !imgTile.classList.contains('is-hidden');
+      const textVisible = textTile && !textTile.classList.contains('is-hidden');
+      if (!imgVisible && !textVisible) continue;
+      // Position für dieses Pair: 2 Pairs pro Reihe → col 1+2 oder 3+4
+      const pairCol = (visiblePairIdx % 2) * 2 + 1;
+      const pairRow = Math.floor(visiblePairIdx / 2) + 1;
+      if (imgTile) {
+        imgTile.style.setProperty('--filter-col', pairCol);
+        imgTile.style.setProperty('--filter-row', pairRow);
+      }
+      if (textTile) {
+        textTile.style.setProperty('--filter-col', pairCol + 1);
+        textTile.style.setProperty('--filter-row', pairRow);
+      }
+      visiblePairIdx++;
+    }
+  };
+
+  const resetTileFlow = () => {
+    grid.querySelectorAll('.agency-grid__tile').forEach((t) => {
+      t.style.removeProperty('--filter-col');
+      t.style.removeProperty('--filter-row');
+    });
+  };
+
+  const applyFilterState = () => {
+    grid.querySelectorAll('.agency-grid__tile').forEach((tile) => {
+      let visible = true;
+      for (const key of Object.keys(active)) {
+        const wanted = active[key];
+        if (wanted.size === 0) continue;
+        const val = tile.dataset[key] || '';
+        if (key === 'schwerpunkte') {
+          const vals = val.split('|').filter(Boolean);
+          if (!vals.some((v) => wanted.has(v))) { visible = false; break; }
+        } else {
+          if (!wanted.has(val)) { visible = false; break; }
+        }
+      }
+      tile.classList.toggle('is-hidden', !visible);
+    });
+    const filtered = anyFilterActive();
+    grid.classList.toggle('is-filtered', filtered);
+    if (filtered) {
+      reflowVisibleTiles();
+    } else {
+      resetTileFlow();
+    }
+  };
+
+  // Filter-Update läuft instant. CSS Transitions auf opacity + transform
+  // sorgen für smoothes Fading der Tiles. KEIN View-Transitions Cross-Fade,
+  // weil das alte und neue Tile-Positionen kurzfristig überlappen ließ.
+  const update = () => {
+    applyFilterState();
+  };
+
+  filterRoot.querySelectorAll('button[data-filter]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.filter;
+      const val = btn.dataset.value;
+      const set = active[key];
+      if (!set) return;
+      if (set.has(val)) { set.delete(val); btn.classList.remove('is-active'); }
+      else              { set.add(val);    btn.classList.add('is-active'); }
+      update();
+    });
+  });
+});

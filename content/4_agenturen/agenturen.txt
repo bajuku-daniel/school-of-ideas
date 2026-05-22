@@ -2,7 +2,11 @@ Title: Agenturen
 
 ----
 
-Headline: Agenturen, in denen du nicht zuschaust, sondern mitarbeitest.
+Builder: [{"content":{"filterlabellocation":"Standort","filterlabelworkmode":"Arbeitsweise","filterlabeldisciplines":"Schwerpunkte","filterlabelsize":"Agenturgröße","gridcols":4,"tilelabel":"Erfahre mehr über die {schwerpunkte} Agentur aus {ort}","sectiontheme":"","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":""},"id":"85de2413-b5be-4b00-8ae6-4ffd800e3282","isHidden":false,"type":"agency-grid"},{"content":{"headlineink":"Kreativität hat immer Zukunft","headlineaccent":"Und wir bilden die Talente aus, die sie gestalten.","image":[],"cards":[{"title":"Du willst Kreativität zum Beruf machen?","buttontext":"Jetzt bewerben","buttonurl":"/bewerbung","buttonstyle":"mint","text":""},{"title":"Du hast eine Agentur und suchst guten Nachwuchs?","buttontext":"Jetzt mitmachen","buttonurl":"/agenturen/kontakt","buttonstyle":"mint","text":""}],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"glasses-bold","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"wobble","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":80,"icondesktopy":60,"icondesktopsize":140,"icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"93678e44-7ae2-4792-9ce4-2f8a7afaf79f","isHidden":false,"type":"conversion-section"}]
+
+----
+
+Kicker: 
 
 ----
 
@@ -15,6 +19,14 @@ Headlineaccent: sondern mitarbeitest.
 ----
 
 Intro: Unsere Partneragenturen öffnen Teams, Projekte und Perspektiven. Filtere nach Standort, Schwerpunkt oder Setup und finde heraus, wo dein Jahr Gestalt annehmen kann.
+
+----
+
+Metadescription: Übersicht der Partneragenturen der school of ideas mit Filtern nach Standort, Schwerpunkt und Setup.
+
+----
+
+Headline: Agenturen, in denen du nicht zuschaust, sondern mitarbeitest.
 
 ----
 
@@ -56,10 +68,6 @@ Sections:
       icon: shooting-star
       heading: Raum zum Wachsen
       text: Teams, in denen Neugier wichtiger ist als fertige Antworten.
-
-----
-
-Metadescription: Übersicht der Partneragenturen der school of ideas mit Filtern nach Standort, Schwerpunkt und Setup.
 
 ----
 

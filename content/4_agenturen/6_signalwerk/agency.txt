@@ -14,7 +14,67 @@ Headlineaccent: für Marken mit Tempo.
 
 ----
 
-Intro: Signalwerk denkt Kampagnen aus der Logik von Plattformen, Communities und Echtzeitkultur.
+Body: Du bist nah an Trends, Formaten und schnellen Prototypen. Ein guter Ort, wenn du Lust auf Tempo und klare Pointen hast.
+
+----
+
+Cards: 
+
+----
+
+Website: https://example.com
+
+----
+
+Contactemail: 
+
+----
+
+Logo: 
+
+----
+
+Location: Hamburg
+
+----
+
+Arbeitsweise: onsite
+
+----
+
+Groesse: 50-100
+
+----
+
+Schwerpunkte: Social Media, Influencer Marketing
+
+----
+
+Discipline: Social
+
+----
+
+Setup: Spezialagentur
+
+----
+
+Gridcol: 4
+
+----
+
+Gridrow: 3
+
+----
+
+Gridspan: 1
+
+----
+
+Builder: 
+
+----
+
+Metadescription: 
 
 ----
 
@@ -38,27 +98,7 @@ Contentspacingbottompx: 140
 
 ----
 
-Body: Du bist nah an Trends, Formaten und schnellen Prototypen. Ein guter Ort, wenn du Lust auf Tempo und klare Pointen hast.
-
-----
-
-Location: Hamburg
-
-----
-
-Discipline: Social
-
-----
-
-Setup: Spezialagentur
-
-----
-
 Tags: TikTok, Creator, Plattformen
-
-----
-
-Website: https://example.com
 
 ----
 

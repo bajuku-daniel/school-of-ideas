@@ -1,0 +1,82 @@
+# Shared Shadow-Tab für Bild-Blocks (image, hero-foto, etc.) — steuert den
+# blauen Backdrop-Shadow per Breakpoint (Offset X/Y + Rotation + Bild-Rotation).
+label: Bild-Schatten
+icon: shape
+fields:
+  shadowInfo:
+    label: Blauer Schlagschatten
+    type: info
+    theme: blue
+    text: >
+      Position und Rotation des blauen Schatten-Rechtecks hinter dem Bild,
+      pro Breakpoint. Plus Rotation des Bildes selbst.
+      Positive X = nach rechts, positive Y = nach unten.
+  mobileShadowHead:
+    label: Mobile
+    type: headline
+  shadowXMobile:
+    label: Schatten X
+    type: number
+    after: px
+    width: 1/4
+  shadowYMobile:
+    label: Schatten Y
+    type: number
+    after: px
+    width: 1/4
+  shadowRotateMobile:
+    label: Schatten °
+    type: number
+    after: °
+    width: 1/4
+  motivRotateMobile:
+    label: Bild °
+    type: number
+    after: °
+    width: 1/4
+  tabletShadowHead:
+    label: Tablet
+    type: headline
+  shadowXTablet:
+    label: Schatten X
+    type: number
+    after: px
+    width: 1/4
+  shadowYTablet:
+    label: Schatten Y
+    type: number
+    after: px
+    width: 1/4
+  shadowRotateTablet:
+    label: Schatten °
+    type: number
+    after: °
+    width: 1/4
+  motivRotateTablet:
+    label: Bild °
+    type: number
+    after: °
+    width: 1/4
+  desktopShadowHead:
+    label: Desktop
+    type: headline
+  shadowXDesktop:
+    label: Schatten X
+    type: number
+    after: px
+    width: 1/4
+  shadowYDesktop:
+    label: Schatten Y
+    type: number
+    after: px
+    width: 1/4
+  shadowRotateDesktop:
+    label: Schatten °
+    type: number
+    after: °
+    width: 1/4
+  motivRotateDesktop:
+    label: Bild °
+    type: number
+    after: °
+    width: 1/4

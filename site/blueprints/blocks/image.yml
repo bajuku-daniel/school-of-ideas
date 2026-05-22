@@ -1,0 +1,55 @@
+name: Bild (mit Schatten)
+icon: image
+preview: fields
+
+tabs:
+  content:
+    label: Inhalt
+    icon: image
+    fields:
+      sectionInfo:
+        label: Stand-Alone-Bild
+        type: info
+        theme: blue
+        text: >
+          Einzelnes Bild mit dem typischen blauen Schlagschatten und
+          schräger Rotation. Format wählbar (landscape/square/portrait/custom).
+      aspect:
+        label: Bildformat
+        type: toggles
+        default: landscape
+        options:
+          landscape: Landscape (16/11)
+          square: Quadrat (1/1)
+          portrait: Hochkant (3/4)
+          custom: Eigene Aspect-Ratio
+      aspectCustom:
+        label: Aspect-Ratio (Breite / Höhe)
+        type: text
+        placeholder: z. B. 4 / 3
+        when:
+          aspect: custom
+      align:
+        label: Ausrichtung
+        type: toggles
+        default: center
+        options:
+          left: Links
+          center: Zentriert
+          right: Rechts
+      image:
+        label: Bild
+        type: files
+        max: 1
+        uploads: image
+        layout: cards
+      caption:
+        label: Bildunterschrift (optional)
+        type: text
+
+  layout:
+    extends: sections/block-layout-tab
+  shadow:
+    extends: sections/block-shadow-tab
+  icon:
+    extends: sections/block-icon-tab

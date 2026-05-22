@@ -2,7 +2,11 @@ Title: FAQ
 
 ----
 
-Headline: Fragen, die wahrscheinlich gerade in deinem Kopf sind.
+Builder: [{"content":{"headlineink":"Das Wichtigste","headlineaccent":"","groups":[{"title":"","questions":[{"question":"Kostet das Programm etwas?","answer":"Nein. Du zahlst keine Studiengebühren und verdienst in der Agentur Geld."},{"question":"Muss ich schon ein Portfolio haben?","answer":"Ein paar Arbeiten helfen, aber wichtiger ist, wie du denkst und woran du wachsen willst."},{"question":"Wo findet das statt?","answer":"Die Agenturphase hängt vom Standort der Partneragentur ab. Die School-Tage werden gesondert kommuniziert."},{"question":"Wie lange dauert das?","answer":"Das Programm läuft ein Jahr."}]}],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":""},"id":"511525a8-2d81-49d7-ba94-39b7bc9443fa","isHidden":false,"type":"question-answers"}]
+
+----
+
+Kicker: 
 
 ----
 
@@ -15,6 +19,14 @@ Headlineaccent: gerade in deinem Kopf sind.
 ----
 
 Intro: Kurz und ehrlich beantwortet. Wenn etwas fehlt, melden wir es nach.
+
+----
+
+Metadescription: Häufige Fragen zur school of ideas, Bewerbung, Ablauf und Kosten.
+
+----
+
+Headline: Fragen, die wahrscheinlich gerade in deinem Kopf sind.
 
 ----
 
@@ -53,10 +65,6 @@ Sections:
       answer: Das Programm läuft ein Jahr.
   spacingTop: normal
   spacingBottom: large
-
-----
-
-Metadescription: Häufige Fragen zur school of ideas, Bewerbung, Ablauf und Kosten.
 
 ----
 

@@ -1,0 +1,86 @@
+name: Bild-Grid
+icon: image
+preview: fields
+
+tabs:
+  content:
+    label: Inhalt
+    icon: image
+    fields:
+      sectionInfo:
+        label: Bild-Grid
+        type: info
+        theme: blue
+        text: >
+          Mehrere Bilder im 4-Spalten-Raster. Jedes Bild bekommt Spalte (1–4),
+          Zeile (1–N) und optional eine Breite (1–4 Spalten). Mit oder ohne blauen Schatten.
+      cols:
+        label: Spalten gesamt
+        type: number
+        default: 4
+        min: 1
+        max: 6
+        width: 1/2
+      shadow:
+        label: Blauer Schatten
+        type: toggles
+        default: 'on'
+        width: 1/2
+        options:
+          'on':  An
+          'off': Aus
+      items:
+        label: Bilder
+        type: structure
+        columns:
+          image:
+            width: 1/3
+          col:
+            width: 1/6
+          row:
+            width: 1/6
+          span:
+            width: 1/6
+        fields:
+          image:
+            label: Bild
+            type: files
+            max: 1
+            uploads: image
+            layout: cards
+          caption:
+            label: Bildunterschrift (optional)
+            type: text
+          col:
+            label: Spalte (1–4)
+            type: number
+            default: 1
+            min: 1
+            max: 6
+            width: 1/3
+          row:
+            label: Zeile (1–N)
+            type: number
+            default: 1
+            min: 1
+            width: 1/3
+          span:
+            label: Breite (Spalten)
+            type: number
+            default: 1
+            min: 1
+            max: 6
+            width: 1/3
+          aspect:
+            label: Bildformat
+            type: select
+            default: landscape
+            options:
+              landscape: Landscape
+              square: Quadrat
+              portrait: Hochkant
+
+  layout:
+    extends: sections/block-layout-tab
+  icon:
+    extends: sections/block-icon-tab

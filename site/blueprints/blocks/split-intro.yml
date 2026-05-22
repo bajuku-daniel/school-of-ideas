@@ -1,0 +1,69 @@
+name: Split-Intro
+icon: rectangle-vertical
+preview: fields
+
+tabs:
+  content:
+    label: Inhalt
+    icon: text
+    fields:
+      sectionInfo:
+        label: Split-Intro
+        type: info
+        theme: blue
+        text: >
+          Zwei-spaltiger Einstieg: links Headline + Bild, rechts Sub-Headline,
+          Fließtext und CTAs. Verwendet z. B. direkt unter dem Hero.
+      headlineInk:
+        label: Headline (schwarz)
+        type: textarea
+        buttons: false
+        width: 1/2
+      headlineAccent:
+        label: Headline (blau)
+        type: textarea
+        buttons: false
+        width: 1/2
+      sub:
+        label: Sub-Headline (fett)
+        type: textarea
+        buttons: false
+      body:
+        label: Fließtext
+        type: textarea
+        help: Absätze mit einer Leerzeile trennen.
+      imageHeadline:
+        label: Bild
+        type: headline
+      image:
+        label: Bild
+        type: files
+        max: 1
+        uploads: image
+        layout: cards
+      ctaHeadline:
+        label: Buttons
+        type: headline
+      ctaPrimaryText:
+        label: Primary-Button Text
+        type: text
+        width: 1/4
+      ctaPrimaryUrl:
+        label: Primary-Button Link
+        type: text
+        width: 1/4
+      ctaSecondaryText:
+        label: Ghost-Link Text
+        type: text
+        width: 1/4
+      ctaSecondaryUrl:
+        label: Ghost-Link URL
+        type: text
+        width: 1/4
+
+  layout:
+    extends: sections/block-layout-tab
+  icon:
+    extends: sections/block-icon-tab
+  shadow:
+    extends: sections/block-shadow-tab

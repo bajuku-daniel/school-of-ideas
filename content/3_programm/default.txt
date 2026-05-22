@@ -2,7 +2,11 @@ Title: Programm
 
 ----
 
-Headline: Ein Jahr Praxis. Ein Jahr Entwicklung. Ein ziemlich guter Anfang.
+Builder: [{"content":{"headlineink":"So ist das Jahr aufgebaut","headlineaccent":"","sub":"","bulletkey":"","bulletupload":[],"items":[{"text":"Agenturpraxis\nVier Tage pro Woche bist du Teil eines Agenturteams und arbeitest an realen Aufgaben.","col":1,"row":1},{"text":"School Friday\nFreitags geht es um Idee, Haltung, Tools, KI, Feedback und dein Portfolio.","col":2,"row":1},{"text":"Coaching\nDu bekommst Orientierung, Sparring und ehrliche Rückmeldungen zu deiner Entwicklung.","col":3,"row":1}],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":""},"id":"d15250cd-04d5-4dfa-a0f7-a3339d209eb1","isHidden":false,"type":"editorial-bullet-list"},{"content":{"headlineink":"Klingt nach deinem nächsten Schritt?","headlineaccent":"","image":[],"cards":[{"title":"Klingt nach deinem nächsten Schritt?","buttontext":"Bewerbung ansehen","buttonurl":"/bewerbung","buttonstyle":"mint","text":""}],"sectiontheme":"mint","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"a3764927-c8d4-4589-9c0c-8e67c940aada","isHidden":false,"type":"conversion-section"},{"content":{"layout":"1col","headlineink":"","headlineaccent":"","sub":"","body":"","columns":[],"image":[],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","iconkey":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","iconmobilex":"","iconmobiley":"","iconmobilesize":"","iconmobilerotate":"","icontabletx":"","icontablety":"","icontabletsize":"","icontabletrotate":"","icondesktopx":"","icondesktopy":"","icondesktopsize":"","icondesktoprotate":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"5f06567a-342d-4e00-b95d-ec7c196a71c9","isHidden":false,"type":"editorial-split-intro"}]
+
+----
+
+Kicker: 
 
 ----
 
@@ -14,11 +18,15 @@ Headlineaccent:
 
 ----
 
-Kicker: 
+Intro: Vier Tage Agentur, ein Tag school of ideas. Du arbeitest an echten Projekten, bekommst Feedback von Menschen aus der Branche und entwickelst dein kreatives Profil weiter.
 
 ----
 
-Intro: Vier Tage Agentur, ein Tag school of ideas. Du arbeitest an echten Projekten, bekommst Feedback von Menschen aus der Branche und entwickelst dein kreatives Profil weiter.
+Metadescription: Das einjährige Programm der school of ideas verbindet bezahlte Agenturpraxis mit kreativer Weiterentwicklung.
+
+----
+
+Headline: Ein Jahr Praxis. Ein Jahr Entwicklung. Ein ziemlich guter Anfang.
 
 ----
 
@@ -112,10 +120,6 @@ Sections:
   spacingbottom: normal
   spacingtoppx: ""
   spacingbottompx: ""
-
-----
-
-Metadescription: Das einjährige Programm der school of ideas verbindet bezahlte Agenturpraxis mit kreativer Weiterentwicklung.
 
 ----
 

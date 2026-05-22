@@ -72,6 +72,7 @@
       background: #111;
       box-shadow: 0 24px 50px -28px rgba(0,0,0,.35);
       transform: rotate(var(--motiv-rot)) translateZ(0);
+      transform-origin: 50% 50%;       // Rotation um Bild-Mittelpunkt
       // Keine CSS-transition: das Update passiert in main.js bereits
       // pro Frame (rAF-throttled).  Eine zusätzliche Transition würde
       // mit dem JS-Update kämpfen → Jank auf iOS / Firefox.
@@ -90,6 +91,7 @@
       transform:
         translate3d(var(--motiv-shadow-x), var(--motiv-shadow-y), 0)
         rotate(var(--motiv-shadow-rot));
+      transform-origin: 50% 50%;       // Rotation um Schatten-Mittelpunkt
       will-change: transform;
       backface-visibility: hidden;
       z-index: 1;

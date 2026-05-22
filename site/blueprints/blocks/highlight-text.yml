@@ -1,0 +1,62 @@
+name: Highlight-Text (Manifest)
+icon: dots
+preview: fields
+
+tabs:
+  content:
+    label: Inhalt
+    icon: text
+    fields:
+      sectionInfo:
+        label: Highlight-Text mit Inline-Icons
+        type: info
+        theme: blue
+        text: >
+          Lange Statement-Absätze mit Inline-Icons. Icons werden im Text per
+          `{icon:name}` referenziert (z. B. `{icon:airplane}`). Die Icons selbst
+          legst du unten im "Icon-Pool" ab.
+      paragraphs:
+        label: Absätze
+        type: structure
+        columns:
+          text:
+            width: 1/1
+        fields:
+          text:
+            label: Text
+            type: textarea
+            buttons: false
+            help: >
+              Inline-Icons mit Token einsetzen, z. B. `{icon:airplane}`.
+              Verfügbare Namen aus dem Icon-Pool unten.
+      iconPoolHeadline:
+        label: Icon-Pool (lokal in dieser Sektion)
+        type: headline
+      iconPool:
+        label: Icons in diesem Block
+        type: structure
+        columns:
+          key:
+            width: 1/2
+          file:
+            width: 1/2
+        fields:
+          key:
+            label: Token-Name
+            type: slug
+            help: Im Text als `{icon:NAME}` verwendet. Nur Kleinbuchstaben + Bindestriche.
+          file:
+            label: PNG/SVG
+            type: files
+            max: 1
+            uploads:
+              template: image
+            layout: cards
+            image:
+              cover: false
+              back: white
+
+  layout:
+    extends: sections/block-layout-tab
+  icon:
+    extends: sections/block-icon-tab

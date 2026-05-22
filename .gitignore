@@ -14,3 +14,5 @@ public/video/hero.mp4
 .vscode
 .DS_Store
 *.log
+# Content-Backups vom Migrations-Script
+content/**/*.bak-*

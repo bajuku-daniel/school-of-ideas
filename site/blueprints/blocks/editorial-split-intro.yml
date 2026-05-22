@@ -1,0 +1,77 @@
+name: Editorial Split-Intro
+icon: layout-cards
+preview: fields
+
+tabs:
+  content:
+    label: Inhalt
+    icon: text
+    fields:
+      sectionInfo:
+        label: Editorial Split-Intro
+        type: info
+        theme: blue
+        text: >
+          Sektion mit Headline (schwarz + blau) und 1/2/3 Spalten Text.
+          Optional mit Bild und/oder Sub-Headline. Variantenwahl steuert das Layout.
+      layout:
+        label: Spalten-Layout
+        type: toggles
+        default: '1col'
+        options:
+          1col: 1 Spalte (mit Bild)
+          2col: 2 Spalten (Lead + Body, mit Bild)
+          3col: 3 Spalten (Textgrid)
+      headlineInk:
+        label: Headline (schwarz)
+        type: text
+        width: 1/2
+      headlineAccent:
+        label: Headline (blau)
+        type: text
+        width: 1/2
+      sub:
+        label: Sub-Headline (fett, optional)
+        type: textarea
+        buttons: false
+        when:
+          layout: 1col
+      body:
+        label: Fließtext
+        type: textarea
+        help: Absätze mit Leerzeile trennen.
+        when:
+          layout: 1col
+      columns:
+        label: Spalten
+        type: structure
+        columns:
+          lead:
+            width: 1/2
+          body:
+            width: 1/2
+        fields:
+          lead:
+            label: Lead (fett)
+            type: textarea
+            buttons: false
+          body:
+            label: Body (regular)
+            type: textarea
+            help: Absätze mit Leerzeile trennen.
+      imageHeadline:
+        label: Bild (optional)
+        type: headline
+      image:
+        label: Bild
+        type: files
+        max: 1
+        uploads: image
+        layout: cards
+
+  layout:
+    extends: sections/block-layout-tab
+  icon:
+    extends: sections/block-icon-tab
+  shadow:
+    extends: sections/block-shadow-tab

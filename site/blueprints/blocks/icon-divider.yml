@@ -1,0 +1,91 @@
+name: Icon-Divider
+icon: star
+preview: fields
+
+tabs:
+  content:
+    label: Inhalt
+    icon: star
+    fields:
+      sectionInfo:
+        label: Trenner-Icon
+        type: info
+        theme: blue
+        text: >
+          Großes dekoratives Icon zentriert auf eigener Sektion. Trennt
+          benachbarte Inhalte sanft, ohne harte Linie.
+      iconKey:
+        label: Aus Bibliothek
+        type: select
+        empty: "—"
+        width: 1/2
+        options:
+          airplane: Papierflieger
+          bag: Tasche
+          bottle: Flasche
+          cloud: Wolke
+          comet: Komet
+          document: Dokument
+          glasses: Brille
+          glasses-bold: Brille (fett)
+          leaf: Blatt
+          lightbulb: Glühbirne
+          lightning: Blitz
+          pencil: Stift
+          puzzle: Puzzle
+          shooting-star: Sternschnuppe
+          spark: Spark
+          sparkles: Sparkles
+          sparkles-line: Sparkles Linie
+          star: Stern
+          starlight: Sternlicht
+          swirl: Wirbel
+      iconUpload:
+        label: Eigene Datei (Override)
+        type: files
+        max: 1
+        uploads: image
+        layout: cards
+        width: 1/2
+      sizeHead:
+        label: Größe + Animation
+        type: headline
+      sizeMobile:
+        label: Größe Mobile
+        type: number
+        after: px
+        placeholder: 64
+        width: 1/3
+      sizeTablet:
+        label: Größe Tablet
+        type: number
+        after: px
+        placeholder: 90
+        width: 1/3
+      sizeDesktop:
+        label: Größe Desktop
+        type: number
+        after: px
+        placeholder: 120
+        width: 1/3
+      iconMotion:
+        label: Bewegung
+        type: toggles
+        default: wobble
+        width: 1/2
+        options:
+          none: Keine
+          wobble: Waber
+          glide: Glide
+      align:
+        label: Ausrichtung
+        type: toggles
+        default: center
+        width: 1/2
+        options:
+          left: Links
+          center: Zentriert
+          right: Rechts
+
+  layout:
+    extends: sections/block-layout-tab

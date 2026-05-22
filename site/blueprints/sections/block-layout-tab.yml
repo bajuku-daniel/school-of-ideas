@@ -1,0 +1,63 @@
+# Shared Layout-Tab für jeden Block.
+# Wird via `extends: sections/block-layout-tab` aus Block-Blueprints geladen.
+# Liefert: Hintergrund-Theme, Anker-ID, Abstände (oben/unten × Mobile/Tablet/Desktop).
+label: Layout
+icon: dashboard
+fields:
+  layoutInfo:
+    label: Layout + Abstände
+    type: info
+    theme: blue
+    text: >
+      Hintergrund, Anker-Link und Abstände der Sektion. Abstände in Pixeln,
+      separat pro Breakpoint. Leere Felder erben den globalen Default.
+  sectionTheme:
+    label: Hintergrund
+    type: toggles
+    default: light
+    width: 1/2
+    options:
+      light: Hell
+      mint: Mint
+      blue: Blau
+  anchorId:
+    label: Anker-ID (für #links)
+    type: text
+    width: 1/2
+    placeholder: z. B. about
+  spacingHeadline:
+    label: Abstand oben (Mobile / Tablet / Desktop)
+    type: headline
+  spacingTopMobile:
+    label: Mobile
+    type: number
+    after: px
+    width: 1/3
+  spacingTopTablet:
+    label: Tablet
+    type: number
+    after: px
+    width: 1/3
+  spacingTopDesktop:
+    label: Desktop
+    type: number
+    after: px
+    width: 1/3
+  spacingBottomHeadline:
+    label: Abstand unten (Mobile / Tablet / Desktop)
+    type: headline
+  spacingBottomMobile:
+    label: Mobile
+    type: number
+    after: px
+    width: 1/3
+  spacingBottomTablet:
+    label: Tablet
+    type: number
+    after: px
+    width: 1/3
+  spacingBottomDesktop:
+    label: Desktop
+    type: number
+    after: px
+    width: 1/3

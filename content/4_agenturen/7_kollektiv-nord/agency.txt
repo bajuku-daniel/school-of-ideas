@@ -1,0 +1,73 @@
+Title: Kollektiv Nord
+
+----
+
+Headline: Kollektiv Nord
+
+----
+
+Headlineink: Kollektiv Nord
+
+----
+
+Headlineaccent: 
+
+----
+
+Body: 
+
+----
+
+Cards: 
+
+----
+
+Website: 
+
+----
+
+Contactemail: 
+
+----
+
+Logo: 
+
+----
+
+Location: Hamburg
+
+----
+
+Arbeitsweise: remote
+
+----
+
+Groesse: 10-30
+
+----
+
+Schwerpunkte: Branding, Strategie
+
+----
+
+Discipline: Strategie
+
+----
+
+Setup: Independent
+
+----
+
+Builder: 
+
+----
+
+Metadescription: 
+
+----
+
+Intro: Erfahre mehr über die Strategie-Agentur aus Hamburg.
+
+----
+
+Uuid: jvdhdk7bt7qstwca
