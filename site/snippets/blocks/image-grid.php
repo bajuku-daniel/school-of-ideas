@@ -27,7 +27,7 @@ $aspectMap = ['landscape' => '16 / 11', 'square' => '1 / 1', 'portrait' => '3 / 
             <span class="motiv__shadow" aria-hidden="true"></span>
           <?php endif ?>
           <div class="motiv__frame">
-            <img class="motiv__img" src="<?= esc($imgUrl) ?>"<?= soi_image_focus_attr($img) ?> alt="<?= esc($caption) ?>">
+            <img class="motiv__img" src="<?= esc($imgUrl) ?>"<?= soi_image_focus_attr($item->image()) ?> alt="<?= esc($caption) ?>">
           </div>
           <?php if ($caption !== ''): ?>
             <figcaption class="image-grid__caption"><?= soi_html($caption) ?></figcaption>
