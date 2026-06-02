@@ -40,7 +40,6 @@ fields:
   spacingTopHelp:
     label: Pro Breakpoint einstellbar
     type: info
-    theme: none
     text: >
       Werte in Pixeln. Leer lassen = sinnvoller Default. Mobile-Wert gilt
       auf Handy (≤ 768px), Tablet-Wert auf Tablet (769–1199px), Desktop-Wert
@@ -85,7 +84,6 @@ fields:
   subGapInfo:
     label: Wo wirkt das?
     type: info
-    theme: none
     text: >
       Steuert den Abstand zwischen der schwarz+blauen Hauptheadline und
       dem **blauen Sub-Text** direkt darunter (z. B. bei Bullet-List,
@@ -113,7 +111,6 @@ fields:
   bodyGapInfo:
     label: Wo wirkt das?
     type: info
-    theme: none
     text: >
       Steuert den Abstand zwischen dem ganzen Headline-Bereich (Headline +
       ggf. Sub) und dem **Inhalt darunter** (Bullet-Cards, Text-Spalten,

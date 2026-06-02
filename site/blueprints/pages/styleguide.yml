@@ -1,0 +1,58 @@
+title: Style-Guide / Referenz
+icon: book
+
+# Versteckt — nicht in Seitenleiste der Hauptnav, aber via URL erreichbar.
+# Zeigt alle verfügbaren Block-Typen mit Demo-Inhalt, damit man als Designer
+# sieht was vorhanden ist und wie es aussieht.
+status:
+  draft: Entwurf
+  listed: Sichtbar
+  unlisted: Versteckt (nur via Link erreichbar)
+
+num: zero
+
+tabs:
+  builder:
+    label: Sektionen
+    icon: layers
+    fields:
+      info:
+        label: Style-Guide / Block-Referenz
+        type: info
+        theme: info
+        text: >
+          Diese Seite ist eine **versteckte Übersicht aller Block-Typen** —
+          ideal um zu sehen welcher Block-Typ wie aussieht. Vor jedem Block
+          steht eine **Headline mit dem Block-Namen**, damit du in der
+          Live-Ansicht direkt vergleichen kannst.
+          URL: `/styleguide` (oder wie du die Seite benennst).
+      builder:
+        label: Sektionen (alle Block-Typen)
+        type: blocks
+        empty: Noch keine Sektion. Klick auf + um die erste anzulegen.
+        fieldsets:
+          - hero
+          - hero-foto
+          - headline-solo
+          - editorial-split-intro
+          - editorial-plain-2col
+          - editorial-image-text
+          - editorial-bullet-list
+          - highlight-text
+          - split-intro
+          - image
+          - image-grid
+          - work-showcase
+          - information-images
+          - icon-divider
+          - question-answers
+          - conversion-section
+
+  seo:
+    label: SEO
+    icon: search
+    fields:
+      metaDescription:
+        label: Meta Description
+        type: textarea
+        buttons: false

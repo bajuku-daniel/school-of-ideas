@@ -4,7 +4,7 @@
 #
 # Neue Icons hinzufügen:
 #   1. PNG-Dateien in /public/icons/png/{mobile,tablet,desktop}/<key>.png ablegen
-#      (3 Strichstärken — Björn exportiert mobile/tablet/desktop separat).
+#      (3 Strichstärken — mobile/tablet/desktop werden separat geliefert).
 #   2. SVG-Source (optional) in /public/icons/<key>.svg.
 #   3. Hier in dieser Datei den Key in `options:` ergänzen.
 #      Das ist die EINZIGE Stelle wo die Liste gepflegt wird.

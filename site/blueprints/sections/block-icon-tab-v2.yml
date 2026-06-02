@@ -8,7 +8,7 @@
 #        Bild    = am Bild dran (wandert mit dem Bild mit)
 #   3. ANKER auswählen (3×3 Raster): Oben/Mitte/Unten × Links/Mitte/Rechts
 #   4. OFFSET in px (Welt-Koordinaten: +X immer nach rechts, +Y immer nach unten)
-#   5. GRÖßE pro Breakpoint (drei Strichstärken, Björn exportiert separat)
+#   5. GRÖßE pro Breakpoint (drei Strichstärken werden separat geliefert)
 #   6. ANIMATION an/aus (Waber / Glide)
 label: Section-Icon
 icon: star
@@ -74,7 +74,6 @@ fields:
   offsetInfo:
     label: Welt-Koordinaten
     type: info
-    theme: none
     text: >
       Beide Werte funktionieren wie auf einer Karte: **+X = nach rechts**,
       **−X = nach links**, **+Y = nach unten**, **−Y = nach oben**. Egal welcher
@@ -112,8 +111,8 @@ fields:
       **Lass ein Feld leer, wird das Icon auf diesem Breakpoint nicht gezeigt.**
       So kannst du z. B. das Icon nur auf Desktop einblenden und Mobile/Tablet
       ausblenden. Wert eingeben = Icon erscheint in dieser Pixel-Größe.
-      Björn exportiert die Icons in 3 Strichstärken (Mobile dünn, Tablet
-      mittel, Desktop dick) damit sie auf jeder Größe gut aussehen.
+      Die Icons gibt es in 3 Strichstärken (Mobile dünn, Tablet mittel,
+      Desktop dick) damit sie auf jeder Größe gut aussehen.
   iconMobileSize:
     label: Mobile (≤ 768px)
     type: number
@@ -139,7 +138,6 @@ fields:
   uploadInfo:
     label: Wann brauche ich das?
     type: info
-    theme: none
     text: >
       Nur wenn du ein Custom-Icon brauchst, das NICHT in der Bibliothek ist.
       Dann hier pro Breakpoint die passende Strichstärke hochladen.

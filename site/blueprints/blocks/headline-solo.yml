@@ -29,7 +29,7 @@ tabs:
         buttons: false
         help: >
           Für sauberen Umbruch: Zeilenumbrüche manuell mit Enter setzen
-          (z. B. "Questions" Enter "& Answers" für Björns Design).
+          (z. B. "Questions" Enter "& Answers" für eine zweizeilige Headline).
         width: 1/2
       headlineAccent:
         label: Headline (blau, optional)

@@ -54,7 +54,6 @@ tabs:
       sizeInfo:
         label: Wie viel Platz nimmt das Bild ein?
         type: info
-        theme: none
         text: >
           **Breite** in % der Container-Breite (z. B. 60 = 60% breit).
           **Offset X/Y** verschiebt das Bild relativ zur Ausrichtung

@@ -15,7 +15,8 @@ tabs:
           - **Seiten** unten in der Liste klicken zum Bearbeiten.
           - Jede Seite besteht aus **Blöcken** (Sektionen) — du fügst sie über den **+**-Button hinzu, ziehst sie zum Sortieren.
           - Pro Block gibt's **Tabs**: *Inhalt*, *Layout* (Abstände & Hintergrund), *Section-Icon* (Deko-Icon), bei Bild-Blocks zusätzlich *Bild-Schatten*.
-          - **Footer** wird zentral in der **Footer-Tab** oben gepflegt — gilt für alle Seiten.
+          - **Footer** wird zentral oben im **Footer-Tab** gepflegt — gilt für alle Seiten.
+          - **Style-Guide** unter `/styleguide` zeigt alle verfügbaren Block-Typen einmal mit Demo-Inhalt — gut zum Stöbern was es alles gibt.
       pages:
         type: pages
         label: Seiten
@@ -24,6 +25,7 @@ tabs:
           - default
           - agenturen
           - agency
+          - styleguide
 
   footer:
     label: Footer
