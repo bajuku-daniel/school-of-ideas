@@ -16,28 +16,38 @@ tabs:
           builderInfo:
             label: Modulare Übersichts-Seite
             type: info
-            theme: blue
+            theme: info
             text: >
-              Die Agenturen-Übersicht besteht aus 3 wiederkehrenden Sektionen:
-              (1) Basic-Page-Header mit Bild + Schatten, (2) Agentur-Grid mit
-              Filter, (3) Conversion-Section mit Buttons. Die Filter und das
-              Grid füllen sich automatisch aus den Agentur-Unterseiten rechts.
+              Die Seite besteht komplett aus Builder-Sektionen — genau wie
+              die Startseite. Für den Kopf-Bereich wähle z. B. **Headline + Bild
+              (Seitenkopf)**. Der **Agentur-Grid** Block listet alle Agenturen
+              automatisch aus den Unterseiten rechts.
           builder:
             label: Sektionen
             type: blocks
-            empty: Sektionen hinzufügen
+            empty: Noch keine Sektion. Klick auf + um die erste anzulegen.
             fieldsets:
-              - split-intro
+              # ---- Seiten-Köpfe / Hero ----
+              - hero
+              - hero-foto
               - headline-solo
-              - image
-              - image-grid
+              # ---- Agenturen-Logik ----
               - agency-grid
-              - information-images
-              - conversion-section
-              - icon-divider
+              # ---- Editorial / Text ----
               - editorial-split-intro
               - editorial-plain-2col
               - editorial-image-text
+              - editorial-bullet-list
+              - highlight-text
+              - split-intro
+              # ---- Bilder / Medien ----
+              - image
+              - image-grid
+              - information-images
+              # ---- Spezial / Trenner ----
+              - icon-divider
+              - question-answers
+              - conversion-section
       sidebar:
         width: 1/3
         sections:
@@ -45,34 +55,6 @@ tabs:
             label: Agentur-Unterseiten
             type: pages
             template: agency
-
-  hero:
-    label: Seitenkopf
-    icon: text
-    fields:
-      heroInfo:
-        label: Seitenkopf
-        type: info
-        theme: blue
-        text: Wird über den Builder-Sektionen angezeigt.
-      kicker:
-        label: Kicker
-        type: text
-        width: 1/2
-      headlineInk:
-        label: Headline schwarz
-        type: textarea
-        buttons: false
-        width: 1/2
-      headlineAccent:
-        label: Headline blau
-        type: textarea
-        buttons: false
-        width: 1/2
-      intro:
-        label: Introtext
-        type: textarea
-        buttons: false
 
   seo:
     label: SEO

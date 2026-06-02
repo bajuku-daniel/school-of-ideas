@@ -7,3 +7,7 @@ Builder: [{"content":{"kicker":"kontakt","headlineink":"Sag","headlineaccent":"H
 ----
 
 Metadescription: Kontakt zur school of ideas — Direkt Romy Nickel anschreiben oder als Partneragentur einsteigen.
+
+----
+
+Uuid: ztk6zothcfzgli40

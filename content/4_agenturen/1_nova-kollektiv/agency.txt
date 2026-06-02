@@ -48,8 +48,9 @@ Contactemail:
 
 ----
 
-Logo: 
+Logo:
 
+- tile.png
 ----
 
 Location: Hamburg

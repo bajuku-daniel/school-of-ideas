@@ -30,8 +30,9 @@ Contactemail:
 
 ----
 
-Logo: 
+Logo:
 
+- tile.png
 ----
 
 Location: Berlin
