@@ -6,68 +6,87 @@ status:
   listed: Sichtbar
 
 tabs:
-  content:
+  # --------------------------------------------------------------------
+  # Tab 1: Sektionen (Builder) — die Hauptarbeit für die Detailseite
+  # --------------------------------------------------------------------
+  builder:
+    label: Seitenaufbau
+    icon: layers
+    fields:
+      builderInfo:
+        label: So baust du eine Agentur-Detailseite
+        type: info
+        theme: info
+        text: >
+          Der **Seitenkopf** wird automatisch gerendert: Der Page-Titel
+          (siehe unten links) als große Headline, das Logo/Bild aus den
+          Stammdaten als Polaroid rechts.
+          Alle weiteren Sektionen baust du hier mit Blöcken zusammen.
+          Filter-Daten (Standort, Schwerpunkte, etc.) pflegst du im Tab
+          **Stammdaten** — die werden für die Übersichts-Seite gebraucht.
+      builder:
+        label: Sektionen
+        type: blocks
+        empty: Noch keine Sektion. Klick auf + um die erste anzulegen.
+        fieldsets:
+          - headline-solo
+          - editorial-split-intro
+          - editorial-plain-2col
+          - editorial-image-text
+          - editorial-bullet-list
+          - highlight-text
+          - split-intro
+          - image
+          - image-grid
+          - work-showcase
+          - information-images
+          - icon-divider
+          - question-answers
+          - conversion-section
+
+  # --------------------------------------------------------------------
+  # Tab 2: Stammdaten — Logo, Filter, Kontakt (alles für das Grid)
+  # --------------------------------------------------------------------
+  meta:
     label: Stammdaten
-    icon: text
+    icon: settings
     columns:
       main:
         width: 2/3
         fields:
-          headline:
-            label: Headline (kurz)
-            type: text
-          headlineInk:
-            label: Headline schwarz
-            type: textarea
-            buttons: false
-            width: 1/2
-          headlineAccent:
-            label: Headline blau
-            type: textarea
-            buttons: false
-            width: 1/2
+          stammInfo:
+            label: Was hier rein gehört
+            type: info
+            theme: info
+            text: >
+              Diese Daten brauchen wir für die **Übersichts-Seite**
+              (Agenturen-Grid mit Filter). Das Bild + die Filter-Daten
+              werden dort gezeigt, plus auf der Detailseite automatisch
+              im Seitenkopf (Polaroid rechts).
+
+          logo:
+            label: Logo / Tile-Bild
+            help: >
+              Wird auf der Übersichts-Seite als Grid-Tile und auf der
+              Detailseite oben rechts im Polaroid-Look gezeigt.
+            type: files
+            max: 1
+            uploads: image
+            layout: cards
+            image:
+              cover: true
+
           intro:
-            label: Kurzbeschreibung
+            label: Kurz-Intro (für Grid-Tile)
             type: textarea
             buttons: false
-          body:
-            label: Über die Agentur
-            type: textarea
-          cards:
-            label: Info-Karten
-            type: structure
-            fields:
-              icon:
-                label: Icon
-                type: select
-                empty: Kein Icon
-                options:
-                  airplane: Papierflieger
-                  bag: Tasche
-                  bottle: Flasche
-                  cloud: Wolke
-                  comet: Komet
-                  document: Dokument
-                  glasses-bold: Brille fett
-                  glasses: Brille
-                  leaf: Blatt
-                  lightbulb: Glühbirne
-                  lightning: Blitz
-                  pencil: Stift
-                  puzzle: Puzzle
-                  shooting-star: Sternschnuppe
-                  spark: Spark
-                  sparkles: Sparkles
-                  sparkles-line: Sparkles Linie
-                  star: Stern
-                  starlight: Sternlicht
-                  swirl: Wirbel
-              heading:
-                label: Titel
-                type: text
-              text:
-                label: Text
-                type: textarea
+            help: >
+              Erscheint im Übersichts-Grid unter dem Bild.
+              Z. B. „Erfahre mehr über die Social Agentur aus Hamburg."
+
+          contactRow:
+            label: Kontakt
+            type: headline
           website:
             label: Website
             type: url
@@ -76,19 +95,19 @@ tabs:
             label: Kontakt E-Mail
             type: email
             width: 1/2
-      meta:
+
+      filters:
         width: 1/3
         fields:
-          logo:
-            label: Logo / Bild (für Grid-Tile)
-            type: files
-            max: 1
-            uploads: image
-            layout: cards
-            image:
-              cover: true
+          filterInfo:
+            label: Filter-Daten
+            type: info
+            theme: positive
+            text: >
+              Diese Felder steuern, in welchen Kategorien die Agentur
+              im Übersichts-Filter erscheint.
           location:
-            label: Standort (Filter)
+            label: Standort
             type: select
             options:
               Berlin: Berlin
@@ -100,7 +119,7 @@ tabs:
               Stuttgart: Stuttgart
               Zürich: Zürich
           arbeitsweise:
-            label: Arbeitsweise (Filter)
+            label: Arbeitsweise
             type: select
             empty: "—"
             options:
@@ -108,7 +127,7 @@ tabs:
               hybrid: Hybrid
               remote: Remote
           groesse:
-            label: Agenturgröße (Filter)
+            label: Agenturgröße
             type: select
             empty: "—"
             options:
@@ -117,8 +136,17 @@ tabs:
               "50-100": 50–100 Mitarbeitende
               "100-200": 100–200 Mitarbeitende
               "200+":   200+ Mitarbeitende
+          setup:
+            label: Setup
+            type: select
+            empty: "—"
+            options:
+              Netzwerkagentur: Netzwerkagentur
+              Independent: Independent
+              Studio: Studio
+              Spezialagentur: Spezialagentur
           schwerpunkte:
-            label: Schwerpunkte (Filter)
+            label: Schwerpunkte
             type: tags
             options:
               Strategie: Strategie
@@ -133,71 +161,10 @@ tabs:
               Employer Branding: Employer Branding
               Events: Events
               Produktion: Produktion
-          discipline:
-            label: Haupt-Schwerpunkt (alt)
-            type: select
-            empty: "—"
-            options:
-              Strategie: Strategie
-              Design: Design
-              Kampagne: Kampagne
-              Digital: Digital
-              Social: Social
-              Film: Film
-            help: Legacy-Feld. Lieber "Schwerpunkte" oben pflegen.
-          setup:
-            label: Setup
-            type: select
-            empty: "—"
-            options:
-              Netzwerkagentur: Netzwerkagentur
-              Independent: Independent
-              Studio: Studio
-              Spezialagentur: Spezialagentur
-          gridHeadline:
-            label: Position im Übersichts-Grid
-            type: info
-            theme: positive
-            text: >
-              Die Position im 4-Spalten-Raster ergibt sich automatisch aus der
-              Reihenfolge der Agenturen in der Sidebar. Das Pattern wiederholt
-              sich alle 4 Zeilen — keine manuelle Einstellung nötig.
-          intro:
-            label: Kurz-Intro (für Grid-Tile)
-            type: textarea
-            buttons: false
-            help: Text der unter dem Bild im Übersichts-Grid steht. Z. B. „Erfahre mehr über die Social Agentur aus Hamburg.".
 
-  builder:
-    label: Zusatz-Sektionen
-    icon: layers
-    fields:
-      builderInfo:
-        label: Optionale Sektionen
-        type: info
-        theme: blue
-        text: >
-          Falls die Agentur-Detailseite zusätzliche Inhalte braucht
-          (z. B. Galerie, Q&A, weitere Bilder mit Schatten). Stammdaten
-          bleiben im ersten Tab.
-      builder:
-        label: Sektionen
-        type: blocks
-        fieldsets:
-          - split-intro
-          - headline-solo
-          - editorial-split-intro
-          - editorial-plain-2col
-          - editorial-image-text
-          - editorial-bullet-list
-          - image
-          - image-grid
-          - information-images
-          - work-showcase
-          - icon-divider
-          - question-answers
-          - conversion-section
-
+  # --------------------------------------------------------------------
+  # Tab 3: SEO
+  # --------------------------------------------------------------------
   seo:
     label: SEO
     icon: search
