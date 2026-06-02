@@ -107,9 +107,8 @@ try {
 } catch (\Throwable $e) {}
 if (empty($legalLinks)) {
     $legalLinks = [
-        ['label' => 'Impressum',           'url' => '/impressum'],
-        ['label' => 'Datenschutz',          'url' => '/datenschutz'],
-        ['label' => 'Cookie-Einstellungen', 'url' => '#cookies'],
+        ['label' => 'Impressum',   'url' => '/impressum'],
+        ['label' => 'Datenschutz', 'url' => '/datenschutz'],
     ];
 }
 ?>
