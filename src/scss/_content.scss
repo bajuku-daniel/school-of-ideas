@@ -3493,6 +3493,21 @@
   }
 }
 
+// ----- Agentur-Detail Auto-Hero: Mobile-Feinschliff -------------------------
+// Der Auto-Hero rendert den Agentur-NAMEN als großen Titel. Bei der großen
+// rem-Basis (24px) greift beim generischen Mobile-Clamp das Minimum 2rem = 48px
+// → der einzeilige Name füllt die Zeile randvoll (lange Namen würden überlaufen).
+// Zusätzlich ragt der große, hart gesetzte Bild-Schatten (shadow-y 40 aus
+// agency.php) in den Titel. Beides hier scoped & rem-unabhängig korrigiert.
+@media (max-width: 768px) {
+  .headline-solo.agency-detail__auto-hero {
+    --hs-title-fs: clamp(28px, 9vw, 44px);
+  }
+  .agency-detail__auto-hero .headline-solo__head {
+    margin-top: 36px;   // Titel klar unter den Bild-Schatten schieben
+  }
+}
+
 // ----- .editorial-plain-2col ------------------------------------------------
 .editorial-plain-2col {
   @include section-spacing;
