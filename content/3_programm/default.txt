@@ -7,3 +7,7 @@ Builder: [{"content":{"kicker":"das programm","headlineink":"Junior Creative","h
 ----
 
 Metadescription: Das einjährige Programm der school of ideas verbindet bezahlte Agenturpraxis mit kreativer Weiterentwicklung.
+
+----
+
+Uuid: etlbjvby0epiz8mf

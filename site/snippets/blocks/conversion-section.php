@@ -12,7 +12,7 @@ $cards       = $block->cards()->toStructure();
     <figure class="motiv motiv--shadow cta-final__motiv"<?= soi_image_shadow_data_attrs($block) ?>
       <?php if ($shadowStyle): ?>style="<?= esc($shadowStyle, 'attr') ?>"<?php endif ?>>
       <span class="motiv__shadow" aria-hidden="true"></span>
-      <div class="motiv__frame"><img class="motiv__img" src="<?= esc($imageUrl) ?>" alt=""></div>
+      <div class="motiv__frame"><img class="motiv__img" src="<?= esc($imageUrl) ?>"<?= soi_image_focus_attr($block->image()) ?> alt=""></div>
       <?= soi_section_icon_at($block, 'image') ?>
     </figure>
     <?php endif ?>

@@ -34,7 +34,7 @@ $shadowStyle = soi_image_shadow_style($block);
           <figure class="work-showcase__tile motiv motiv--shadow"<?= soi_image_shadow_data_attrs($block) ?>
             <?php if ($shadowStyle): ?>style="<?= esc($shadowStyle, 'attr') ?>"<?php endif ?>>
             <span class="motiv__shadow" aria-hidden="true"></span>
-            <div class="motiv__frame"><img class="motiv__img" src="<?= esc($img->url()) ?>" alt=""></div>
+            <div class="motiv__frame"><img class="motiv__img" src="<?= esc($img->url()) ?>"<?= soi_image_focus_attr($img) ?> alt=""></div>
           </figure>
         <?php endforeach ?>
         <?php for ($i = $images->count(); $i < 2; $i++): ?>
@@ -50,7 +50,7 @@ $shadowStyle = soi_image_shadow_style($block);
           <figure class="work-showcase__tile motiv motiv--shadow"<?= soi_image_shadow_data_attrs($block) ?>
             <?php if ($shadowStyle): ?>style="<?= esc($shadowStyle, 'attr') ?>"<?php endif ?>>
             <span class="motiv__shadow" aria-hidden="true"></span>
-            <div class="motiv__frame"><img class="motiv__img" src="<?= esc($img->url()) ?>" alt=""></div>
+            <div class="motiv__frame"><img class="motiv__img" src="<?= esc($img->url()) ?>"<?= soi_image_focus_attr($img) ?> alt=""></div>
           </figure>
         <?php endforeach ?>
         <?php for ($i = $images->count(); $i < 3; $i++): ?>

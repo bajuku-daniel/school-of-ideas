@@ -7,3 +7,7 @@ Builder: [{"content":{"kicker":"bewerbung","headlineink":"So läuft die","headli
 ----
 
 Metadescription: Bewerbung für das einjährige Programm der school of ideas — drei Schritte zur Aufnahme.
+
+----
+
+Uuid: tzch9b4rchcnrlw0

@@ -46,7 +46,7 @@ $attrs = soi_section_attrs($block, 'information-images', [
         <<?= $tag ?> class="information-images__card"<?= $hrefAttr ?>>
           <figure class="information-images__media">
             <?php if ($imageUrl): ?>
-              <img src="<?= esc($imageUrl) ?>" alt="<?= esc($name) ?>">
+              <img src="<?= esc($imageUrl) ?>"<?= soi_image_focus_attr($card->image()) ?> alt="<?= esc($name) ?>">
             <?php else: ?>
               <span class="information-images__placeholder" aria-hidden="true"></span>
             <?php endif ?>

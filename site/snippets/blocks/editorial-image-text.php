@@ -25,7 +25,7 @@ $ctaUrl  = (string)$block->ctaUrl()->or('#');
       <figure class="editorial-image-text__media motiv motiv--shadow"<?= soi_image_shadow_data_attrs($block) ?>
         <?php if ($shadowStyle): ?>style="<?= esc($shadowStyle, 'attr') ?>"<?php endif ?>>
         <span class="motiv__shadow" aria-hidden="true"></span>
-        <div class="motiv__frame"><img class="motiv__img" src="<?= esc($imageUrl) ?>" alt=""></div>
+        <div class="motiv__frame"><img class="motiv__img" src="<?= esc($imageUrl) ?>"<?= soi_image_focus_attr($block->image()) ?> alt=""></div>
         <?= soi_section_icon_at($block, 'image') ?>
       </figure>
       <?php endif ?>

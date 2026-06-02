@@ -55,7 +55,7 @@ $attrs = soi_section_attrs($block, 'hero-foto', ['--motiv-aspect' => $aspectValu
       <figure class="hero-foto__media motiv motiv--shadow"<?= soi_image_shadow_data_attrs($block) ?>
         <?php if ($shadowStyle): ?>style="<?= esc($shadowStyle, 'attr') ?>"<?php endif ?>>
         <span class="motiv__shadow" aria-hidden="true"></span>
-        <div class="motiv__frame"><img class="motiv__img" src="<?= esc($photoUrl) ?>" alt=""></div>
+        <div class="motiv__frame"><img class="motiv__img" src="<?= esc($photoUrl) ?>"<?= soi_image_focus_attr($block->photo()) ?> alt=""></div>
         <?= soi_section_icon_at($block, 'image') ?>
       </figure>
       <?php endif ?>

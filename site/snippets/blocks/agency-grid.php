@@ -180,7 +180,7 @@ $patternRows = 4;
           <?php if ($logo): ?>
             <figure class="agency-grid__tile-image motiv motiv--shadow">
               <span class="motiv__shadow" aria-hidden="true"></span>
-              <div class="motiv__frame"><img class="motiv__img" src="<?= esc($logo->url()) ?>" alt=""></div>
+              <div class="motiv__frame"><img class="motiv__img" src="<?= esc($logo->url()) ?>"<?= soi_image_focus_attr($logo) ?> alt=""></div>
             </figure>
           <?php else: ?>
             <figure class="agency-grid__tile-image agency-grid__placeholder" aria-hidden="true"></figure>

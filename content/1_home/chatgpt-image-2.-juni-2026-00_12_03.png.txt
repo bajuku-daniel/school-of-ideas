@@ -1,0 +1,9 @@
+Uuid: yx0r9rf6p380vmqx
+
+----
+
+Template: image
+
+----
+
+Focus: 68.0% 35.1%

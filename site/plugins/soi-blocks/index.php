@@ -126,6 +126,74 @@ if (!function_exists('soi_file_url')) {
     }
 }
 
+if (!function_exists('soi_image_focus_style')) {
+    /**
+     * Liest den Focal Point aus einem Kirby-Bild und gibt einen
+     * `object-position: X% Y%` String zurück. Wirkt zusammen mit
+     * `object-fit: cover` damit der Designer-gewählte Bildmittelpunkt
+     * sichtbar bleibt, statt dass das Bild zufällig zentriert beschnitten wird.
+     *
+     * Gibt leeren String zurück wenn:
+     *   - kein Bild im Feld
+     *   - kein Focus gesetzt (Kirby-Default = 50% 50% greift dann eh)
+     */
+    function soi_image_focus_style($fieldOrFile): string
+    {
+        if (!is_object($fieldOrFile)) return '';
+        try {
+            // Direkt ein File-Object (z.B. in Loops mit $img->url())
+            if ($fieldOrFile instanceof \Kirby\Cms\File) {
+                $file = $fieldOrFile;
+            } else {
+                $file = $fieldOrFile->toFiles()->first();
+                if (!$file) {
+                    $file = $fieldOrFile->toFile();
+                }
+            }
+            if (!$file) return '';
+
+            $focus = $file->focus();
+
+            // 1) Kirby FocusValue-Object mit ->x()/->y() (0..1)
+            $x = null; $y = null;
+            if (is_object($focus) && method_exists($focus, 'x') && method_exists($focus, 'y')) {
+                $x = (float)$focus->x();
+                $y = (float)$focus->y();
+            }
+            // 2) Field mit raw value "x,y" oder "x, y"
+            elseif (is_object($focus) && method_exists($focus, 'value')) {
+                $raw = (string)$focus->value();
+                if ($raw !== '') {
+                    $parts = array_map('trim', explode(',', $raw));
+                    if (count($parts) === 2) {
+                        $x = (float)$parts[0];
+                        $y = (float)$parts[1];
+                    }
+                }
+            }
+
+            if ($x === null || $y === null) return '';
+            // Default 0.5/0.5 → CSS-Default greift, kein Override nötig
+            if (abs($x - 0.5) < 0.001 && abs($y - 0.5) < 0.001) return '';
+            return 'object-position:' . round($x * 100, 1) . '% ' . round($y * 100, 1) . '%';
+        } catch (\Throwable $e) {}
+        return '';
+    }
+}
+
+if (!function_exists('soi_image_focus_attr')) {
+    /**
+     * Convenience: rendert direkt ein style="…" Attribut (oder leeren String).
+     * Nutzung im Snippet:
+     *   <img class="motiv__img" src="…"<?= soi_image_focus_attr($field) ?> alt="">
+     */
+    function soi_image_focus_attr($field): string
+    {
+        $style = soi_image_focus_style($field);
+        return $style === '' ? '' : ' style="' . esc($style, 'attr') . '"';
+    }
+}
+
 if (!function_exists('soi_inline_icon')) {
     /**
      * Inline-Icon im Text via {icon:name} Token.

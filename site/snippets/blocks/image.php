@@ -50,7 +50,7 @@ $attrs = soi_section_attrs($block, 'image-block', $extraVars);
     <?php if ($imageUrl): ?>
     <figure class="motiv motiv--shadow image-block__motiv image-block__motiv--<?= esc($align, 'attr') ?>"<?= soi_image_shadow_data_attrs($block) ?>>
       <span class="motiv__shadow" aria-hidden="true"></span>
-      <div class="motiv__frame"><img class="motiv__img" src="<?= esc($imageUrl) ?>" alt=""></div>
+      <div class="motiv__frame"><img class="motiv__img" src="<?= esc($imageUrl) ?>"<?= soi_image_focus_attr($block->image()) ?> alt=""></div>
       <?php if ($caption !== ''): ?>
       <figcaption class="image-block__caption"><?= soi_html($caption) ?></figcaption>
       <?php endif ?>
