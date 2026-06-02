@@ -269,15 +269,13 @@ if (brandText && navCloud) {
     let dx = 0, dy = 0;
 
     if (cloudTarget) {
-      // Progress: wie nah ist der User am Page-Ende?
       const docHeight = document.documentElement.scrollHeight;
       const vh        = window.innerHeight;
       const maxScroll = docHeight - vh;
       const fromBottom = Math.max(0, maxScroll - window.scrollY);
-      journeyProgress = clamp01(1 - fromBottom / JOURNEY_TRIGGER_DISTANCE);
 
       // Shift: zeige permanent zur aktuellen Slot-Position im Viewport.
-      // Bei progress=1 (am Page-Ende) sind cloud + slot deckungsgleich.
+      // Bei progress=1 sind cloud + slot deckungsgleich.
       const navRect    = navCloudHost.getBoundingClientRect();
       const targetRect = cloudTarget.getBoundingClientRect();
 
@@ -285,6 +283,19 @@ if (brandText && navCloud) {
       const cloudCenterY = navRect.top  + navRect.height * 0.5;
       const slotCenterX  = targetRect.left + targetRect.width  / 2;
       const slotCenterY  = targetRect.top  + targetRect.height / 2;
+
+      // Journey-Progress = MAX aus zwei Messungen, damit die Cloud auf JEDER
+      // Footer-Höhe sauber im sichtbaren Logo landet:
+      //   • pBottom: Nähe zum Seitenende — greift auf Desktop (kurzer Footer,
+      //              Logo nah am Page-Ende).
+      //   • pSlot:   der Footer-Slot steigt in die obere Bildschirmhälfte —
+      //              greift auf Mobile, wo der gestapelte Footer sehr hoch ist
+      //              und das Logo lange VOR dem Seitenende durchs Bild scrollt.
+      //              Ohne das fliegt die Cloud am Mobile-Seitenende nach oben
+      //              aus dem Bild, statt ins (da schon weggescrollte) Logo.
+      const pBottom = clamp01(1 - fromBottom / JOURNEY_TRIGGER_DISTANCE);
+      const pSlot   = clamp01((vh - slotCenterY) / (vh * 0.5));
+      journeyProgress = Math.max(pBottom, pSlot);
 
       dx = slotCenterX - cloudCenterX;
       dy = slotCenterY - cloudCenterY;
