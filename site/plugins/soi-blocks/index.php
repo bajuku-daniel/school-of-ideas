@@ -22,14 +22,27 @@ if (!function_exists('soi_text')) {
 }
 
 if (!function_exists('soi_html')) {
+    /**
+     * Markup im Editor:
+     *   **text**  → <strong> (bold)
+     *   *text*    → <em>     (kursiv)
+     *   --text--  → <span class="accent">  (Marken-Blau-Akzent)
+     */
     function soi_html($text): string
     {
         if (is_object($text) && method_exists($text, 'value')) {
             $text = $text->value();
         }
         $safe = htmlspecialchars((string)$text, ENT_QUOTES, 'UTF-8');
+        // Bold zuerst (** sind länger, vermeiden Konflikte mit *)
         $safe = preg_replace('/\*\*(.+?)\*\*/s', '<strong>$1</strong>', $safe);
+        // Italic (kein doppeltes Stern)
         $safe = preg_replace('/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/s', '<em>$1</em>', $safe);
+        // Inline-Accent: --text-- → blauer Span. Funktioniert auch mitten im
+        // Satz, z. B. "Wir lieben Fragen, --wir lieben die bessere Idee.--"
+        // Negative-Lookahead erlaubt einzelne Bindestriche im Inhalt
+        // (z. B. "Kreativ-Agentur"), aber kein zweites "--" innendrin.
+        $safe = preg_replace('/--((?:(?!--).)+?)--/s', '<span class="accent">$1</span>', $safe);
         return nl2br($safe);
     }
 }

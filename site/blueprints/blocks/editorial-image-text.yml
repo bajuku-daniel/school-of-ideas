@@ -53,7 +53,7 @@ tabs:
         label: Fließtext
         type: textarea
         help: >
-          Absätze mit Leerzeile trennen. **fett** und *kursiv* inline möglich.
+          Absätze mit Leerzeile trennen. **fett** und *kursiv* inline möglich. --blau-Akzent-- für inline Markenfarbe.
           Ganzer Absatz fett/groß: kompletten Absatz mit ** umschließen.
       ctaText:
         label: Button Text (optional)
