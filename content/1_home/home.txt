@@ -19,7 +19,7 @@ Navitems:
   url: /agenturen
 - 
   label: Kontakt
-  url: /
+  url: /kontakt
 - 
   label: FAQ
   url: /faq
