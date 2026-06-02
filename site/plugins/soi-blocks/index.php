@@ -154,28 +154,40 @@ if (!function_exists('soi_image_focus_style')) {
 
             $focus = $file->focus();
 
-            // 1) Kirby FocusValue-Object mit ->x()/->y() (0..1)
-            $x = null; $y = null;
+            // Werte als Prozent (0..100) extrahieren — egal welches Speicher-Format.
+            $px = null; $py = null;
+
+            // 1) FocusValue-Object mit ->x()/->y() (Kirby v4 hat 0..1, v5 evtl. anders)
             if (is_object($focus) && method_exists($focus, 'x') && method_exists($focus, 'y')) {
                 $x = (float)$focus->x();
                 $y = (float)$focus->y();
+                // Wenn beide ≤ 1 → 0..1 Range, sonst schon 0..100
+                $px = ($x <= 1.0 && $y <= 1.0) ? $x * 100 : $x;
+                $py = ($x <= 1.0 && $y <= 1.0) ? $y * 100 : $y;
             }
-            // 2) Field mit raw value "x,y" oder "x, y"
+            // 2) Field mit raw value
             elseif (is_object($focus) && method_exists($focus, 'value')) {
-                $raw = (string)$focus->value();
+                $raw = trim((string)$focus->value());
                 if ($raw !== '') {
-                    $parts = array_map('trim', explode(',', $raw));
-                    if (count($parts) === 2) {
-                        $x = (float)$parts[0];
-                        $y = (float)$parts[1];
+                    // Kirby v5: "66.0% 33.6%" (Prozent, Space-getrennt)
+                    // Kirby v4 / Plugins: "0.66, 0.336" (Decimal, Komma)
+                    // Beides parsen: alle nicht-numerischen Zeichen (außer . und -)
+                    // raus, dann splitten
+                    if (preg_match_all('/-?\d+(?:\.\d+)?/', $raw, $m) && count($m[0]) === 2) {
+                        $x = (float)$m[0][0];
+                        $y = (float)$m[0][1];
+                        // Prozent-Suffix vorhanden? → schon 0..100
+                        $isPercent = strpos($raw, '%') !== false;
+                        $px = ($isPercent || $x > 1.0 || $y > 1.0) ? $x : $x * 100;
+                        $py = ($isPercent || $x > 1.0 || $y > 1.0) ? $y : $y * 100;
                     }
                 }
             }
 
-            if ($x === null || $y === null) return '';
-            // Default 0.5/0.5 → CSS-Default greift, kein Override nötig
-            if (abs($x - 0.5) < 0.001 && abs($y - 0.5) < 0.001) return '';
-            return 'object-position:' . round($x * 100, 1) . '% ' . round($y * 100, 1) . '%';
+            if ($px === null || $py === null) return '';
+            // Default 50/50 → CSS-Default greift, kein Override nötig
+            if (abs($px - 50) < 0.5 && abs($py - 50) < 0.5) return '';
+            return 'object-position:' . round($px, 1) . '% ' . round($py, 1) . '%';
         } catch (\Throwable $e) {}
         return '';
     }
