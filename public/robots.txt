@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Versteckte interne Seiten
+Disallow: /styleguide
+Disallow: /panel
+Disallow: /api
+
+Sitemap: https://school-of-ideas.de/sitemap.xml
