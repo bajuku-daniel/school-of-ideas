@@ -3915,7 +3915,8 @@
   z-index: 1;
 
   // ---- Designer-Knöpfe ----
-  --footer-v2-brand-height: clamp(40px, 5vw, 72px);
+  // Logo-Größe gleich wie Nav-Header (--wm-height in _navigation.scss).
+  --footer-v2-brand-height: clamp(34px, 2.6vw, 56px);
   --footer-v2-pad-x:        clamp(24px, 4vw, 96px);
   --footer-v2-logo-pad-y:   clamp(28px, 3vw, 56px);
   --footer-v2-main-pad-top: clamp(48px, 6vw, 96px);
@@ -3949,28 +3950,34 @@
     text-decoration: none;
   }
 
-  // Wordmark-Stack mit Cloud-Slot — exakt wie .nav__brand-stack damit die
-  // Wolke beim Scroll-End sauber im Slot landet.
+  // Wordmark-Stack — exakt wie .nav__brand-stack (gleiche viewBox-Proportion).
+  // Cloud landet via JS-Animation im data-cloud-target Slot (Mitte des Stacks).
   &__brand-stack {
     position: relative;
     display: inline-block;
+    height: var(--footer-v2-brand-height);
+    aspect-ratio: 645.268 / 87.772;
     line-height: 0;
   }
   &__brand-text {
-    height: var(--footer-v2-brand-height);
-    width: auto;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     display: block;
   }
-  // Cloud-Slot: Position spiegelt die Nav (60.1% horizontal, 55% vertikal).
-  // Größe deutlich größer als altes Footer-Slot, weil im Björn-Design die
-  // Wolke prominenter zwischen "school of" und "ideas" sitzt.
+  // Cloud-Slot: JS-Animation-Target — Center bei 60.1% / 55% des Brand-Stacks.
+  // Sitzt exakt an der Cloud-Position der Wordmark-SVG, also fliegt die Cloud
+  // perfekt in die "school of [WOLKE] ideas" Lücke.
   &__cloud-slot {
     position: absolute;
     left: 60.1%;
     top: 55%;
     transform: translate(-50%, calc(-50% - 1px));
-    width:  calc(var(--footer-v2-brand-height) * 2.4);
-    height: calc(var(--footer-v2-brand-height) * 2.4);
+    // Slot-Größe entspricht dem Cloud-Sichtbereich nach Skalierung —
+    // dient nur als Mitten-Target für die JS-Berechnung.
+    width:  calc(var(--footer-v2-brand-height) * 0.9);
+    height: calc(var(--footer-v2-brand-height) * 0.9);
     pointer-events: none;
   }
 

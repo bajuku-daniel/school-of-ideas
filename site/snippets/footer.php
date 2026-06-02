@@ -119,7 +119,7 @@ if (empty($legalLinks)) {
     <div class="footer-v2__inner">
       <a class="footer-v2__brand" href="<?= url() ?>" aria-label="school of ideas">
         <span class="footer-v2__brand-stack">
-          <img class="footer-v2__brand-text" src="<?= url('logo/School_of_ideas_Logo_OW.png') ?>" alt="school of ideas">
+          <img class="footer-v2__brand-text" src="<?= url('logo/soi_logo_wordmark.svg') ?>" alt="school of ideas">
           <span class="footer-v2__cloud-slot" data-cloud-target aria-hidden="true"></span>
         </span>
       </a>
