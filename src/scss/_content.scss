@@ -3063,7 +3063,9 @@
   &__inner {
     display: grid;
     grid-template-columns: repeat(var(--image-grid-cols, 4), minmax(0, 1fr));
-    gap: clamp(24px, 3vw, 50px);
+    // Größere vertikale Lücken zwischen den Reihen — gibt dem Grid einen
+    // ruhigeren, designorientierten Look (statt dichten "Fotoalbum"-Stack).
+    gap: clamp(40px, 6vw, 100px) clamp(24px, 3vw, 50px);
     align-items: start;
 
     @media (max-width: 991px) {
@@ -3079,6 +3081,11 @@
     grid-row:    var(--card-row, auto);
     width: 100%;
     margin: 0;
+    // Bilder im Grid bekommen die volle Spaltenbreite mit konsistentem Aspect.
+    .motiv__frame {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+    }
 
     @media (max-width: 991px) {
       grid-column: auto / span 1;

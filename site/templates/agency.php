@@ -12,8 +12,9 @@ $logo   = $page->logo()->toFile();
 $next   = $page->next();
 $parent = $page->parent();
 
-// Auto-Header sichtbar wenn ein Titel da ist
-$hasTitle = $page->headlineInk()->isNotEmpty() || $page->headline()->isNotEmpty() || $page->title()->isNotEmpty();
+// Auto-Header rendert den Agentur-TITLE als große Headline (nicht headlineInk!).
+// Die ink/accent-Felder werden für den Teaser-Block im Builder genutzt.
+$hasTitle = $page->title()->isNotEmpty();
 ?><!doctype html>
 <html lang="de">
 <head>
@@ -32,14 +33,8 @@ $hasTitle = $page->headlineInk()->isNotEmpty() || $page->headline()->isNotEmpty(
         <div class="headline-solo__grid">
           <header class="headline-solo__head">
             <h1 class="headline-solo__title">
-              <span class="ink"><?= nl2br(esc($page->headlineInk()->or($page->headline()->or($page->title())))) ?></span>
-              <?php if ($page->headlineAccent()->isNotEmpty()): ?>
-                <span class="accent"><?= nl2br(esc($page->headlineAccent())) ?></span>
-              <?php endif ?>
+              <span class="ink"><?= nl2br(esc($page->title())) ?></span>
             </h1>
-            <?php if ($page->intro()->isNotEmpty()): ?>
-              <p class="headline-solo__sub"><?= soi_html($page->intro()) ?></p>
-            <?php endif ?>
           </header>
 
           <?php if ($logo): ?>
