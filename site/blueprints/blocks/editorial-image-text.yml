@@ -1,0 +1,71 @@
+name: Editorial Image + Text
+icon: image
+preview: fields
+
+tabs:
+  content:
+    label: Inhalt
+    icon: text
+    fields:
+      sectionInfo:
+        label: Bild + Text horizontal
+        type: info
+        theme: blue
+        text: >
+          Eine Hälfte Bild, eine Hälfte Text. Bild-Position links oder rechts
+          umschaltbar. Auf Mobile stapeln Bild und Text übereinander (Bild oben).
+      imageSide:
+        label: Bild-Position
+        type: toggles
+        default: left
+        width: 1/2
+        options:
+          left: Links
+          right: Rechts
+      aspect:
+        label: Bildformat
+        type: toggles
+        default: landscape
+        width: 1/2
+        options:
+          landscape: Landscape (16/11)
+          square: Quadrat (1/1)
+          portrait: Hochkant (3/4)
+      image:
+        label: Bild
+        type: files
+        max: 1
+        uploads: image
+        layout: cards
+      copyHeadline:
+        label: Text-Seite
+        type: headline
+      headlineInk:
+        label: Headline (schwarz)
+        type: text
+        width: 1/2
+      headlineAccent:
+        label: Headline (blau)
+        type: text
+        width: 1/2
+      body:
+        label: Fließtext
+        type: textarea
+        help: >
+          Absätze mit Leerzeile trennen. **fett** und *kursiv* inline möglich.
+          Ganzer Absatz fett/groß: kompletten Absatz mit ** umschließen.
+      ctaText:
+        label: Button Text (optional)
+        type: text
+        width: 1/2
+      ctaUrl:
+        label: Button Link
+        type: text
+        width: 1/2
+
+  layout:
+    extends: sections/block-layout-tab
+  shadow:
+    extends: sections/block-shadow-tab
+  icon:
+    extends: sections/block-icon-tab-v2

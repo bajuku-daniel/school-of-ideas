@@ -4,7 +4,6 @@
 $layout = (string)$block->layout()->or('1col');
 
 // Legacy-Mapping: jedes Layout matched die bestehende SCSS-Klasse aus der alten Home.
-// So funktioniert das bestehende _content.scss ohne Umbau.
 $legacyMap = ['1col' => 'expect', '2col' => 'year', '3col' => 'values'];
 $base      = $legacyMap[$layout] ?? 'expect';
 $attrs     = soi_section_attrs($block, $base, ['--editorial-layout' => $layout]);
@@ -28,7 +27,7 @@ $columns     = $block->columns()->toStructure();
             <p class="<?= $base ?>__sub"><?= soi_html($block->sub()) ?></p>
           <?php endif ?>
           <?php if ($block->body()->isNotEmpty()): ?>
-            <div class="<?= $base ?>__body"><?= soi_paragraphs($block->body(), 'text-medium') ?></div>
+            <div class="<?= $base ?>__body"><?= soi_paragraphs($block->body()) ?></div>
           <?php endif ?>
         </div>
       </header>
@@ -38,6 +37,7 @@ $columns     = $block->columns()->toStructure();
         <?php if ($shadowStyle): ?>style="<?= esc($shadowStyle, 'attr') ?>"<?php endif ?>>
         <span class="motiv__shadow" aria-hidden="true"></span>
         <div class="motiv__frame"><img class="motiv__img" src="<?= esc($imageUrl) ?>" alt=""></div>
+        <?= soi_section_icon_at($block, 'image') ?>
       </figure>
       <?php endif ?>
     <?php endif ?>
@@ -57,7 +57,20 @@ $columns     = $block->columns()->toStructure();
             <?php endif ?>
           </div>
           <div class="<?= $base ?>__block <?= $base ?>__block--body-<?= $n ?>">
-            <?= soi_paragraphs($col->body(), 'text-medium') ?>
+            <?= soi_paragraphs($col->body()) ?>
+            <?php
+              $ctaText  = (string)$col->ctaText();
+              $ctaUrl   = (string)$col->ctaUrl();
+              $ctaStyle = (string)$col->ctaStyle()->or('link');
+              if ($ctaText !== ''):
+                $ctaClass = match($ctaStyle) {
+                    'mint'  => 'btn-mint',
+                    'ghost' => 'btn-ghost',
+                    default => 'editorial-cta-link',
+                };
+            ?>
+              <a class="<?= $ctaClass ?> <?= $base ?>__block-cta" href="<?= esc($ctaUrl !== '' ? $ctaUrl : '#') ?>"><?= esc($ctaText) ?></a>
+            <?php endif ?>
           </div>
         <?php endforeach ?>
       </div>
@@ -66,6 +79,7 @@ $columns     = $block->columns()->toStructure();
         <?php if ($shadowStyle): ?>style="<?= esc($shadowStyle, 'attr') ?>"<?php endif ?>>
         <span class="motiv__shadow" aria-hidden="true"></span>
         <div class="motiv__frame"><img class="motiv__img" src="<?= esc($imageUrl) ?>" alt=""></div>
+        <?= soi_section_icon_at($block, 'image') ?>
       </figure>
       <?php endif ?>
     <?php endif ?>
@@ -83,11 +97,11 @@ $columns     = $block->columns()->toStructure();
             <?php if ($col->lead()->isNotEmpty()): ?>
               <p class="<?= $base ?>__col-lead"><?= soi_html($col->lead()) ?></p>
             <?php endif ?>
-            <?= soi_paragraphs($col->body(), 'text-medium') ?>
+            <?= soi_paragraphs($col->body()) ?>
           </div>
         <?php endforeach ?>
       </div>
     <?php endif ?>
   </div>
-  <?= soi_section_icon($block) ?>
+  <?= soi_section_icon_at($block, 'section') ?>
 </section>

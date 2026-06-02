@@ -43,12 +43,16 @@
   background: $color-accent;
   border-radius: 50%;
 
-  // Custom-Variante: img drin → Kreis-Background weg, img füllt aus
+  // Custom-Variante: img drin → Kreis-Background weg, img füllt aus.
+  // Mit <picture> wird das <img> als Nachfahre gerendert; picture selbst
+  // bekommt display:contents damit es im Layout transparent ist.
   &--custom {
     background: transparent;
     border-radius: 0;
     width:  1em;               // Custom-Icons sichtbar größer
     height: 1em;
+
+    picture { display: contents; }
 
     img {
       width: 100%;

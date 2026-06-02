@@ -1,0 +1,37 @@
+# Zentrale Definition der Icon-Bibliothek.
+# Wird via `extends: fields/icon-key` aus jedem Block-Blueprint geladen,
+# der ein "Icon aus Bibliothek wählen"-Feld braucht.
+#
+# Neue Icons hinzufügen:
+#   1. PNG-Dateien in /public/icons/png/{mobile,tablet,desktop}/<key>.png ablegen
+#      (3 Strichstärken — Björn exportiert mobile/tablet/desktop separat).
+#   2. SVG-Source (optional) in /public/icons/<key>.svg.
+#   3. Hier in dieser Datei den Key in `options:` ergänzen.
+#      Das ist die EINZIGE Stelle wo die Liste gepflegt wird.
+#
+# Field-spezifische Eigenschaften (label, width, default) können beim
+# Verwender überschrieben werden — `extends:` merged tief.
+label: Aus Bibliothek wählen
+type: select
+empty: Kein Icon
+options:
+  airplane: Papierflieger
+  bag: Tasche
+  bottle: Flasche
+  cloud: Wolke
+  comet: Komet
+  document: Dokument
+  glasses: Brille
+  glasses-bold: Brille (fett)
+  leaf: Blatt
+  lightbulb: Glühbirne
+  lightning: Blitz
+  pencil: Stift
+  puzzle: Puzzle
+  shooting-star: Sternschnuppe
+  spark: Spark
+  sparkles: Sparkles
+  sparkles-line: Sparkles Linie
+  star: Stern
+  starlight: Sternlicht
+  swirl: Wirbel

@@ -248,7 +248,9 @@ if (brandText && navCloud) {
   //   • JOURNEY_TRIGGER_DISTANCE: px vor Page-Ende, ab wo die Reise startet
   //   • JOURNEY_END_SCALE:        Cloud-Endgröße im Footer-Slot
   const JOURNEY_TRIGGER_DISTANCE = 800;
-  const JOURNEY_END_SCALE        = 1;
+  // Cloud-Endgröße im Footer-Slot — größer als im Nav (Björn-Design zeigt
+  // die Wolke deutlich prominenter zwischen "school of" und "ideas").
+  const JOURNEY_END_SCALE        = 2.4;
 
   const clamp01 = (n) => Math.max(0, Math.min(1, n));
 

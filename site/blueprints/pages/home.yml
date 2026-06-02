@@ -24,11 +24,18 @@ tabs:
         empty: Noch keine Sektion. Klick auf + um die erste anzulegen.
         fieldsets:
           - hero
+          - hero-foto
           - split-intro
           - highlight-text
+          - headline-solo
           - editorial-split-intro
+          - editorial-plain-2col
+          - editorial-image-text
           - editorial-bullet-list
           - image
+          - image-grid
+          - information-images
+          - icon-divider
           - question-answers
           - conversion-section
 

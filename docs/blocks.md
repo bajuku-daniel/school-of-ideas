@@ -7,15 +7,20 @@ Modulares Sektionen-System. Jede Seite (Landingpage, Unterseite, Agenturliste, A
 | Block | Wofür | Ersetzt (alt) |
 | --- | --- | --- |
 | **Hero** | Großer Video-Header mit Headline + optionalem Inline-Icon | `.hero` Sektion |
+| **Hero-Foto** | Eingangs-Block mit Foto-Tile statt Video (Headline links, Bild rechts) | (Neu) |
 | **Split-Intro** | Zweispaltig: Headline + Bild ◀ ▶ Sub + Body + CTAs | `.intro` Sektion |
 | **Highlight-Text (Manifest)** | Lange Absätze mit Inline-Icons via `{icon:name}` Tokens | `.manifest` Sektion |
+| **Headline-Solo** | Einzelne Headline-Sektion mit optionalem Kicker + Sub-Text (left/center/right) | (Neu) |
 | **Editorial Split-Intro** | Headline + 1/2/3-Spalten Text + optionales Bild | `.expect` / `.year` / `.values` Sektionen |
+| **Editorial Plain 2-Col** | Reiner 2-Spalten-Fließtext ohne Headline (optional Kicker) | (Neu) |
+| **Editorial Image + Text** | Bild links/rechts + Headline + Body + optionaler CTA | (Neu) |
 | **Editorial Bullet-List** | Headline + optionale Sub + Bullet-Liste im 4er-Grid (blaue Punkte) | `.audience` / `.outcome` Sektionen |
 | **Bild (mit Schatten)** | Einzelnes Bild mit konfigurierbarem blauen Schlagschatten | Image-only Sektion |
 | **Bild-Grid** | Mehrere Bilder im 4er-Grid mit col/row/span pro Bild + optionalem Schatten | (Neu) |
+| **Team-Cards (Information-Images)** | Karten-Grid mit Foto + Name + Position, optional verlinkt | (Neu) Team/Mentor:innen |
 | **Work-Showcase** | Case-Sektion: Video oder 2/3 Bilder + Headline + 2-spaltiger Text | (Neu) Agentur-Cases |
 | **Icon-Divider** | Großes zentriertes Icon als Trenner zwischen Sektionen | (Neu) |
-| **Agentur-Grid mit Filter** | Auto-Liste aller Agentur-Unterseiten mit Filter (Standort/Arbeitsweise/Schwerpunkte/Größe), Position via gridCol/gridRow/gridSpan pro Agentur | (Neu) Nur auf agenturen-Seite |
+| **Agentur-Grid mit Filter** | Auto-Liste aller Agentur-Unterseiten mit Filter (Standort/Arbeitsweise/Schwerpunkte/Größe) | (Neu) Nur auf agenturen-Seite |
 | **Q & A (FAQ)** | Frage-Antwort-Listen mit optionalen Themengruppen | FAQ-Seite |
 | **Conversion (CTA-Cards)** | Abschluss mit Headline + Bild + mehreren CTA-Karten | `.cta-final` Sektion |
 

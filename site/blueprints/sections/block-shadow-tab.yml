@@ -4,13 +4,16 @@ label: Bild-Schatten
 icon: shape
 fields:
   shadowInfo:
-    label: Blauer Schlagschatten
+    label: Blauer Schlagschatten — was ist das?
     type: info
     theme: blue
     text: >
-      Position und Rotation des blauen Schatten-Rechtecks hinter dem Bild,
-      pro Breakpoint. Plus Rotation des Bildes selbst.
-      Positive X = nach rechts, positive Y = nach unten.
+      Der Schatten ist das **versetzte blaue Rechteck hinter dem Bild** —
+      Designer-Effekt für mehr Tiefe. Du kannst pro Breakpoint einstellen
+      wie weit es **verschoben** ist (X/Y) und wie **gedreht** (°).
+      Zusätzlich kannst du das **Bild selbst** drehen (Polaroid-Look).
+      **+X = nach rechts**, **+Y = nach unten**, **+° = im Uhrzeigersinn**.
+      Werte leer = Default greift. Animation läuft automatisch beim Scrollen.
   mobileShadowHead:
     label: Mobile
     type: headline

@@ -35,17 +35,48 @@ if (!function_exists('soi_html')) {
 }
 
 if (!function_exists('soi_paragraphs')) {
-    function soi_paragraphs($text, string $leadClass = ''): string
+    /**
+     * Rendert einen Fließtext zu <p>-Absätzen. Markdown-Inline-Format (**bold**,
+     * *italic*) bleibt erhalten.
+     *
+     * **Steuerung der Schriftgröße pro Absatz:**
+     * Ein Absatz, der KOMPLETT von `**...**` umschlossen ist, wird mit der
+     * Klasse $leadClass (z.B. 'text-medium') gerendert — anstatt mit
+     * <strong> versehen. So kann der Designer pro Absatz entscheiden, ob er
+     * groß/bold gerendert werden soll.
+     *
+     * Beispiel:
+     *   Text: "**Erster Absatz fett**\n\nNormaler Absatz mit **inline-bold**."
+     *   →    <p class="text-medium">Erster Absatz fett</p>
+     *        <p>Normaler Absatz mit <strong>inline-bold</strong>.</p>
+     *
+     * Vorher gab's einen "erster-Absatz-immer-medium" Auto-Modus. Der ist raus,
+     * weil der Designer das jetzt explizit steuern können soll.
+     */
+    function soi_paragraphs($text, string $leadClass = 'text-medium'): string
     {
         if (is_object($text) && method_exists($text, 'value')) {
             $text = $text->value();
         }
         $parts = preg_split('/\R{2,}/', trim((string)$text)) ?: [];
         $html = '';
-        foreach ($parts as $index => $part) {
-            if (trim($part) === '') continue;
-            $class = $index === 0 && $leadClass !== '' ? ' class="' . $leadClass . '"' : '';
-            $html .= '<p' . $class . '>' . soi_html(trim($part)) . '</p>';
+        foreach ($parts as $part) {
+            $part = trim($part);
+            if ($part === '') continue;
+
+            // Ganzer Absatz in **...** → als CSS-Klasse rendern (kein <strong>).
+            // Class bringt Medium-Weight (500) für den ruhigen Lead-Look,
+            // kein zusätzliches Bold (700). Inline-bold in normalen Absätzen
+            // (`Text mit **fett** drin`) bleibt davon unberührt — das macht
+            // soi_html weiterhin via <strong>.
+            // Negative-Lookahead `(?!\*\*)` verhindert, dass z.B.
+            // "**A** und **B**" matched.
+            if ($leadClass !== '' && preg_match('/^\*\*((?:(?!\*\*).)+)\*\*$/s', $part, $m)) {
+                $inner = trim($m[1]);
+                $html .= '<p class="' . $leadClass . '">' . soi_html($inner) . '</p>';
+            } else {
+                $html .= '<p>' . soi_html($part) . '</p>';
+            }
         }
         return $html;
     }
@@ -127,10 +158,15 @@ if (!function_exists('soi_icon_text')) {
     /**
      * Ersetzt {icon:name} im Text durch Inline-Icons.
      * $localPool ist [name => url].
+     *
+     * Zusätzlich: leading-Whitespace vor jedem Icon wird zu NBSP. So bleibt
+     * das Icon immer am vorigen Wort kleben und macht keinen Orphan-Umbruch.
      */
     function soi_icon_text(string $text, array $localPool = [], string $extraClass = 'manifest__icon'): string
     {
         $escaped = soi_html($text);
+        // NBSP statt Space vor Icon-Token → bleibt am vorigen Wort
+        $escaped = preg_replace('/[ \t]+(?=\{icon:)/u', '&nbsp;', $escaped);
         return preg_replace_callback('/\{icon:([a-zA-Z0-9_-]+)\}/', function ($m) use ($localPool, $extraClass) {
             return soi_inline_icon($m[1], $localPool, $extraClass);
         }, $escaped);
@@ -189,6 +225,17 @@ if (!function_exists('soi_section_attrs')) {
             'spacingBottomDesktop' => '--section-bottom-desktop',
             'spacingBottomTablet'  => '--section-bottom-tablet',
             'spacingBottomMobile'  => '--section-bottom-mobile',
+            'subGapDesktop'        => '--section-sub-gap-desktop',
+            'subGapTablet'         => '--section-sub-gap-tablet',
+            'subGapMobile'         => '--section-sub-gap-mobile',
+            'bodyGapDesktop'       => '--section-body-gap-desktop',
+            'bodyGapTablet'        => '--section-body-gap-tablet',
+            'bodyGapMobile'        => '--section-body-gap-mobile',
+            // Backwards-Compat: alte headGap-Felder fallen auf body-gap (war
+            // semantisch dasselbe) — falls jemand schon Werte eingetragen hat.
+            'headGapDesktop'       => '--section-body-gap-desktop',
+            'headGapTablet'        => '--section-body-gap-tablet',
+            'headGapMobile'        => '--section-body-gap-mobile',
         ];
         foreach ($spacingMap as $field => $var) {
             try {
@@ -241,6 +288,79 @@ if (!function_exists('soi_section_icon_url')) {
             }
         }
         return null;
+    }
+}
+
+if (!function_exists('soi_library_icon_url')) {
+    /**
+     * URL zu einem Library-Icon für einen Breakpoint (kein Upload-Fallback).
+     * Liefert null wenn die PNG-Datei nicht existiert.
+     */
+    function soi_library_icon_url(string $key, string $bp): ?string
+    {
+        $key = trim($key);
+        if ($key === '') return null;
+        if (!in_array($bp, ['mobile', 'tablet', 'desktop'], true)) return null;
+
+        $relPath = 'icons/png/' . $bp . '/' . $key . '.png';
+        $absPath = kirby()->root('index') . '/' . $relPath;
+        if (is_file($absPath)) {
+            return url($relPath);
+        }
+        return null;
+    }
+}
+
+if (!function_exists('soi_library_picture')) {
+    /**
+     * Rendert ein <picture>-Element für ein Library-Icon mit allen 3
+     * Strichstärken (Mobile/Tablet/Desktop). Browser pickt automatisch
+     * die passende per media-query.
+     *
+     * Breakpoints korrespondieren mit SCSS:
+     *   - mobile:  bis 768px
+     *   - tablet:  769-1199px
+     *   - desktop: ab 1200px
+     *
+     * Wenn $uploadUrl gesetzt ist, hat das Vorrang vor der Library
+     * (eigener Upload überschreibt Bibliothek-Auswahl).
+     */
+    function soi_library_picture(
+        ?string $key,
+        ?string $uploadUrl = null,
+        string $class = '',
+        string $alt = ''
+    ): string {
+        // Upload-Override: nur ein <img>, kein <picture> nötig
+        if ($uploadUrl !== null && $uploadUrl !== '') {
+            $attrs = '';
+            if ($class !== '') $attrs .= ' class="' . esc($class, 'attr') . '"';
+            return '<img src="' . esc($uploadUrl, 'attr') . '" alt="' . esc($alt, 'attr') . '"' . $attrs . '>';
+        }
+
+        $key = $key ? trim($key) : '';
+        if ($key === '') return '';
+
+        $mobile  = soi_library_icon_url($key, 'mobile');
+        $tablet  = soi_library_icon_url($key, 'tablet');
+        $desktop = soi_library_icon_url($key, 'desktop');
+
+        // Fallback: wenn ein BP fehlt, den nächst-besseren nehmen
+        $fallback = $desktop ?? $tablet ?? $mobile;
+        if ($fallback === null) return '';
+
+        $mobile  = $mobile  ?? $fallback;
+        $tablet  = $tablet  ?? $fallback;
+        $desktop = $desktop ?? $fallback;
+
+        $cls = $class !== '' ? ' class="' . esc($class, 'attr') . '"' : '';
+        $altAttr = ' alt="' . esc($alt, 'attr') . '"';
+
+        return '<picture>'
+            . '<source media="(min-width: 1200px)" srcset="' . esc($desktop, 'attr') . '">'
+            . '<source media="(min-width: 769px)" srcset="' . esc($tablet, 'attr') . '">'
+            . '<img src="' . esc($mobile, 'attr') . '"' . $altAttr . $cls . '>'
+            . '</picture>';
     }
 }
 
@@ -323,6 +443,178 @@ if (!function_exists('soi_section_icon')) {
         }
         $html .= '</span>';
         return $html;
+    }
+}
+
+if (!function_exists('soi_section_icon_v2')) {
+    /**
+     * v2 Section-Icon Renderer — Anker-basiert.
+     *
+     * Liest neue Felder:
+     *   iconKey, iconRef (section|image),
+     *   iconAnchorY (top|middle|bottom), iconAnchorX (left|center|right),
+     *   iconOffsetX, iconOffsetY, iconRotate,
+     *   iconMobileSize/iconTabletSize/iconDesktopSize,
+     *   iconMobile/iconTablet/iconDesktop (Datei-Overrides),
+     *   iconMotion/iconMotionDuration/iconMotionDelay.
+     *
+     * Output HTML:
+     *   <span class="section-icon section-icon--v2"
+     *         data-anchor-y="top" data-anchor-x="right" data-ref="section"
+     *         style="--icon-offset-x:10px;--icon-offset-y:-20px;
+     *                --icon-rotate:0deg;
+     *                --icon-size-mobile:60px; --icon-size-tablet:90px;
+     *                --icon-size-desktop:120px;
+     *                --icon-motion-name:floatWobble;...">
+     *     <img class="section-icon__img section-icon__img--mobile" ...>
+     *     <img class="section-icon__img section-icon__img--tablet" ...>
+     *     <img class="section-icon__img section-icon__img--desktop" ...>
+     *   </span>
+     *
+     * Bezug = "image": Snippet sollte das Icon-HTML innerhalb der figure
+     * rendern (das figure ist position:relative). Bezug = "section": Icon
+     * direkt im section. Diese Helper-Funktion gibt nur das Markup zurück —
+     * wo es im Snippet platziert wird, entscheidet das Snippet.
+     */
+    function soi_section_icon_v2($block): string
+    {
+        if (!is_object($block)) return '';
+
+        $iconKey = '';
+        try { $iconKey = trim((string)$block->iconKey()); } catch (\Throwable $e) {}
+
+        $urls = [
+            'mobile'  => soi_section_icon_url($block, 'mobile',  $iconKey),
+            'tablet'  => soi_section_icon_url($block, 'tablet',  $iconKey),
+            'desktop' => soi_section_icon_url($block, 'desktop', $iconKey),
+        ];
+
+        if (!$urls['desktop'] && !$urls['tablet'] && !$urls['mobile']) {
+            return '';
+        }
+
+        // Fallback-Kaskade
+        if (!$urls['tablet'])  $urls['tablet']  = $urls['desktop'] ?? $urls['mobile'];
+        if (!$urls['mobile'])  $urls['mobile']  = $urls['tablet']  ?? $urls['desktop'];
+        if (!$urls['desktop']) $urls['desktop'] = $urls['tablet']  ?? $urls['mobile'];
+
+        // Anker (Defaults: oben-rechts)
+        $anchorY = 'top';
+        $anchorX = 'right';
+        $ref     = 'section';
+        try {
+            $ay = (string)$block->iconAnchorY();
+            if (in_array($ay, ['top', 'middle', 'bottom'], true)) $anchorY = $ay;
+            $ax = (string)$block->iconAnchorX();
+            if (in_array($ax, ['left', 'center', 'right'], true)) $anchorX = $ax;
+            $r  = (string)$block->iconRef();
+            if (in_array($r,  ['section', 'image'], true))         $ref     = $r;
+        } catch (\Throwable $e) {}
+
+        // CSS-Vars
+        $styles = [];
+
+        // Offsets + Rotation (jeweils mit 0 als Default)
+        $reads = [
+            'iconOffsetX'      => '--icon-offset-x',
+            'iconOffsetY'      => '--icon-offset-y',
+            'iconRotate'       => '--icon-rotate',
+        ];
+        foreach ($reads as $field => $cssVar) {
+            try {
+                $v = $block->{$field}();
+                if ($v->isNotEmpty()) {
+                    $unit = ($cssVar === '--icon-rotate') ? 'deg' : 'px';
+                    $styles[] = $cssVar . ':' . (int)$v->value() . $unit;
+                }
+            } catch (\Throwable $e) {}
+        }
+
+        // Größe pro BP
+        foreach (['mobile', 'tablet', 'desktop'] as $bp) {
+            $field = 'icon' . ucfirst($bp) . 'Size';
+            try {
+                $v = $block->{$field}();
+                if ($v->isNotEmpty()) {
+                    $styles[] = '--icon-size-' . $bp . ':' . (int)$v->value() . 'px';
+                }
+            } catch (\Throwable $e) {}
+        }
+
+        // Animation
+        $motion   = 'wobble';
+        $duration = '6.5s';
+        $delay    = '0s';
+        try {
+            $m = (string)$block->iconMotion();
+            if ($m !== '') $motion = $m;
+            $d = $block->iconMotionDuration();
+            if ($d->isNotEmpty()) $duration = ((float)$d->value()) . 's';
+            $dl = $block->iconMotionDelay();
+            if ($dl->isNotEmpty()) $delay = ((float)$dl->value()) . 's';
+        } catch (\Throwable $e) {}
+
+        $styles[] = '--icon-motion-name:' . ($motion === 'none' ? 'none' : ($motion === 'glide' ? 'floatGlide' : 'floatWobble'));
+        $styles[] = '--icon-motion-duration:' . $duration;
+        $styles[] = '--icon-motion-delay:' . $delay;
+
+        $html  = '<span class="section-icon section-icon--v2"';
+        $html .= ' data-anchor-y="' . esc($anchorY, 'attr') . '"';
+        $html .= ' data-anchor-x="' . esc($anchorX, 'attr') . '"';
+        $html .= ' data-ref="' . esc($ref, 'attr') . '"';
+        $html .= ' data-motion="' . esc($motion, 'attr') . '"';
+        $html .= ' aria-hidden="true"';
+        if (!empty($styles)) {
+            $html .= ' style="' . esc(implode(';', $styles), 'attr') . '"';
+        }
+        $html .= '>';
+        foreach (['mobile', 'tablet', 'desktop'] as $bp) {
+            if ($urls[$bp]) {
+                $html .= '<img class="section-icon__img section-icon__img--' . $bp . '" src="' . esc($urls[$bp]) . '" alt="" loading="lazy">';
+            }
+        }
+        $html .= '</span>';
+        return $html;
+    }
+}
+
+if (!function_exists('soi_section_icon_ref')) {
+    /**
+     * Helper für Snippets: wo soll das Icon im DOM gerendert werden?
+     * Returns 'image' oder 'section'. Snippet kann damit entscheiden ob
+     * das Icon in figure (Bild) oder direkt in section gehört.
+     */
+    function soi_section_icon_ref($block): string
+    {
+        try {
+            $r = (string)$block->iconRef();
+            if (in_array($r, ['section', 'image'], true)) return $r;
+        } catch (\Throwable $e) {}
+        return 'section';
+    }
+}
+
+if (!function_exists('soi_section_icon_at')) {
+    /**
+     * Convenience-Helper für Snippets: rendert das v2-Icon nur dann,
+     * wenn der User diese Position (image/section) gewählt hat.
+     *
+     * Usage in Snippet:
+     *   <figure>
+     *     ...
+     *     <?= soi_section_icon_at($block, 'image') ?>
+     *   </figure>
+     *   ...
+     *   <?= soi_section_icon_at($block, 'section') ?>
+     *
+     * Pro Block beide Aufrufe rein — der Helper entscheidet wo es erscheint.
+     * Wenn der Block kein Bild hat: einfach nur den 'section'-Aufruf nutzen.
+     */
+    function soi_section_icon_at($block, string $location): string
+    {
+        if (!in_array($location, ['section', 'image'], true)) return '';
+        if (soi_section_icon_ref($block) !== $location) return '';
+        return soi_section_icon_v2($block);
     }
 }
 

@@ -26,7 +26,9 @@ if (!$iconUrl && $icon !== '') {
     }
 }
 if ($iconUrl) {
-    $iconHtml = ' <span class="site-icon star-inline" aria-hidden="true"><img class="site-icon__img" src="' . esc($iconUrl) . '" alt=""></span> ';
+    // NBSP statt Space: Icon klebt am vorhergehenden Wort, kein Orphan-Umbruch.
+    // Trailing-Space bleibt regulär (Icon kann mit folgendem Wort umbrechen).
+    $iconHtml = '&nbsp;<span class="site-icon star-inline" aria-hidden="true"><img class="site-icon__img" src="' . esc($iconUrl) . '" alt=""></span> ';
 }
 ?>
 <section<?= $attrs ?>>
@@ -53,6 +55,6 @@ if ($iconUrl) {
       <?php endif ?>
     </h1>
   </div>
-  <?= soi_section_icon($block) ?>
+  <?= soi_section_icon_at($block, 'section') ?>
 </section>
 <div class="hero__mint" aria-hidden="true"></div>

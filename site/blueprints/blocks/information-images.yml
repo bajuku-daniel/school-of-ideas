@@ -1,0 +1,81 @@
+name: Team-Cards (Bild + Name)
+icon: users
+preview: fields
+
+tabs:
+  content:
+    label: Inhalt
+    icon: text
+    fields:
+      sectionInfo:
+        label: Team-/Personen-Karten
+        type: info
+        theme: blue
+        text: >
+          Karten-Grid mit Foto, Name und Position. Verlinkt optional auf
+          eine externe URL. Eignet sich für Team-Übersichten,
+          Mitarbeiter-Vorstellung oder Mentor:innen-Listen.
+      headlineInk:
+        label: Headline (schwarz, optional)
+        type: text
+        width: 1/2
+      headlineAccent:
+        label: Headline (blau, optional)
+        type: text
+        width: 1/2
+      sub:
+        label: Sub-Headline (optional)
+        type: textarea
+        buttons: false
+      gridSettings:
+        label: Grid-Einstellungen
+        type: headline
+      cols:
+        label: Spalten
+        type: number
+        default: 3
+        min: 2
+        max: 5
+        width: 1/2
+      aspect:
+        label: Bildformat
+        type: toggles
+        default: portrait
+        width: 1/2
+        options:
+          portrait: Hochkant (3/4)
+          square: Quadrat (1/1)
+          landscape: Landscape (4/3)
+      cards:
+        label: Personen
+        type: structure
+        columns:
+          name:
+            width: 1/3
+          position:
+            width: 1/3
+          image:
+            width: 1/3
+        fields:
+          image:
+            label: Foto
+            type: files
+            max: 1
+            uploads: image
+            layout: cards
+          name:
+            label: Name, Vorname
+            type: text
+          position:
+            label: Position
+            type: text
+            placeholder: z. B. "Creative Director"
+          url:
+            label: Link (optional)
+            type: text
+            placeholder: z. B. LinkedIn-Profil
+
+  layout:
+    extends: sections/block-layout-tab
+  icon:
+    extends: sections/block-icon-tab-v2

@@ -13,6 +13,7 @@ $cards       = $block->cards()->toStructure();
       <?php if ($shadowStyle): ?>style="<?= esc($shadowStyle, 'attr') ?>"<?php endif ?>>
       <span class="motiv__shadow" aria-hidden="true"></span>
       <div class="motiv__frame"><img class="motiv__img" src="<?= esc($imageUrl) ?>" alt=""></div>
+      <?= soi_section_icon_at($block, 'image') ?>
     </figure>
     <?php endif ?>
 
@@ -47,5 +48,5 @@ $cards       = $block->cards()->toStructure();
       <?php endforeach ?>
     </div>
   </div>
-  <?= soi_section_icon($block) ?>
+  <?= soi_section_icon_at($block, 'section') ?>
 </section>

@@ -380,9 +380,217 @@
   &[data-motion="none"] .section-icon__img { animation: none; }
 }
 
+// =============================================================================
+// .section-icon--v2 — Anker-basiertes Positionssystem.
+//
+// Statt pixelgenauer top/left pro BP setzt der Designer:
+//   data-anchor-y="top|middle|bottom"
+//   data-anchor-x="left|center|right"
+//   data-ref="section|image"        (wo das Icon im DOM sitzt — entscheidet das Snippet)
+//
+// CSS-Vars für Feinjustierung + Größe:
+//   --icon-offset-x / --icon-offset-y  (px, kann negativ sein)
+//   --icon-rotate                       (deg)
+//   --icon-size-mobile/tablet/desktop  (px)
+//   --icon-motion-name/duration/delay  (wie bei v1)
+//
+// Das Icon klebt am gewählten Anker. Bei Höhen-Änderung der Sektion
+// rutscht es NICHT — es bleibt an seiner Ecke fest. Bei "image" ref ist
+// es im figure und wandert mit dem Bild.
+// =============================================================================
+.section-icon--v2 {
+  position: absolute;
+  pointer-events: none;
+  z-index: 5;
+  display: block;
+  will-change: transform;
+  transform-origin: 50% 50%;
+
+  // Größe je nach BP — wenn der Designer keine Größe setzt, ist das Icon
+  // auf diesem BP UNSICHTBAR (display: none). So kann er das Icon gezielt
+  // pro BP ein-/ausschalten ohne extra Hide-Toggle.
+  //
+  // Default: display:none auf allen BPs.
+  // Wenn der User --icon-size-{bp} setzt → display:block + width: <wert>.
+  display: none;
+
+  @media (max-width: 768px) {
+    &[style*="--icon-size-mobile"] {
+      display: block;
+      width: var(--icon-size-mobile);
+    }
+  }
+  @media (min-width: 769px) and (max-width: 1199px) {
+    &[style*="--icon-size-tablet"] {
+      display: block;
+      width: var(--icon-size-tablet);
+    }
+  }
+  @media (min-width: 1200px) {
+    &[style*="--icon-size-desktop"] {
+      display: block;
+      width: var(--icon-size-desktop);
+    }
+  }
+
+  // Rotation
+  transform: rotate(var(--icon-rotate, 0deg));
+
+  // --- Anker-Positionierung via data-attributes ---
+  // Semantik: --icon-offset-x / -y sind WELT-KOORDINATEN:
+  //   +X verschiebt IMMER nach rechts, −X nach links
+  //   +Y verschiebt IMMER nach unten,  −Y nach oben
+  // Egal welcher Anker — die Verschiebungs-Richtung bleibt gleich.
+  // Bei "right"-Anker muss right: −offset gerechnet werden, sonst würde
+  // +X nach links wandern (weil right wegrückt vom rechten Rand).
+  top:  var(--icon-offset-y, 0px);
+  right: calc(0px - var(--icon-offset-x, 0px));
+  left: auto;
+  bottom: auto;
+
+  // Vertikal-Anker
+  &[data-anchor-y="top"] {
+    top: var(--icon-offset-y, 0px);
+    bottom: auto;
+  }
+  &[data-anchor-y="middle"] {
+    top: 50%;
+    bottom: auto;
+    margin-top: var(--icon-offset-y, 0px);
+    transform: translateY(-50%) rotate(var(--icon-rotate, 0deg));
+  }
+  &[data-anchor-y="bottom"] {
+    top: auto;
+    // bottom-Anker: +Y nach unten = aus dem Anker rausschieben (= bottom: −Y)
+    bottom: calc(0px - var(--icon-offset-y, 0px));
+  }
+
+  // Horizontal-Anker
+  &[data-anchor-x="left"] {
+    left: var(--icon-offset-x, 0px);
+    right: auto;
+  }
+  &[data-anchor-x="center"] {
+    left: 50%;
+    right: auto;
+    margin-left: var(--icon-offset-x, 0px);
+    transform: translateX(-50%) rotate(var(--icon-rotate, 0deg));
+  }
+  &[data-anchor-x="right"] {
+    left: auto;
+    // right-Anker: +X nach rechts = aus dem Anker rausschieben (= right: −X)
+    right: calc(0px - var(--icon-offset-x, 0px));
+  }
+
+  // Wenn BEIDE Achsen "mitte" sind: Doppel-Translate
+  &[data-anchor-y="middle"][data-anchor-x="center"] {
+    transform: translate(-50%, -50%) rotate(var(--icon-rotate, 0deg));
+  }
+
+  // Inner image: Animation läuft hier (Wobble/Glide), nicht am Container
+  // (sonst kollidieren Rotation und Animation-Transform).
+  & > .section-icon__img {
+    display: none;
+    width: 100%;
+    height: auto;
+    transform-origin: 50% 50%;
+    animation: var(--icon-motion-name, floatWobble)
+               var(--icon-motion-duration, 6.5s)
+               ease-in-out infinite;
+    animation-delay: var(--icon-motion-delay, 0s);
+
+    @media (prefers-reduced-motion: reduce) { animation: none; }
+  }
+
+  // Pro BP nur das passende img zeigen
+  & > .section-icon__img--mobile  { display: block; }
+  @media (min-width: 769px) {
+    & > .section-icon__img--mobile  { display: none; }
+    & > .section-icon__img--tablet  { display: block; }
+  }
+  @media (min-width: 1200px) {
+    & > .section-icon__img--tablet  { display: none; }
+    & > .section-icon__img--desktop { display: block; }
+  }
+
+  &[data-motion="none"] > .section-icon__img { animation: none; }
+}
+
 // Damit absolute Section-Icons funktionieren: jede Block-Section ist position:relative.
 .hero, .intro, .manifest, .expect, .year, .values, .audience, .outcome,
-.cta-final, .qa, .image-block, .editorial {
+.cta-final, .qa, .image-block, .editorial,
+.headline-solo, .editorial-plain-2col, .editorial-image-text,
+.information-images, .hero-foto {
+  position: relative;
+
+  // Globaler Spacing-Override aus dem Layout-Tab.
+  // Wenn der User im Panel einen Wert für Abstand oben/unten setzt, gewinnt
+  // der gegenüber den Block-spezifischen Defaults. Per BP separat — Mobile
+  // gilt ≤768px, Tablet 769-1199px, Desktop ≥1200px.
+  // !important nötig, weil jede Block-Klasse eigene padding-Regel hat.
+  &[style*="--section-top-mobile"]    { padding-top:    var(--section-top-mobile)    !important; }
+  &[style*="--section-bottom-mobile"] { padding-bottom: var(--section-bottom-mobile) !important; }
+  @media (min-width: 769px) {
+    &[style*="--section-top-tablet"]    { padding-top:    var(--section-top-tablet)    !important; }
+    &[style*="--section-bottom-tablet"] { padding-bottom: var(--section-bottom-tablet) !important; }
+  }
+  @media (min-width: 1200px) {
+    &[style*="--section-top-desktop"]    { padding-top:    var(--section-top-desktop)    !important; }
+    &[style*="--section-bottom-desktop"] { padding-bottom: var(--section-bottom-desktop) !important; }
+  }
+
+  // -------- Headline → blauer Sub-Text --------
+  // Mappt --section-sub-gap-{bp} auf die "__sub margin-top" Vars der
+  // Sektionen, die einen blauen Sub-Text drunter rendern (audience, etc.).
+  &[style*="--section-sub-gap-mobile"] {
+    --audience-sub-spacing-top: var(--section-sub-gap-mobile);
+  }
+  @media (min-width: 769px) {
+    &[style*="--section-sub-gap-tablet"] {
+      --audience-sub-spacing-top: var(--section-sub-gap-tablet);
+    }
+  }
+  @media (min-width: 1200px) {
+    &[style*="--section-sub-gap-desktop"] {
+      --audience-sub-spacing-top: var(--section-sub-gap-desktop);
+    }
+  }
+
+  // -------- Headline-Bereich → Cards/Grid/Inhaltsbereich --------
+  // Mappt --section-body-gap-{bp} auf die "Header → Inhalt" Vars der
+  // Sektionen mit dem Pattern "Headline oben, Content drunter".
+  &[style*="--section-body-gap-mobile"] {
+    --year-copy-spacing-top:    var(--section-body-gap-mobile);
+    --values-grid-spacing-top:  var(--section-body-gap-mobile);
+    --audience-grid-spacing-top: var(--section-body-gap-mobile);
+    --outcome-grid-spacing-top: var(--section-body-gap-mobile);
+    --expect-copy-gap:          var(--section-body-gap-mobile);
+    --intro-copy-gap:           var(--section-body-gap-mobile);
+  }
+  @media (min-width: 769px) {
+    &[style*="--section-body-gap-tablet"] {
+      --year-copy-spacing-top:    var(--section-body-gap-tablet);
+      --values-grid-spacing-top:  var(--section-body-gap-tablet);
+      --audience-grid-spacing-top: var(--section-body-gap-tablet);
+      --outcome-grid-spacing-top: var(--section-body-gap-tablet);
+      --expect-copy-gap:          var(--section-body-gap-tablet);
+      --intro-copy-gap:           var(--section-body-gap-tablet);
+    }
+  }
+  @media (min-width: 1200px) {
+    &[style*="--section-body-gap-desktop"] {
+      --year-copy-spacing-top:    var(--section-body-gap-desktop);
+      --values-grid-spacing-top:  var(--section-body-gap-desktop);
+      --audience-grid-spacing-top: var(--section-body-gap-desktop);
+      --outcome-grid-spacing-top: var(--section-body-gap-desktop);
+      --expect-copy-gap:          var(--section-body-gap-desktop);
+      --intro-copy-gap:           var(--section-body-gap-desktop);
+    }
+  }
+}
+
+// Wenn ref="image": .motiv figure ist position:relative (für Icon-Anchoring)
+.motiv {
   position: relative;
 }
 
@@ -443,6 +651,23 @@
   text-decoration: underline;
   text-underline-offset: 5px;
   text-decoration-thickness: 1.5px;
+
+  &:hover { color: $color-accent-soft; }
+}
+
+// .editorial-cta-link — schlichter Inline-Link unter einem Textblock.
+// Genutzt z.B. im editorial-split-intro Block ("Details zum Programm").
+.editorial-cta-link {
+  display: inline-block;
+  font-family: $font-body;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.1vw, 1.15rem);
+  color: $color-accent;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+  margin-top: clamp(16px, 1.4vw, 24px);
+  transition: color $duration-base $easing-out;
 
   &:hover { color: $color-accent-soft; }
 }
@@ -3060,5 +3285,641 @@
     justify-content: space-between;
     align-items: center;
     gap: 24px;
+  }
+}
+
+// =============================================================================
+// NEUE BLOCKS — headline-solo, editorial-plain-2col, editorial-image-text,
+// information-images, hero-foto
+// =============================================================================
+
+// ----- Shared Section-Padding-Mixin (3-BP CSS-Vars aus dem Block) ----------
+@mixin section-spacing {
+  padding: var(--section-top-mobile, clamp(60px, 9vw, 120px)) 0
+           var(--section-bottom-mobile, clamp(60px, 9vw, 120px));
+  @media (min-width: 769px) {
+    padding: var(--section-top-tablet, clamp(60px, 9vw, 120px)) 0
+             var(--section-bottom-tablet, clamp(60px, 9vw, 120px));
+  }
+  @media (min-width: 1200px) {
+    padding: var(--section-top-desktop, clamp(60px, 9vw, 120px)) 0
+             var(--section-bottom-desktop, clamp(60px, 9vw, 120px));
+  }
+}
+
+// ----- .headline-solo --------------------------------------------------------
+.headline-solo {
+  @include section-spacing;
+  position: relative;
+
+  &__head {
+    max-width: 28ch;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 1.4vw, 20px);
+  }
+
+  &[data-align="center"] &__head { max-width: 38ch; margin-inline: auto; text-align: center; }
+  &[data-align="right"]  &__head { margin-left: auto; text-align: right; }
+
+  &__kicker {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(.8rem, .9vw, .95rem);
+    color: $color-accent;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin: 0;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: clamp(2rem, 5vw, 4.2rem);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .15em;
+
+    .ink    { color: $color-ink; }
+    .accent { color: $color-accent; }
+  }
+
+  &__sub {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(.95rem, 1.1vw, 1.15rem);
+    line-height: 1.4;
+    color: $color-ink;
+    margin: 0;
+    max-width: 32ch;
+  }
+}
+
+// ----- .editorial-plain-2col ------------------------------------------------
+.editorial-plain-2col {
+  @include section-spacing;
+  position: relative;
+
+  &__kicker {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(.8rem, .9vw, .95rem);
+    color: $color-accent;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin: 0 0 clamp(20px, 2.5vw, 40px);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(30px, 5vw, 80px);
+
+    @media (max-width: 760px) {
+      grid-template-columns: 1fr;
+      gap: clamp(20px, 4vw, 36px);
+    }
+  }
+
+  &__col p {
+    font-family: $font-body;
+    font-weight: 400;
+    font-size: clamp(.95rem, 1.05vw, 1.05rem);
+    line-height: 1.55;
+    color: $color-ink;
+    margin: 0 0 1em;
+    &:last-child { margin: 0; }
+  }
+}
+
+// ----- .image-block — Stand-Alone-Bild Sektion -----------------------------
+// Standalone-Bild mit blauem Schatten, Aspect-Ratio + 3 Ausrichtungen
+// (links / mitte / rechts). Plus Designer-Knöpfe für Breite pro BP und
+// X/Y-Offset zur Feinpositionierung.
+.image-block {
+  @include section-spacing;
+  position: relative;
+
+  // Designer-Defaults — pro BP überschreibbar
+  --image-width-mobile:  100%;
+  --image-width-tablet:  100%;
+  --image-width-desktop: 100%;
+  --image-offset-x:      0px;
+  --image-offset-y:      0px;
+
+  .container > .motiv {
+    width: var(--image-width-mobile);
+    margin-block: 0;
+    transform: translate(var(--image-offset-x), var(--image-offset-y));
+
+    @media (min-width: 769px)  { width: var(--image-width-tablet); }
+    @media (min-width: 1200px) { width: var(--image-width-desktop); }
+  }
+
+  &__motiv {
+    aspect-ratio: var(--motiv-aspect, 16 / 11);
+
+    &--left   { margin-inline: 0 auto; }
+    &--center { margin-inline: auto; }
+    &--right  { margin-inline: auto 0; }
+  }
+
+  &__caption {
+    margin-top: clamp(8px, 1vw, 16px);
+    font-family: $font-body;
+    font-size: clamp(.8rem, .85vw, .85rem);
+    color: $color-ink-soft;
+    text-align: center;
+  }
+}
+
+// ----- .editorial-image-text ------------------------------------------------
+.editorial-image-text {
+  @include section-spacing;
+  position: relative;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(40px, 6vw, 100px);
+    align-items: center;
+
+    @media (max-width: 800px) {
+      grid-template-columns: 1fr;
+      gap: clamp(30px, 5vw, 60px);
+    }
+  }
+
+  // Bild-Position: rechts → in der Source-Order tauschen via Grid-Trick
+  &[data-image-side="right"] &__media { order: 2; }
+  &[data-image-side="right"] &__copy  { order: 1; }
+  @media (max-width: 800px) {
+    &[data-image-side="right"] &__media { order: 1; }
+    &[data-image-side="right"] &__copy  { order: 2; }
+  }
+
+  &__media {
+    width: 100%;
+    margin: 0;
+    aspect-ratio: var(--motiv-aspect, 16 / 11);
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(18px, 2vw, 28px);
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3.6vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .12em;
+
+    .ink    { color: $color-ink; }
+    .accent { color: $color-accent; }
+  }
+
+  &__body p {
+    font-family: $font-body;
+    font-weight: 400;
+    font-size: clamp(.95rem, 1.05vw, 1.05rem);
+    line-height: 1.55;
+    color: $color-ink;
+    margin: 0 0 1em;
+    &:last-child { margin: 0; }
+  }
+
+  &__cta {
+    align-self: flex-start;
+    margin-top: clamp(8px, 1vw, 16px);
+  }
+}
+
+// ----- .information-images --------------------------------------------------
+.information-images {
+  @include section-spacing;
+  position: relative;
+
+  &__head {
+    margin-bottom: clamp(36px, 5vw, 72px);
+    max-width: 42ch;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 3.6vw, 3rem);
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .12em;
+
+    .ink    { color: $color-ink; }
+    .accent { color: $color-accent; }
+  }
+
+  &__sub {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(.95rem, 1.1vw, 1.15rem);
+    color: $color-accent;
+    margin: 16px 0 0;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--info-images-cols, 3), minmax(0, 1fr));
+    gap: clamp(24px, 3vw, 48px);
+
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 540px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: inherit;
+    text-decoration: none;
+    transition: transform $duration-base $easing-out;
+  }
+  a.information-images__card:hover { transform: translateY(-4px); }
+
+  &__media {
+    width: 100%;
+    margin: 0;
+    aspect-ratio: var(--info-images-aspect, 3 / 4);
+    background: $color-accent;
+    border-radius: $radius-md;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: $color-accent;
+  }
+
+  &__name {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(.95rem, 1.05vw, 1.05rem);
+    color: $color-ink;
+    margin: 0;
+  }
+
+  &__position {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(.85rem, .95vw, .95rem);
+    color: $color-ink;
+    margin: 0;
+  }
+}
+
+// ----- .hero-foto -----------------------------------------------------------
+.hero-foto {
+  @include section-spacing;
+  position: relative;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: clamp(40px, 6vw, 110px);
+    align-items: start;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+      gap: clamp(30px, 5vw, 60px);
+    }
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: clamp(2.4rem, 6vw, 6rem);
+    line-height: 1.02;
+    letter-spacing: -.02em;
+    margin: 0;
+    color: $color-ink;
+    display: flex;
+    flex-direction: column;
+
+    .line { display: block; }
+
+    .site-icon.star-inline {
+      display: inline-flex;
+      vertical-align: middle;
+      width: .85em;
+      height: .85em;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  &__sub {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(1rem, 1.3vw, 1.35rem);
+    line-height: 1.4;
+    color: $color-accent;
+    margin: clamp(20px, 2.4vw, 36px) 0 0;
+    max-width: 32ch;
+  }
+
+  &__media {
+    width: 100%;
+    margin: 0;
+    aspect-ratio: var(--motiv-aspect, 16 / 11);
+  }
+}
+
+// =============================================================================
+// .footer-v2 — neuer globaler Footer (Design Björn)
+// Aufbau:
+//   [weißer Logo-Bereich oben]
+//   [blauer Hauptbereich mit Claim + 2 CTAs + 4 Link-Spalten + Bottom-Row]
+// =============================================================================
+.footer-v2 {
+  position: relative;
+  z-index: 1;
+
+  // ---- Designer-Knöpfe ----
+  --footer-v2-brand-height: clamp(40px, 5vw, 72px);
+  --footer-v2-pad-x:        clamp(24px, 4vw, 96px);
+  --footer-v2-logo-pad-y:   clamp(28px, 3vw, 56px);
+  --footer-v2-main-pad-top: clamp(48px, 6vw, 96px);
+  --footer-v2-main-pad-bot: clamp(32px, 4vw, 56px);
+  --footer-v2-row-gap:      clamp(64px, 9vw, 140px);
+
+  // Vorgabe Björn: 22px Standard / 35px für den großen Claim.
+  // Mobile bisschen kleiner, sonst fix.
+  --footer-v2-fs-claim:  35px;
+  --footer-v2-fs-body:   22px;
+  --footer-v2-fs-bottom: 17px;
+
+  @media (max-width: 768px) {
+    --footer-v2-fs-claim:  26px;
+    --footer-v2-fs-body:   18px;
+    --footer-v2-fs-bottom: 15px;
+  }
+
+  // ----- Logo-Bereich oben -----
+  // Gleiche Background-Color wie die Page (off-white), damit es nahtlos
+  // anschließt. Inhalt boxed via __inner — selbe max-width wie der blaue
+  // Content darunter.
+  &__logo-wrap {
+    background: $color-bg;
+    padding: var(--footer-v2-logo-pad-y) var(--footer-v2-pad-x);
+  }
+
+  &__brand {
+    display: inline-block;
+    color: $color-ink;
+    text-decoration: none;
+  }
+
+  // Wordmark-Stack mit Cloud-Slot — exakt wie .nav__brand-stack damit die
+  // Wolke beim Scroll-End sauber im Slot landet.
+  &__brand-stack {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+  }
+  &__brand-text {
+    height: var(--footer-v2-brand-height);
+    width: auto;
+    display: block;
+  }
+  // Cloud-Slot: Position spiegelt die Nav (60.1% horizontal, 55% vertikal).
+  // Größe deutlich größer als altes Footer-Slot, weil im Björn-Design die
+  // Wolke prominenter zwischen "school of" und "ideas" sitzt.
+  &__cloud-slot {
+    position: absolute;
+    left: 60.1%;
+    top: 55%;
+    transform: translate(-50%, calc(-50% - 1px));
+    width:  calc(var(--footer-v2-brand-height) * 2.4);
+    height: calc(var(--footer-v2-brand-height) * 2.4);
+    pointer-events: none;
+  }
+
+  // ----- Blauer Hauptbereich -----
+  &__main {
+    background: $color-accent;
+    color: #fff;
+    padding: var(--footer-v2-main-pad-top) var(--footer-v2-pad-x) var(--footer-v2-main-pad-bot);
+  }
+  // Boxed Container — matched die Lesebreite der Seite (xxl 1400px).
+  // Wird im Logo-Bereich UND im blauen Main-Bereich verwendet, damit
+  // beide horizontal exakt gleich ausgerichtet sind.
+  &__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  // ----- Top-Row: Claim (Span 2) + 2 CTAs -----
+  // 4-col Grid mit gleichen Tracks wie die Link-Spalten unten, damit
+  // CTA1/CTA2 perfekt mit "Deine Bewerbung"/"Für Agenturen" alignen.
+  &__top {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(32px, 4vw, 80px);
+
+    @media (max-width: 1199px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: clamp(28px, 5vw, 48px);
+    }
+  }
+
+  &__claim-wrap {
+    grid-column: span 2;  // belegt Spalten 1+2 (über Kontakt + Das Programm)
+    @media (max-width: 768px) { grid-column: span 1; }
+  }
+  &__claim {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: var(--footer-v2-fs-claim);  // 35px (Björn)
+    line-height: 1.2;
+    margin: 0 0 clamp(20px, 2vw, 32px);
+    letter-spacing: -.005em;
+    max-width: 22ch;
+  }
+  &__claim-sub {
+    font-family: $font-body;
+    font-weight: 400;
+    font-size: var(--footer-v2-fs-body);  // 22px (Björn)
+    line-height: 1.4;
+    margin: 0;
+    max-width: 28ch;
+  }
+
+  &__cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(20px, 2vw, 32px);
+  }
+  &__cta-head {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: var(--footer-v2-fs-body);  // 22px
+    line-height: 1.35;
+    margin: 0;
+    max-width: 22ch;
+  }
+  // Kompakter Button — Björn-Design zeigt knappe Höhe ~40px, nicht 48px+.
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: $color-accent;
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: 17px;
+    padding: 10px 22px;
+    padding-top:12px;
+    border-radius: $radius-md;
+    text-decoration: none;
+    line-height: 1.2;
+    transition: background $duration-base $easing-out, transform $duration-base $easing-out;
+
+    &:hover {
+      background: $color-mint;
+      transform: translateY(-1px);
+    }
+  }
+
+  // ----- 4 Link-Spalten -----
+  &__cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(32px, 4vw, 80px);
+    margin-top: var(--footer-v2-row-gap);
+
+    @media (max-width: 1199px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(32px, 4vw, 56px);
+    }
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &__col-title {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: var(--footer-v2-fs-body);  // 22px
+    line-height: 1.3;
+    margin: 0 0 clamp(20px, 2vw, 32px);
+    color: #fff;
+  }
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(4px, .5vw, 8px);
+
+    li > a,
+    li > span {
+      font-family: $font-body;
+      font-weight: 400;
+      font-size: var(--footer-v2-fs-body);  // 22px
+      line-height: 1.5;
+      color: #fff;
+      text-decoration: none;
+      transition: opacity $duration-base $easing-out;
+    }
+    li > a:hover { opacity: .75; }
+  }
+
+  // ----- Bottom-Row: Copyright + Legal (vertikal) + Credit -----
+  // Björn-Design: Copyright links (Spalten 1+2), Impressum/Datenschutz/Cookies
+  // untereinander in Spalte 3, Credit rechts in Spalte 4.
+  // Selbe 4-col-Grid wie Top + Cols damit alles vertikal aligniert.
+  &__bottom {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: start;
+    gap: clamp(16px, 2vw, 32px) clamp(32px, 4vw, 80px);
+    margin-top: var(--footer-v2-row-gap);
+    padding-top: clamp(24px, 3vw, 40px);
+    border-top: 2px solid rgba(#fff, .9);
+    font-family: $font-body;
+    font-size: var(--footer-v2-fs-bottom);
+    color: #fff;
+
+    @media (max-width: 1199px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: clamp(20px, 3vw, 32px);
+    }
+  }
+  &__copyright {
+    margin: 0;
+    grid-column: span 2;  // belegt Spalten 1+2 (gleich wie Claim oben)
+    @media (max-width: 768px) { grid-column: span 1; }
+    strong, b { font-weight: 700; }
+  }
+  &__legal {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;          // ← untereinander
+    gap: clamp(4px, .5vw, 8px);
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      transition: opacity $duration-base $easing-out;
+      &:hover { opacity: .75; }
+    }
+  }
+  &__credit {
+    margin: 0;
+    // Sitzt in Spalte 4 (auto), linksbündig in seiner Spalte — gleich wie
+    // "Für Agenturen" oben drüber.
+    a {
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity $duration-base $easing-out;
+      &:hover { opacity: .75; }
+    }
   }
 }

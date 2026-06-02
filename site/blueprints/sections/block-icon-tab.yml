@@ -14,30 +14,7 @@ fields:
       (2) Eigene PNGs pro Breakpoint hochladen (Override).
       Eigene Uploads gewinnen immer.
   iconKey:
-    label: Aus Bibliothek wählen
-    type: select
-    empty: Kein Icon
-    options:
-      airplane: Papierflieger
-      bag: Tasche
-      bottle: Flasche
-      cloud: Wolke
-      comet: Komet
-      document: Dokument
-      glasses: Brille
-      glasses-bold: Brille (fett)
-      leaf: Blatt
-      lightbulb: Glühbirne
-      lightning: Blitz
-      pencil: Stift
-      puzzle: Puzzle
-      shooting-star: Sternschnuppe
-      spark: Spark
-      sparkles: Sparkles
-      sparkles-line: Sparkles Linie
-      star: Stern
-      starlight: Sternlicht
-      swirl: Wirbel
+    extends: fields/icon-key
   uploadHead:
     label: Eigene Uploads (Override pro Breakpoint)
     type: headline

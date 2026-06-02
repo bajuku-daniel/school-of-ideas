@@ -53,6 +53,6 @@ $parent = $page->parent();
     </nav>
 
   </main>
-  <?php snippet('subpage-footer') ?>
+  <?php snippet('footer') ?>
 </body>
 </html>

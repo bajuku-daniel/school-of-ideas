@@ -5,13 +5,178 @@ tabs:
     label: Seiten
     icon: page
     sections:
+      onboardingInfo:
+        type: info
+        label: 👋 Willkommen im Panel
+        theme: info
+        text: |
+          **So funktioniert das Panel:**
+
+          - **Seiten** unten in der Liste klicken zum Bearbeiten.
+          - Jede Seite besteht aus **Blöcken** (Sektionen) — du fügst sie über den **+**-Button hinzu, ziehst sie zum Sortieren.
+          - Pro Block gibt's **Tabs**: *Inhalt*, *Layout* (Abstände & Hintergrund), *Section-Icon* (Deko-Icon), bei Bild-Blocks zusätzlich *Bild-Schatten*.
+          - **Footer** wird zentral in der **Footer-Tab** oben gepflegt — gilt für alle Seiten.
       pages:
         type: pages
+        label: Seiten
         templates:
           - home
           - default
           - agenturen
           - agency
+
+  footer:
+    label: Footer
+    icon: layout-bottom
+    fields:
+      footerInfo:
+        label: Footer — global für alle Seiten
+        type: info
+        theme: info
+        text: >
+          Der Footer erscheint am Ende jeder Seite. Inhalte hier sind
+          für alle Seiten gleich. Spalten lassen sich beliebig sortieren,
+          einzelne Einträge können ausgeblendet werden ohne sie zu löschen.
+
+      claimHeadline:
+        label: Abschluss-Claim (groß, oben links im Footer)
+        type: headline
+      footerClaim:
+        label: Claim (große Zeile)
+        type: text
+        width: 1/2
+      footerClaimSub:
+        label: Sub-Claim (kleinere Zeile darunter)
+        type: textarea
+        buttons: false
+        width: 1/2
+
+      ctaHeadline:
+        label: Zwei CTA-Bereiche (rechts neben dem Claim)
+        type: headline
+      ctaApplyHead:
+        label: CTA 1 — Fragestellung
+        type: text
+        width: 1/2
+      ctaAgencyHead:
+        label: CTA 2 — Fragestellung
+        type: text
+        width: 1/2
+      ctaApplyButton:
+        label: CTA 1 — Button-Text
+        type: text
+        width: 1/4
+      ctaApplyUrl:
+        label: CTA 1 — Button-Link
+        type: text
+        width: 1/4
+      ctaAgencyButton:
+        label: CTA 2 — Button-Text
+        type: text
+        width: 1/4
+      ctaAgencyUrl:
+        label: CTA 2 — Button-Link
+        type: text
+        width: 1/4
+
+      columnsInfo:
+        label: 4 Link-Spalten unten
+        type: headline
+      columnsHelp:
+        label: Pro Spalte beliebig viele Einträge
+        type: info
+        text: >
+          Jede Spalte hat eine Überschrift und Items. Items können
+          per Toggle "Versteckt" ausgeblendet werden ohne Löschen.
+          URL leer = Spalten-Eintrag wird nicht als Link gerendert, nur als Text.
+
+      contactColumn:
+        label: Spalte 1 — Kontakt
+        type: structure
+        fields:
+          label:
+            label: Text / Label
+            type: text
+          url:
+            label: URL (optional, mailto möglich)
+            type: text
+          hidden:
+            label: Verstecken
+            type: toggle
+
+      programColumn:
+        label: Spalte 2 — Das Programm
+        type: structure
+        fields:
+          label:
+            label: Text / Label
+            type: text
+          url:
+            label: URL
+            type: text
+          hidden:
+            label: Verstecken
+            type: toggle
+
+      applicationColumn:
+        label: Spalte 3 — Deine Bewerbung
+        type: structure
+        fields:
+          label:
+            label: Text / Label
+            type: text
+          url:
+            label: URL
+            type: text
+          hidden:
+            label: Verstecken
+            type: toggle
+
+      agenciesColumn:
+        label: Spalte 4 — Für Agenturen
+        type: structure
+        fields:
+          label:
+            label: Text / Label
+            type: text
+          url:
+            label: URL (mailto möglich)
+            type: text
+          hidden:
+            label: Verstecken
+            type: toggle
+
+      bottomInfo:
+        label: Unterste Zeile (Copyright + Legal + Credit)
+        type: headline
+      copyright:
+        label: Copyright-Text
+        type: text
+        width: 1/2
+      legalLinks:
+        label: Legal-Links (Impressum, Datenschutz …)
+        type: structure
+        width: 1/2
+        fields:
+          label:
+            label: Text
+            type: text
+          url:
+            label: URL
+            type: text
+      creditPrefix:
+        label: Credit-Text (vor dem Studio-Link)
+        type: text
+        width: 1/3
+      creditStudio:
+        label: Studio-Name (Link)
+        type: text
+        width: 1/3
+      creditUrl:
+        label: Studio-URL
+        type: text
+        width: 1/3
+
   settings:
     label: Einstellungen
     icon: settings

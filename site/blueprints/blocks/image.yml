@@ -47,9 +47,60 @@ tabs:
         label: Bildunterschrift (optional)
         type: text
 
+      sizeHead:
+        label: Bildbreite & Position (Feinjustierung)
+        type: headline
+      sizeInfo:
+        label: Wie viel Platz nimmt das Bild ein?
+        type: info
+        theme: none
+        text: >
+          **Breite** in % der Container-Breite (z. B. 60 = 60% breit).
+          **Offset X/Y** verschiebt das Bild relativ zur Ausrichtung
+          (z. B. um es leicht außerhalb der zentrierten Position zu setzen).
+          Leer = Default-Layout.
+      widthDesktop:
+        label: Breite Desktop
+        type: number
+        after: '%'
+        placeholder: 100
+        width: 1/3
+        min: 10
+        max: 100
+      widthTablet:
+        label: Breite Tablet
+        type: number
+        after: '%'
+        placeholder: 100
+        width: 1/3
+        min: 10
+        max: 100
+      widthMobile:
+        label: Breite Mobile
+        type: number
+        after: '%'
+        placeholder: 100
+        width: 1/3
+        min: 10
+        max: 100
+      offsetX:
+        label: Offset X (horizontal)
+        type: number
+        after: px
+        placeholder: 0
+        width: 1/2
+        help: + nach rechts, − nach links
+      offsetY:
+        label: Offset Y (vertikal)
+        type: number
+        after: px
+        placeholder: 0
+        width: 1/2
+        help: + nach unten, − nach oben
+
   layout:
     extends: sections/block-layout-tab
   shadow:
     extends: sections/block-shadow-tab
   icon:
-    extends: sections/block-icon-tab
+    extends: sections/block-icon-tab-v2

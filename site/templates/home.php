@@ -84,35 +84,6 @@ $ctaUrl   = soi_text($page, 'ctaUrl', '#contact');
     ?>
   </main>
 
-  <footer class="footer">
-    <div class="footer__mint" aria-hidden="true"></div>
-    <div class="container">
-      <p class="footer__claim">
-        <span class="ink"><?= soi_html(soi_text($page, 'footerClaimInk', 'Bereit, deine Kreativität')) ?></span>
-        <span class="accent"><?= soi_html(soi_text($page, 'footerClaimAccent', 'in Zukunft zu verwandeln?')) ?></span>
-      </p>
-      <div class="footer__row">
-        <a class="footer__brand" href="<?= url() ?>" aria-label="school of ideas">
-          <span class="footer__brand-stack">
-            <img class="footer__brand-text" src="<?= url('logo/School_of_ideas_Logo_OW.png') ?>" alt="school of ideas">
-            <span class="footer__cloud-slot" data-cloud-target aria-hidden="true"></span>
-          </span>
-        </a>
-        <nav class="footer__nav" aria-label="Footer-Navigation">
-          <?php foreach ($footerLinksArr as $item): ?>
-            <a href="<?= esc($item['url']) ?>"><?= esc($item['label']) ?></a>
-          <?php endforeach ?>
-        </nav>
-      </div>
-      <div class="footer__bottom">
-        <div class="footer__legal">
-          <?php foreach ($legalLinksArr as $item): ?>
-            <a href="<?= esc($item['url']) ?>"><?= esc($item['label']) ?></a>
-          <?php endforeach ?>
-        </div>
-        <p class="footer__credit">Made with <span class="footer__heart" aria-hidden="true">♥</span><span class="visually-hidden">love</span> in Heimbach by <a class="footer__studio" href="https://watm.bajuku-dev.de/" target="_blank" rel="noopener">we and the machine</a> <span class="footer__machine" aria-hidden="true"><span></span></span></p>
-      </div>
-    </div>
-  </footer>
+  <?php snippet('footer') ?>
 </body>
 </html>

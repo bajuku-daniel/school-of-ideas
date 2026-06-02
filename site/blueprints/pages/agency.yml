@@ -185,10 +185,14 @@ tabs:
         type: blocks
         fieldsets:
           - split-intro
+          - headline-solo
           - editorial-split-intro
+          - editorial-plain-2col
+          - editorial-image-text
           - editorial-bullet-list
           - image
           - image-grid
+          - information-images
           - work-showcase
           - icon-divider
           - question-answers

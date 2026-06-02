@@ -31,7 +31,9 @@ tabs:
       body:
         label: Fließtext
         type: textarea
-        help: Absätze mit einer Leerzeile trennen.
+        help: >
+          Absätze mit Leerzeile trennen. **fett** und *kursiv* inline möglich.
+          Ganzer Absatz fett/groß: kompletten Absatz mit ** umschließen.
       imageHeadline:
         label: Bild
         type: headline
@@ -41,6 +43,30 @@ tabs:
         max: 1
         uploads: image
         layout: cards
+      imageSpacingHead:
+        label: Abstand Bild → Headline (oberhalb des Bildes)
+        type: headline
+        help: >
+          Vertikaler Abstand zwischen der Headline und dem Bild darunter.
+          Felder leer lassen für den Standard-Wert (Mobile ~48px, Tablet ~180px, Desktop ~285px).
+      motivSpacingTopMobile:
+        label: Mobile
+        type: number
+        after: px
+        placeholder: 48
+        width: 1/3
+      motivSpacingTopTablet:
+        label: Tablet
+        type: number
+        after: px
+        placeholder: 180
+        width: 1/3
+      motivSpacingTopDesktop:
+        label: Desktop
+        type: number
+        after: px
+        placeholder: 285
+        width: 1/3
       ctaHeadline:
         label: Buttons
         type: headline
@@ -64,6 +90,6 @@ tabs:
   layout:
     extends: sections/block-layout-tab
   icon:
-    extends: sections/block-icon-tab
+    extends: sections/block-icon-tab-v2
   shadow:
     extends: sections/block-shadow-tab

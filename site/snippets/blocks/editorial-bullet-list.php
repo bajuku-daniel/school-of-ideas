@@ -5,28 +5,20 @@ $attrs = soi_section_attrs($block, 'audience');
 $items = $block->items()->toStructure();
 
 // Bullet-Icon Resolution:
-//   1. eigener Upload (bulletUpload)
-//   2. Library-Key (bulletKey) → /icons/png/desktop/<key>.png
+//   1. Eigener Upload (bulletUpload) → schlägt Bibliothek
+//   2. Library-Key (bulletKey) → <picture> mit 3 BP-Strichstärken
 //   3. Default → leerer span, CSS rendert blauen Kreis (.card__arrow)
-$bulletUrl = null;
+$uploadUrl = null;
 try {
     $f = $block->bulletUpload()->toFiles()->first();
-    if ($f) $bulletUrl = $f->url();
+    if ($f) $uploadUrl = $f->url();
 } catch (\Throwable $e) {}
 
-if (!$bulletUrl) {
-    $bk = trim((string)$block->bulletKey());
-    if ($bk !== '') {
-        $absPath = kirby()->root('index') . '/icons/png/desktop/' . $bk . '.png';
-        if (is_file($absPath)) {
-            $bulletUrl = url('icons/png/desktop/' . $bk . '.png');
-        }
-    }
-}
+$bulletKey  = trim((string)$block->bulletKey());
+$bulletHtml = soi_library_picture($bulletKey, $uploadUrl, '', '');
 
-// Wenn ein eigenes Icon gewählt wurde, zusätzliche Klasse damit das CSS
-// nicht mehr den blauen Punkt zeichnet.
-$bulletClass = 'card__arrow' . ($bulletUrl ? ' card__arrow--custom' : '');
+// Klasse setzt CSS-Logik: --custom überspringt den blauen Punkt
+$bulletClass = 'card__arrow' . ($bulletHtml !== '' ? ' card__arrow--custom' : '');
 ?>
 <section<?= $attrs ?>>
   <div class="container">
@@ -48,15 +40,11 @@ $bulletClass = 'card__arrow' . ($bulletUrl ? ' card__arrow--custom' : '');
         $col = max(1, (int)$item->col()->or(1)->value());
         $row = max(1, (int)$item->row()->or(1)->value()); ?>
         <article class="card" style="--card-col:<?= $col ?>;--card-row:<?= $row ?>">
-          <?php if ($bulletUrl): ?>
-            <span class="<?= $bulletClass ?>" aria-hidden="true"><img src="<?= esc($bulletUrl) ?>" alt=""></span>
-          <?php else: ?>
-            <span class="<?= $bulletClass ?>" aria-hidden="true"></span>
-          <?php endif ?>
+          <span class="<?= $bulletClass ?>" aria-hidden="true"><?= $bulletHtml ?></span>
           <p class="card__text"><?= soi_html($item->text()) ?></p>
         </article>
       <?php endforeach ?>
     </div>
   </div>
-  <?= soi_section_icon($block) ?>
+  <?= soi_section_icon_at($block, 'section') ?>
 </section>

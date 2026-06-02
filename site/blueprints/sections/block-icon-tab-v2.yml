@@ -1,0 +1,196 @@
+# Shared Section-Icon Tab v2 — Anker-basiert statt pixelgenau.
+# Wird via `extends: sections/block-icon-tab-v2` aus Block-Blueprints geladen.
+#
+# Konzept (kurz für Designer):
+#   1. ICON wählen (aus Bibliothek ODER eigenes PNG je BP hochladen)
+#   2. BEZUG sagen: An welcher Stelle soll es kleben?
+#        Section = an der Sektion (Sektion ändert sich, Icon bleibt an der Ecke)
+#        Bild    = am Bild dran (wandert mit dem Bild mit)
+#   3. ANKER auswählen (3×3 Raster): Oben/Mitte/Unten × Links/Mitte/Rechts
+#   4. OFFSET in px (Welt-Koordinaten: +X immer nach rechts, +Y immer nach unten)
+#   5. GRÖßE pro Breakpoint (drei Strichstärken, Björn exportiert separat)
+#   6. ANIMATION an/aus (Waber / Glide)
+label: Section-Icon
+icon: star
+fields:
+  iconInfo:
+    label: So funktioniert die Icon-Platzierung
+    type: info
+    theme: blue
+    text: >
+      Schritt 1: **Icon** aus der Bibliothek wählen oder ein eigenes PNG hochladen.
+      Schritt 2: **Bezug** = wo soll es kleben? Sektion oder Bild.
+      Schritt 3: **Anker** im 3×3 Raster = die Ecke an der es klebt.
+      Schritt 4: **Offset X/Y** = Feinjustierung in Pixeln (positive Werte schieben
+      IMMER nach rechts bzw. nach unten, egal wo der Anker sitzt).
+      Schritt 5: **Größe** pro Breakpoint (verschiedene Strichstärken).
+
+  iconKey:
+    extends: fields/icon-key
+    width: 1/2
+    help: >
+      Die Bibliothek liegt in /public/icons/png/. Neue Icons:
+      PNG in mobile/tablet/desktop/ ablegen, dann den Key in
+      site/blueprints/fields/icon-key.yml ergänzen.
+  iconRef:
+    label: Bezug — wo soll das Icon kleben?
+    type: toggles
+    default: section
+    width: 1/2
+    options:
+      section: An der Sektion
+      image: Am Bild
+    help: >
+      **Sektion**: klebt an einer Ecke der ganzen Sektion. Wenn die Sektion durch
+      längere Texte wächst, bleibt das Icon an seiner Ecke.
+      **Bild**: klebt direkt am Bild. Wandert mit, wenn sich der Layout-Abstand
+      ändert. Empfohlen wenn das Icon visuell zum Bild gehört.
+
+  positionHead:
+    label: Anker — an welcher Ecke soll es kleben? (3×3 Raster)
+    type: headline
+  iconAnchorY:
+    label: Vertikal
+    type: toggles
+    default: top
+    width: 1/2
+    options:
+      top: Oben
+      middle: Mitte
+      bottom: Unten
+  iconAnchorX:
+    label: Horizontal
+    type: toggles
+    default: right
+    width: 1/2
+    options:
+      left: Links
+      center: Mitte
+      right: Rechts
+
+  offsetHead:
+    label: Feinjustierung — wie weit vom Anker weg?
+    type: headline
+  offsetInfo:
+    label: Welt-Koordinaten
+    type: info
+    theme: none
+    text: >
+      Beide Werte funktionieren wie auf einer Karte: **+X = nach rechts**,
+      **−X = nach links**, **+Y = nach unten**, **−Y = nach oben**. Egal welcher
+      Anker eingestellt ist, die Richtung bleibt immer gleich.
+  iconOffsetX:
+    label: Offset X (horizontal)
+    type: number
+    after: px
+    placeholder: 0
+    width: 1/3
+    help: + nach rechts, − nach links
+  iconOffsetY:
+    label: Offset Y (vertikal)
+    type: number
+    after: px
+    placeholder: 0
+    width: 1/3
+    help: + nach unten, − nach oben
+  iconRotate:
+    label: Drehung
+    type: number
+    after: °
+    placeholder: 0
+    width: 1/3
+    help: Positive Werte = im Uhrzeigersinn
+
+  sizeHead:
+    label: Größe — pro Breakpoint einstellen (oder ausblenden)
+    type: headline
+  sizeInfo:
+    label: Wichtig — leere Felder = Icon ausgeblendet
+    type: info
+    theme: blue
+    text: >
+      **Lass ein Feld leer, wird das Icon auf diesem Breakpoint nicht gezeigt.**
+      So kannst du z. B. das Icon nur auf Desktop einblenden und Mobile/Tablet
+      ausblenden. Wert eingeben = Icon erscheint in dieser Pixel-Größe.
+      Björn exportiert die Icons in 3 Strichstärken (Mobile dünn, Tablet
+      mittel, Desktop dick) damit sie auf jeder Größe gut aussehen.
+  iconMobileSize:
+    label: Mobile (≤ 768px)
+    type: number
+    after: px
+    placeholder: leer = aus
+    width: 1/3
+  iconTabletSize:
+    label: Tablet (769–1199px)
+    type: number
+    after: px
+    placeholder: leer = aus
+    width: 1/3
+  iconDesktopSize:
+    label: Desktop (≥ 1200px)
+    type: number
+    after: px
+    placeholder: leer = aus
+    width: 1/3
+
+  uploadHead:
+    label: Eigene Uploads (optional — Override pro Breakpoint)
+    type: headline
+  uploadInfo:
+    label: Wann brauche ich das?
+    type: info
+    theme: none
+    text: >
+      Nur wenn du ein Custom-Icon brauchst, das NICHT in der Bibliothek ist.
+      Dann hier pro Breakpoint die passende Strichstärke hochladen.
+      Wenn ein Feld leer bleibt, wird die Bibliothek-Auswahl oben verwendet.
+  iconMobile:
+    label: Icon Mobile (dünn)
+    type: files
+    max: 1
+    uploads: image
+    layout: cards
+    width: 1/3
+  iconTablet:
+    label: Icon Tablet (mittel)
+    type: files
+    max: 1
+    uploads: image
+    layout: cards
+    width: 1/3
+  iconDesktop:
+    label: Icon Desktop (dick)
+    type: files
+    max: 1
+    uploads: image
+    layout: cards
+    width: 1/3
+
+  motionHead:
+    label: Animation
+    type: headline
+  iconMotion:
+    label: Bewegung
+    type: toggles
+    default: wobble
+    width: 1/2
+    options:
+      none: Keine
+      wobble: Waber (4 Richtungen)
+      glide: Glide (sanft schwebend)
+  iconMotionDuration:
+    label: Dauer (1 Zyklus)
+    type: number
+    step: 0.1
+    after: s
+    placeholder: 6.5
+    width: 1/4
+    help: Niedrigere Werte = schneller
+  iconMotionDelay:
+    label: Verzögerung
+    type: number
+    step: 0.1
+    after: s
+    placeholder: 0
+    width: 1/4
+    help: Wann startet die Animation? Negativ = mitten drin starten

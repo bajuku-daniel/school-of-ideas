@@ -40,6 +40,6 @@
       <?= $block ?>
     <?php endforeach ?>
   </main>
-  <?php snippet('subpage-footer') ?>
+  <?php snippet('footer') ?>
 </body>
 </html>

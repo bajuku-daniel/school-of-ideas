@@ -34,5 +34,5 @@ $groups = $block->groups()->toStructure();
       <?php endforeach ?>
     </div>
   </div>
-  <?= soi_section_icon($block) ?>
+  <?= soi_section_icon_at($block, 'section') ?>
 </section>

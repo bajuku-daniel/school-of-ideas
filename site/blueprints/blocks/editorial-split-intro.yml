@@ -13,7 +13,9 @@ tabs:
         theme: blue
         text: >
           Sektion mit Headline (schwarz + blau) und 1/2/3 Spalten Text.
-          Optional mit Bild und/oder Sub-Headline. Variantenwahl steuert das Layout.
+          Optional Bild + Sub-Headline. Für mehr Bild-Kontrolle (Breite,
+          Offset, separater Schatten) kann alternativ der "Bild"-Block
+          benutzt werden.
       layout:
         label: Spalten-Layout
         type: toggles
@@ -39,7 +41,11 @@ tabs:
       body:
         label: Fließtext
         type: textarea
-        help: Absätze mit Leerzeile trennen.
+        help: >
+          Absätze mit Leerzeile trennen.
+          Inline-Formatierung: **fett**, *kursiv*.
+          Ganzer Absatz fett/groß: den ganzen Absatz mit ** umschließen
+          (z. B. **Diesen Absatz größer**). Inline mit *...* bleibt nur kursiv.
         when:
           layout: 1col
       columns:
@@ -58,7 +64,27 @@ tabs:
           body:
             label: Body (regular)
             type: textarea
-            help: Absätze mit Leerzeile trennen.
+            help: >
+              Absätze mit Leerzeile trennen. **fett** und *kursiv* gehen inline.
+              Ganzer Absatz fett/groß: Absatz komplett mit ** umschließen.
+          ctaText:
+            label: Link-Text (optional)
+            type: text
+            help: Wenn gefüllt, erscheint ein Link/Button am Ende der Spalte.
+            width: 1/2
+          ctaUrl:
+            label: Link-URL
+            type: text
+            placeholder: z. B. /programm oder #anchor
+            width: 1/2
+          ctaStyle:
+            label: Stil
+            type: toggles
+            default: link
+            options:
+              link: Link (unterstrichen, blau)
+              ghost: Ghost (umrandet)
+              mint: Mint-Button (gefüllt)
       imageHeadline:
         label: Bild (optional)
         type: headline
@@ -72,6 +98,6 @@ tabs:
   layout:
     extends: sections/block-layout-tab
   icon:
-    extends: sections/block-icon-tab
+    extends: sections/block-icon-tab-v2
   shadow:
     extends: sections/block-shadow-tab

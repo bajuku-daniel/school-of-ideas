@@ -1,0 +1,34 @@
+name: Editorial 2-Col Plain
+icon: layout-cards
+preview: fields
+
+tabs:
+  content:
+    label: Inhalt
+    icon: text
+    fields:
+      sectionInfo:
+        label: Zweispaltiger Plain-Text
+        type: info
+        theme: blue
+        text: >
+          Zwei Spalten Fließtext nebeneinander, ohne Headline. Auf Mobile
+          stacken die Spalten untereinander. Optional ein Kicker oben drüber.
+      kicker:
+        label: Kicker (optional)
+        type: text
+      column1:
+        label: Linke Spalte
+        type: textarea
+        width: 1/2
+        help: Absätze mit einer Leerzeile trennen.
+      column2:
+        label: Rechte Spalte
+        type: textarea
+        width: 1/2
+        help: Absätze mit einer Leerzeile trennen.
+
+  layout:
+    extends: sections/block-layout-tab
+  icon:
+    extends: sections/block-icon-tab-v2

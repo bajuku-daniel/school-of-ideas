@@ -28,11 +28,16 @@ tabs:
             empty: Sektionen hinzufügen
             fieldsets:
               - split-intro
+              - headline-solo
               - image
+              - image-grid
               - agency-grid
+              - information-images
               - conversion-section
               - icon-divider
               - editorial-split-intro
+              - editorial-plain-2col
+              - editorial-image-text
       sidebar:
         width: 1/3
         sections:

@@ -77,5 +77,5 @@ $shadowStyle = soi_image_shadow_style($block);
     <?php endif ?>
 
   </div>
-  <?= soi_section_icon($block) ?>
+  <?= soi_section_icon_at($block, 'section') ?>
 </section>

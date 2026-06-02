@@ -1,5 +1,5 @@
-name: Hero
-icon: video
+name: Hero-Foto
+icon: image
 preview: fields
 
 tabs:
@@ -8,30 +8,31 @@ tabs:
     icon: text
     fields:
       sectionInfo:
-        label: Hero
+        label: Hero-Foto
         type: info
         theme: blue
         text: >
-          Großer Eingangs-Block mit Video-Hintergrund und Headline mit
-          optionalem Inline-Icon. Typischerweise erster Block einer Landingpage.
+          Großer Eingangs-Block mit Foto-Tile statt Video. Headline mit
+          optionalem Inline-Icon. Foto bekommt den blauen Schlagschatten
+          (per Tab "Bild-Schatten" tunbar).
       heroLine1:
         label: Headline Zeile 1
         type: text
-        placeholder: Kreativität hat
+        placeholder: Hier lernst du
       line2Headline:
         label: Headline Zeile 2 mit Icon
         type: headline
       heroLine2Prefix:
         label: Vor dem Icon
         type: text
-        placeholder: immer
+        placeholder: was
         width: 1/3
       heroIcon:
         label: Icon aus Bibliothek
         type: select
         empty: Kein Icon
         width: 1/3
-        help: "Verwendet /icons/png/<bp>/<key>.png. Eigene Datei unten überschreibt."
+        help: Lädt aus /icons/png/desktop/<key>.png
         options:
           airplane: Papierflieger
           bag: Tasche
@@ -56,7 +57,7 @@ tabs:
       heroLine2Suffix:
         label: Nach dem Icon
         type: text
-        placeholder: Zukunft
+        placeholder: Kreativarbeit
         width: 1/3
       heroIconUpload:
         label: Hero-Icon eigene Datei (Override)
@@ -64,37 +65,33 @@ tabs:
         max: 1
         uploads: image
         layout: cards
-        help: Wenn gesetzt, gewinnt diese Datei über die Bibliotheks-Auswahl.
-      mediaHeadline:
-        label: Medien
+      sub:
+        label: Sub-Text (unter Headline)
+        type: textarea
+        buttons: false
+      photoHeadline:
+        label: Foto
         type: headline
-      heroPoster:
-        label: Poster (Fallback-Bild)
+      photo:
+        label: Foto
         type: files
         max: 1
         uploads: image
         layout: cards
-        width: 1/3
-      heroVideo:
-        label: Video Desktop (mp4)
-        type: files
-        max: 1
-        uploads:
-          template: image
-        layout: cards
-        width: 1/3
-        help: Wird ab Tablet/Desktop ausgespielt.
-      heroVideoMobile:
-        label: Video Mobile (mp4)
-        type: files
-        max: 1
-        uploads:
-          template: image
-        layout: cards
-        width: 1/3
-        help: Schmaleres Format für ≤ 768px.
+        image:
+          cover: true
+      aspect:
+        label: Foto-Format
+        type: toggles
+        default: landscape
+        options:
+          landscape: Landscape (16/11)
+          square: Quadrat (1/1)
+          portrait: Hochkant (3/4)
 
   layout:
     extends: sections/block-layout-tab
+  shadow:
+    extends: sections/block-shadow-tab
   icon:
     extends: sections/block-icon-tab-v2

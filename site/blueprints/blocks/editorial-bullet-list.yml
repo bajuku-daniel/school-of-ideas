@@ -37,31 +37,10 @@ tabs:
           einen Library-Eintrag wählst oder eine eigene Datei hochlädst,
           wird dieses Icon stattdessen verwendet.
       bulletKey:
+        extends: fields/icon-key
         label: Aus Bibliothek
-        type: select
         empty: "Blauer Punkt (Default)"
         width: 1/2
-        options:
-          airplane: Papierflieger
-          bag: Tasche
-          bottle: Flasche
-          cloud: Wolke
-          comet: Komet
-          document: Dokument
-          glasses: Brille
-          glasses-bold: Brille (fett)
-          leaf: Blatt
-          lightbulb: Glühbirne
-          lightning: Blitz
-          pencil: Stift
-          puzzle: Puzzle
-          shooting-star: Sternschnuppe
-          spark: Spark
-          sparkles: Sparkles
-          sparkles-line: Sparkles Linie
-          star: Stern
-          starlight: Sternlicht
-          swirl: Wirbel
       bulletUpload:
         label: Eigene Datei (Override)
         type: files
@@ -99,4 +78,4 @@ tabs:
   layout:
     extends: sections/block-layout-tab
   icon:
-    extends: sections/block-icon-tab
+    extends: sections/block-icon-tab-v2

@@ -25,6 +25,24 @@ if ($shadowStyle !== '') {
     }
 }
 
+// Designer-Overrides für Bildbreite (pro BP) + Offset
+foreach (['Mobile', 'Tablet', 'Desktop'] as $bp) {
+    try {
+        $w = $block->{'width' . $bp}();
+        if ($w->isNotEmpty()) {
+            $extraVars['--image-width-' . strtolower($bp)] = (int)$w->value() . '%';
+        }
+    } catch (\Throwable $e) {}
+}
+foreach (['offsetX' => '--image-offset-x', 'offsetY' => '--image-offset-y'] as $field => $cssVar) {
+    try {
+        $v = $block->{$field}();
+        if ($v->isNotEmpty()) {
+            $extraVars[$cssVar] = (int)$v->value() . 'px';
+        }
+    } catch (\Throwable $e) {}
+}
+
 $attrs = soi_section_attrs($block, 'image-block', $extraVars);
 ?>
 <section<?= $attrs ?> data-align="<?= esc($align, 'attr') ?>">
@@ -36,8 +54,9 @@ $attrs = soi_section_attrs($block, 'image-block', $extraVars);
       <?php if ($caption !== ''): ?>
       <figcaption class="image-block__caption"><?= soi_html($caption) ?></figcaption>
       <?php endif ?>
+      <?= soi_section_icon_at($block, 'image') ?>
     </figure>
     <?php endif ?>
   </div>
-  <?= soi_section_icon($block) ?>
+  <?= soi_section_icon_at($block, 'section') ?>
 </section>

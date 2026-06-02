@@ -1,9 +1,23 @@
 <?php
 /** @var \Kirby\Cms\Block $block */
 
-$attrs       = soi_section_attrs($block, 'intro');
+// Optionale Designer-Overrides für den Abstand Bild → Headline (pro BP).
+$motivVars = [];
+foreach (['Mobile', 'Tablet', 'Desktop'] as $bp) {
+    try {
+        $f = $block->{'motivSpacingTop' . $bp}();
+        if ($f->isNotEmpty()) {
+            $motivVars['--motiv-spacing-top-' . strtolower($bp)] = (int)$f->value() . 'px';
+        }
+    } catch (\Throwable $e) {}
+}
+
+$attrs       = soi_section_attrs($block, 'intro', $motivVars);
 $imageUrl    = soi_file_url($block->image());
 $shadowStyle = soi_image_shadow_style($block);
+
+// v2 Section-Icon rendert sich an der vom User gewählten Position
+// (Bezug = 'image' → in figure, 'section' → direkt in section).
 ?>
 <section<?= $attrs ?>>
   <div class="container">
@@ -18,6 +32,7 @@ $shadowStyle = soi_image_shadow_style($block);
           <?php if ($shadowStyle): ?>style="<?= esc($shadowStyle, 'attr') ?>"<?php endif ?>>
           <span class="motiv__shadow" aria-hidden="true"></span>
           <div class="motiv__frame"><img class="motiv__img" src="<?= esc($imageUrl) ?>" alt=""></div>
+          <?= soi_section_icon_at($block, 'image') ?>
         </figure>
         <?php endif ?>
       </div>
@@ -43,5 +58,5 @@ $shadowStyle = soi_image_shadow_style($block);
       </div>
     </div>
   </div>
-  <?= soi_section_icon($block) ?>
+  <?= soi_section_icon_at($block, 'section') ?>
 </section>

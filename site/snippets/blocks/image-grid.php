@@ -36,5 +36,5 @@ $aspectMap = ['landscape' => '16 / 11', 'square' => '1 / 1', 'portrait' => '3 / 
       <?php endforeach ?>
     </div>
   </div>
-  <?= soi_section_icon($block) ?>
+  <?= soi_section_icon_at($block, 'section') ?>
 </section>

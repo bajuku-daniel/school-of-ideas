@@ -69,6 +69,6 @@ tabs:
   layout:
     extends: sections/block-layout-tab
   icon:
-    extends: sections/block-icon-tab
+    extends: sections/block-icon-tab-v2
   shadow:
     extends: sections/block-shadow-tab
