@@ -20,10 +20,10 @@
     position: relative;
     width: min(70%, 760px);
     aspect-ratio: 3 / 2;
-    border-radius: $radius-lg;
     overflow: hidden;
-    background: #ddd;
     will-change: transform;
+    // Keine border-radius, kein Background — bei rotierten Bildern
+    // erzeugt beides einen sichtbaren Anti-Aliasing-Rand.
   }
 
   &__img {
@@ -69,16 +69,15 @@
       // Aspect-Ratio kommt vom Eltern-Section (.intro / .expect / …) via
       // `--motiv-aspect`. Fallback `16 / 11`, falls die Section keinen Wert setzt.
       aspect-ratio: var(--motiv-aspect, 16 / 11);
-      background: #111;
       box-shadow: 0 24px 50px -28px rgba(0,0,0,.35);
       transform: rotate(var(--motiv-rot)) translateZ(0);
       transform-origin: 50% 50%;       // Rotation um Bild-Mittelpunkt
-      // Keine CSS-transition: das Update passiert in main.js bereits
-      // pro Frame (rAF-throttled).  Eine zusätzliche Transition würde
-      // mit dem JS-Update kämpfen → Jank auf iOS / Firefox.
       will-change: transform;
       backface-visibility: hidden;     // kompositiert auf eigenem Layer
       z-index: 2;
+      // KEIN border-radius und KEIN background: bei rotierten Bildern
+      // erzeugen beide einen sichtbaren Anti-Aliasing-Rand. Saubere
+      // scharfe Kanten passen besser zum Designer-Look.
     }
 
     .motiv__shadow {
@@ -87,7 +86,6 @@
       width: 100%;
       aspect-ratio: var(--motiv-aspect, 16 / 11);
       background: $color-accent;
-      border-radius: $radius-lg;
       transform:
         translate3d(var(--motiv-shadow-x), var(--motiv-shadow-y), 0)
         rotate(var(--motiv-shadow-rot));
@@ -96,6 +94,7 @@
       backface-visibility: hidden;
       z-index: 1;
       pointer-events: none;
+      // Konsistent mit dem Bild: scharfe Ecken (keine border-radius).
     }
   }
 
@@ -109,7 +108,6 @@
       width: 70%;
       aspect-ratio: 3 / 2;
       background: $color-accent;
-      border-radius: $radius-lg;
       transform: rotate(var(--rot, 0deg)) scale(var(--scl, .8));
       transition: transform .1s linear;
       z-index: 0;
