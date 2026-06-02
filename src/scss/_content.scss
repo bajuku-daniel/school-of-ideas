@@ -3385,7 +3385,10 @@
   // ----- Layout: kein Bild — Headline allein -----
   // Kein Bild: dieselbe Größe wie mit Bild — konsistent mit anderen Lead-Headlines.
   &[data-image-layout="none"] &__head            { max-width: 28ch; }
-  &[data-image-layout="none"][data-align="center"] &__head { max-width: 38ch; margin-inline: auto; text-align: center; }
+  // align="center" → Block mittig auf der Seite, Text aber LINKSBÜNDIG.
+  // Symmetrisch-zentrierter Text wäre `text-align: center` — wollen wir
+  // hier nicht, weil im Designer-Layout typografisch ungünstig.
+  &[data-image-layout="none"][data-align="center"] &__head { max-width: 30ch; margin-inline: auto; text-align: left; }
   &[data-image-layout="none"][data-align="right"]  &__head { margin-left: auto; text-align: right; }
 
   // ----- Layout: Bild rechts (Björn Subpage-Header) -----
