@@ -3386,8 +3386,12 @@
   // Kein Bild: dieselbe Größe wie mit Bild — konsistent mit anderen Lead-Headlines.
   &[data-image-layout="none"] &__head            { max-width: 28ch; }
   // align="center" → Block mittig auf der Seite, Text aber LINKSBÜNDIG.
+  // Plus kleinere Title-Größe als Teaser-Variante (= Intro-Lead Größe).
   // Symmetrisch-zentrierter Text wäre `text-align: center` — wollen wir
   // hier nicht, weil im Designer-Layout typografisch ungünstig.
+  &[data-image-layout="none"][data-align="center"] {
+    --hs-title-fs: clamp(1.5rem, 2.8vw, 2.5rem);   // 24-40px (= Lead-Headline)
+  }
   &[data-image-layout="none"][data-align="center"] &__head { max-width: 48ch; margin-inline: auto; text-align: left; }
   &[data-image-layout="none"][data-align="right"]  &__head { margin-left: auto; text-align: right; }
 
