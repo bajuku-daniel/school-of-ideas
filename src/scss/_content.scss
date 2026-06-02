@@ -3312,15 +3312,25 @@
   @include section-spacing;
   position: relative;
 
+  // ---- Designer-Knöpfe (überschreibbar pro Block via Layout-Tab) ----
+  --hs-title-fs:   clamp(2.4rem, 5.5vw, 5rem);      // Subpage-Headline groß (max ~80px)
+  --hs-image-col:  1fr;                              // Spaltenbreite Bild
+  --hs-head-col:   1.2fr;                            // Spaltenbreite Headline
+  --hs-overlap-y:  clamp(-60px, -5vw, -30px);        // wie weit Headline-Bild überlappen
+  --hs-image-max:  clamp(280px, 38vw, 540px);        // Max-Breite vom Bild
+  --hs-image-top:  clamp(60px, 10vw, 180px);         // Bild-Abstand vom oberen Sektion-Rand
+
+  &__grid {
+    display: grid;
+    gap: clamp(32px, 5vw, 64px);
+  }
+
   &__head {
-    max-width: 28ch;
     display: flex;
     flex-direction: column;
     gap: clamp(12px, 1.4vw, 20px);
+    text-wrap: balance;   // verteilt Zeilen besser
   }
-
-  &[data-align="center"] &__head { max-width: 38ch; margin-inline: auto; text-align: center; }
-  &[data-align="right"]  &__head { margin-left: auto; text-align: right; }
 
   &__kicker {
     font-family: $font-body;
@@ -3335,13 +3345,13 @@
   &__title {
     font-family: $font-display;
     font-weight: 700;
-    font-size: clamp(2rem, 5vw, 4.2rem);
-    line-height: 1.05;
+    font-size: var(--hs-title-fs);
+    line-height: .95;
     letter-spacing: -.02em;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: .15em;
+    gap: .05em;
 
     .ink    { color: $color-ink; }
     .accent { color: $color-accent; }
@@ -3350,11 +3360,97 @@
   &__sub {
     font-family: $font-body;
     font-weight: 700;
-    font-size: clamp(.95rem, 1.1vw, 1.15rem);
+    font-size: clamp(1rem, 1.2vw, 1.25rem);
     line-height: 1.4;
     color: $color-ink;
     margin: 0;
     max-width: 32ch;
+  }
+
+  &__motiv {
+    width: 100%;
+    max-width: var(--hs-image-max);
+    margin: 0;
+    aspect-ratio: var(--motiv-aspect, 16 / 11);
+    justify-self: end;  // Default rechts, wird per Layout überschrieben
+  }
+
+  // ----- Layout: kein Bild — Headline allein -----
+  // Kein Bild: dieselbe Größe wie mit Bild — konsistent mit anderen Lead-Headlines.
+  &[data-image-layout="none"] &__head            { max-width: 28ch; }
+  &[data-image-layout="none"][data-align="center"] &__head { max-width: 38ch; margin-inline: auto; text-align: center; }
+  &[data-image-layout="none"][data-align="right"]  &__head { margin-left: auto; text-align: right; }
+
+  // ----- Layout: Bild rechts (Björn Subpage-Header) -----
+  // Bild oben-rechts, Headline unten-links — überlappen sich vertikal.
+  &[data-image-layout="right"] &__grid {
+    grid-template-columns: var(--hs-head-col) var(--hs-image-col);
+    grid-template-rows: auto auto;
+    gap: var(--hs-overlap-y) clamp(40px, 5vw, 80px);
+    align-items: end;
+  }
+  &[data-image-layout="right"] &__head {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: end;
+  }
+  &[data-image-layout="right"] &__motiv {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    margin-top: var(--hs-image-top);  // Bild tiefer setzen, nicht ganz oben kleben
+  }
+
+  // ----- Layout: Bild links -----
+  &[data-image-layout="left"] &__grid {
+    grid-template-columns: var(--hs-image-col) var(--hs-head-col);
+    grid-template-rows: auto auto;
+    gap: var(--hs-overlap-y) clamp(40px, 5vw, 80px);
+    align-items: end;
+  }
+  &[data-image-layout="left"] &__head {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: end;
+  }
+  &[data-image-layout="left"] &__motiv {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    margin-top: var(--hs-image-top);  // Bild tiefer setzen, nicht ganz oben kleben
+  }
+
+  // ----- Layout: Bild unter Headline -----
+  &[data-image-layout="below"] &__grid {
+    grid-template-columns: 1fr;
+    gap: clamp(32px, 5vw, 80px);
+  }
+  &[data-image-layout="below"] &__motiv {
+    justify-self: center;
+    max-width: 100%;
+  }
+
+  // Auf Mobile: alle Bild-Layouts stapeln (Headline oben, Bild drunter)
+  @media (max-width: 768px) {
+    --hs-title-fs: clamp(2rem, 9vw, 3rem);
+
+    &[data-image-layout="right"] &__grid,
+    &[data-image-layout="left"] &__grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto;
+      gap: clamp(24px, 4vw, 40px);
+    }
+    &[data-image-layout="right"] &__head,
+    &[data-image-layout="left"] &__head {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    &[data-image-layout="right"] &__motiv,
+    &[data-image-layout="left"] &__motiv {
+      grid-column: 1;
+      grid-row: 1;
+      justify-self: center;
+    }
   }
 }
 
@@ -3658,6 +3754,153 @@
     width: 100%;
     margin: 0;
     aspect-ratio: var(--motiv-aspect, 16 / 11);
+  }
+}
+
+// =============================================================================
+// .qa — FAQ / Q&A Akkordeon (Design Björn)
+// Layout: Gruppen-Titel LINKS (1/3), Akkordeon-Liste RECHTS (2/3).
+// Items via <details>/<summary> — ohne JS aufklappbar.
+// Erste Frage der ersten Gruppe ist beim Laden offen (via open-Attribut).
+// =============================================================================
+.qa {
+  @include section-spacing;
+  position: relative;
+
+  // ---- Designer-Knöpfe ----
+  --qa-line-color: #{$color-accent};
+  --qa-line-width: 1px;
+  --qa-question-fs:    clamp(1.1rem, 1.3vw, 1.375rem);   // ~22px
+  --qa-answer-fs:      clamp(1rem,   1.15vw, 1.25rem);   // ~20px
+  --qa-group-title-fs: clamp(1.1rem, 1.3vw, 1.375rem);   // ~22px (= Question-Größe)
+  --qa-item-pad-y: clamp(20px, 2vw, 36px);
+  --qa-group-spacing: clamp(64px, 8vw, 120px);
+
+  &__head {
+    margin-bottom: clamp(48px, 6vw, 96px);
+  }
+  // FAQ-Block-Headline ("Headline schwarz" + "Headline blau") —
+  // selbe Größe wie Intro-Lead auf der Startseite.
+  &__lead {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 2.8vw, 2.5rem);   // 24-40px (= Intro-Lead)
+    line-height: 1.06;
+    letter-spacing: -.02em;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    .ink    { color: $color-ink; }
+    .accent { color: $color-accent; }
+  }
+
+  &__groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--qa-group-spacing);
+  }
+
+  // ----- Eine Themengruppe (Titel links + Akkordeon rechts) -----
+  &__group {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: clamp(24px, 4vw, 80px);
+    align-items: start;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: clamp(16px, 3vw, 32px);
+    }
+  }
+
+  &__group-title {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: var(--qa-group-title-fs);
+    line-height: 1.3;
+    color: $color-accent;
+    margin: 0;
+    padding-top: var(--qa-item-pad-y);  // alignt mit erster Frage rechts
+  }
+
+  &__items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // ----- Einzelner Akkordeon-Eintrag -----
+  &__item {
+    border-top: var(--qa-line-width) solid var(--qa-line-color);
+
+    &:last-child {
+      border-bottom: var(--qa-line-width) solid var(--qa-line-color);
+    }
+
+    // Default-Marker entfernen (Pfeil-Triangle)
+    summary { list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+  }
+
+  // ----- Frage (Klick-Trigger) -----
+  &__question {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: clamp(16px, 2vw, 32px);
+    padding: var(--qa-item-pad-y) 0;
+    cursor: pointer;
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: var(--qa-question-fs);
+    line-height: 1.35;
+    color: $color-ink;
+    transition: color $duration-base $easing-out;
+
+    &:hover { color: $color-accent; }
+  }
+  &__question-text { flex: 1; }
+
+  // Plus-Toggle (rotiert beim Aufklappen zu X)
+  &__toggle {
+    flex-shrink: 0;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    margin-top: 2px;
+    color: $color-accent;
+    transition: transform $duration-base $easing-out;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      background: currentColor;
+    }
+    &::before { width: 18px; height:  2px; transform: translate(-50%, -50%); }
+    &::after  { width:  2px; height: 18px; transform: translate(-50%, -50%); }
+  }
+  &__item[open] &__toggle {
+    transform: rotate(45deg);  // Plus → X
+  }
+
+  // ----- Antwort -----
+  &__answer {
+    padding: 0 0 var(--qa-item-pad-y);
+    max-width: 60ch;
+
+    p {
+      font-family: $font-body;
+      font-weight: 400;
+      font-size: var(--qa-answer-fs);
+      line-height: 1.55;
+      color: $color-ink;
+      margin: 0;
+
+      & + p { margin-top: 1em; }
+    }
   }
 }
 

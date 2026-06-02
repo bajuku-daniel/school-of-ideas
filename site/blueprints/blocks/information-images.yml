@@ -1,5 +1,6 @@
-name: Team-Cards (Bild + Name)
+name: Team-Karten
 icon: users
+description: Karten mit Bild + Name + Funktion (klickbar)
 preview: fields
 
 tabs:

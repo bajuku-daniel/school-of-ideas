@@ -11,58 +11,40 @@ tabs:
     icon: layers
     fields:
       builderInfo:
-        label: Modulare Sektionen
+        label: So baust du eine Unterseite
         type: info
-        theme: blue
+        theme: info
         text: >
-          Baue die Seite aus Sektionen. Reihenfolge per Drag & Drop. Auf
-          Unterseiten ist KEIN Hero-Block erlaubt — die Seite startet mit
-          ihrem regulären Seitenkopf (unten im Tab "Seitenkopf").
+          Eine Unterseite besteht aus **Sektionen** (Blocks) — genau wie die
+          Startseite. Für den Kopf-Bereich wählst du je nach Bedarf einen
+          **Hero** (Vollbild Video/Foto), einen **Headline + Bild (Seitenkopf)**
+          oder direkt eine andere Sektion. Reihenfolge per Drag & Drop, jede
+          Sektion hat eigene Layout-/Icon-Tabs.
       builder:
         label: Sektionen
         type: blocks
         empty: Noch keine Sektion. Klick auf + um die erste anzulegen.
         fieldsets:
-          - split-intro
-          - highlight-text
+          # ---- Seiten-Köpfe / Hero ----
+          - hero
+          - hero-foto
           - headline-solo
+          # ---- Editorial / Text ----
           - editorial-split-intro
           - editorial-plain-2col
           - editorial-image-text
           - editorial-bullet-list
+          - highlight-text
+          - split-intro
+          # ---- Bilder / Medien ----
           - image
           - image-grid
+          - work-showcase
           - information-images
+          # ---- Spezial / Trenner ----
           - icon-divider
           - question-answers
           - conversion-section
-
-  hero:
-    label: Seitenkopf
-    icon: text
-    fields:
-      heroInfo:
-        label: Seitenkopf (über dem Builder)
-        type: info
-        theme: blue
-        text: Wird oberhalb der Sektionen angezeigt — Kicker, Headline, optionaler Introtext.
-      kicker:
-        label: Kicker
-        type: text
-        width: 1/2
-      headlineInk:
-        label: Headline schwarz
-        type: textarea
-        buttons: false
-        width: 1/2
-      headlineAccent:
-        label: Headline blau (optional)
-        type: textarea
-        buttons: false
-        width: 1/2
-      intro:
-        label: Introtext
-        type: textarea
 
   seo:
     label: SEO

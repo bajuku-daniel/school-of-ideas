@@ -1,5 +1,6 @@
-name: Editorial Bullet-List
+name: Bullet-Liste (Items mit Icons)
 icon: list-bullet
+description: Headline + Liste mit blauen Punkten oder Custom-Icons
 preview: fields
 
 tabs:

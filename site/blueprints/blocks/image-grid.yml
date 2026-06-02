@@ -1,5 +1,6 @@
-name: Bild-Grid
+name: Bilder-Grid (mehrere)
 icon: image
+description: Mehrere Bilder frei im Raster positionierbar
 preview: fields
 
 tabs:

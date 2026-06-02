@@ -1,5 +1,6 @@
-name: Bild (mit Schatten)
+name: Bild (einzeln, mit Schatten)
 icon: image
+description: Stand-Alone-Bild mit blauem Schlagschatten
 preview: fields
 
 tabs:

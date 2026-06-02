@@ -1,5 +1,6 @@
-name: Hero-Foto
+name: Hero mit Foto
 icon: image
+description: Großer Auftakt mit Foto rechts + Headline links
 preview: fields
 
 tabs:

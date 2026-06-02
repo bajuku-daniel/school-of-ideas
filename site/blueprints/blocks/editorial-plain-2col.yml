@@ -1,5 +1,6 @@
-name: Editorial 2-Col Plain
-icon: layout-cards
+name: Zweispaltiger Text (ohne Headline)
+icon: text
+description: Zwei nebeneinanderliegende Textspalten
 preview: fields
 
 tabs:

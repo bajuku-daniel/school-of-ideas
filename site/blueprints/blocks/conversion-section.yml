@@ -1,5 +1,6 @@
-name: Conversion (CTA-Cards)
-icon: target
+name: Conversion-Block (CTA-Karten)
+icon: checklist
+description: Bild + Headline + Karten mit Buttons
 preview: fields
 
 tabs:

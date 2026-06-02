@@ -1,5 +1,6 @@
-name: Agentur-Grid mit Filter
+name: Agentur-Grid (mit Filter)
 icon: grid
+description: Auto-Grid aller Agenturen mit Filter-Buttons
 preview: fields
 
 tabs:

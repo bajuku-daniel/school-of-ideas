@@ -1,5 +1,6 @@
-name: Q & A (FAQ)
+name: FAQ / Q&A (Akkordeon)
 icon: question
+description: Themengruppen mit aufklappbaren Fragen
 preview: fields
 
 tabs:
@@ -8,35 +9,33 @@ tabs:
     icon: text
     fields:
       sectionInfo:
-        label: Q & A
+        label: FAQ / Q&A — Frage-Antwort Akkordeon
         type: info
-        theme: blue
+        theme: info
         text: >
-          Frage-Antwort-Sektion mit optionalen Themengruppen.
-          Die erste Frage jeder Gruppe ist beim Laden geöffnet.
+          Layout: **Gruppentitel links, Akkordeon-Liste rechts.** Eine
+          Sektion kann mehrere Themengruppen enthalten (z. B. "Über die
+          School", "Das Programm"). Die ALLERERSTE Frage der ersten Gruppe
+          ist beim Seitenaufruf bereits geöffnet. Alle anderen sind
+          eingeklappt — Besucher öffnet sie via Klick auf die Frage.
       headlineInk:
-        label: Headline (schwarz)
+        label: Headline (schwarz, optional)
         type: text
         width: 1/2
       headlineAccent:
-        label: Headline (blau)
+        label: Headline (blau, optional)
         type: text
         width: 1/2
       groups:
         label: Themengruppen
         type: structure
-        columns:
-          title:
-            width: 1/3
-          questions:
-            width: 2/3
         fields:
           title:
-            label: Gruppentitel
+            label: Gruppen-Titel (links angezeigt)
             type: text
             placeholder: z. B. Über die School
           questions:
-            label: Fragen
+            label: Fragen in dieser Gruppe
             type: structure
             fields:
               question:
@@ -45,6 +44,9 @@ tabs:
               answer:
                 label: Antwort
                 type: textarea
+                help: >
+                  Absätze mit Leerzeile trennen. **fett** und *kursiv* gehen
+                  inline. Ganzer Absatz fett: Absatz mit ** umschließen.
 
   layout:
     extends: sections/block-layout-tab

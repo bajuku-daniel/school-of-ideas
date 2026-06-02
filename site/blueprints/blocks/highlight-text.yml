@@ -1,5 +1,6 @@
-name: Highlight-Text (Manifest)
-icon: dots
+name: Highlight-Statement
+icon: quote
+description: Großer Aussage-Text mit Inline-Icons (z.B. Manifest)
 preview: fields
 
 tabs:

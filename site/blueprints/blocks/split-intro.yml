@@ -1,5 +1,6 @@
-name: Split-Intro
-icon: rectangle-vertical
+name: Split-Intro (Headline + Bild + Text)
+icon: dashboard
+description: Zwei-spaltiger Einstieg unter dem Hero
 preview: fields
 
 tabs:

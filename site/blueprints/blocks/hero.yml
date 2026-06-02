@@ -1,5 +1,6 @@
-name: Hero
+name: Hero (mit Video)
 icon: video
+description: Vollbild-Auftakt mit Hintergrundvideo + Headline
 preview: fields
 
 tabs:
