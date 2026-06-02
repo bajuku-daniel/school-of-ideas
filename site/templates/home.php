@@ -11,7 +11,7 @@ $navItemsArr = $navItems->isEmpty() ? [
     ['label' => 'About',     'url' => url('about')],
     ['label' => 'Programm',  'url' => url('programm')],
     ['label' => 'Agenturen', 'url' => url('agenturen')],
-    ['label' => 'Kontakt',   'url' => url() . '#contact'],
+    ['label' => 'Kontakt',   'url' => url('kontakt')],
     ['label' => 'FAQ',       'url' => url('faq')],
 ] : array_map(fn($i) => ['label' => (string)$i->label(), 'url' => (string)$i->url()], $navItems->values());
 

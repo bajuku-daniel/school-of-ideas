@@ -1,0 +1,9 @@
+Title: Kontakt
+
+----
+
+Builder: [{"content":{"kicker":"kontakt","headlineink":"Sag","headlineaccent":"Hallo.","sub":"Du hast Fragen zum Programm, zur Bewerbung oder willst eure Agentur einbringen? Schreib uns einfach.","align":"left","imagelayout":"right","image":["demo-kontakt.png"],"imageaspect":"landscape","sectiontheme":"light","iconkey":"airplane","iconref":"section","iconanchory":"top","iconanchorx":"right","iconoffsetx":-50,"iconoffsety":30,"iconrotate":15,"icondesktopsize":160,"icontabletsize":90,"iconmobilesize":50,"iconmotion":"glide","iconmotionduration":8},"id":"ko-h00","isHidden":false,"type":"headline-solo"},{"content":{"layout":"2col","headlineink":"Direkt an","headlineaccent":"Romy.","columns":[{"lead":"**Romy Nickel**\nLeitung school of ideas","body":"Romy ist deine erste Ansprechpartnerin für alles rund um das Programm, die Bewerbung und persönliche Fragen.","ctatext":"mail@schoolofideas.de","ctaurl":"mailto:mail@schoolofideas.de","ctastyle":"link"},{"lead":"**Für Agenturen**","body":"Du willst mit eurer Agentur Partneragentur werden? Schreib uns für ein erstes Kennenlernen.","ctatext":"Partner werden","ctaurl":"mailto:mail@schoolofideas.de","ctastyle":"link"}],"sectiontheme":"light"},"id":"ko-ed2","isHidden":false,"type":"editorial-split-intro"},{"content":{"headlineink":"Worauf wartest","headlineaccent":"du?","cards":[{"title":"Bewerbung starten","text":"","buttontext":"Jetzt loslegen","buttonurl":"/bewerbung","buttonstyle":"mint"},{"title":"Erst FAQ?","text":"","buttontext":"FAQ ansehen","buttonurl":"/faq","buttonstyle":"ghost"}],"sectiontheme":"mint"},"id":"ko-cta","isHidden":false,"type":"conversion-section"}]
+
+----
+
+Metadescription: Kontakt zur school of ideas — Direkt Romy Nickel anschreiben oder als Partneragentur einsteigen.
