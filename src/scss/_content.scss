@@ -3120,13 +3120,13 @@
   &__media--video {
     position: relative;
     width: 100%;
-    max-width: 1000px;
+    max-width: 100%;          // war 1000px — jetzt volle Container-Breite (breiter, aber im Raster)
     margin-inline: auto;
     aspect-ratio: 16 / 9;
     background: $color-mint;
-    border-radius: $radius-lg;
+    border-radius: $radius-lg; // gerahmt: Rundung bleibt
     overflow: hidden;
-    transform: rotate(-1.5deg);
+    transform: none;           // gerade wie im Design (war rotate(-1.5deg))
 
     video, img {
       width: 100%;
@@ -3196,7 +3196,7 @@
     font-family: $font-body;
     font-weight: 700;
     font-size: clamp(1.1rem, 1.3vw, 1.35rem);
-    color: $color-ink;
+    color: $color-accent;   // blau wie im Design (war ink)
     margin: 0;
   }
 
@@ -3391,6 +3391,34 @@
   }
   &[data-image-layout="none"][data-align="center"] &__head { margin-inline: auto; text-align: left; }
   &[data-image-layout="none"][data-align="right"]  &__head { margin-left: auto; text-align: right; }
+
+  // ----- Layout: "Label"-Marker (Björns "Unsere Kunden / Unsere Arbeiten") -----
+  // Zweifarbige Mini-Headline oben links, Sub (Statement / Client-Liste) GRÖSSER
+  // und nach rechts eingerückt mit großem vertikalen Abstand. Greift NUR bei
+  // align="label" — Teaser & andere headline-solos bleiben unberührt.
+  &[data-image-layout="none"][data-align="label"] {
+    --hs-title-fs: clamp(1.5rem, 2.8vw, 2.4rem);   // 24-38px Mini-Headline
+  }
+  &[data-image-layout="none"][data-align="label"] &__head {
+    align-items: flex-start;
+    text-align: left;
+  }
+  &[data-image-layout="none"][data-align="label"] &__sub {
+    font-family: $font-display;
+    font-size: clamp(1.7rem, 3.4vw, 2.9rem);       // größer als die Headline
+    line-height: 1.12;
+    letter-spacing: -.01em;
+    max-width: 22ch;
+    margin-top: clamp(56px, 9vw, 140px);           // großer Abstand zur Headline
+    margin-left: clamp(32px, 12vw, 150px);         // Einrückung wie im Design
+  }
+  @media (max-width: 768px) {
+    &[data-image-layout="none"][data-align="label"] &__sub {
+      font-size: clamp(1.4rem, 6vw, 2rem);
+      margin-top: clamp(32px, 8vw, 64px);
+      margin-left: clamp(16px, 6vw, 48px);
+    }
+  }
 
   // ----- Layout: Bild rechts (Björn Subpage-Header) -----
   // Bild oben-rechts, Headline unten-links — überlappen sich vertikal.

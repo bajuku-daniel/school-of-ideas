@@ -84,6 +84,10 @@ tabs:
           left: Links
           center: Zentriert
           right: Rechts
+          label: 'Label (Mini-Headline + großer Sub)'
+        help: >
+          "Label" = kleine zweifarbige Headline oben links, Sub-Text größer und
+          eingerückt drunter (für "Unsere Kunden"/"Unsere Arbeiten"-Marker).
 
   layout:
     extends: sections/block-layout-tab

@@ -11,7 +11,7 @@ $shadowStyle = soi_image_shadow_style($block);
     <?php if ($mode === 'video'):
       $videoUrl  = soi_file_url($block->video());
       $posterUrl = soi_file_url($block->videoPoster());
-      $videoLabel = (string)$block->videoLabel()->or('Video'); ?>
+      $videoLabel = (string)$block->videoLabel(); // kein Default — Label nur wenn explizit gesetzt ?>
       <figure class="work-showcase__media work-showcase__media--video">
         <?php if ($videoUrl): ?>
         <video src="<?= esc($videoUrl) ?>" <?php if ($posterUrl): ?>poster="<?= esc($posterUrl) ?>"<?php endif ?>
