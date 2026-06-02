@@ -1,12 +1,19 @@
 <?php
 /**
- * Agentur-Detail Template — Hero mit Stammdaten + Builder-Loop + Footer.
- * Stammdaten (Logo, Location, Schwerpunkte, Setup) bleiben außerhalb des Builders,
- * weil sie für das Übersichts-Grid und die Filter gelesen werden.
+ * Agentur-Detail Template — Auto-Header (Titel + Logo als Polaroid) +
+ * Builder-Loop + Footer-Navigation.
+ *
+ * Der Header rendert sich aus den Page-Feldern (headlineInk/Accent, intro)
+ * und nutzt das `Logo` Feld (= tile.png) als Bild rechts mit blauem Schatten.
+ * Damit muss der Designer auf der Detail-Seite NICHTS für den Kopfbereich
+ * pflegen — das Bild aus dem Übersichts-Grid wird einfach übernommen.
  */
-$logo = $page->logo()->toFile();
-$next = $page->next();
+$logo   = $page->logo()->toFile();
+$next   = $page->next();
 $parent = $page->parent();
+
+// Auto-Header sichtbar wenn ein Titel da ist
+$hasTitle = $page->headlineInk()->isNotEmpty() || $page->headline()->isNotEmpty() || $page->title()->isNotEmpty();
 ?><!doctype html>
 <html lang="de">
 <head>
@@ -19,23 +26,42 @@ $parent = $page->parent();
 </head>
 <body>
   <?php snippet('subpage-nav') ?>
-  <main class="subpage agency-detail">
+  <main class="subpage subpage--builder-only agency-detail">
 
-    <header class="agency-detail__hero">
+    <?php if ($hasTitle): ?>
+    <section class="headline-solo headline-solo--theme-light section--light agency-detail__auto-hero"
+             data-align="left"
+             data-image-layout="<?= $logo ? 'right' : 'none' ?>"
+             style="--motiv-aspect: 16 / 11;">
       <div class="container">
-        <?php if ($page->headlineInk()->isNotEmpty() || $page->headline()->isNotEmpty() || $page->title()->isNotEmpty()): ?>
-        <h1 class="agency-detail__title">
-          <span class="ink"><?= nl2br(esc($page->headlineInk()->or($page->headline()->or($page->title())))) ?></span>
-          <?php if ($page->headlineAccent()->isNotEmpty()): ?>
-            <span class="accent"><?= nl2br(esc($page->headlineAccent())) ?></span>
+        <div class="headline-solo__grid">
+          <header class="headline-solo__head">
+            <h1 class="headline-solo__title">
+              <span class="ink"><?= nl2br(esc($page->headlineInk()->or($page->headline()->or($page->title())))) ?></span>
+              <?php if ($page->headlineAccent()->isNotEmpty()): ?>
+                <span class="accent"><?= nl2br(esc($page->headlineAccent())) ?></span>
+              <?php endif ?>
+            </h1>
+            <?php if ($page->intro()->isNotEmpty()): ?>
+              <p class="headline-solo__sub"><?= soi_html($page->intro()) ?></p>
+            <?php endif ?>
+          </header>
+
+          <?php if ($logo): ?>
+          <figure class="motiv motiv--shadow headline-solo__motiv"
+                  data-motiv-shadow
+                  data-rotate="-5"
+                  data-shadow-x="40"
+                  data-shadow-y="40"
+                  data-shadow-rotate="8">
+            <span class="motiv__shadow" aria-hidden="true"></span>
+            <div class="motiv__frame"><img class="motiv__img" src="<?= esc($logo->url()) ?>"<?= soi_image_focus_attr($logo) ?> alt=""></div>
+          </figure>
           <?php endif ?>
-        </h1>
-        <?php endif ?>
-        <?php if ($page->intro()->isNotEmpty()): ?>
-          <div class="agency-detail__intro"><?= soi_paragraphs($page->intro()) ?></div>
-        <?php endif ?>
+        </div>
       </div>
-    </header>
+    </section>
+    <?php endif ?>
 
     <?php foreach ($page->builder()->toBlocks() as $block): ?>
       <?= $block ?>
