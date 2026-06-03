@@ -240,7 +240,9 @@ const navCloud  = document.querySelector('.nav__cloud');
 
 if (brandText && navCloud) {
   const FADE_DISTANCE = 220;   // px of scroll over which the wordmark fades
-  const GROW_TO       = 1.6;   // cloud scale at end of fade
+  const GROW_TO       = 1.12;  // cloud scale at end of fade — nur minimal (Designer:
+                               // Wolke soll beim Scrollen kaum wachsen), unten via
+                               // Journey-Progress wieder zurück auf JOURNEY_END_SCALE.
 
   // Cloud-Journey-Endpunkt: Slot im Footer (data-cloud-target).
   // Wenn der Footer-Slot im Viewport näher kommt, fliegt die Cloud aus
