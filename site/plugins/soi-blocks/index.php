@@ -751,20 +751,27 @@ if (!function_exists('soi_image_shadow_data_attrs')) {
     function soi_image_shadow_data_attrs($block): string
     {
         if (!is_object($block)) return ' data-motiv-shadow';
-        $map = [
-            'motivRotateDesktop'  => 'data-rotate',
-            'shadowXDesktop'      => 'data-shadow-x',
-            'shadowYDesktop'      => 'data-shadow-y',
-            'shadowRotateDesktop' => 'data-shadow-rotate',
+        // Pro Breakpoint ausgeben: Desktop behält die Legacy-Attribute
+        // (data-rotate …) als Fallback; Mobile/Tablet bekommen Suffixe, die das
+        // JS je nach Viewport bevorzugt. So wirken die Bild-Schatten-Felder
+        // „Bild °/Schatten" pro Breakpoint wirklich (vorher: nur Desktop).
+        $metrics = [
+            'motivRotate'  => 'data-rotate',
+            'shadowX'      => 'data-shadow-x',
+            'shadowY'      => 'data-shadow-y',
+            'shadowRotate' => 'data-shadow-rotate',
         ];
+        $bps = ['Desktop' => '', 'Mobile' => '-mobile', 'Tablet' => '-tablet'];
         $out = ' data-motiv-shadow';
-        foreach ($map as $field => $attr) {
-            try {
-                $val = $block->{$field}();
-                if ($val->isNotEmpty()) {
-                    $out .= ' ' . $attr . '="' . esc((string)(int)$val->value(), 'attr') . '"';
-                }
-            } catch (\Throwable $e) {}
+        foreach ($metrics as $field => $attr) {
+            foreach ($bps as $bp => $suffix) {
+                try {
+                    $val = $block->{$field . $bp}();
+                    if ($val->isNotEmpty()) {
+                        $out .= ' ' . $attr . $suffix . '="' . esc((string)(int)$val->value(), 'attr') . '"';
+                    }
+                } catch (\Throwable $e) {}
+            }
         }
         return $out;
     }

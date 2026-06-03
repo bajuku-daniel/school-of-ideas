@@ -63,6 +63,29 @@ tabs:
         label: Button Link
         type: text
         width: 1/2
+      gapHead:
+        label: Abstand Bild ↔ Text
+        type: headline
+      gapInfo:
+        label: Wofür?
+        type: info
+        text: >
+          Abstand zwischen Bild und Text. Auf Desktop horizontal, auf **Mobile**
+          (gestapelt) der **vertikale Abstand zwischen Bild und Headline** —
+          praktisch, wenn ein gedrehtes Bild sonst zu nah an die Headline kommt.
+          Leer = sinnvoller Default.
+      gapDesktop:
+        label: Desktop
+        type: number
+        after: px
+        width: 1/2
+        placeholder: "auto"
+      gapMobile:
+        label: Mobile
+        type: number
+        after: px
+        width: 1/2
+        placeholder: "auto"
 
   layout:
     extends: sections/block-layout-tab

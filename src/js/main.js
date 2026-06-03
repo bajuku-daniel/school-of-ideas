@@ -375,6 +375,19 @@ const shadowFigures = document.querySelectorAll('[data-motiv-shadow]');
 if (shadowFigures.length) {
   const ease = (t) => t * t * (3 - 2 * t); // smoothstep — same vibe as Apple
 
+  // Per-Breakpoint-Wert: bevorzugt den passenden (data-*-mobile/-tablet),
+  // sonst der Desktop-Legacy-Wert (data-*). So wirken die Bild-Schatten-Felder
+  // „Bild °/Schatten" pro Breakpoint (vorher galt überall der Desktop-Wert).
+  const bpSuffix = () => {
+    const w = window.innerWidth;
+    return w <= 768 ? 'Mobile' : (w <= 1199 ? 'Tablet' : 'Desktop');
+  };
+  const pickBp = (ds, key) => {
+    let v = ds[key + bpSuffix()];
+    if (v === undefined || v === '') v = ds[key];
+    return parseFloat(v) || 0;
+  };
+
   const updateShadow = (fig) => {
     const rect = fig.getBoundingClientRect();
     const vh   = window.innerHeight;
@@ -391,10 +404,10 @@ if (shadowFigures.length) {
     const raw          = (triggerStart - rect.top) / range;
     const t            = ease(Math.max(0, Math.min(1, raw)));
 
-    const rot      = parseFloat(fig.dataset.rotate)        || 0;
-    const sx       = parseFloat(fig.dataset.shadowX)       || 0;
-    const sy       = parseFloat(fig.dataset.shadowY)       || 0;
-    const srot     = parseFloat(fig.dataset.shadowRotate)  || 0;
+    const rot      = pickBp(fig.dataset, 'rotate');
+    const sx       = pickBp(fig.dataset, 'shadowX');
+    const sy       = pickBp(fig.dataset, 'shadowY');
+    const srot     = pickBp(fig.dataset, 'shadowRotate');
 
     fig.style.setProperty('--motiv-rot',         (rot  * t).toFixed(2) + 'deg');
     fig.style.setProperty('--motiv-shadow-x',    (sx   * t).toFixed(2) + 'px');

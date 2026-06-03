@@ -3762,12 +3762,14 @@
   &__grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(40px, 6vw, 100px);
+    // Abstand Bild ↔ Text — per Panel überschreibbar (Bild-/Text-Block).
+    gap: var(--eit-gap-desktop, clamp(40px, 6vw, 100px));
     align-items: center;
 
     @media (max-width: 800px) {
       grid-template-columns: 1fr;
-      gap: clamp(30px, 5vw, 60px);
+      // Mobile: vertikaler Abstand Bild → Headline (eigener Regler, sonst Default).
+      gap: var(--eit-gap-mobile, clamp(30px, 5vw, 60px));
     }
   }
 

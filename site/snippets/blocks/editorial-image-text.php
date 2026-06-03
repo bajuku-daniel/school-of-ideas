@@ -12,7 +12,14 @@ $aspectValue = match($aspect) {
     default    => '16 / 11',
 };
 
-$extraVars = ['--motiv-aspect' => $aspectValue];
+// Optionaler, einstellbarer Abstand Bild ↔ Text (Desktop horizontal, Mobile
+// vertikal Bild→Headline). Leer = Default-Clamp.
+$gapPx = fn ($f) => $block->{$f}()->isNotEmpty() ? (int)$block->{$f}()->value() . 'px' : null;
+$extraVars = [
+    '--motiv-aspect'    => $aspectValue,
+    '--eit-gap-desktop' => $gapPx('gapDesktop'),
+    '--eit-gap-mobile'  => $gapPx('gapMobile'),
+];
 $attrs = soi_section_attrs($block, 'editorial-image-text', $extraVars);
 
 $ctaText = (string)$block->ctaText();
