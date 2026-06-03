@@ -16,6 +16,15 @@ tabs:
           Lange Statement-Absätze mit Inline-Icons. Icons werden im Text per
           `{icon:name}` referenziert (z. B. `{icon:airplane}`). Die Icons selbst
           legst du unten im "Icon-Pool" ab.
+      breaksInfo:
+        label: Feste Umbrüche & automatische Größe
+        type: info
+        theme: positive
+        text: >
+          **Jede neue Zeile (Enter) = fester Umbruch.** Der Text bricht NUR dort um,
+          wo du Enter drückst — nie von allein. Die Schriftgröße wird automatisch so
+          berechnet, dass die längste Zeile genau die Spaltenbreite füllt. So ist die
+          Sektion auf jeder Bildschirmgröße exakt gleich aufgebaut.
       paragraphs:
         label: Absätze
         type: structure
@@ -24,12 +33,59 @@ tabs:
             width: 1/1
         fields:
           text:
-            label: Text
+            label: Text (Desktop-Umbrüche)
             type: textarea
             buttons: false
             help: >
-              Inline-Icons mit Token einsetzen, z. B. `{icon:airplane}`.
-              Verfügbare Namen aus dem Icon-Pool unten.
+              Jede Zeile = fester Umbruch (Enter drücken). Inline-Icons mit Token,
+              z. B. `{icon:airplane}` (Namen aus dem Icon-Pool unten).
+          textMobile:
+            label: Text (Mobile-Umbrüche, optional)
+            type: textarea
+            buttons: false
+            help: >
+              Eigene Umbrüche fürs Handy. Leer lassen = die Desktop-Umbrüche
+              werden auch auf Mobile genutzt.
+      sizeHeadline:
+        label: Spaltenbreite & Größen-Grenzen (optional)
+        type: headline
+      sizeInfo:
+        label: Wann brauchst du das?
+        type: info
+        text: >
+          Normalerweise nichts einstellen nötig — die Schrift skaliert von allein.
+          Diese Werte sind nur Feinjustierung bzw. Sicherheitsnetze. Leer = sinnvoller
+          Default.
+      fitWidthDesktop:
+        label: Spaltenbreite Desktop
+        type: number
+        after: px
+        width: 1/2
+        placeholder: z. B. 1100
+        help: Wie breit der Textblock auf großen Screens werden darf.
+      fitWidthMobile:
+        label: Spaltenbreite Mobile
+        type: number
+        after: px
+        width: 1/2
+        help: Leer = ca. 86 % der Bildschirmbreite.
+      fitFontMaxDesktop:
+        label: Max. Schrift Desktop
+        type: number
+        after: px
+        width: 1/3
+        help: Obergrenze, damit die Schrift nicht zu groß wird.
+      fitFontMaxMobile:
+        label: Max. Schrift Mobile
+        type: number
+        after: px
+        width: 1/3
+      fitFontMin:
+        label: Min. Schrift
+        type: number
+        after: px
+        width: 1/3
+        help: Untergrenze, damit es nie zu klein wird.
       iconPoolHeadline:
         label: Icon-Pool (lokal in dieser Sektion)
         type: headline

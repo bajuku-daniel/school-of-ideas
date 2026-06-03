@@ -77,19 +77,27 @@ const fetchInlineSvg = async (src) => {
 const inlineSvgHosts = document.querySelectorAll(
   '[data-inline-svg], .manifest__icon'
 );
+const inlineSvgDone = [];
 inlineSvgHosts.forEach((host) => {
-  host.querySelectorAll('img').forEach(async (img) => {
-    const src = img.currentSrc || img.getAttribute('src') || '';
-    if (!src.toLowerCase().split('?')[0].endsWith('.svg')) return;
+  host.querySelectorAll('img').forEach((img) => {
+    const task = (async () => {
+      const src = img.currentSrc || img.getAttribute('src') || '';
+      if (!src.toLowerCase().split('?')[0].endsWith('.svg')) return;
 
-    const template = await fetchInlineSvg(src);
-    if (!template || !img.parentNode) return;
-    const svg = template.cloneNode(true);
-    svg.setAttribute('aria-hidden', 'true');
-    svg.removeAttribute('id');
-    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-    img.replaceWith(svg);
+      const template = await fetchInlineSvg(src);
+      if (!template || !img.parentNode) return;
+      const svg = template.cloneNode(true);
+      svg.setAttribute('aria-hidden', 'true');
+      svg.removeAttribute('id');
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      img.replaceWith(svg);
+    })();
+    inlineSvgDone.push(task);
   });
+});
+// Inline-Icons ändern die Zeilenbreite → nach dem Austausch neu fitten.
+Promise.all(inlineSvgDone).then(() => {
+  if (typeof window.__manifestFit === 'function') window.__manifestFit();
 });
 
 /* ============================================================
@@ -687,3 +695,85 @@ document.querySelectorAll('[data-agency-grid]').forEach((grid) => {
     });
   });
 });
+
+/* ============================================================
+   Highlight-Statement (.manifest) — feste Umbrüche + Fit-to-width.
+
+   Björn setzt die Umbrüche per Enter (→ <br> im Markup). Die Schrift
+   skaliert hier so, dass die BREITESTE Zeile genau die Spaltenbreite
+   (`.manifest__inner`) füllt. Alle Absätze teilen sich EINE Größe, damit
+   das Bild auf jeder Breite exakt dem Screendesign entspricht.
+
+   Messprinzip: Textbreite ist linear zur Schriftgröße. Wir setzen eine
+   Messbasis (100px), lesen die breiteste Zeile (scrollWidth bei nowrap)
+   und skalieren in einem Schritt — kein iteratives Probieren.
+
+   Knöpfe (data-Attribute): data-fit-max-desktop / -mobile (Obergrenze px),
+   data-fit-min (Untergrenze px). CSS-Var --manifest-fit-width-* setzt die
+   Spalten-/Zielbreite.
+   ============================================================ */
+const initManifestFit = () => {
+  const sections = document.querySelectorAll('[data-manifest-fit]');
+  if (!sections.length) return null;
+
+  const BASE = 100; // Messbasis in px
+
+  const fitOne = (section) => {
+    const inner = section.querySelector('.manifest__inner');
+    const texts = section.querySelectorAll('.manifest__text');
+    if (!inner || !texts.length) return;
+
+    const target = inner.clientWidth;
+    if (!target) return;
+
+    const isMobile = window.matchMedia('(max-width: 991px)').matches;
+    const maxRaw   = isMobile ? section.dataset.fitMaxMobile : section.dataset.fitMaxDesktop;
+    const maxPx    = parseFloat(maxRaw) || Infinity;
+    const minPx    = parseFloat(section.dataset.fitMin) || 0;
+
+    // Nur Absätze mit festen Umbrüchen (<br> in der SICHTBAREN Variante) werden
+    // gefittet → bekommen `.is-fixed` (nowrap). Absätze ohne manuelle Umbrüche
+    // dürfen normal umbrechen und treiben die Größe nicht runter.
+    const fixed = [];
+    texts.forEach((t) => {
+      const span = [...t.querySelectorAll('.manifest__bp')].find((s) => s.offsetParent !== null) || t;
+      const hasBreak = !!span.querySelector('br');
+      t.classList.toggle('is-fixed', hasBreak);
+      if (hasBreak) fixed.push(t);
+    });
+
+    // Keine festen Umbrüche → nicht fitten, CSS-Default (clamp) greift.
+    if (!fixed.length) { section.classList.remove('is-fitting'); return; }
+
+    // Messbasis setzen, dann breiteste feste Zeile lesen (Breite ∝ Schriftgröße).
+    section.classList.add('is-fitting');
+    section.style.setProperty('--manifest-fs', BASE + 'px');
+
+    let widest = 0;
+    fixed.forEach((t) => { if (t.scrollWidth > widest) widest = t.scrollWidth; });
+    if (!widest) return;
+
+    let px = BASE * (target / widest);
+    if (px > maxPx) px = maxPx;
+    if (px < minPx) px = minPx;
+    section.style.setProperty('--manifest-fs', px.toFixed(2) + 'px');
+  };
+
+  const fitAll = () => sections.forEach(fitOne);
+
+  fitAll();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+  window.addEventListener('load', fitAll);
+
+  // Resize-Debounce per Timeout (NICHT rAF): feuert auch zuverlässig, wenn der
+  // Tab im Hintergrund liegt — rAF wird dort pausiert und bliebe sonst hängen.
+  let resizeTimer = 0;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(fitAll, 150);
+  });
+
+  return fitAll;
+};
+
+window.__manifestFit = initManifestFit();

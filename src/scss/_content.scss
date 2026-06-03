@@ -693,7 +693,7 @@
   // EIN durchgehender Clamp von 320 px bis 1920+ px — kein Sprung am
   // Breakpoint. Bei 320 ≈ 17 px, 1200 ≈ 27 px, 1400 ≈ 30 px, 1920+ = 33.6 px.
   --manifest-fs:        clamp(2.15rem, 4.6vw, 4.35rem);
-  --manifest-lh:        1.22;
+  --manifest-lh:        0.75;
   --manifest-fw:        700;
   --manifest-color:     #{$color-accent};
   --manifest-max-width: 1260px;          // Lesebreite
@@ -754,8 +754,14 @@
   // Zentrale Lesebreite — `.container` liefert die Außen-Padding,
   // `.manifest__inner` die Lesebreite (in Zeichen).
   &__inner {
-    max-width: var(--manifest-max-width);
+    // Spaltenbreite = Fit-Ziel. Designer-Knöpfe (fitWidth*) überschreiben,
+    // sonst greift der Lesebreite-Default bzw. 86vw auf Mobile.
+    max-width: var(--manifest-fit-width-desktop, var(--manifest-max-width));
     margin: 0 auto;
+
+    @media (max-width: 991px) {
+      max-width: var(--manifest-fit-width-mobile, var(--manifest-max-width));
+    }
   }
 
   &__text {
@@ -771,6 +777,21 @@
     // Abstand zwischen den Absätzen
     & + & { margin-top: var(--manifest-paragraph-gap); }
   }
+
+  // Feste Umbrüche: Desktop- vs. Mobile-Variante je Breakpoint zeigen.
+  // (Bei nur einer Variante rendert das Snippet `--all` → immer sichtbar.)
+  &__bp        { display: inline; }
+  &__bp--mobile { display: none; }
+  @media (max-width: 991px) {
+    &__bp--desktop { display: none; }
+    &__bp--mobile  { display: inline; }
+  }
+
+  // Nur Absätze MIT festen Umbrüchen (<br>) bekommen nowrap — das Fit-Script
+  // setzt `.is-fixed` per JS. So bricht ein Absatz ohne manuelle Umbrüche
+  // normal um (statt zu einer langen, winzig skalierten Zeile zu werden),
+  // und ohne JS bleibt überall normaler Umbruch als Fallback.
+  &__text.is-fixed { white-space: nowrap; }
 
   // Inline-Icon im Text — sitzt mitten im Lesefluss zwischen Wörtern.
   // <img> wird beim Boot von main.js durch das echte <svg> ersetzt.
