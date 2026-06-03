@@ -686,8 +686,10 @@
   // ===========================================================================
 
   // ---- Section-Abstand ----
-  --manifest-spacing-top:    var(--manifest-spacing-top-desktop, #{clamp(80px, 11vw, 160px)});
-  --manifest-spacing-bottom: var(--manifest-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)});
+  // Liest die Layout-Tab-Felder „Abstand oben/unten" (--section-top/bottom-*).
+  // Leer im Panel = Default-Clamp.
+  --manifest-spacing-top:    var(--section-top-desktop, #{clamp(80px, 11vw, 160px)});
+  --manifest-spacing-bottom: var(--section-bottom-desktop, #{clamp(80px, 11vw, 160px)});
 
   // ---- Typo ----
   // EIN durchgehender Clamp von 320 px bis 1920+ px — kein Sprung am
@@ -722,8 +724,8 @@
   // Clamp — hier sind nur Werte zu setzen, die WIRKLICH anders sein müssen.
   // =========================================================================
   @media (max-width: 1199px) {
-    --manifest-spacing-top:    var(--manifest-spacing-top-tablet, var(--manifest-spacing-top-desktop, #{clamp(80px, 11vw, 160px)}));
-    --manifest-spacing-bottom: var(--manifest-spacing-bottom-tablet, var(--manifest-spacing-bottom-desktop, #{clamp(80px, 11vw, 160px)}));
+    --manifest-spacing-top:    var(--section-top-tablet, var(--section-top-desktop, #{clamp(80px, 11vw, 160px)}));
+    --manifest-spacing-bottom: var(--section-bottom-tablet, var(--section-bottom-desktop, #{clamp(80px, 11vw, 160px)}));
     --manifest-paragraph-gap:  var(--manifest-paragraph-gap-tablet, var(--manifest-paragraph-gap-desktop, 1.65em));
     --manifest-icon-size:      var(--manifest-icon-size-tablet, var(--manifest-icon-size-desktop, 1.32em));
     --manifest-icon-gap:       var(--manifest-icon-gap-tablet, var(--manifest-icon-gap-desktop, .2em));
@@ -738,8 +740,8 @@
   // via em + clamp aus den Defaults oben.
   // =========================================================================
   @media (max-width: 991px) {
-    --manifest-spacing-top:    var(--manifest-spacing-top-mobile, 60px);
-    --manifest-spacing-bottom: var(--manifest-spacing-bottom-mobile, 60px);
+    --manifest-spacing-top:    var(--section-top-mobile, 60px);
+    --manifest-spacing-bottom: var(--section-bottom-mobile, 60px);
     --manifest-icon-stroke:    var(--manifest-icon-stroke-mobile, 26);
     --manifest-fs:             clamp(2.05rem, 8.5vw, 3.2rem);
     --manifest-max-width:      86vw;

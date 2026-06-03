@@ -19,9 +19,30 @@ $px = fn ($field) => $block->{$field}()->isNotEmpty() ? (int)$block->{$field}()-
 $widthDesktop = $px('fitWidthDesktop');
 $widthMobile  = $px('fitWidthMobile');
 
+// Inline-Icon-Feinjustierung (pro Breakpoint) → manifest-CSS liest diese Slots
+// bereits. `raw`: unitlos (Strichstärke), `em`: relativ zur Schrift (Größe/Abstand/Lage).
+$raw = fn ($field) => $block->{$field}()->isNotEmpty() ? (string)$block->{$field}()->value() : null;
+$em  = fn ($field) => $block->{$field}()->isNotEmpty() ? (float)$block->{$field}()->value() . 'em' : null;
+
 $extraVars = [
     '--manifest-fit-width-desktop' => $widthDesktop !== null ? $widthDesktop . 'px' : null,
     '--manifest-fit-width-mobile'  => $widthMobile  !== null ? $widthMobile  . 'px' : null,
+
+    '--manifest-icon-stroke-mobile'  => $raw('iconStrokeMobile'),
+    '--manifest-icon-stroke-tablet'  => $raw('iconStrokeTablet'),
+    '--manifest-icon-stroke-desktop' => $raw('iconStrokeDesktop'),
+
+    '--manifest-icon-size-mobile'  => $em('iconSizeMobile'),
+    '--manifest-icon-size-tablet'  => $em('iconSizeTablet'),
+    '--manifest-icon-size-desktop' => $em('iconSizeDesktop'),
+
+    '--manifest-icon-gap-mobile'  => $em('iconGapMobile'),
+    '--manifest-icon-gap-tablet'  => $em('iconGapTablet'),
+    '--manifest-icon-gap-desktop' => $em('iconGapDesktop'),
+
+    '--manifest-icon-lift-mobile'  => $em('iconLiftMobile'),
+    '--manifest-icon-lift-tablet'  => $em('iconLiftTablet'),
+    '--manifest-icon-lift-desktop' => $em('iconLiftDesktop'),
 ];
 
 $attrs = soi_section_attrs($block, 'manifest', $extraVars);

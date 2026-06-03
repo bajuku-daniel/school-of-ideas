@@ -113,6 +113,110 @@ tabs:
               cover: false
               back: white
 
+  inlineicons:
+    label: Inline-Icons
+    icon: sparkles
+    fields:
+      inlineInfo:
+        label: Icons mitten im Text
+        type: info
+        theme: blue
+        text: >
+          Feinjustierung der Icons IM TEXT (z. B. Papierflieger). Pro Breakpoint
+          einstellbar — leer = sinnvoller Default. Das frei schwebende Deko-Icon
+          stellst du im Tab „Section-Icon" ein, den Abstand der ganzen Sektion
+          oben/unten im Tab „Layout".
+      strokeHead:
+        label: Strichstärke (Linienstärke der Icons)
+        type: headline
+      iconStrokeMobile:
+        label: Mobile
+        type: number
+        placeholder: "26"
+        width: 1/3
+      iconStrokeTablet:
+        label: Tablet
+        type: number
+        placeholder: "24"
+        width: 1/3
+      iconStrokeDesktop:
+        label: Desktop
+        type: number
+        placeholder: "24"
+        width: 1/3
+      sizeHead:
+        label: Größe (× Schriftgröße)
+        type: headline
+      iconSizeMobile:
+        label: Mobile
+        type: number
+        step: 0.01
+        after: "× Schrift"
+        placeholder: "1.22"
+        width: 1/3
+      iconSizeTablet:
+        label: Tablet
+        type: number
+        step: 0.01
+        after: "× Schrift"
+        placeholder: "1.32"
+        width: 1/3
+      iconSizeDesktop:
+        label: Desktop
+        type: number
+        step: 0.01
+        after: "× Schrift"
+        placeholder: "1.32"
+        width: 1/3
+      gapHead:
+        label: Abstand links/rechts um jedes Icon
+        type: headline
+      iconGapMobile:
+        label: Mobile
+        type: number
+        step: 0.02
+        after: em
+        placeholder: "0.16"
+        width: 1/3
+      iconGapTablet:
+        label: Tablet
+        type: number
+        step: 0.02
+        after: em
+        placeholder: "0.2"
+        width: 1/3
+      iconGapDesktop:
+        label: Desktop
+        type: number
+        step: 0.02
+        after: em
+        placeholder: "0.2"
+        width: 1/3
+      liftHead:
+        label: Vertikale Lage (höher = Icon weiter nach oben)
+        type: headline
+      iconLiftMobile:
+        label: Mobile
+        type: number
+        step: 0.02
+        after: em
+        placeholder: "0.76"
+        width: 1/3
+      iconLiftTablet:
+        label: Tablet
+        type: number
+        step: 0.02
+        after: em
+        placeholder: "0.82"
+        width: 1/3
+      iconLiftDesktop:
+        label: Desktop
+        type: number
+        step: 0.02
+        after: em
+        placeholder: "0.82"
+        width: 1/3
+
   layout:
     extends: sections/block-layout-tab
   icon:
