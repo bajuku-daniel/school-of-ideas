@@ -1531,6 +1531,9 @@
     font-size: clamp(.95rem, 1.05vw, 1.05rem);
     line-height: 1.35;
     color: $color-ink;
+
+    // Inline-Färbung im Text-Item: --Text-- → blau (sonst schwarz).
+    .accent { color: $color-accent; }
   }
 
   // Auf Mobile fließen die Cards der Reihe nach — Inline-Position ignorieren.

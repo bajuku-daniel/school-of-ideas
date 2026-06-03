@@ -1,6 +1,6 @@
-name: Bullet-Liste (Items mit Icons)
+name: Text-Liste (färbbar, ohne Punkte)
 icon: list-bullet
-description: Headline + Liste mit blauen Punkten oder Custom-Icons
+description: Headline + Text-Items im Raster — blau/schwarz färbbar, ohne Aufzählungspunkte
 preview: fields
 
 tabs:
@@ -9,12 +9,15 @@ tabs:
     icon: text
     fields:
       sectionInfo:
-        label: Editorial Bullet-List
+        label: Text-Liste
         type: info
         theme: blue
         text: >
-          Headline + optionale Sub-Headline + Bullet-Liste (blaue Punkte).
-          Items können frei im 4er-Grid positioniert werden (Spalte/Zeile).
+          Headline + optionale Sub-Headline + Text-Items im 4er-Raster (frei
+          positionierbar über Spalte/Zeile). **Keine Aufzählungspunkte** —
+          reiner Text. Färben: **--Text--** = blau, sonst schwarz. **Enter** im
+          Item = Zeilenumbruch (z. B. blaue Titel-Zeile, schwarze Beschreibung
+          darunter).
       headlineInk:
         label: Headline (schwarz)
         type: text
@@ -27,30 +30,8 @@ tabs:
         label: Sub-Headline (optional)
         type: textarea
         buttons: false
-      bulletHead:
-        label: Aufzählungs-Icon
-        type: headline
-      bulletInfo:
-        label: Default = blauer Punkt
-        type: info
-        text: >
-          Ohne Auswahl wird vor jedem Item ein blauer Kreis gezeigt. Wenn du
-          einen Library-Eintrag wählst oder eine eigene Datei hochlädst,
-          wird dieses Icon stattdessen verwendet.
-      bulletKey:
-        extends: fields/icon-key
-        label: Aus Bibliothek
-        empty: "Blauer Punkt (Default)"
-        width: 1/2
-      bulletUpload:
-        label: Eigene Datei (Override)
-        type: files
-        max: 1
-        uploads: image
-        layout: cards
-        width: 1/2
       items:
-        label: Bullet-Items
+        label: Text-Items
         type: structure
         columns:
           text:
@@ -64,6 +45,9 @@ tabs:
             label: Text
             type: textarea
             buttons: false
+            help: >
+              --Text-- = blau, sonst schwarz. **fett**, *kursiv* möglich.
+              Enter = Zeilenumbruch (Titel-Zeile / Beschreibung).
           col:
             label: Spalte (1–4)
             type: number
