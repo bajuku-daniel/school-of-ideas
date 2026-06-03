@@ -693,7 +693,7 @@
   // EIN durchgehender Clamp von 320 px bis 1920+ px — kein Sprung am
   // Breakpoint. Bei 320 ≈ 17 px, 1200 ≈ 27 px, 1400 ≈ 30 px, 1920+ = 33.6 px.
   --manifest-fs:        clamp(2.15rem, 4.6vw, 4.35rem);
-  --manifest-lh:        0.75;
+  --manifest-lh:        0.7;
   --manifest-fw:        700;
   --manifest-color:     #{$color-accent};
   --manifest-max-width: 1260px;          // Lesebreite
