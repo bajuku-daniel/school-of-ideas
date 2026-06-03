@@ -214,7 +214,9 @@ const rafThrottle = (fn) => {
    1) Navigation: switch to glass mode once we leave the hero
    ============================================================ */
 const nav  = document.getElementById('siteNav');
-const hero = document.getElementById('hero');
+// Nav-Glas-Trigger: bevorzugt #hero, sonst irgendein .hero (Video-Hero ODER
+// Bild-Hero im Vollbild-Modus) → beide lösen das Glas-Verhalten zuverlässig aus.
+const hero = document.getElementById('hero') || document.querySelector('.hero');
 
 if (nav && hero) {
   const heroObserver = new IntersectionObserver(
@@ -681,6 +683,7 @@ document.querySelectorAll('[data-agency-grid]').forEach((grid) => {
   // weil das alte und neue Tile-Positionen kurzfristig überlappen ließ.
   const update = () => {
     applyFilterState();
+    syncUI();
   };
 
   filterRoot.querySelectorAll('button[data-filter]').forEach((btn) => {
@@ -694,6 +697,92 @@ document.querySelectorAll('[data-agency-grid]').forEach((grid) => {
       update();
     });
   });
+
+  /* ---- Popover-Bar UI (Trigger, Badges, Ergebniszähler, Reset) ---- */
+  const groupEls = {};
+  filterRoot.querySelectorAll('[data-group]').forEach((el) => { groupEls[el.dataset.group] = el; });
+  const triggers   = filterRoot.querySelectorAll('[data-popover-trigger]');
+  const popovers   = filterRoot.querySelectorAll('[data-popover]');
+  const backdrop   = filterRoot.querySelector('[data-popover-backdrop]');
+  const resultEl   = filterRoot.querySelector('[data-result-count]');
+  const resetAllBtn = filterRoot.querySelector('[data-reset-all]');
+  const allIdx = (sel) => new Set(
+    [...grid.querySelectorAll('[data-agency-idx]')].filter(sel).map((t) => t.dataset.agencyIdx)
+  ).size;
+  const totalAgencies = allIdx(() => true);
+
+  // Badges, aktive-Markierung, Reset-Sichtbarkeit und Ergebniszähler spiegeln.
+  const syncUI = () => {
+    let anyActive = false;
+    Object.keys(active).forEach((key) => {
+      const size = active[key].size;
+      if (size) anyActive = true;
+      const g = groupEls[key];
+      if (!g) return;
+      g.classList.toggle('has-selection', size > 0);
+      // Slot bleibt immer im Layout (CSS min-width) → kein Verschieben beim
+      // Auswählen. Nur der Text (inkl. Klammern) wechselt.
+      const badge = g.querySelector('[data-count-for="' + key + '"]');
+      if (badge) badge.textContent = size > 0 ? '(' + size + ')' : '';
+    });
+    if (resetAllBtn) resetAllBtn.hidden = !anyActive;
+    if (resultEl) {
+      const visible = allIdx((t) => !t.classList.contains('is-hidden'));
+      resultEl.textContent = anyActive
+        ? `${visible} von ${totalAgencies} Agenturen`
+        : `${totalAgencies} Agenturen`;
+    }
+  };
+
+  const closeAll = () => {
+    triggers.forEach((t) => t.setAttribute('aria-expanded', 'false'));
+    popovers.forEach((p) => { p.hidden = true; });
+    filterRoot.classList.remove('is-open');
+  };
+
+  const openPopover = (key) => {
+    const pop = filterRoot.querySelector('[data-popover="' + key + '"]');
+    if (!pop) return;
+    const wasOpen = !pop.hidden;
+    closeAll();
+    if (wasOpen) return; // erneuter Klick = schließen
+    pop.hidden = false;
+    const trig = filterRoot.querySelector('[data-popover-trigger="' + key + '"]');
+    if (trig) trig.setAttribute('aria-expanded', 'true');
+    filterRoot.classList.add('is-open');
+  };
+
+  triggers.forEach((t) => t.addEventListener('click', () => openPopover(t.dataset.popoverTrigger)));
+
+  // Außerhalb klicken / Backdrop / Escape schließt.
+  document.addEventListener('click', (e) => {
+    if (!filterRoot.contains(e.target)) closeAll();
+  });
+  if (backdrop) backdrop.addEventListener('click', closeAll);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+
+  // "Zurücksetzen" je Kategorie.
+  filterRoot.querySelectorAll('[data-clear]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.clear;
+      if (!active[key]) return;
+      active[key].clear();
+      filterRoot.querySelectorAll('button[data-filter="' + key + '"]').forEach((b) => b.classList.remove('is-active'));
+      update();
+    });
+  });
+
+  // "Alle Filter zurücksetzen".
+  if (resetAllBtn) {
+    resetAllBtn.addEventListener('click', () => {
+      Object.values(active).forEach((s) => s.clear());
+      filterRoot.querySelectorAll('button[data-filter]').forEach((b) => b.classList.remove('is-active'));
+      closeAll();
+      update();
+    });
+  }
+
+  syncUI(); // Initialzustand (Ergebniszähler etc.)
 });
 
 /* ============================================================

@@ -8,14 +8,27 @@ tabs:
     label: Inhalt
     icon: text
     fields:
+      displayMode:
+        label: Darstellung
+        type: toggles
+        default: foto
+        options:
+          foto: Foto + Text nebeneinander
+          vollbild: Vollbild (wie Video-Hero)
+        help: >
+          „Vollbild" verhält sich exakt wie der Video-Hero — formatfüllend (16:9),
+          Text unten links in Weiß, Nav wird beim Rausscrollen zu Glas — nur mit
+          dem Foto als Hintergrund statt Video.
       sectionInfo:
         label: Hero-Foto
         type: info
         theme: blue
         text: >
-          Großer Eingangs-Block mit Foto-Tile statt Video. Headline mit
-          optionalem Inline-Icon. Foto bekommt den blauen Schlagschatten
-          (per Tab "Bild-Schatten" tunbar).
+          „Foto + Text": Foto rechts mit blauem Schlagschatten, Headline links.
+          „Vollbild": Foto formatfüllend als Hintergrund, Headline unten links —
+          identisch zum Video-Hero. Format (16:9) und Textfarbe sind im Vollbild-
+          Modus fix; Foto-Format, Sub-Text und Bild-Schatten gelten nur im
+          „Foto"-Modus.
       heroLine1:
         label: Headline Zeile 1
         type: text
@@ -70,6 +83,8 @@ tabs:
         label: Sub-Text (unter Headline)
         type: textarea
         buttons: false
+        when:
+          displayMode: foto
       photoHeadline:
         label: Foto
         type: headline
@@ -81,10 +96,15 @@ tabs:
         layout: cards
         image:
           cover: true
+        help: >
+          Im „Foto"-Modus rechts als Tile, im „Vollbild"-Modus formatfüllend als
+          Hintergrund. Für Vollbild ein quer-/breitformatiges Motiv wählen.
       aspect:
         label: Foto-Format
         type: toggles
         default: landscape
+        when:
+          displayMode: foto
         options:
           landscape: Landscape (16/11)
           square: Quadrat (1/1)

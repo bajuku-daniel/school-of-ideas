@@ -88,39 +88,41 @@ $patternRows = 4;
 ?>
 <section<?= $attrs ?>>
   <div class="container">
-    <div class="agency-grid__filters" data-filters>
-      <div class="agency-grid__filter-col">
-        <div class="agency-grid__filter-label"><?= esc($labels['Standort']) ?></div>
-        <ul class="agency-grid__filter-list">
-          <?php foreach ($locations as $opt): ?>
-            <li><button type="button" data-filter="location" data-value="<?= esc($opt, 'attr') ?>"><?= esc($opt) ?></button></li>
-          <?php endforeach ?>
-        </ul>
+    <?php
+      // Filter-Gruppen für die kompakte Popover-Leiste.
+      $filterGroups = [
+          ['key' => 'location',     'label' => $labels['Standort'],     'opts' => $locations],
+          ['key' => 'arbeitsweise', 'label' => $labels['Arbeitsweise'], 'opts' => $workmodes],
+          ['key' => 'schwerpunkte', 'label' => $labels['Schwerpunkte'], 'opts' => $disciplines],
+          ['key' => 'groesse',      'label' => $labels['Agenturgröße'], 'opts' => $sizes],
+      ];
+    ?>
+    <div class="agency-filterbar" data-filters>
+      <div class="agency-filterbar__row">
+        <?php foreach ($filterGroups as $g): if (empty($g['opts'])) continue; ?>
+          <div class="agency-filterbar__group" data-group="<?= esc($g['key'], 'attr') ?>">
+            <button type="button" class="agency-filterbar__trigger" data-popover-trigger="<?= esc($g['key'], 'attr') ?>" aria-expanded="false" aria-haspopup="true">
+              <span class="agency-filterbar__trigger-text"><?= esc($g['label']) ?></span>
+              <span class="agency-filterbar__badge" data-count-for="<?= esc($g['key'], 'attr') ?>"></span>
+              <svg class="agency-filterbar__chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="agency-filterbar__popover" data-popover="<?= esc($g['key'], 'attr') ?>" hidden>
+              <div class="agency-filterbar__popover-head">
+                <span class="agency-filterbar__popover-title"><?= esc($g['label']) ?></span>
+                <button type="button" class="agency-filterbar__clear" data-clear="<?= esc($g['key'], 'attr') ?>">Zurücksetzen</button>
+              </div>
+              <div class="agency-filterbar__options">
+                <?php foreach ($g['opts'] as $opt): ?>
+                  <button type="button" class="agency-chip" data-filter="<?= esc($g['key'], 'attr') ?>" data-value="<?= esc($opt, 'attr') ?>"><?= esc($opt) ?></button>
+                <?php endforeach ?>
+              </div>
+            </div>
+          </div>
+        <?php endforeach ?>
+        <button type="button" class="agency-filterbar__reset" data-reset-all hidden>Alle Filter zurücksetzen</button>
       </div>
-      <div class="agency-grid__filter-col">
-        <div class="agency-grid__filter-label"><?= esc($labels['Arbeitsweise']) ?></div>
-        <ul class="agency-grid__filter-list">
-          <?php foreach ($workmodes as $opt): ?>
-            <li><button type="button" data-filter="arbeitsweise" data-value="<?= esc($opt, 'attr') ?>"><?= esc($opt) ?></button></li>
-          <?php endforeach ?>
-        </ul>
-      </div>
-      <div class="agency-grid__filter-col">
-        <div class="agency-grid__filter-label"><?= esc($labels['Schwerpunkte']) ?></div>
-        <ul class="agency-grid__filter-list">
-          <?php foreach ($disciplines as $opt): ?>
-            <li><button type="button" data-filter="schwerpunkte" data-value="<?= esc($opt, 'attr') ?>"><?= esc($opt) ?></button></li>
-          <?php endforeach ?>
-        </ul>
-      </div>
-      <div class="agency-grid__filter-col">
-        <div class="agency-grid__filter-label"><?= esc($labels['Agenturgröße']) ?></div>
-        <ul class="agency-grid__filter-list">
-          <?php foreach ($sizes as $opt): ?>
-            <li><button type="button" data-filter="groesse" data-value="<?= esc($opt, 'attr') ?>"><?= esc($opt) ?></button></li>
-          <?php endforeach ?>
-        </ul>
-      </div>
+      <span class="agency-filterbar__result" data-result-count aria-live="polite"></span>
+      <div class="agency-filterbar__backdrop" data-popover-backdrop></div>
     </div>
 
     <div class="agency-grid__tiles" data-agency-grid>
@@ -163,7 +165,8 @@ $patternRows = 4;
           if ($intro === '') $intro = $fillTemplate($template, $agency);
           $disciplinesAttr = implode('|', $agency->schwerpunkte()->split(','));
           $url = esc($agency->url());
-          $dataAttrs = ' data-location="' . esc((string)$agency->location(), 'attr') . '"'
+          $dataAttrs = ' data-agency-idx="' . $i . '"'
+                     . ' data-location="' . esc((string)$agency->location(), 'attr') . '"'
                      . ' data-arbeitsweise="' . esc((string)$agency->arbeitsweise(), 'attr') . '"'
                      . ' data-groesse="' . esc((string)$agency->groesse(), 'attr') . '"'
                      . ' data-schwerpunkte="' . esc($disciplinesAttr, 'attr') . '"';
