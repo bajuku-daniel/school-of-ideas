@@ -2645,11 +2645,9 @@
   padding: var(--directory-top, clamp(32px, 5vw, 72px)) 0 var(--directory-bottom, clamp(90px, 12vw, 180px));
 }
 
-// (Legacy `.agency-filterbar` mit <select>-Dropdowns + sticky/backdrop-filter
-//  entfernt — kein Snippet rendert dieses Markup mehr. Die aktuelle, kompakte
-//  Popover-Filterleiste (.agency-filterbar) ist weiter unten definiert; ihr
-//  backdrop-filter hätte hier sonst die position:fixed-Popover auf Mobile
-//  eingefangen.)
+// (Legacy `.agency-filterbar` mit <select>-Dropdowns entfernt — kein Snippet
+//  rendert dieses Markup mehr. Der aktive Agenturfilter ist die klassische
+//  4-Spalten-Liste `.agency-grid__filters` weiter oben.)
 
 // (Legacy .agency-grid { display: grid } entfernt — kollidierte mit dem neuen
 //  Block-Selector. Definition für den neuen Block-Wrapper steht weiter unten.)
@@ -2855,8 +2853,49 @@
              var(--section-bottom-desktop, clamp(60px, 9vw, 120px));
   }
 
-  // Filter-UI lebt jetzt in `.agency-filterbar` (kompakte Popover-Leiste,
-  // siehe unten) — die alte 4-Spalten-Liste wurde abgelöst.
+  &__filters {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 48px);
+    margin-bottom: clamp(48px, 7vw, 96px);
+
+    @media (max-width: 760px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__filter-label {
+    font-family: $font-body;
+    font-weight: 700;
+    font-size: clamp(.9rem, 1vw, 1rem);
+    color: $color-accent;
+    margin-bottom: 12px;
+  }
+
+  &__filter-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    button {
+      appearance: none;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      font: inherit;
+      color: $color-ink;
+      text-align: left;
+      cursor: pointer;
+      font-size: clamp(.85rem, .95vw, .95rem);
+      transition: color $duration-base $easing-out;
+
+      &:hover { color: $color-accent; }
+      &.is-active { color: $color-accent; font-weight: 700; }
+    }
+  }
 
   &__tiles {
     display: grid;
@@ -2991,229 +3030,6 @@
 }
 // (agencyTileExit Keyframe entfernt — hidden Tiles sind jetzt display:none,
 //  kein Fade-Out nötig. Filter-Toggle ist instant statt mit Übergangsanimation.)
-
-// ----- .agency-filterbar (kompakte Popover-Filterleiste) ---------------------
-// Löst die alte 4-Spalten-Liste ab. Eine Zeile aus Kategorie-Buttons; Klick
-// öffnet ein Panel mit Auswahl-Chips. Desktop: Dropdown unter dem Button.
-// Mobile: Bottom-Sheet mit Backdrop. Filter-Logik (button[data-filter]) bleibt
-// unverändert — hier nur Layout/Optik.
-.agency-filterbar {
-  --fb-border: #{rgba($color-ink, .14)};
-  position: relative;
-  margin-bottom: clamp(40px, 5.5vw, 80px);
-
-  &__row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: clamp(28px, 3.4vw, 56px);   // mehr Luft zwischen den Kategorien
-    padding-bottom: clamp(16px, 2vw, 24px);
-    // dezente Trennlinie unter der Filterzeile — "angedeutet" statt Karte
-    border-bottom: 1px solid #{rgba($color-ink, .1)};
-  }
-
-  &__group { position: relative; }
-
-  // Trigger = flacher Text-Button (kein Pill).
-  &__trigger {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 7px;
-    appearance: none;
-    cursor: pointer;
-    font: inherit;
-    font-weight: 600;
-    font-size: clamp(.95rem, 1.05vw, 1.05rem);
-    line-height: 1.2;
-    color: $color-ink;
-    background: none;
-    border: 0;
-    padding: 2px 0;
-    transition: color $duration-base $easing-out;
-
-    &:hover,
-    &[aria-expanded="true"] { color: $color-accent; }
-  }
-
-  // Der Label-Text trägt die angedeutete Unterstreichung (auf inline-flex-
-  // Containern greift text-decoration nicht zuverlässig → am Text-Span).
-  &__trigger-text {
-    text-decoration: underline;
-    text-decoration-color: #{rgba($color-ink, .28)};
-    text-decoration-thickness: 1px;
-    text-underline-offset: 6px;
-    transition: text-decoration-color $duration-base $easing-out;
-  }
-  &__trigger:hover &__trigger-text,
-  &__trigger[aria-expanded="true"] &__trigger-text { text-decoration-color: $color-accent; }
-
-  // Aktive Auswahl → blau + durchgezogene Unterstreichung (kein Fill).
-  &__group.has-selection &__trigger { color: $color-accent; }
-  &__group.has-selection &__trigger-text { text-decoration-color: $color-accent; }
-
-  &__chev {
-    width: 11px;
-    height: 11px;
-    align-self: center;
-    opacity: .55;
-    transition: transform $duration-base $easing-out;
-  }
-  &__trigger[aria-expanded="true"] &__chev { transform: rotate(180deg); }
-
-  // Zähler als schlichte blaue (n)-Angabe. Slot reserviert IMMER Platz (auch
-  // leer) → beim Auswählen ändert sich die Trigger-Breite nicht, nichts
-  // verschiebt sich oder bricht um. Text inkl. Klammern setzt das JS.
-  &__badge {
-    display: inline-block;
-    min-width: 2.4ch;
-    font-size: .85em;
-    font-weight: 700;
-    color: $color-accent;
-  }
-
-  &__reset {
-    appearance: none;
-    cursor: pointer;
-    font: inherit;
-    font-size: .9rem;
-    font-weight: 600;
-    color: $color-accent;
-    background: transparent;
-    border: 0;
-    padding: 11px 6px;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  // Ergebniszähler als eigene, ruhige Caption-Zeile UNTER der Trennlinie —
-  // nicht mehr in der Trigger-Zeile (sonst sprang er bei Auswahl nach rechts).
-  &__result {
-    display: block;
-    margin-top: clamp(12px, 1.4vw, 18px);
-    font-size: .9rem;
-    color: #{rgba($color-ink, .5)};
-  }
-
-  // ---- Popover-Panel (schlicht: dünner Rahmen, kleiner Radius) ----
-  &__popover {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
-    z-index: 30;
-    min-width: 200px;
-    max-width: min(92vw, 340px);
-    max-height: min(62vh, 380px);
-    overflow-y: auto;
-    background: #fff;
-    border: 1px solid var(--fb-border);
-    border-radius: 6px;
-    box-shadow: 0 12px 32px #{rgba($color-ink, .1)};
-    padding: 16px 18px;
-    animation: fbPop .14s $easing-out both;
-  }
-
-  &__popover-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-  &__popover-title {
-    font-weight: 700;
-    color: $color-accent;
-    font-size: .76rem;
-    text-transform: uppercase;
-    letter-spacing: .05em;
-  }
-  &__clear {
-    appearance: none;
-    cursor: pointer;
-    font: inherit;
-    font-size: .8rem;
-    color: #{rgba($color-ink, .5)};
-    background: transparent;
-    border: 0;
-    padding: 0;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    &:hover { color: $color-accent; }
-  }
-
-  // Optionen: flache Text-Optionen, untereinander (schlichtes Menü).
-  &__options { display: flex; flex-direction: column; gap: 11px; }
-
-  &__backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 20;
-    background: #{rgba($color-ink, .35)};
-    display: none; // Desktop: kein Dim-Overlay, Outside-Click schließt
-    animation: fbFade .2s $easing-out both;
-  }
-
-  // ---- Mobile: Bottom-Sheet ----
-  @media (max-width: 760px) {
-    &__row { gap: 18px 24px; }
-
-    &.is-open &__backdrop { display: block; }
-
-    &__popover {
-      position: fixed;
-      inset: auto 0 0 0;
-      top: auto;
-      width: 100%;
-      max-width: none;
-      min-width: 0;
-      max-height: 70vh;
-      border: 0;
-      border-radius: 14px 14px 0 0;
-      padding: 22px 24px calc(24px + env(safe-area-inset-bottom));
-      box-shadow: 0 -10px 40px #{rgba($color-ink, .16)};
-      animation: fbSheet .24s $easing-out both;
-    }
-    &__popover-head { margin-bottom: 18px; }
-    &__options { gap: 18px; }
-  }
-}
-
-// Auswahl-Option: flach + unterstrichen-angedeutet (kein Pill).
-.agency-chip {
-  appearance: none;
-  cursor: pointer;
-  font: inherit;
-  font-size: clamp(.95rem, 1.05vw, 1.05rem);
-  font-weight: 500;
-  line-height: 1.1;
-  text-align: left;
-  width: max-content;
-  max-width: 100%;
-  color: $color-ink;
-  background: none;
-  border: 0;
-  padding: 0;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 5px;
-  transition: color $duration-base $easing-out,
-              text-decoration-color $duration-base $easing-out;
-
-  &:hover { color: $color-accent; text-decoration-color: #{rgba($color-accent, .45)}; }
-  &.is-active { color: $color-accent; text-decoration-color: $color-accent; font-weight: 600; }
-
-  @media (max-width: 760px) { font-size: 1.05rem; padding: 2px 0; } // Touch-Höhe
-}
-
-@keyframes fbPop {
-  from { opacity: 0; transform: translateY(-6px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fbFade { from { opacity: 0; } to { opacity: 1; } }
-@keyframes fbSheet {
-  from { transform: translateY(100%); }
-  to   { transform: translateY(0); }
-}
 
 // ----- .image-grid -----------------------------------------------------------
 .image-grid {

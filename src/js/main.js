@@ -636,29 +636,22 @@ document.querySelectorAll('[data-agency-grid]').forEach((grid) => {
   // Sammelt Tiles in Reihenfolge der Agentur-Pairs (img dann text).
   // Setzt explizite Grid-Positionen so dass jedes Pair in einer Reihe bleibt,
   // 2 Pairs pro Reihe (4-col grid).
+  // Natürliche Pattern-Positionen (das organische Mosaik) EINMAL festhalten.
+  // Beim Filtern rücken die sichtbaren Tiles der Reihe nach in genau diese
+  // Slots — das Raster bleibt identisch, die Treffer "rutschen hoch".
+  const patternSlots = Array.from(grid.querySelectorAll('.agency-grid__tile')).map((t) => ({
+    col: t.style.getPropertyValue('--card-col').trim(),
+    row: t.style.getPropertyValue('--card-row').trim(),
+  }));
+
   const reflowVisibleTiles = () => {
-    const allTiles = Array.from(grid.querySelectorAll('.agency-grid__tile'));
-    let visiblePairIdx = 0;
-    // Iteriere in Pairs: img-Tile (gerade idx) + zugehöriges text-Tile (ungerade idx)
-    for (let i = 0; i < allTiles.length; i += 2) {
-      const imgTile = allTiles[i];
-      const textTile = allTiles[i + 1];
-      const imgVisible = imgTile && !imgTile.classList.contains('is-hidden');
-      const textVisible = textTile && !textTile.classList.contains('is-hidden');
-      if (!imgVisible && !textVisible) continue;
-      // Position für dieses Pair: 2 Pairs pro Reihe → col 1+2 oder 3+4
-      const pairCol = (visiblePairIdx % 2) * 2 + 1;
-      const pairRow = Math.floor(visiblePairIdx / 2) + 1;
-      if (imgTile) {
-        imgTile.style.setProperty('--filter-col', pairCol);
-        imgTile.style.setProperty('--filter-row', pairRow);
-      }
-      if (textTile) {
-        textTile.style.setProperty('--filter-col', pairCol + 1);
-        textTile.style.setProperty('--filter-row', pairRow);
-      }
-      visiblePairIdx++;
-    }
+    let k = 0;
+    grid.querySelectorAll('.agency-grid__tile').forEach((t) => {
+      if (t.classList.contains('is-hidden')) return;
+      const slot = patternSlots[k++] || {};
+      if (slot.col) t.style.setProperty('--filter-col', slot.col);
+      if (slot.row) t.style.setProperty('--filter-row', slot.row);
+    });
   };
 
   const resetTileFlow = () => {
@@ -698,7 +691,6 @@ document.querySelectorAll('[data-agency-grid]').forEach((grid) => {
   // weil das alte und neue Tile-Positionen kurzfristig überlappen ließ.
   const update = () => {
     applyFilterState();
-    syncUI();
   };
 
   filterRoot.querySelectorAll('button[data-filter]').forEach((btn) => {
@@ -712,92 +704,6 @@ document.querySelectorAll('[data-agency-grid]').forEach((grid) => {
       update();
     });
   });
-
-  /* ---- Popover-Bar UI (Trigger, Badges, Ergebniszähler, Reset) ---- */
-  const groupEls = {};
-  filterRoot.querySelectorAll('[data-group]').forEach((el) => { groupEls[el.dataset.group] = el; });
-  const triggers   = filterRoot.querySelectorAll('[data-popover-trigger]');
-  const popovers   = filterRoot.querySelectorAll('[data-popover]');
-  const backdrop   = filterRoot.querySelector('[data-popover-backdrop]');
-  const resultEl   = filterRoot.querySelector('[data-result-count]');
-  const resetAllBtn = filterRoot.querySelector('[data-reset-all]');
-  const allIdx = (sel) => new Set(
-    [...grid.querySelectorAll('[data-agency-idx]')].filter(sel).map((t) => t.dataset.agencyIdx)
-  ).size;
-  const totalAgencies = allIdx(() => true);
-
-  // Badges, aktive-Markierung, Reset-Sichtbarkeit und Ergebniszähler spiegeln.
-  const syncUI = () => {
-    let anyActive = false;
-    Object.keys(active).forEach((key) => {
-      const size = active[key].size;
-      if (size) anyActive = true;
-      const g = groupEls[key];
-      if (!g) return;
-      g.classList.toggle('has-selection', size > 0);
-      // Slot bleibt immer im Layout (CSS min-width) → kein Verschieben beim
-      // Auswählen. Nur der Text (inkl. Klammern) wechselt.
-      const badge = g.querySelector('[data-count-for="' + key + '"]');
-      if (badge) badge.textContent = size > 0 ? '(' + size + ')' : '';
-    });
-    if (resetAllBtn) resetAllBtn.hidden = !anyActive;
-    if (resultEl) {
-      const visible = allIdx((t) => !t.classList.contains('is-hidden'));
-      resultEl.textContent = anyActive
-        ? `${visible} von ${totalAgencies} Agenturen`
-        : `${totalAgencies} Agenturen`;
-    }
-  };
-
-  const closeAll = () => {
-    triggers.forEach((t) => t.setAttribute('aria-expanded', 'false'));
-    popovers.forEach((p) => { p.hidden = true; });
-    filterRoot.classList.remove('is-open');
-  };
-
-  const openPopover = (key) => {
-    const pop = filterRoot.querySelector('[data-popover="' + key + '"]');
-    if (!pop) return;
-    const wasOpen = !pop.hidden;
-    closeAll();
-    if (wasOpen) return; // erneuter Klick = schließen
-    pop.hidden = false;
-    const trig = filterRoot.querySelector('[data-popover-trigger="' + key + '"]');
-    if (trig) trig.setAttribute('aria-expanded', 'true');
-    filterRoot.classList.add('is-open');
-  };
-
-  triggers.forEach((t) => t.addEventListener('click', () => openPopover(t.dataset.popoverTrigger)));
-
-  // Außerhalb klicken / Backdrop / Escape schließt.
-  document.addEventListener('click', (e) => {
-    if (!filterRoot.contains(e.target)) closeAll();
-  });
-  if (backdrop) backdrop.addEventListener('click', closeAll);
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
-
-  // "Zurücksetzen" je Kategorie.
-  filterRoot.querySelectorAll('[data-clear]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const key = btn.dataset.clear;
-      if (!active[key]) return;
-      active[key].clear();
-      filterRoot.querySelectorAll('button[data-filter="' + key + '"]').forEach((b) => b.classList.remove('is-active'));
-      update();
-    });
-  });
-
-  // "Alle Filter zurücksetzen".
-  if (resetAllBtn) {
-    resetAllBtn.addEventListener('click', () => {
-      Object.values(active).forEach((s) => s.clear());
-      filterRoot.querySelectorAll('button[data-filter]').forEach((b) => b.classList.remove('is-active'));
-      closeAll();
-      update();
-    });
-  }
-
-  syncUI(); // Initialzustand (Ergebniszähler etc.)
 });
 
 /* ============================================================
