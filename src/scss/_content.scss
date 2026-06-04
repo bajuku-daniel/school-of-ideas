@@ -242,7 +242,12 @@
     height: auto;
     display: flex;
     transform-origin: 50% 50%;
-    animation: var(--icon-motion-name, floatWobble) var(--icon-motion-duration, 6.5s) ease-in-out infinite;
+    // Longhand statt Shorthand: Firefox startet keine Animation, wenn der
+    // animation-NAME aus einer var() im `animation`-Shorthand kommt.
+    animation-name: var(--icon-motion-name, floatWobble);
+    animation-duration: var(--icon-motion-duration, 6.5s);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
     animation-delay: var(--icon-motion-delay, 0s);
   }
 
@@ -351,9 +356,11 @@
     width: 100%;
     height: auto;
     transform-origin: 50% 50%;
-    animation: var(--icon-motion-name, floatWobble)
-               var(--icon-motion-duration, 6.5s)
-               ease-in-out infinite;
+    // Longhand: Firefox ignoriert animation-name aus var() im Shorthand.
+    animation-name: var(--icon-motion-name, floatWobble);
+    animation-duration: var(--icon-motion-duration, 6.5s);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
     animation-delay: var(--icon-motion-delay, 0s);
 
     @media (prefers-reduced-motion: reduce) { animation: none; }
@@ -494,9 +501,11 @@
     width: 100%;
     height: auto;
     transform-origin: 50% 50%;
-    animation: var(--icon-motion-name, floatWobble)
-               var(--icon-motion-duration, 6.5s)
-               ease-in-out infinite;
+    // Longhand: Firefox ignoriert animation-name aus var() im Shorthand.
+    animation-name: var(--icon-motion-name, floatWobble);
+    animation-duration: var(--icon-motion-duration, 6.5s);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
     animation-delay: var(--icon-motion-delay, 0s);
 
     @media (prefers-reduced-motion: reduce) { animation: none; }
@@ -3235,7 +3244,11 @@
       height: auto;
       display: block;
       transform-origin: 50% 50%;
-      animation: var(--icon-motion-name, floatWobble) 6.5s ease-in-out infinite;
+      // Longhand: Firefox ignoriert animation-name aus var() im Shorthand.
+      animation-name: var(--icon-motion-name, floatWobble);
+      animation-duration: 6.5s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
     }
     &[data-motion="none"] img { animation: none; }
 
