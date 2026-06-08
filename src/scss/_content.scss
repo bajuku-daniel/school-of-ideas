@@ -3754,6 +3754,64 @@
     color: $color-ink;
     margin: 0;
   }
+
+  // ----- Organische Anordnung -----------------------------------------------
+  // Bild- und Text-Kacheln werden über --card-col / --card-row explizit im
+  // Grid platziert (wie .agency-grid), die Positionen kommen aber pro Karte
+  // aus dem Panel. Reveal-Welle via .is-revealed (gesetzt vom JS).
+  &__grid--organic {
+    grid-template-columns: repeat(var(--info-images-cols, 4), minmax(0, 1fr));
+    align-items: start;
+    // KEIN auto-flow — Positionen kommen explizit aus --card-col / --card-row
+
+    @media (max-width: 540px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__tile {
+    grid-column: var(--card-col, auto);
+    grid-row:    var(--card-row, auto);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: inherit;
+    text-decoration: none;
+
+    // Initial verborgen — Reveal-Welle startet, wenn das Grid in den Viewport
+    // scrollt (.is-revealed wird vom IntersectionObserver-Loop gesetzt).
+    opacity: 0;
+    transform: translateY(16px);
+    transition: transform $duration-base $easing-out;
+
+    @media (max-width: 991px) {
+      // Tablet/Mobile: Pattern aufgeben, normale Reihenfolge
+      grid-column: auto;
+      grid-row:    auto;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  a.information-images__tile:hover { transform: translateY(-4px); }
+
+  &__tile--image .information-images__media { margin: 0; }
+
+  &__tile--text {
+    justify-content: center;
+
+    .information-images__name     { color: $color-accent; } // Name blau
+    .information-images__position { color: $color-ink; }     // Position schwarz
+  }
+
+  &__grid--organic.is-revealed &__tile {
+    animation: agencyTileEnter .55s cubic-bezier(.22, .9, .25, 1) both;
+    animation-delay: calc(var(--stagger, 0) * 60ms);
+  }
 }
 
 // ----- .hero-foto -----------------------------------------------------------

@@ -600,7 +600,7 @@ if ('IntersectionObserver' in window) {
    Agency-Grid Filter — multi-select Toggle pro Spalte (Standort,
    Arbeitsweise, Schwerpunkte, Größe). Tiles werden ein-/ausgeblendet.
    ============================================================ */
-document.querySelectorAll('[data-agency-grid]').forEach((grid) => {
+document.querySelectorAll('[data-agency-grid], [data-reveal-tiles]').forEach((grid) => {
   // Initial-Load: Stagger-Animation startet erst wenn das Grid in den
   // Viewport scrollt. Scroll-Listener-Fallback (IntersectionObserver
   // verhält sich in manchen Setups quirky bei sehr großen Elementen).
