@@ -18,3 +18,15 @@ RewriteRule ^.*$ - [L]
 
 # Let Kirby handle everything else
 RewriteRule ^(.*) index.php [L]
+
+#<MITTWALD HTACCESS_USER>
+# PLEASE DO NEVER CHANGE THE CODE INSIDE THE <MITTWALD> MARKERS.
+# VERAENDERN SIE BITTE NIEMALS DEN INHALT ZWISCHEN DEN <MITTWALD> MARKERN.
+
+AuthType Basic
+AuthName "Bald fertig"
+AuthUserFile /home/www/p708685/html/soi/public/.htpasswd.mittwald
+order deny,allow
+allow from all
+require valid-user
+#</MITTWALD HTACCESS_USER>
