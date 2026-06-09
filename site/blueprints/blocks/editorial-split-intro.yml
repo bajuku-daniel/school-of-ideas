@@ -73,11 +73,44 @@ tabs:
             type: text
             help: Wenn gefüllt, erscheint ein Link/Button am Ende der Spalte.
             width: 1/2
+          ctaLinkType:
+            label: Link-Ziel
+            type: toggles
+            default: url
+            width: 1/2
+            options:
+              url: Seite / URL
+              mail: E-Mail schreiben
           ctaUrl:
             label: Link-URL
             type: text
             placeholder: z. B. /programm oder #anchor
+            width: 1/1
+            when:
+              ctaLinkType: url
+          ctaEmail:
+            label: E-Mail-Adresse
+            type: email
+            placeholder: z. B. hallo@school-of-ideas.de
             width: 1/2
+            when:
+              ctaLinkType: mail
+          ctaSubject:
+            label: Betreff (optional)
+            type: text
+            placeholder: z. B. Bewerbung School of Ideas
+            width: 1/2
+            when:
+              ctaLinkType: mail
+          ctaBody:
+            label: Nachricht-Vorlage (optional)
+            type: textarea
+            buttons: false
+            help: >
+              Öffnet sich vorausgefüllt im Mailprogramm der Besucher:innen.
+              Zeilenumbrüche werden übernommen.
+            when:
+              ctaLinkType: mail
           ctaStyle:
             label: Stil
             type: toggles

@@ -11,6 +11,37 @@ $attrs     = soi_section_attrs($block, $base, ['--editorial-layout' => $layout])
 $imageUrl    = soi_file_url($block->image());
 $shadowStyle = soi_image_shadow_style($block);
 $columns     = $block->columns()->toStructure();
+
+// CTA-Rendering für eine Spalte (Link/Button ODER mailto mit Betreff+Text).
+// Wird in 2col UND 3col genutzt, damit Buttons in beiden Layouts erscheinen.
+$renderCta = function ($col) use ($base): string {
+    $ctaText = trim((string)$col->ctaText());
+    if ($ctaText === '') return '';
+
+    $ctaStyle = (string)$col->ctaStyle()->or('link');
+    $ctaClass = match ($ctaStyle) {
+        'mint'  => 'btn-mint',
+        'ghost' => 'btn-ghost',
+        default => 'editorial-cta-link',
+    };
+
+    $type = (string)$col->ctaLinkType()->or('url');
+    if ($type === 'mail') {
+        $email  = trim((string)$col->ctaEmail());
+        $params = [];
+        if (($s = trim((string)$col->ctaSubject())) !== '') $params[] = 'subject=' . rawurlencode($s);
+        if (($b = trim((string)$col->ctaBody()))    !== '') $params[] = 'body='    . rawurlencode($b);
+        $href = 'mailto:' . $email . ($params ? '?' . implode('&', $params) : '');
+        $extra = '';
+    } else {
+        $url   = trim((string)$col->ctaUrl());
+        $href  = $url !== '' ? $url : '#';
+        $extra = str_starts_with($url, 'http') ? ' target="_blank" rel="noopener"' : '';
+    }
+
+    return '<a class="' . $ctaClass . ' ' . $base . '__block-cta" href="'
+         . esc($href, 'attr') . '"' . $extra . '>' . esc($ctaText) . '</a>';
+};
 ?>
 <section<?= $attrs ?> data-layout="<?= esc($layout, 'attr') ?>">
   <div class="container">
@@ -58,19 +89,7 @@ $columns     = $block->columns()->toStructure();
           </div>
           <div class="<?= $base ?>__block <?= $base ?>__block--body-<?= $n ?>">
             <?= soi_paragraphs($col->body()) ?>
-            <?php
-              $ctaText  = (string)$col->ctaText();
-              $ctaUrl   = (string)$col->ctaUrl();
-              $ctaStyle = (string)$col->ctaStyle()->or('link');
-              if ($ctaText !== ''):
-                $ctaClass = match($ctaStyle) {
-                    'mint'  => 'btn-mint',
-                    'ghost' => 'btn-ghost',
-                    default => 'editorial-cta-link',
-                };
-            ?>
-              <a class="<?= $ctaClass ?> <?= $base ?>__block-cta" href="<?= esc($ctaUrl !== '' ? $ctaUrl : '#') ?>"><?= esc($ctaText) ?></a>
-            <?php endif ?>
+            <?= $renderCta($col) ?>
           </div>
         <?php endforeach ?>
       </div>
@@ -98,6 +117,7 @@ $columns     = $block->columns()->toStructure();
               <p class="<?= $base ?>__col-lead"><?= soi_html($col->lead()) ?></p>
             <?php endif ?>
             <?= soi_paragraphs($col->body()) ?>
+            <?= $renderCta($col) ?>
           </div>
         <?php endforeach ?>
       </div>
