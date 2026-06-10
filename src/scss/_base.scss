@@ -49,7 +49,13 @@ html, body {
 }
 
 @supports (overflow: clip) {
-  body { overflow-x: clip; }   // `clip` keeps `position: sticky` working where supported
+  // `clip` statt `hidden` für BEIDE Elemente. Wichtig für iOS Safari:
+  // `overflow-x: hidden` auf <html> zwingt den Used-Value von overflow-y auf
+  // `auto` → <html> wird zum Scroll-Container und das native Momentum-Scrolling
+  // bleibt oben hängen (man kommt nur mit viel Schwung weiter). `clip` lässt
+  // overflow-y dagegen `visible` → kein Scroll-Container, Scrollen wieder normal.
+  // Hält außerdem `position: sticky` funktionsfähig.
+  html, body { overflow-x: clip; }
 }
 
 a {
