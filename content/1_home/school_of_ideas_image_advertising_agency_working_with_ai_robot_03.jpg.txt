@@ -1,0 +1,5 @@
+Uuid: obpcw8twdiw2ou0p
+
+----
+
+Template: image

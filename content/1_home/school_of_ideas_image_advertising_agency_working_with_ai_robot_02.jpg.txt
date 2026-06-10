@@ -1,0 +1,5 @@
+Uuid: xfm86wadl0f0ikmy
+
+----
+
+Template: image

@@ -1,0 +1,9 @@
+Uuid: rpzej79cgoomifhx
+
+----
+
+Template: image
+
+----
+
+Focus: 68.4% 27.0%
