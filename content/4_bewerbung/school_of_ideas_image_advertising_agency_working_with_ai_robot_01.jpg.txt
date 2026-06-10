@@ -1,0 +1,5 @@
+Uuid: bubgc6ha5srrxjsr
+
+----
+
+Template: image

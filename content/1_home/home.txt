@@ -15,9 +15,6 @@ Navitems:
   label: Programm
   url: /programm
 - 
-  label: Agenturen
-  url: /agenturen
-- 
   label: Kontakt
   url: /kontakt
 - 
