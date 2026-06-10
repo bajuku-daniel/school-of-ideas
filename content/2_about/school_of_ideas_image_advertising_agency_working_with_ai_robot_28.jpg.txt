@@ -1,0 +1,9 @@
+Uuid: tyi93yahmzzn1bv0
+
+----
+
+Template: image
+
+----
+
+Focus: 63.5% 51.4%

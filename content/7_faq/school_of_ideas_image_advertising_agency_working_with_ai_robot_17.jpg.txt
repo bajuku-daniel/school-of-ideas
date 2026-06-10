@@ -1,0 +1,5 @@
+Uuid: am667zy6uwbjnse0
+
+----
+
+Template: image

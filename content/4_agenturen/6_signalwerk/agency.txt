@@ -1,0 +1,106 @@
+Title: Signalwerk
+
+----
+
+Headline: Social-first Ideen für Marken mit Tempo.
+
+----
+
+Headlineink: Social-first Ideen
+
+----
+
+Headlineaccent: für Marken mit Tempo.
+
+----
+
+Body: Du bist nah an Trends, Formaten und schnellen Prototypen. Ein guter Ort, wenn du Lust auf Tempo und klare Pointen hast.
+
+----
+
+Cards: 
+
+----
+
+Website: https://example.com
+
+----
+
+Contactemail: 
+
+----
+
+Logo:
+
+- tile.png
+----
+
+Location: Hamburg
+
+----
+
+Arbeitsweise: onsite
+
+----
+
+Groesse: 50-100
+
+----
+
+Schwerpunkte: Social Media, Influencer Marketing
+
+----
+
+Discipline: Social
+
+----
+
+Setup: Spezialagentur
+
+----
+
+Gridcol: 4
+
+----
+
+Gridrow: 3
+
+----
+
+Gridspan: 1
+
+----
+
+Builder: 
+
+----
+
+Metadescription: 
+
+----
+
+Herospacingtoppx: 150
+
+----
+
+Herospacingbottompx: 105
+
+----
+
+Introspacingtoppx: 40
+
+----
+
+Contentspacingtoppx: 115
+
+----
+
+Contentspacingbottompx: 140
+
+----
+
+Tags: TikTok, Creator, Plattformen
+
+----
+
+Uuid: ychluxnuvxin5oqv

@@ -1,0 +1,106 @@
+Title: Atelier Futura
+
+----
+
+Headline: Strategie und Design für Organisationen im Wandel.
+
+----
+
+Headlineink: Strategie und Design
+
+----
+
+Headlineaccent: für Organisationen im Wandel.
+
+----
+
+Body: Du arbeitest mit Research, Workshops, Markenstrategie und Design. Besonders spannend, wenn du gern denkst, ordnest und komplexe Dinge klar machst.
+
+----
+
+Cards: 
+
+----
+
+Website: https://example.com
+
+----
+
+Contactemail: 
+
+----
+
+Logo:
+
+- tile.png
+----
+
+Location: Düsseldorf
+
+----
+
+Arbeitsweise: hybrid
+
+----
+
+Groesse: 10-50
+
+----
+
+Schwerpunkte: Strategie, Branding
+
+----
+
+Discipline: Strategie
+
+----
+
+Setup: Independent
+
+----
+
+Gridcol: 1
+
+----
+
+Gridrow: 2
+
+----
+
+Gridspan: 1
+
+----
+
+Builder: 
+
+----
+
+Metadescription: 
+
+----
+
+Herospacingtoppx: 150
+
+----
+
+Herospacingbottompx: 105
+
+----
+
+Introspacingtoppx: 40
+
+----
+
+Contentspacingtoppx: 115
+
+----
+
+Contentspacingbottompx: 140
+
+----
+
+Tags: Marke, Research, Positionierung
+
+----
+
+Uuid: vikijeenu8qrkhsk

@@ -1,0 +1,9 @@
+Uuid: stlrx1n9flnnqvdc
+
+----
+
+Template: image
+
+----
+
+Focus: 62.0% 47.0%

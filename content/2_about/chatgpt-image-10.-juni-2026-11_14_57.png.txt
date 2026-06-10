@@ -1,0 +1,5 @@
+Uuid: 4ewbn5uqh1d1pids
+
+----
+
+Template: image

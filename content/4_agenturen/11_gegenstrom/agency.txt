@@ -1,0 +1,74 @@
+Title: Gegenstrom
+
+----
+
+Headline: Gegenstrom
+
+----
+
+Headlineink: Gegenstrom
+
+----
+
+Headlineaccent: 
+
+----
+
+Body: 
+
+----
+
+Cards: 
+
+----
+
+Website: 
+
+----
+
+Contactemail: 
+
+----
+
+Logo:
+
+- tile.png
+----
+
+Location: Düsseldorf
+
+----
+
+Arbeitsweise: onsite
+
+----
+
+Groesse: 100-200
+
+----
+
+Schwerpunkte: Web/Digital, Content, Strategie
+
+----
+
+Discipline: Digital
+
+----
+
+Setup: Netzwerkagentur
+
+----
+
+Builder: 
+
+----
+
+Metadescription: 
+
+----
+
+Intro: Erfahre mehr über die Digital-Agentur aus Düsseldorf.
+
+----
+
+Uuid: r9y8etpyqcdwwui8

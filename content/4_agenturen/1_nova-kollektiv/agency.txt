@@ -1,0 +1,127 @@
+Title: Nova Kollektiv
+
+----
+
+Builder: [{"content":{"kicker":"","headlineink":"Wir lieben Menschen, wir lieben Fragen,","headlineaccent":"wir lieben die bessere Idee.","sub":"","imagelayout":"none","image":[],"imageaspect":"","align":"center","sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","subgapmobile":"","subgaptablet":"","subgapdesktop":"","bodygapmobile":"","bodygaptablet":"","bodygapdesktop":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":"","iconkey":"","iconref":"","iconanchory":"","iconanchorx":"","iconoffsetx":"","iconoffsety":"","iconrotate":"","iconmobilesize":"","icontabletsize":"","icondesktopsize":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":""},"id":"nk-teaser","isHidden":false,"type":"headline-solo"},{"content":{"layout":"3col","headlineink":"Agentur","headlineaccent":"Beschreibung","sub":"","body":"","columns":[{"lead":"Wynken Blynken & Nod ist eine --unabhängige Kreativ-Agentur.--","body":"","ctatext":"","ctaurl":"","ctastyle":""},{"lead":"","body":"Wir dürfen arbeiten, für wen und mit wem wir wollen — Menschen und Marken, die etwas bewegen wollen, und die ihren gesellschaftlichen Beitrag leisten wollen.","ctatext":"","ctaurl":"","ctastyle":""},{"lead":"","body":"Unser Produkt ist Kreativität. Wir nutzen sie, um jede denkbare Form von Kommunikation wirksamer zu machen und Marken in der Kultur ihrer Zeit zu verankern.\n\nWir machen keine Kunst. Wir entwickeln maßgeschneiderte Lösungen, die unternehmerische Herausforderungen lösen.","ctatext":"","ctaurl":"","ctastyle":""}],"image":[],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","subgapmobile":"","subgaptablet":"","subgapdesktop":"","bodygapmobile":"","bodygaptablet":"","bodygapdesktop":"","iconkey":"","iconref":"","iconanchory":"","iconanchorx":"","iconoffsetx":"","iconoffsety":"","iconrotate":"","iconmobilesize":"","icontabletsize":"","icondesktopsize":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"nk-desc","isHidden":false,"type":"editorial-split-intro"},{"content":{"cols":3,"shadow":"off","items":[{"image":["file://t420bgtzwyyt4yd5"],"caption":"","col":1,"row":1,"span":1,"aspect":""},{"image":["file://trjvoa4qdylixafy"],"caption":"","col":2,"row":1,"span":1,"aspect":""},{"image":["file://w85gn5hdknpwjcc0"],"caption":"","col":1,"row":2,"span":1,"aspect":""},{"image":["file://ceff4a0swv3ozqtt"],"caption":"","col":3,"row":2,"span":1,"aspect":""},{"image":["file://xntijono34nbvhsu"],"caption":"","col":2,"row":3,"span":1,"aspect":""},{"image":["file://0wals7zzajubaph6"],"caption":"","col":3,"row":4,"span":1,"aspect":""}],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","subgapmobile":"","subgaptablet":"","subgapdesktop":"","bodygapmobile":"","bodygaptablet":"","bodygapdesktop":"","iconkey":"","iconref":"","iconanchory":"","iconanchorx":"","iconoffsetx":"","iconoffsety":"","iconrotate":"","iconmobilesize":"","icontabletsize":"","icondesktopsize":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":""},"id":"nk-grid","isHidden":false,"type":"image-grid"},{"content":{"kicker":"","headlineink":"Unsere","headlineaccent":"Kunden","sub":"AOK, Edeka, Frosta, Jägermeister, bonprix.","imagelayout":"none","image":[],"imageaspect":"","align":"label","sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","subgapmobile":"","subgaptablet":"","subgapdesktop":"","bodygapmobile":"","bodygaptablet":"","bodygapdesktop":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":"","iconkey":"","iconref":"","iconanchory":"","iconanchorx":"","iconoffsetx":"","iconoffsety":"","iconrotate":"","iconmobilesize":"","icontabletsize":"","icondesktopsize":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":""},"id":"nk-kunden","isHidden":false,"type":"headline-solo"},{"content":{"kicker":"","headlineink":"Unsere","headlineaccent":"Arbeiten","sub":"","imagelayout":"none","image":[],"imageaspect":"","align":"label","sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","subgapmobile":"","subgaptablet":"","subgapdesktop":"","bodygapmobile":"","bodygaptablet":"","bodygapdesktop":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":"","iconkey":"","iconref":"","iconanchory":"","iconanchorx":"","iconoffsetx":"","iconoffsety":"","iconrotate":"","iconmobilesize":"","icontabletsize":"","icondesktopsize":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":""},"id":"nk-arbeiten","isHidden":false,"type":"headline-solo"},{"content":{"mediamode":"video","video":["file://63imhteha8byio3p"],"videoposter":["file://viaqr53royjkq3on"],"videolabel":"","images2":[],"images3":[],"casetitle":"Oreo Square Cookie","casetextleft":"AOK 2024: Ein neues Kampagnen-Konzept mit hohem Aufmerksamkeitswert. Plattformübergreifend, in 8 Sprachen, integriert auf TikTok, Instagram, Snapchat und im AOK-CRM.","casetextright":"In nur 5 Wochen Konzept bis Launch. Reichweite 12M+. CTR 5x über Branchen-Durchschnitt. Kreative Führung Nova Kollektiv.","sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","subgapmobile":"","subgaptablet":"","subgapdesktop":"","bodygapmobile":"","bodygaptablet":"","bodygapdesktop":"","iconkey":"","iconref":"","iconanchory":"","iconanchorx":"","iconoffsetx":"","iconoffsety":"","iconrotate":"","iconmobilesize":"","icontabletsize":"","icondesktopsize":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"nk-case1","isHidden":false,"type":"work-showcase"},{"content":{"mediamode":"image3","video":[],"videoposter":[],"videolabel":"","images2":[],"images3":["file://trjvoa4qdylixafy","file://w85gn5hdknpwjcc0","file://ceff4a0swv3ozqtt"],"casetitle":"Edeka Frühjahr","casetextleft":"Edeka Frühjahr 2024 — Saisonale Kommunikation für regionalen Handel.","casetextright":"Crossmedialer Auftritt: Plakat, Print, Online, POS. 6-stelliger Mediabudget.","sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","subgapmobile":"","subgaptablet":"","subgapdesktop":"","bodygapmobile":"","bodygaptablet":"","bodygapdesktop":"","iconkey":"","iconref":"","iconanchory":"","iconanchorx":"","iconoffsetx":"","iconoffsety":"","iconrotate":"","iconmobilesize":"","icontabletsize":"","icondesktopsize":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"nk-case2","isHidden":false,"type":"work-showcase"},{"content":{"mediamode":"image3","video":[],"videoposter":[],"videolabel":"","images2":[],"images3":["file://xntijono34nbvhsu","file://0wals7zzajubaph6","file://t420bgtzwyyt4yd5"],"casetitle":"Jägermeister Loop","casetextleft":"Jägermeister Loop — kontinuierliche Always-On Kampagne.","casetextright":"Markenführung über 18 Monate, Co-Kreation mit Influencer-Network.","sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","subgapmobile":"","subgaptablet":"","subgapdesktop":"","bodygapmobile":"","bodygaptablet":"","bodygapdesktop":"","iconkey":"","iconref":"","iconanchory":"","iconanchorx":"","iconoffsetx":"","iconoffsety":"","iconrotate":"","iconmobilesize":"","icontabletsize":"","icondesktopsize":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"nk-case3","isHidden":false,"type":"work-showcase"},{"content":{"iconkey":"sparkles","iconupload":[],"sizemobile":70,"sizetablet":90,"sizedesktop":110,"iconmotion":"wobble","align":"center","sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","subgapmobile":"","subgaptablet":"","subgapdesktop":"","bodygapmobile":"","bodygaptablet":"","bodygapdesktop":""},"id":"nk-div","isHidden":false,"type":"icon-divider"},{"content":{"layout":"3col","headlineink":"Unsere","headlineaccent":"Arbeitskultur","sub":"","body":"","columns":[{"lead":"Wie wir arbeiten","body":"Konzept-getrieben statt Tool-getrieben.\nKurze Wege, klare Entscheidungen.\nTeamarbeit über Hierarchien.\nProdukt-Quality über Quantity.","ctatext":"","ctaurl":"","ctastyle":""},{"lead":"Was du lernst","body":"Wie aus Briefings große Kampagnen werden. Wie Kunden- und Kreativbedürfnisse zusammenkommen. Konkrete Projektverantwortung von Tag 1.","ctatext":"","ctaurl":"","ctastyle":""},{"lead":"Was es nicht gibt","body":"Powerpoint-Schlachten.","ctatext":"","ctaurl":"","ctastyle":""}],"image":[],"sectiontheme":"light","anchorid":"","spacingtopmobile":"","spacingtoptablet":"","spacingtopdesktop":"","spacingbottommobile":"","spacingbottomtablet":"","spacingbottomdesktop":"","subgapmobile":"","subgaptablet":"","subgapdesktop":"","bodygapmobile":"","bodygaptablet":"","bodygapdesktop":"","iconkey":"","iconref":"","iconanchory":"","iconanchorx":"","iconoffsetx":"","iconoffsety":"","iconrotate":"","iconmobilesize":"","icontabletsize":"","icondesktopsize":"","iconmobile":[],"icontablet":[],"icondesktop":[],"iconmotion":"","iconmotionduration":"","iconmotiondelay":"","shadowxmobile":"","shadowymobile":"","shadowrotatemobile":"","motivrotatemobile":"","shadowxtablet":"","shadowytablet":"","shadowrotatetablet":"","motivrotatetablet":"","shadowxdesktop":"","shadowydesktop":"","shadowrotatedesktop":"","motivrotatedesktop":""},"id":"nk-kultur","isHidden":false,"type":"editorial-split-intro"}]
+
+----
+
+Logo: - file://oikinylal5mj0a7b
+
+----
+
+Intro: 
+
+----
+
+Website: https://example.com
+
+----
+
+Contactemail: 
+
+----
+
+Location: Hamburg
+
+----
+
+Arbeitsweise: hybrid
+
+----
+
+Groesse: 10-50
+
+----
+
+Setup: Independent
+
+----
+
+Schwerpunkte: Kampagnen, Strategie
+
+----
+
+Metadescription: 
+
+----
+
+Headline: Ideen für Marken, die sich bewegen wollen.
+
+----
+
+Headlineink: Ideen für Marken,
+
+----
+
+Headlineaccent: die sich bewegen wollen.
+
+----
+
+Body:
+
+Hier lernst du, wie aus einem strategischen Gedanken eine kreative Kampagne wird. Das Team arbeitet schnell, kollaborativ und sehr nah an aktuellen kulturellen Bewegungen.
+
+Du bist in Konzept, Recherche, Präsentationen und Ausarbeitung eingebunden und bekommst Feedback von Strategie, Text und Art Direction.
+
+----
+
+Cards:
+
+- 
+  icon: ""
+  heading: Passt zu dir, wenn
+  text: >
+    du gern beobachtest, schnell Ideen
+    skizzierst und Lust auf
+    Markenkommunikation hast.
+- 
+  icon: ""
+  heading: Du arbeitest mit
+  text: >
+    Strategie, Text, Art Direction, Social
+    Creative und Projektmanagement.
+
+----
+
+Discipline: Kampagne
+
+----
+
+Gridcol: 1
+
+----
+
+Gridrow: 1
+
+----
+
+Gridspan: 1
+
+----
+
+Herospacingtoppx: 150
+
+----
+
+Herospacingbottompx: 105
+
+----
+
+Introspacingtoppx: 40
+
+----
+
+Contentspacingtoppx: 115
+
+----
+
+Contentspacingbottompx: 140
+
+----
+
+Tags: Social, Kultur, Konzept
+
+----
+
+Uuid: jzuoi1ckekygngrr

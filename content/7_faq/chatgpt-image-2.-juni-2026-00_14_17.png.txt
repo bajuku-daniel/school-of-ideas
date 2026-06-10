@@ -1,0 +1,5 @@
+Uuid: fog9hropwxxm3pss
+
+----
+
+Template: image

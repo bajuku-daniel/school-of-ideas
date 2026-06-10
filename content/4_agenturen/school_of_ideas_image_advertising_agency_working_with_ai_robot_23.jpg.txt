@@ -1,0 +1,5 @@
+Uuid: q87qlzdkyivshmo1
+
+----
+
+Template: image

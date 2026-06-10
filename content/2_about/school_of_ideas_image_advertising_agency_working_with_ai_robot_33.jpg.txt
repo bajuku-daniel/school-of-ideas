@@ -1,0 +1,5 @@
+Uuid: hdt8ffutc2upjpll
+
+----
+
+Template: image
