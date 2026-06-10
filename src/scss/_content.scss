@@ -2393,7 +2393,11 @@
   .footer,
   .subpage {
     max-width: 100%;
-    overflow-x: hidden;
+    // `clip` statt `hidden`! `overflow-x: hidden` zwingt overflow-y auf `auto`
+    // → jedes dieser Elemente (v.a. .subpage = <main>) wird zum Scroll-Container.
+    // Auf iOS Safari bricht damit das Seiten-Scrolling (springt zurück, nur mit
+    // viel Schwung lösbar). `clip` lässt overflow-y `visible` → kein Container.
+    overflow-x: clip;
   }
 }
 
