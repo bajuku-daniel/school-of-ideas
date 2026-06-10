@@ -9,7 +9,7 @@ $claimSub       = (string)$site->footerClaimSub()->or('Und wir bilden die Talent
 
 $ctaApplyHead   = (string)$site->ctaApplyHead()->or('Du willst Kreativität zum Beruf machen?');
 $ctaApplyBtn    = (string)$site->ctaApplyButton()->or('Jetzt bewerben');
-$ctaApplyUrl    = (string)$site->ctaApplyUrl()->or('/kreativtest');
+$ctaApplyUrl    = (string)$site->ctaApplyUrl()->or('/bewerbung');
 
 $ctaAgencyHead  = (string)$site->ctaAgencyHead()->or('Du hast eine Agentur und suchst Nachwuchs?');
 $ctaAgencyBtn   = (string)$site->ctaAgencyButton()->or('Jetzt mitmachen');
@@ -33,16 +33,16 @@ $defaults = [
     'program' => [
         'title' => 'Das Programm',
         'items' => [
-            ['label' => 'Junior Creative Studies',    'url' => '/programm#worum-es-hier-wirklich-geht', 'hidden' => false],
+            ['label' => 'Junior Creative Studies',    'url' => '/programm', 'hidden' => false],
             ['label' => 'Curriculum',                  'url' => '', 'hidden' => true],
-            ['label' => 'FAQ',                         'url' => '/faq#das-programm', 'hidden' => false],
+            ['label' => 'FAQ',                         'url' => '/faq', 'hidden' => false],
         ],
     ],
     'application' => [
         'title' => 'Deine Bewerbung',
         'items' => [
-            ['label' => 'Jetzt bewerben',              'url' => '/kreativtest', 'hidden' => false],
-            ['label' => 'Voraussetzungen',             'url' => '/#fuer-wen-das-sinn-macht', 'hidden' => false],
+            ['label' => 'Jetzt bewerben',              'url' => '/bewerbung', 'hidden' => false],
+            ['label' => 'Voraussetzungen',             'url' => '/#audience', 'hidden' => false],
             ['label' => 'Termine',                     'url' => '', 'hidden' => true],
         ],
     ],
