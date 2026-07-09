@@ -81,4 +81,27 @@ if (!$ogImage) {
 <link rel="manifest" href="<?= url('site.webmanifest') ?>">
 <meta name="theme-color" content="#1a3aff">
 
+<!-- Structured Data: Organisation (Rich Results / Knowledge Graph) -->
+<?php
+$orgLd = [
+    '@context'    => 'https://schema.org',
+    '@type'       => 'EducationalOrganization',
+    'name'        => 'School of Ideas',
+    'alternateName'=> 'School of Ideas gGmbH',
+    'url'         => $site->url(),
+    'logo'        => url('logo/School_of_ideas_Bildlogo.svg'),
+    'description' => 'Die School of Ideas bildet den kreativen Nachwuchs der Kreativbranche aus — mit Agenturpraxis, digitalem Unterricht und Fokus auf KI.',
+    'email'       => 'mail@schoolofideas.de',
+    'telephone'   => '+4917663025965',
+    'address'     => [
+        '@type'           => 'PostalAddress',
+        'streetAddress'   => 'Hongkongstr. 5 / 3. Boden',
+        'postalCode'      => '20457',
+        'addressLocality' => 'Hamburg',
+        'addressCountry'  => 'DE',
+    ],
+];
+?>
+<script type="application/ld+json"><?= json_encode($orgLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+
 <?php snippet('vite') ?>

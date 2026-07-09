@@ -19,6 +19,10 @@ $effectiveLayout = $hasImage ? $imageLayout : 'none';
 
 $extraVars = ['--motiv-aspect' => $aspectValue];
 $attrs = soi_section_attrs($block, 'headline-solo', $extraVars);
+
+// SEO: Der erste Block einer Seite ist deren Hauptüberschrift → <h1>.
+// Weitere headline-solo-Blöcke auf derselben Seite bleiben <h2>.
+$titleTag = ($block->siblings()->first()?->id() === $block->id()) ? 'h1' : 'h2';
 ?>
 <section<?= $attrs ?>
   data-align="<?= esc($align, 'attr') ?>"
@@ -30,14 +34,14 @@ $attrs = soi_section_attrs($block, 'headline-solo', $extraVars);
           <p class="headline-solo__kicker"><?= esc($block->kicker()) ?></p>
         <?php endif ?>
         <?php if ($block->headlineInk()->isNotEmpty() || $block->headlineAccent()->isNotEmpty()): ?>
-        <h2 class="headline-solo__title">
+        <<?= $titleTag ?> class="headline-solo__title">
           <?php if ($block->headlineInk()->isNotEmpty()): ?>
             <span class="ink"><?= nl2br(esc($block->headlineInk())) ?></span>
           <?php endif ?>
           <?php if ($block->headlineAccent()->isNotEmpty()): ?>
             <span class="accent"><?= nl2br(esc($block->headlineAccent())) ?></span>
           <?php endif ?>
-        </h2>
+        </<?= $titleTag ?>>
         <?php endif ?>
         <?php if ($block->sub()->isNotEmpty()): ?>
           <p class="headline-solo__sub"><?= soi_html($block->sub()) ?></p>
