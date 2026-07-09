@@ -6,7 +6,11 @@ Builder: [{"content":{"kicker":"","headlineink":"Junior","headlineaccent":"Creat
 
 ----
 
-Metadescription: Das einjährige Programm der school of ideas verbindet bezahlte Agenturpraxis mit kreativer Weiterentwicklung.
+Metatitle: School of Ideas | Junior Creative Studies
+
+----
+
+Metadescription: Junior Creative Studies sind dein professionell geführter Einstieg in die Kreativbranche. Mit Ideenentwicklung, Konzeption und KI.
 
 ----
 

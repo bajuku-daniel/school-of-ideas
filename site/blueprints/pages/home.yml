@@ -114,3 +114,19 @@ tabs:
             label: Link
             type: text
             width: 1/2
+
+  seo:
+    label: SEO
+    icon: search
+    fields:
+      metaTitle:
+        label: Title-Tag (SEO, überschreibt Standard)
+        type: text
+        help: >
+          Wenn gefüllt, wird dieser Text 1:1 als Browser-Titel (<title>)
+          ausgegeben, z. B. "School of Ideas | Kreativ Upgrade für Creative
+          Talents". Leer = automatischer Titel.
+      metaDescription:
+        label: Meta Description
+        type: textarea
+        buttons: false

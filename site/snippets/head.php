@@ -14,7 +14,11 @@ $siteName  = (string)$site->title();
 $sep       = ' — ';
 
 // ----- Title -----
-if ($page->isHomePage()) {
+// Vorrang: expliziter SEO-Title (metaTitle) → 1:1 als <title>.
+// Sonst: Home = Site-Name, Unterseite = "Seitenname — School of Ideas".
+if ($page->metaTitle()->isNotEmpty()) {
+    $title = (string)$page->metaTitle();
+} elseif ($page->isHomePage()) {
     $title = $siteName;
 } else {
     $title = (string)$page->title() . $sep . $siteName;

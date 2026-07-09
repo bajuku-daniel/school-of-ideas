@@ -50,6 +50,13 @@ tabs:
     label: SEO
     icon: search
     fields:
+      metaTitle:
+        label: Title-Tag (SEO, überschreibt Standard)
+        type: text
+        help: >
+          Wenn gefüllt, wird dieser Text 1:1 als Browser-Titel (<title>)
+          ausgegeben, z. B. "School of Ideas | Die Idee dahinter".
+          Leer = automatischer Titel (Seitenname — School of Ideas).
       metaDescription:
         label: Meta Description
         type: textarea

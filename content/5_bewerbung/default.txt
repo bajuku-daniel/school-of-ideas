@@ -6,7 +6,11 @@ Builder: [{"content":{"kicker":"","headlineink":"Dein erster","headlineaccent":"
 
 ----
 
-Metadescription: Bewerbung für das einjährige Programm der school of ideas — drei Schritte zur Aufnahme.
+Metatitle: School of Ideas | Bewerbung als Junior Creative
+
+----
+
+Metadescription: Bewirb dich für Junior Creative Studies an der School of Ideas. Der Anfang einer richtig guten Karriere.
 
 ----
 

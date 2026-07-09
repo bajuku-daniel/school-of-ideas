@@ -6,7 +6,11 @@ Builder: [{"content":{"kicker":"","headlineink":"Questions \n& Answers","headlin
 
 ----
 
-Metadescription: Häufige Fragen zur school of ideas — Programm, Bewerbung, Kosten, Termine.
+Metatitle: School of Ideas | Fragen und Antworten
+
+----
+
+Metadescription: Antworten auf häufige Fragen zur School of Ideas, zu Junior Creative Studies, Bewerbung, Partneragenturen und Ablauf.
 
 ----
 

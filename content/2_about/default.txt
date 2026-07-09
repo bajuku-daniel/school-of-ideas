@@ -6,7 +6,11 @@ Builder: [{"content":{"kicker":"","headlineink":"Die neue","headlineaccent":"sch
 
 ----
 
-Metadescription: About-Seite der school of ideas: Idee, Haltung und Arbeitsweise des Programms.
+Metatitle: School of Ideas | Die Idee dahinter
+
+----
+
+Metadescription: Die School of Ideas denkt kreative Ausbildung neu. Für eine Branche, die sich durch KI schneller verändert als je zuvor.
 
 ----
 

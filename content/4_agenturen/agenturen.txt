@@ -6,7 +6,11 @@ Builder: [{"content":{"kicker":"","headlineink":"Agenturen","headlineaccent":"an
 
 ----
 
-Metadescription: Partneragenturen der school of ideas. Unabhängige Kreativhäuser für deine Junior Creative Studies.
+Metatitle: School of Ideas | Unsere Partneragenturen
+
+----
+
+Metadescription: Diese Agenturen sind aktiv Teil der School of Ideas und nehmen Creative Talents bei sich auf.
 
 ----
 

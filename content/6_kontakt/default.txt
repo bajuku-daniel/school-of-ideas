@@ -6,7 +6,11 @@ Builder: [{"content":{"kicker":"","headlineink":"Schreib uns","headlineaccent":"
 
 ----
 
-Metadescription: Kontakt zur school of ideas — Direkt Romy Nickel anschreiben oder als Partneragentur einsteigen.
+Metatitle: School of Ideas | Kontakt
+
+----
+
+Metadescription: Eine Frage, eine Idee oder das Gefühl, dass du hier richtig bist? Schreib uns. Wir antworten persönlich.
 
 ----
 
