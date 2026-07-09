@@ -1,0 +1,5 @@
+Uuid: zvhx5sozcewmtemy
+
+----
+
+Template: image

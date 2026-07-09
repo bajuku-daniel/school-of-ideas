@@ -1,0 +1,5 @@
+Uuid: skhmlwogwo8wvsr7
+
+----
+
+Template: image

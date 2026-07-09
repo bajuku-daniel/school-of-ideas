@@ -1,0 +1,5 @@
+Uuid: 26cg0okwtvfnestt
+
+----
+
+Template: image

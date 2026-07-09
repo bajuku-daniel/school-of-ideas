@@ -1,0 +1,5 @@
+Uuid: eutn64y7dpas4wfr
+
+----
+
+Template: image

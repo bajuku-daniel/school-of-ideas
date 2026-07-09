@@ -1,0 +1,5 @@
+Uuid: 1o68vegnho3sahbl
+
+----
+
+Template: image

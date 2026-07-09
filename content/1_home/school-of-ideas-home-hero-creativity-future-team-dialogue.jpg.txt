@@ -1,0 +1,9 @@
+Uuid: ugvvo2cr45j5wb3s
+
+----
+
+Template: image
+
+----
+
+Focus: 75.0% 16.3%

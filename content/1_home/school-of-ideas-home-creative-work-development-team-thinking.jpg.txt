@@ -1,0 +1,5 @@
+Uuid: 1qrtw3hfvnelsmma
+
+----
+
+Template: image
