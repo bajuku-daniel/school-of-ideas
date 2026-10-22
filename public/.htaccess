@@ -2,6 +2,10 @@
 
 RewriteEngine on
 
+# Canonical host: www -> apex
+RewriteCond %{HTTP_HOST} ^www\.schoolofideas\.de$ [NC]
+RewriteRule ^(.*)$ https://schoolofideas.de/$1 [R=301,L]
+
 # Pass the Authorization header to PHP
 SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
 
@@ -18,3 +22,19 @@ RewriteRule ^.*$ - [L]
 
 # Let Kirby handle everything else
 RewriteRule ^(.*) index.php [L]
+
+# Security headers
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always unset X-Powered-By
+
+  # Panel and API send their own CSP
+  <If "%{THE_REQUEST} !~ m#^[A-Z]+ /(panel|api)([/?\s])#">
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; media-src 'self' blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+  </If>
+</IfModule>
